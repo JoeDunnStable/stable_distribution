@@ -1,0 +1,11 @@
+
+
+double_to_mpreal_test = executable('double_to_mpreal_test', 
+                        'double_to_mpreal_test.cpp',
+                        dependencies : stable_distribution_dep) 
+
+
+my_timeout = 100000
+
+#test('double_to_mpreal_test', double_to_mpreal_test, timeout: my_timeout)
+

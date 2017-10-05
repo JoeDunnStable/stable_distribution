@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution_v3/stable_distribution_cdf.h"
+            timestampString = "528351165.059796"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "cdf(myFloat x, int lower_tail, int log_p, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::cdf(double, int, int, stable_distribution::StandardStableDistribution&lt;double&gt;::Parameterization)"
+                  moduleName = "stable_distribution_v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution_v3/stable_distribution_cdf.h"
+                  timestampString = "528171902.844561"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "51">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;mpfr::mpreal&gt;::cdf(mpfr::mpreal, int, int, stable_distribution::StandardStableDistribution&lt;mpfr::mpreal&gt;::Parameterization)"
+                  moduleName = "stable_distribution_v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution_v3/stable_distribution_cdf.h"
+                  timestampString = "528171902.847252"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution_v3/stable_distribution_cdf.h"
+            timestampString = "528351165.060245"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "retValue(myFloat F, int useF, int log_p)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "int stable_distribution::retValue&lt;int&gt;(int, int, int)"
+                  moduleName = "stable_distribution_v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution_v3/stable_distribution_cdf.h"
+                  timestampString = "528171902.852642"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "17">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "double stable_distribution::retValue&lt;double&gt;(double, int, int)"
+                  moduleName = "stable_distribution_v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution_v3/stable_distribution_cdf.h"
+                  timestampString = "528171902.855"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "19">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "mpfr::mpreal stable_distribution::retValue&lt;mpfr::mpreal&gt;(mpfr::mpreal, int, int)"
+                  moduleName = "stable_distribution_v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution_v3/stable_distribution_cdf.h"
+                  timestampString = "528171902.857742"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "17">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution_v3/stable_distribution_base.h"
+            timestampString = "528351165.060416"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "initialize()"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::initialize()"
+                  moduleName = "stable_distribution_v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution_v3/stable_distribution_base.h"
+                  timestampString = "528171771.075101"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;mpfr::mpreal&gt;::initialize()"
+                  moduleName = "stable_distribution_v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution_v3/stable_distribution_base.h"
+                  timestampString = "528171771.078138"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "15">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../opt/local/include/boost/throw_exception.hpp"
+            timestampString = "528351165.060725"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution_v3/main.cpp"
+            timestampString = "528408260.986968"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
+            landmarkName = "stable_levy_quantile(myFloat pp, bool lower_tail=true, bool log_p=false)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution_v3/main.cpp"
+            timestampString = "528408260.987067"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
+            landmarkName = "stable_levy_quantile(myFloat pp, bool lower_tail=true, bool log_p=false)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/stable_distribution_pdf.h"
+            timestampString = "528419944.375959"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "pdf(myFloat x, int log_flag, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::pdf(double, int, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_pdf.h"
+                  timestampString = "528422994.434528"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "224">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;mpfr::mpreal&gt;::pdf(mpfr::mpreal, int, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_pdf.h"
+                  timestampString = "528422994.440849"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "234">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "double_to_mpreal_test/double_to_mpreal_test.cpp"
+            timestampString = "528659341.395924"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
+            landmarkName = "calculate_results(int thread_id, int noext, Kronrod&lt;BigFloat&gt; g_k_big, myFloat epsabs, myFloat epsrel, int subdivisions, int verbose, Jobs* jobs, result_buffer&lt;myFloat&gt;* res_buf, int digits)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "double_to_mpreal_test/double_to_mpreal_test.cpp"
+            timestampString = "528659341.396312"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
+            landmarkName = "calculate_results(int thread_id, int noext, Kronrod&lt;BigFloat&gt; g_k_big, myFloat epsabs, myFloat epsrel, int subdivisions, int verbose, Jobs* jobs, result_buffer&lt;myFloat&gt;* res_buf, int digits)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "xcheck_to_file/xcheck_to_file.cpp"
+            timestampString = "528835996.245394"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "416"
+            endingLineNumber = "416"
+            landmarkName = "main(int argc, char *argv[])"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

@@ -9,6 +9,7 @@
 #include <sstream>
 #include <vector>
 #include <boost/math/tools/toms748_solve.hpp>
+#include <cassert>
 
 namespace stable_distribution {
 
@@ -40,17 +41,6 @@ template<typename myFloat> myFloat StandardStableDistribution<myFloat>::NegInf;
 template<typename myFloat> myFloat StandardStableDistribution<myFloat>::zeta_tol;
 template<typename myFloat> bool StandardStableDistribution<myFloat>::initialized = false;
 
-/// macro to instantiate the static variable in StandardStableDistribution
-#define STABLE_STATIC(myFloat) \
-template myFloat StandardStableDistribution<myFloat>::pi; \
-template myFloat StandardStableDistribution<myFloat>::pi2; \
-template myFloat StandardStableDistribution<myFloat>::eps; \
-template myFloat StandardStableDistribution<myFloat>::large_exp_arg; \
-template myFloat StandardStableDistribution<myFloat>::PosInf; \
-template myFloat StandardStableDistribution<myFloat>::NegInf; \
-template myFloat StandardStableDistribution<myFloat>::zeta_tol; \
-template bool StandardStableDistribution<myFloat>::initialized;
-  
 template<typename myFloat>
 void StandardStableDistribution<myFloat>::initialize(){
   pi = const_pi<myFloat>();
@@ -106,11 +96,15 @@ myFloat StandardStableDistribution<myFloat>::g_r(myFloat th_r) const{
     return g0;
   }
   else {
+    myFloat th_l = max<myFloat>(0, th_max - th_r);
+    // rounding errors cause problems when th_r is near th_max.  th_l works better.
+    if (th_l< min(th_max*1000*eps, th_max/2))
+      return g_l(th_l);
     myFloat att = alpha*th_r+add_r;
     myFloat catt_m_t = max(static_cast<myFloat>(0.),static_cast<myFloat>(sin((alpha-1)*th_r+add_r)));
     myFloat pow2;
     if (x_m_zet < 1e100) {
-      myFloat costh = sin(th_r);
+      myFloat costh = max<myFloat>(0,sin(th_r));
       myFloat pow1 = pow(x_m_zet/sin(att),alpha);
       pow2 = pow(cat0 * costh * pow1,1/(alpha-1));
     } else {
@@ -337,19 +331,19 @@ void f_of_g (myFloat *th, int n, void *ext) {
 template<typename myFloat>
 myFloat Integral_f_of_g<myFloat>::operator() () {
   
-  int verbose = controller->get_verbose();
+  int verbose = controllers->controller.get_verbose();
   if (verbose==4){
     cout << endl
          << "IntegrationController::integrate(f_of_g,..)" << endl;
   }
-  controller->integrate(stable_distribution::f_of_g, (void *) this, std_stable_dist->points,
+  controllers->controller.integrate(stable_distribution::f_of_g, (void *) this, std_stable_dist->points,
                         result, abserr, neval, termination_code, last);
   
   if (verbose>=3){
     myFloat rsum=0, esum=0;
     for (int i=0; i<last; i++) {
-      rsum += controller->subs.at(i).r;
-      esum += controller->subs.at(i).e;
+      rsum += controllers->controller.subs.at(i).r;
+      esum += controllers->controller.subs.at(i).e;
     }
     
     if (termination_code > 0)
@@ -360,10 +354,10 @@ myFloat Integral_f_of_g<myFloat>::operator() () {
          << ", with absolute error = " << abserr
          << ", subintervals = " << last << endl
          << "rsum = " << rsum << ", esum = " << esum << endl;
-    print_subs_summary(cout, controller->subs, last, std_stable_dist->points);
+    print_subs_summary(cout, controllers->controller.subs, last, std_stable_dist->points);
   }
   if (verbose>=4){
-    print_subs(cout, controller->subs, last, std_stable_dist->points);
+    print_subs(cout, controllers->controller.subs, last, std_stable_dist->points);
   }
   return result;
 }
@@ -480,7 +474,7 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
           myFloat lower = th_min;
           myFloat upper = th_max;
           boost::uintmax_t max_iter = 1000;
-          RelativeComparisonTolerance<myFloat> rel_tol(controller->epsrel);
+          RelativeComparisonTolerance<myFloat> rel_tol(controllers.controller.epsrel);
           
           pair<myFloat,myFloat> ur1_pair = toms748_solve(g_s, lower, upper, rel_tol, max_iter);
           if (fabs(g(ur1_pair.second)-g(ur1_pair.first))<1e6){
@@ -505,7 +499,7 @@ template<typename myFloat>
 void StandardStableDistribution<myFloat>::map_g() {
   if (verbose > 1) cout << "map_g:" << endl;
   boost::uintmax_t max_iter;
-  RelativeComparisonTolerance<myFloat> rel_tol(controller->epsrel);
+  RelativeComparisonTolerance<myFloat> rel_tol(controllers.controller.epsrel);
   
   //' g() is strictly monotone -- Nolan(1997) ["3. Numerical Considerations"]
   //'     alpha >= 1  <==>  g() is falling, ie. from Inf --> 0;  otherwise growing from 0 to +Inf
@@ -648,7 +642,7 @@ void StandardStableDistribution<myFloat>::map_g() {
       if (max_iter==1000) break;
       myFloat th_new=th_pair.first;
       if (fabs(th_new-th_max)< 200*eps*th_max) {
-        myFloat del_th{200};
+        myFloat del_th{2/controllers.controller.edge_spacing()};
         while (fabs(th-th_max) >= 2*del_th*eps*th_max) {
           th_new = th_max*(1-del_th*eps);
           points.push_back(th_new);

@@ -9,7 +9,7 @@ namespace stable_distribution {
 template<typename myFloat>
 myFloat random_stable(myFloat alpha, myFloat beta,
                         myFloat u1, myFloat u2,
-                        typename StandardStableDistribution<myFloat>::Parameterization pm)
+                        Parameterization pm)
   {
     // Description:
     //	 Returns one random variates for standard stable DF
@@ -38,7 +38,7 @@ myFloat random_stable(myFloat alpha, myFloat beta,
       myFloat c = pow(1+pow(b_tan_pa,2),1/(2*alpha));
       myFloat a_tht = alpha*(theta+theta0);
       myFloat r = c*sin(a_tht)*exp(-log(cos(theta))/alpha+((1-alpha)/alpha)*log(cos(theta-a_tht)/w));
-      if (pm == StandardStableDistribution<myFloat>::Parameterization::S0)
+      if (pm == S0)
         result = r - b_tan_pa;
       else
         result = r;

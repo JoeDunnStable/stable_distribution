@@ -4,20 +4,85 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>FMStable_test.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>dump_mpreal.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>fit_test.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>lib_stable_distribution.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
+		</dict>
+		<key>quick_test.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>stable_distribution.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
 		</dict>
 		<key>stable_distribution_v3.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>trace_stable_mode.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>xcheck_to_file.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>6F36D0951F81CD37006686EB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6F36D0A51F81EC49006686EB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6F7DD2FE1F8193FD00EE7744</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6F7DD30C1F81AC8C00EE7744</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6FC6C3611F8488ED004E30CC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6FF3BFDC1F7A042F00F3371F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6FF3C0781F7EE9A900F3371F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

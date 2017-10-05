@@ -38,10 +38,11 @@ myFloat StandardStableDistribution<myFloat>::integrate_ddx_pdf() {
   if (verbose)
     cout << "integrate_ddx_pdf:" << endl
          << "Integrand is g * (1 - alpha * g) * exp(-g)" << endl;
-  IntegrationController<myFloat> ctl_ddx(*controller);
   // integral is zero near mode so need to use absolute tolerance near mode
-  ctl_ddx.epsabs=(fabs(x_m_zeta_input) < 1) ? ctl_ddx.epsrel/c_ddx : myFloat{0};
-  Integral_f_of_g<myFloat> int_g1(x_1_m_alpha_x_exp_m_x,this, &ctl_ddx);
+  myFloat old_epsabs = controllers.controller.epsabs;
+  controllers.controller.epsabs=(fabs(x_m_zeta_input) < 1) ? controllers.controller.epsrel/c_ddx : myFloat{0};
+  Integral_f_of_g<myFloat> int_g1(x_1_m_alpha_x_exp_m_x,this, &controllers);
+  controllers.controller.epsabs = old_epsabs;
   r=int_g1();
   abserr=fabs(c_ddx) * int_g1.abserr;
   c_g_theta2_error = fabs(c_ddx) * g_theta2_error;

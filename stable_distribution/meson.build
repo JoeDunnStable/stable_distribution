@@ -1,0 +1,32 @@
+src = ['adaptive_integration.h',
+       'adaptive_integration_impl.h',
+       'gauss_kronrod.h',
+       'gauss_kronrod_impl.h',
+       'q_guess.cpp',
+       'q_guess.h',
+       'myFloat.h',
+       'stable_distribution_base.h',
+       'stable_distribution_cdf.h',
+       'stable_distribution_ddx_pdf.h',
+       'stable_distribution_mode.h',
+       'stable_distribution_pdf.h',
+       'stable_distribution_quantile.h',
+       'stable_distribution_random.h',
+       'bracket_and_solve.h',
+       'stable_distribution.cpp',
+       'stable_distribution_Vec.h',
+       'stable_distribution_Vec_impl.h',
+       'parameter_check.h',
+       'stable_distribution_fit.h',
+       'stable_distribution_fit_impl.h']
+
+lib_stable_distribution = shared_library('stable_distribution', 
+                                         src,
+					 cpp_args : '-Wno-non-virtual-dtor',
+					 soversion : meson.project_version() ,
+                                         dependencies : alldep,
+                                         include_directories : incdir)
+
+stable_distribution_dep = declare_dependency(link_with : lib_stable_distribution,
+                                             dependencies : alldep,
+                                             include_directories : incdir)

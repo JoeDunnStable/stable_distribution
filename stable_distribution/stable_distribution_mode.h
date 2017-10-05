@@ -19,14 +19,14 @@ private:
   myFloat value;         ///< the target value
   StandardStableDistribution<myFloat>* std_stable_dist; ///< an instance of the StandardStableDistribution
   int verbose_mode;
-  typename StandardStableDistribution<myFloat>::Parameterization pm;
+  Parameterization pm;
   int x_flag;          ///< interpret input as log of x
 public:
   /// constructor for functor
   DdxPdfSolve(myFloat value,                    ///< [in] the target value
                   StandardStableDistribution<myFloat>* std_stable_dist,  ///< [in] pointer to distribution
                   int verbose_mode,             ///< [in] indicator for verbose mode calculation
-                  typename StandardStableDistribution<myFloat>::Parameterization pm,           ///< [in] the parameterization to use
+                  Parameterization pm,           ///< [in] the parameterization to use
                   int x_flag                  ///< [in] interpret the input as log of x or -x
                   )
   : value(value), std_stable_dist(std_stable_dist), verbose_mode(verbose_mode), pm(pm), x_flag(x_flag) {}
@@ -50,11 +50,11 @@ public:
     if (verbose_mode) {
       myFloat zeta = -std_stable_dist->beta_input*tan(StandardStableDistribution<myFloat>::pi2*std_stable_dist->alpha);
       switch (pm) {
-        case StandardStableDistribution<myFloat>::S0:
+        case S0:
           cout << "x = " << x << ", x - zeta = " << x - zeta
                << ", ddx_pdf(x) = " << ret << endl;
           break;
-        case StandardStableDistribution<myFloat>::S1:
+        case S1:
           cout << "x = " << x + zeta << ", x - zeta = " << x
                << ", ddx_pdf(x) = " << ret << endl;
           break;
@@ -71,13 +71,13 @@ class Pdmaximum {
 private:
   StandardStableDistribution<myFloat>* std_stable_dist; ///< an instance of the StandardStableDistribution
   int verbose_mode;
-  typename StandardStableDistribution<myFloat>::Parameterization pm;
+  Parameterization pm;
   int x_flag;          ///< interpret input as x, log of x or -x
 public:
   /// constructor for functor
   Pdmaximum(StandardStableDistribution<myFloat>* std_stable_dist,  ///< [in] pointer to distribution
               int verbose_mode,             ///< [in] indicator for verbose mode calculation
-              typename StandardStableDistribution<myFloat>::Parameterization pm,           ///< [in] the parameterization to use
+              Parameterization pm,           ///< [in] the parameterization to use
               int x_flag                  ///< [in] interpret the input as log of x or -x
   )
   : std_stable_dist(std_stable_dist), verbose_mode(verbose_mode), pm(pm), x_flag(x_flag) {}
@@ -100,11 +100,11 @@ public:
     if (verbose_mode) {
       myFloat zeta = -std_stable_dist->beta_input*tan(StandardStableDistribution<myFloat>::pi2*std_stable_dist->alpha);
       switch (pm) {
-        case StandardStableDistribution<myFloat>::S0:
+        case S0:
           cout << "x = " << x << ", x - zeta = " << x - zeta
           << ", pdf(x) = " << -ret << endl;
           break;
-        case StandardStableDistribution<myFloat>::S1:
+        case S1:
           cout << "x = " << x + zeta << ", x - zeta = " << x
           << ", pdf(x) = " << -ret << endl;
           break;
@@ -126,18 +126,18 @@ std::pair<myFloat,myFloat> StandardStableDistribution<myFloat>::mode(myFloat dbl
     myFloat upper, lower;
     myFloat outer, outer_low, inner_low;
     if (alpha < 1 && fabs(beta_input)==1) {
-      myFloat eps=64*StandardStableDistribution<myFloat>::eps;
+      myFloat eps=sqrt(std::numeric_limits<myFloat>::epsilon());
       myFloat beta_proxy = beta_input*(1-eps);
       if (verbose_mode)
         cout << "Using proxy beta = " << beta_proxy << endl;
-      StandardStableDistribution<myFloat> proxy(alpha, beta_proxy, *controller, verbose);
+      StandardStableDistribution<myFloat> proxy(alpha, beta_proxy, controllers, verbose);
       std::pair<myFloat, myFloat> mode = proxy.mode(dbltol, verbose_mode, pm_requested);
       mode.first = mode.first/(1-eps);
       return mode;
     } else if (alpha > alpha_proxy){
       if (verbose_mode)
         cout << "Using proxy alpha = " << alpha_proxy << endl;
-      StandardStableDistribution<myFloat> proxy(alpha_proxy, beta_input, *controller, verbose);
+      StandardStableDistribution<myFloat> proxy(alpha_proxy, beta_input, controllers, verbose);
       std::pair<myFloat, myFloat> mode = proxy.mode(dbltol, verbose_mode, pm_requested);
       mode.first = mode.first * (2-alpha)/(2-alpha_proxy);
       mode.second = pdf(mode.first, false, pm_requested);

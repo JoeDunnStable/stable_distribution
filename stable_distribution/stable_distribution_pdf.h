@@ -142,7 +142,7 @@ myFloat StandardStableDistribution<myFloat>::pdf(myFloat x, int log_flag, Parame
         ret = integrate_pdf(log_flag);
         if (verbose) cout << "pdf:" << endl;
         myFloat error = max(c_g_theta2_error, abserr);
-        if (error < controller->epsrel * ret || (fun_type == 1) || (fun_type == 3 && x < 10)) {
+        if (error < controllers.controller.epsrel * ret || (fun_type == 1) || (fun_type == 3 && x < 10)) {
           if (verbose)
             cout << "  Error is below threshhold or x is small. Using integral = " << ret << endl;
         } else {

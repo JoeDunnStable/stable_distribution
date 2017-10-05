@@ -1,5 +1,5 @@
 //
-//  main.cpp
+//  basic_test.cpp
 //  stable_distribution_v3
 //
 //  Created by Joseph Dunn on 9/25/17.
@@ -15,14 +15,31 @@ using std::setprecision;
 using std::scientific;
 using std::fixed;
 using std::right;
+#include <fstream>
+using std::ofstream;
 #include <random>
 using std::mt19937;
 using std::uniform_real_distribution;
+#include <boost/timer/timer.hpp>
+using boost::timer::auto_cpu_timer;
+#include <boost/filesystem.hpp>
+
 
 #include "stable_distribution.h"
 #include "kolmogorov.h"
+#include "bracket_and_solve.h"
 
 using namespace stable_distribution;
+
+template<typename myFloat>
+myFloat epsdiff(myFloat r1, myFloat r2) {
+  if (r1 == r2)
+    return 0;
+  else if (!boost::math::isfinite(r1) || !boost::math::isfinite(r2))
+    return std::numeric_limits<myFloat>::infinity();
+  else
+    return fabs(r1-r2)/(max(fabs(r1), fabs(r2))*std::numeric_limits<myFloat>::epsilon());
+}
 
 template<typename myFloat>
 myFloat stable_levy_cdf(myFloat x, bool lower_tail=true, bool log_p=false) {
@@ -50,7 +67,8 @@ myFloat stable_levy_cdf(myFloat x, bool lower_tail=true, bool log_p=false) {
 }
 
 template<typename myFloat>
-void test_stable_cdf(ostream& out, IntegrationController<myFloat>& ctl) {
+int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
+  auto_cpu_timer timer(out);
   int verbose = 0;
   
   bool log_p=true, lower_tail=false;
@@ -75,20 +93,22 @@ void test_stable_cdf(ostream& out, IntegrationController<myFloat>& ctl) {
   xs.push_back(pow(10.,300));
   xs.push_back(std::numeric_limits<myFloat>::infinity());
   
+  out << endl;
   out << "Comparison of cdf to Levy formula for alpha = .5, beta = 1, digits10 = "
   << std::numeric_limits<myFloat>::digits10 << endl << endl;
-  StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctl, verbose);
+  StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
   out << setw(8) << right << "alpha"
   << setw(8) << right << "beta"
   << setw(13) << right << "x"
   << setw(8) << right << "tail"
   << setw(35) << right << "log(pLevy)"
   << setw(35) << right << "log(cdf)"
-  << setw(15) << right << "absdiff"
+  << setw(10) << right << "epsdiff"
   << setw(15) << right << "abserr"
   << setw(5) << right << "code"
   << setw(7) << right << "neval"
   << endl << endl;
+  bool pass = true;
   for (auto x : xs) {
     lower_tail = true;
     myFloat r_Levy = stable_levy_cdf<myFloat>(x, lower_tail, log_p);
@@ -96,20 +116,26 @@ void test_stable_cdf(ostream& out, IntegrationController<myFloat>& ctl) {
       lower_tail = false;
       r_Levy = stable_levy_cdf<myFloat>(x, lower_tail, log_p);
     }
-    myFloat r = std_stable_dist.cdf(x, lower_tail, log_p, StandardStableDistribution<myFloat>::Parameterization::S1);
-    
+    myFloat r = std_stable_dist.cdf(x, lower_tail, log_p, Parameterization::S1);
+    myFloat eps = epsdiff(r, r_Levy);
+    bool pass1 = !boost::math::isnan(eps) && boost::math::isfinite(eps)
+                 && eps < 100;
+
     out << setw(8) << setprecision(3) << fixed << myFloat(alpha)
     << setw(8) << setprecision(3) << fixed << myFloat(beta)
     << setw(13) << setprecision(3) << scientific << myFloat(x)
     << setw(8) << right << ((lower_tail) ? "lower" : "upper")
     << setw(35) << setprecision(26) << scientific << r_Levy
     << setw(35) << setprecision(26) << scientific << r
-    << setw(15) << setprecision(5) << scientific << fabs((r-r_Levy))
+    << setw(10) << setprecision(1) << fixed << eps
     << setw(15) << setprecision(5) << scientific << std_stable_dist.abserr
     << setw(4) << std_stable_dist.termination_code
-    << setw(7) << std_stable_dist.neval << endl;
+    << setw(7) << std_stable_dist.neval
+    << (pass1 ? "" : " FAIL") << endl;
+    pass = pass && pass1;
   }
-  out << endl << endl;
+  out << endl;
+  return !pass;
 }
 
 template<typename myFloat>
@@ -126,8 +152,8 @@ myFloat stable_levy_pdf(myFloat x, bool log_flag=false) {
 }
 
 template<typename myFloat>
-void test_stable_pdf(ostream& out, IntegrationController<myFloat>& ctl) {
-  
+int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
+  auto_cpu_timer timer(out);
   myFloat alpha = .5;
   myFloat beta = 1;
   vector<myFloat> xs;
@@ -149,35 +175,44 @@ void test_stable_pdf(ostream& out, IntegrationController<myFloat>& ctl) {
   xs.push_back(std::numeric_limits<myFloat>::infinity());
   
   int verbose = 0;
+  out << endl;
   out << "Comparison of pdf to Levy formula for alpha = .5, beta = 1, digits10 = "
   << std::numeric_limits<myFloat>::digits10 << endl << endl;
-  StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctl, verbose);
+  StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
   int log_flag=1;
   out << setw(13) << right << "alpha"
   << setw(13) << right << "beta"
   << setw(13) << right << "x"
   << setw(35) << right << "log(dLevy)"
   << setw(35) << right << "log(pdf_myFloat)"
-  << setw(15) << right << "absdiff"
+  << setw(10) << right << "epsdiff"
   << setw(15) << right << "abserr"
   << setw(4) << right << "termination_code"
   << setw(7) << right << "neval"
   << endl << endl;
+  bool pass = true;
   for (auto x : xs) {
-    myFloat r = std_stable_dist.pdf(x, log_flag, StandardStableDistribution<myFloat>::Parameterization::S1);
+    myFloat r = std_stable_dist.pdf(x, log_flag, S1);
     myFloat r_Levy = stable_levy_pdf<myFloat>(x, log_flag);
-    
+    myFloat eps = epsdiff(r, r_Levy);
+    bool pass1 = !boost::math::isnan(eps) && boost::math::isfinite(eps)
+    && eps < 100;
+
     out << setw(13) << setprecision(5) << fixed << myFloat(alpha)
     << setw(13) << setprecision(5) << fixed << myFloat(beta)
     << setw(13) << setprecision(3) << scientific << myFloat(x)
     << setw(35) << setprecision(26) << scientific << r_Levy
     << setw(35) << setprecision(26) << scientific << r
-    << setw(15) << setprecision(5) << scientific << fabs((r-r_Levy))
+    << setw(10) << setprecision(1) << fixed << eps
     << setw(15) << setprecision(5) << scientific << std_stable_dist.abserr
     << setw(4) << std_stable_dist.termination_code
-    << setw(7) << std_stable_dist.neval << endl;
+    << setw(7) << std_stable_dist.neval
+    << (pass1 ? "" : " FAIL") << endl;
+    pass = pass && pass1;
+
   }
-  out << endl << endl;
+  out << endl;
+  return !pass;
 } //test_stable_pdf
 
 template<typename myFloat>
@@ -194,8 +229,8 @@ myFloat stable_levy_ddx_pdf(myFloat x) {
 }
 
 template<typename myFloat>
-void test_stable_ddx_pdf(ostream& out, IntegrationController<myFloat>& ctl) {
-  
+int test_stable_ddx_pdf(ostream& out, Controllers<myFloat> ctls) {
+  auto_cpu_timer timer(out);
   myFloat alpha = .5;
   myFloat beta = 1;
   vector<myFloat> xs;
@@ -217,36 +252,45 @@ void test_stable_ddx_pdf(ostream& out, IntegrationController<myFloat>& ctl) {
   xs.push_back(std::numeric_limits<myFloat>::infinity());
   
   int verbose = 0;
+  out << endl;
   out << "Comparison of ddx_pdf to Levy formula for alpha = .5, beta = 1, digits10 = "
   << std::numeric_limits<myFloat>::digits10 << endl << endl;
-  StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctl, verbose);
+  StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
   out << setw(13) << right << "alpha"
   << setw(13) << right << "beta"
   << setw(13) << right << "x"
   << setw(35) << right << "Levy_ddx_pdf"
   << setw(35) << right << "ddx_pdf_myFloat"
-  << setw(15) << right << "absdiff"
+  << setw(10) << right << "epsdiff"
   << setw(15) << right << "abserr"
   << setw(4) << right << "termination_code"
   << setw(7) << right << "neval"
   << endl << endl;
+  bool pass = true;
   for (auto x : xs) {
-    myFloat r = std_stable_dist.ddx_pdf(x, StandardStableDistribution<myFloat>::Parameterization::S1);
+    myFloat r = std_stable_dist.ddx_pdf(x, S1);
     myFloat r_Levy = stable_levy_ddx_pdf<myFloat>(x);
-    
+    myFloat eps = epsdiff(r, r_Levy);
+    bool pass1 = !boost::math::isnan(eps) && boost::math::isfinite(eps)
+    && eps < 500;
+
     out << setw(13) << setprecision(5) << fixed << myFloat(alpha)
     << setw(13) << setprecision(5) << fixed << myFloat(beta)
     << setw(13) << setprecision(3) << scientific << myFloat(x)
     << setw(35) << setprecision(26) << scientific << r_Levy
     << setw(35) << setprecision(26) << scientific << r
-    << setw(15) << setprecision(5) << scientific << fabs((r-r_Levy))
+    << setw(10) << setprecision(1) << fixed << eps
     << setw(15) << setprecision(5) << scientific << std_stable_dist.abserr
     << setw(4) << std_stable_dist.termination_code
-    << setw(7) << std_stable_dist.neval << endl;
+    << setw(7) << std_stable_dist.neval
+    << (pass1 ? "" : " FAIL") << endl;
+    pass = pass && pass1;
   }
-  out << endl << endl;
+  out << endl;
+  return !pass;
 } //test_stable_ddx_pdf
 
+/// boost erf_inv is broken for high precision.  This functor is part of fix
 template<typename myFloat>
 class erf_solve {
   myFloat target;
@@ -274,7 +318,7 @@ myFloat stable_levy_quantile(myFloat pp, bool lower_tail=true, bool log_p=false)
                         : erf_inv(static_cast<double>(p));
   myFloat guess = c/(2*u*u);
   erf_solve<myFloat> erf_s(p, lower_tail);
-  pair<myFloat,myFloat> r;
+  std::pair<myFloat,myFloat> r;
   RelativeComparisonTolerance<myFloat> tol(16*std::numeric_limits<myFloat>::epsilon());
   myFloat factor = max<myFloat>(static_cast<myFloat>(1),static_cast<myFloat>(.1)*fabs(guess));
   bool rising = !lower_tail;
@@ -302,7 +346,8 @@ double stable_levy_quantile<double>(double pp, bool lower_tail, bool log_p) {
 }
 
 template<typename myFloat>
-void test_stable_quantile(ostream& out, IntegrationController<myFloat>& ctl) {
+int test_stable_quantile(ostream& out, Controllers<myFloat> ctls) {
+  auto_cpu_timer timer(out);
   int verbose = 0;
   
   bool log_p=false;
@@ -314,50 +359,64 @@ void test_stable_quantile(ostream& out, IntegrationController<myFloat>& ctl) {
   vector<int> lower_tails;
   ps.push_back(0);
   lower_tails.push_back(1);
-  for (int i = -4; i<0; ++i) {
+  for (int i = -6; i<-1; ++i) {
     ps.push_back(pow<myFloat>(10,i));
     lower_tails.push_back(1);
   }
-  ps.push_back(.5);
-  lower_tails.push_back(1);
-  for (int i = -1; i>-5; --i) {
+  for (int i = 1; i<=5; ++i) {
+    ps.push_back(static_cast<myFloat>(i)/10);
+    lower_tails.push_back(1);
+  }
+  for (int i = 4; i>=1; --i) {
+    ps.push_back(static_cast<myFloat>(i)/10);
+    lower_tails.push_back(0);
+  }
+  for (int i = -2; i>=-6; --i) {
     ps.push_back(pow<myFloat>(10,i));
     lower_tails.push_back(0);
   }
   ps.push_back(0);
   lower_tails.push_back(0);
   
+  out << endl;
   out << "Comparison of quantile to Levy formula for alpha = .5, beta = 1, digits10 = "
   << std::numeric_limits<myFloat>::digits10 << endl << endl;
-  StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctl, verbose);
+  StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
   out << setw(8) << right << "alpha"
   << setw(8) << right << "beta"
   << setw(13) << right << "p"
   << setw(8) << right << "tail"
   << setw(35) << right << "Levy_quantile"
   << setw(35) << right << "quantile"
-  << setw(15) << right << "reldiff"
+  << setw(10) << right << "epsdiff"
   << setw(7) << right << "iters"
   << setw(7) << right << "neval"
   << endl << endl;
+  bool pass = true;
   for (int i=0; i<ps.size(); ++i) {
     myFloat p = ps.at(i);
     int lower_tail = lower_tails.at(i);
     myFloat r_Levy = stable_levy_quantile<myFloat>(p, lower_tail, log_p);
     myFloat r = std_stable_dist.quantile(p, lower_tail, log_p,
-                                         q_tol, StandardStableDistribution<myFloat>::Parameterization::S1);
-    
+                                         q_tol, S1);
+    myFloat eps = epsdiff(r, r_Levy);
+    bool pass1 = !boost::math::isnan(eps) && boost::math::isfinite(eps)
+    && eps < 100;
+
     out << setw(8) << setprecision(3) << fixed << myFloat(alpha)
     << setw(8) << setprecision(3) << fixed << myFloat(beta)
     << setw(13) << setprecision(3) << scientific << myFloat(p)
     << setw(8) << right << ((lower_tail) ? "lower" : "upper")
     << setw(35) << setprecision(26) << scientific << r_Levy
     << setw(35) << setprecision(26) << scientific << r
-    << setw(15) << setprecision(5) << scientific << fabs((r-r_Levy)/r_Levy)
+    << setw(10) << setprecision(1) << fixed << eps
     << setw(7) << std_stable_dist.num_iter
-    << setw(7) << std_stable_dist.neval << endl;
+    << setw(7) << std_stable_dist.neval
+    << (pass1 ? "" : " FAIL") << endl;
+    pass = pass && pass1;
   }
-  out << endl << endl;
+  out << endl;
+  return !pass;
 }
 
 template<typename myFloat>
@@ -365,14 +424,16 @@ void print_stable_mode_heading(ostream& os, const vector<myFloat>& betas) {
   os << setw(65) << right << "beta" << endl
   << setw(20) << right << "alpha";
   for (auto beta : betas)
-    os << setw(15) << setprecision(11) << fixed <<  beta;
+    os << setw(30) << setprecision(11) << fixed <<  beta;
   os << endl;
   
 }
 
 template<typename myFloat>
-void test_stable_mode(ostream& out, IntegrationController<myFloat>& ctl) {
+int test_stable_mode(ostream& out, Controllers<myFloat> ctls) {
+  auto_cpu_timer timer(out);
   myFloat pi2 = const_pi<myFloat>()/2;
+  out << endl;
   out << "Test of stable_mode" << endl << endl;
   
   vector<myFloat> alphas;
@@ -392,7 +453,7 @@ void test_stable_mode(ostream& out, IntegrationController<myFloat>& ctl) {
   alphas.push_back(2);
   
   vector<myFloat> betas;
-  for (int i=-2; i<=2; i++) betas.push_back(i/static_cast<myFloat>(2));
+  for (int i=0; i<=2; i++) betas.push_back(i/static_cast<myFloat>(2));
   myFloat ddx_tol = 64*std::numeric_limits<myFloat>::epsilon();
   //vector<myFloat> out(alphas.size()*betas.size());
   
@@ -402,10 +463,11 @@ void test_stable_mode(ostream& out, IntegrationController<myFloat>& ctl) {
   
   int verbose_mode = 0;
   int verbose = 0;
-  auto pm = StandardStableDistribution<myFloat>::Parameterization::S1;
+  auto pm = S1;
   vector<myFloat> mode_S1;
   vector<myFloat> pdf_at_mode;
   myFloat first_good_alpha = 2;
+  bool pass = true;
   for (auto alpha : alphas) {
     out << setw(20) << setprecision(14) << fixed << alpha;
     if (tgamma(1+1/alpha) > std::numeric_limits<myFloat>::max()) {
@@ -414,14 +476,17 @@ void test_stable_mode(ostream& out, IntegrationController<myFloat>& ctl) {
     } else {
       first_good_alpha = min(first_good_alpha, alpha);
     }
+    bool pass1 = true;
     for (auto beta : betas) {
-      StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctl, verbose);
+      StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
       std::pair<myFloat, myFloat> mode = std_stable_dist.mode(ddx_tol, verbose_mode, pm);
-      out << setw(15) << setprecision(6) << scientific << mode.first;
+      out << setw(30) << setprecision(6) << scientific << mode.first;
       mode_S1.push_back(mode.first);
       pdf_at_mode.push_back(mode.second);
+      pass1 = pass1 && !boost::math::isnan(mode.first) && !boost::math::isnan(mode.second);
     }
-    out << endl;
+    out << (pass1 ? "" : " FAIL") << endl;
+    pass = pass && pass1;
   }
   out << endl << setw(75) << right
   << "Position of Mode in the S0 Parameterization" << endl << endl;
@@ -436,7 +501,7 @@ void test_stable_mode(ostream& out, IntegrationController<myFloat>& ctl) {
     }
     for (myFloat beta : betas) {
       myFloat zeta = (alpha!=1) ? -beta * tan(pi2 * alpha) : 0;
-      out << setw(15) << setprecision(6) << scientific << mode_S1.at(j++)+zeta;
+      out << setw(30) << setprecision(6) << scientific << mode_S1.at(j++)+zeta;
     }
     out << endl;
   }
@@ -452,9 +517,11 @@ void test_stable_mode(ostream& out, IntegrationController<myFloat>& ctl) {
       continue;
     }
     for (myFloat beta : betas)
-      out << setw(15) << setprecision(6) << scientific << pdf_at_mode.at(j++);
+      out << setw(30) << setprecision(6) << scientific << pdf_at_mode.at(j++);
     out << endl;
   }
+  out << endl;
+  return !pass;
 }
 
 template<typename myFloat>
@@ -473,11 +540,9 @@ myFloat D(vector<myFloat>& data, StandardStableDistribution<myFloat>& dist) {
 }
 
 template<typename myFloat>
-void test_stable_random (ostream& out, int n, myFloat alpha, myFloat beta,
-                    IntegrationController<myFloat>& ctl) {
-  out << "n = " << n
-      << ", alpha = " << alpha
-      << ", beta = " << beta << endl << endl;
+int test_stable_random (ostream& out, int n, myFloat alpha, myFloat beta,
+                    Controllers<myFloat> ctls) {
+  auto_cpu_timer timer(out);
   mt19937 gen(200);
   uniform_real_distribution<> dis;
   vector<myFloat> r(n);
@@ -490,7 +555,7 @@ void test_stable_random (ostream& out, int n, myFloat alpha, myFloat beta,
   
   int verbose = 0;
   
-  StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctl, verbose);
+  StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
   
   int log_p=0;
   
@@ -501,6 +566,11 @@ void test_stable_random (ostream& out, int n, myFloat alpha, myFloat beta,
     sum_zero+=(fabs(*pr)<.01);
     sum_nan+=boost::math::isnan(*pr);
   }
+  
+  out << endl;
+  out << "Call to random with n = " << n << ", alpha = " << alpha
+  << ", beta = " << beta << ", digits10 = " << std::numeric_limits<myFloat>::digits10
+  << endl << endl;
   out << "p_neginf = " << setw(15) << sum_neginf/n
       << ", cdf = "<<  setw(15) << std_stable_dist.cdf(-1e300,true,log_p) << endl
       << "p_posinf = " << setw(15) << sum_posinf/n
@@ -514,20 +584,37 @@ void test_stable_random (ostream& out, int n, myFloat alpha, myFloat beta,
   
   double d = static_cast<double>(D(r, std_stable_dist));
   
+  double one_minus_k = 1-kolmogorov_cdf(n, d);
+  bool pass = one_minus_k > .01;
   out << "D = " << d << ", KS Probability = " << kolmogorov_asymptotic_cdf(d * sqrt(n))
-      << ", 1 - K(n,d) = " << 1-kolmogorov_cdf(n, d) << endl;
+      << ", 1 - K(n,d) = " << one_minus_k << (pass ? "" : " FAIL") << endl;
+  out << endl;
+  return !pass;
+}
+
+static void show_usage (string name){
+  boost::filesystem::path p(name);
+  cerr << "Usage: " << p.filename().string() << "test_name" << endl;
 }
 
 int main(int argc, const char * argv[]) {
+  // Check the number of parameters
+  if (argc != 2) {
+    // Tell the user how to run the program
+    show_usage(string(argv[0]));
+    return 1;
+  }
+  
+  string test_name = string(argv[1]);
   // First create some high precision coeficients for
-  mpreal::set_default_prec(mpfr::digits2bits(60));
+  mpreal::set_default_prec(128);
   Kronrod<mpreal> k_big(10);
-  mpreal::set_default_prec(mpfr::digits2bits(50));
+  mpreal::set_default_prec(96);
   int noext = 1;
   mpreal eps_mpreal = std::numeric_limits<mpreal>::epsilon();
   double epsabs_double = 0;
   double epsrel_double = 64 * std::numeric_limits<double>::epsilon();
-  int limit = 3000;
+  int limit = 1000;
   int verbose_integration = 0;
   IntegrationController<double> ctl_double(noext, k_big,
                                            epsabs_double, epsrel_double,
@@ -542,22 +629,60 @@ int main(int argc, const char * argv[]) {
                                            limit, verbose_integration);
   if (verbose_integration)
     cout << "ctl_mpreal:" << endl << ctl_mpreal << endl;
-/*
-  test_stable_cdf<double>(cout, ctl_double);
-  test_stable_pdf<double>(cout, ctl_double);
-  test_stable_ddx_pdf<double>(cout, ctl_double);
-  test_stable_quantile<double>(cout, ctl_double);
-  test_stable_mode<double>(cout, ctl_double);
- */
-  test_stable_random<double>(cout, 10000, 1.5, .5, ctl_double);
-/*
-  test_stable_cdf<mpreal>(cout, ctl_mpreal);
-  test_stable_pdf<mpreal>(cout, ctl_mpreal);
-  test_stable_ddx_pdf<mpreal>(cout, ctl_mpreal);
-  test_stable_quantile<mpreal>(cout,ctl_mpreal);
-  test_stable_mode<mpreal>(cout, ctl_mpreal);
-*/
-  test_stable_random<mpreal>(cout, 10000, 1.5, .5, ctl_mpreal);
 
-  return 0;
+  bool fail = false;
+  if (test_name == "cdf_double") {
+    cout << "Writing output to ../output/test_stable_cdf_double.out" << endl;
+    ofstream cdf_double("../output/test_stable_cdf_double.out");
+    fail = test_stable_cdf<double>(cdf_double, Controllers<double>(ctl_double, ctl_double));
+  } else if (test_name == "pdf_double") {
+    cout << "Writing output to ../output/test_stable_pdf_double.out" << endl;
+    ofstream pdf_double("../output/test_stable_pdf_double.out");
+    fail = test_stable_pdf<double>(pdf_double, Controllers<double>(ctl_double, ctl_double));
+  } else if (test_name == "ddx_pdf_double") {
+    cout << "Writing output to ../output/test_stable_ddx_pdf_double.out" << endl;
+    ofstream ddx_pdf_double("../output/test_stable_ddx_pdf_double.out");
+    fail = test_stable_ddx_pdf<double>(ddx_pdf_double, Controllers<double>(ctl_double, ctl_double));
+  } else if (test_name == "quantile_double") {
+    cout << "Writing output to ../output/test_stable_quantile_double.out" << endl;
+    ofstream quantile_double("../output/test_stable_quantile_double.out");
+    fail = test_stable_quantile<double>(quantile_double, Controllers<double>(ctl_double, ctl_double));
+  } else if (test_name == "mode_double") {
+    cout << "Writing output to ../output/test_stable_mode_double.out" << endl;
+    ofstream mode_double("../output/test_stable_mode_double.out");
+    fail = test_stable_mode<double>(mode_double, Controllers<double>(ctl_double, ctl_double));
+  } else if (test_name == "random_double") {
+    cout << "Writing output to ../output/test_stable_random_double.out" << endl;
+    ofstream random_double("../output/test_stable_random_double.out");
+    fail = test_stable_random<double>(random_double, 10000, 1.5, .5, Controllers<double>(ctl_double, ctl_double));
+  } else if (test_name == "cdf_mpreal") {
+    cout << "Writing output to ../output/test_stable_cdf_mpreal.out" << endl;
+    ofstream cdf_mpreal("../output/test_stable_cdf_mpreal.out");
+    fail = test_stable_cdf<mpreal>(cdf_mpreal,  Controllers<mpreal>(ctl_mpreal, ctl_double));
+  } else if (test_name == "pdf_mpreal") {
+    cout << "Writing output to ../output/test_stable_pdf_mpreal.out" << endl;
+    ofstream pdf_mpreal("../output/test_stable_pdf_mpreal.out");
+    fail = test_stable_pdf<mpreal>(pdf_mpreal,  Controllers<mpreal>(ctl_mpreal, ctl_double));
+  } else if (test_name == "ddx_pdf_mpreal") {
+    cout << "Writing output to ../output/test_stable_ddx_pdf_mpreal.out" << endl;
+    ofstream ddx_pdf_mpreal("../output/test_stable_ddx_pdf_mpreal.out");
+    fail = test_stable_ddx_pdf<mpreal>(ddx_pdf_mpreal,  Controllers<mpreal>(ctl_mpreal, ctl_double));
+  } else if (test_name == "quantile_mpreal") {
+    cout << "Writing output to ../output/test_stable_quantile_mpreal.out" << endl;
+    ofstream quantile_mpreal("../output/test_stable_quantile_mpreal.out");
+    fail = test_stable_quantile<mpreal>(quantile_mpreal, Controllers<mpreal>(ctl_mpreal, ctl_double));
+  } else if (test_name == "mode_mpreal") {
+    cout << "Writing output to ../output/test_stable_mode_mpreal.out" << endl;
+    ofstream mode_mpreal("../output/test_stable_mode_mpreal.out");
+    fail = test_stable_mode<mpreal>(mode_mpreal,  Controllers<mpreal>(ctl_mpreal, ctl_double));
+  } else if (test_name == "random_mpreal") {
+    cout << "Writing output to ../output/test_stable_random_mpreal.out" << endl;
+    ofstream random_mpreal("../output/test_stable_random_mpreal.out");
+    fail = test_stable_random<mpreal>(random_mpreal, 10000, 1.5, .5,  Controllers<mpreal>(ctl_mpreal, ctl_double));
+  } else {
+    cerr << "Improper test name: " << test_name << endl;
+    return 1;
+  }
+  
+  return fail;
 }
