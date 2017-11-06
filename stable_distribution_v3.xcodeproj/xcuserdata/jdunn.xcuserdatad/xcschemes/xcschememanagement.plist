@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>Zolotarev.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>dump_mpreal.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -32,17 +37,22 @@
 		<key>stable_distribution.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>9</integer>
 		</dict>
 		<key>stable_distribution_v3.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>trace_stable_mode.xcscheme</key>
+		<key>trace.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
+		</dict>
+		<key>trace_zolotarev.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
 		</dict>
 		<key>xcheck_to_file.xcscheme</key>
 		<dict>
@@ -73,6 +83,16 @@
 			<true/>
 		</dict>
 		<key>6FC6C3611F8488ED004E30CC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6FF0304D1F89CD7800C3AC5B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6FF030621F8BD6EC00C3AC5B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

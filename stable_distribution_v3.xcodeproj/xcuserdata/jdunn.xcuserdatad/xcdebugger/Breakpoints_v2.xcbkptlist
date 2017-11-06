@@ -297,13 +297,1545 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "xcheck_to_file/xcheck_to_file.cpp"
-            timestampString = "528835996.245394"
+            timestampString = "531593018.439726"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "416"
-            endingLineNumber = "416"
+            startingLineNumber = "422"
+            endingLineNumber = "422"
             landmarkName = "main(int argc, char *argv[])"
             landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/adaptive_integration_impl.h"
+            timestampString = "529780035.750049"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "578"
+            endingLineNumber = "578"
+            landmarkName = "integrate(typename Subinterval&lt;myFloat&gt;::Integrand f, void* ex, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;double&gt;::integrate(void (*)(double*, int, void*), void*, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt; const&amp;, double&amp;, double&amp;, int&amp;, adaptive_integration::IntegrationController&lt;double&gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "529100421.241755"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "578"
+                  endingLineNumber = "578"
+                  offsetFromSymbolStart = "3040">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;mpfr::mpreal&gt;::integrate(void (*)(mpfr::mpreal*, int, void*), void*, std::__1::vector&lt;mpfr::mpreal, std::__1::allocator&lt;mpfr::mpreal&gt; &gt; const&amp;, mpfr::mpreal&amp;, mpfr::mpreal&amp;, int&amp;, adaptive_integration::IntegrationController&lt;mpfr::mpreal&gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "529100421.24463"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "578"
+                  endingLineNumber = "578"
+                  offsetFromSymbolStart = "4344">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/adaptive_integration_impl.h"
+            timestampString = "529780035.750837"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "681"
+            endingLineNumber = "681"
+            landmarkName = "integrate(typename Subinterval&lt;myFloat&gt;::Integrand f, void* ex, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;double&gt;::integrate(void (*)(double*, int, void*), void*, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt; const&amp;, double&amp;, double&amp;, int&amp;, adaptive_integration::IntegrationController&lt;double&gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "528957351.386284"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "681"
+                  endingLineNumber = "681"
+                  offsetFromSymbolStart = "9434">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;mpfr::mpreal&gt;::integrate(void (*)(mpfr::mpreal*, int, void*), void*, std::__1::vector&lt;mpfr::mpreal, std::__1::allocator&lt;mpfr::mpreal&gt; &gt; const&amp;, mpfr::mpreal&amp;, mpfr::mpreal&amp;, int&amp;, adaptive_integration::IntegrationController&lt;mpfr::mpreal&gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "528957351.389905"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "681"
+                  endingLineNumber = "681"
+                  offsetFromSymbolStart = "13259">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "trace_zolotarev/trace_zolotarev.cpp"
+            timestampString = "531593018.439867"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "calc_result(ostream&amp; os, string type, double alpha, double beta, double x, Controllers&lt;myFloat&gt; ctls, int verbose, int verbose_integration)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/adaptive_integration.h"
+            timestampString = "529389719.724557"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
+            landmarkName = "Integral"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/adaptive_integration_impl.h"
+            timestampString = "529780035.751491"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "838"
+            endingLineNumber = "838"
+            landmarkName = "operator() ()"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::Integral&lt;double&gt;::operator()()"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "529390604.276634"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "836"
+                  endingLineNumber = "836"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::Integral&lt;mpfr::mpreal&gt;::operator()()"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "529390604.278861"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "836"
+                  endingLineNumber = "836"
+                  offsetFromSymbolStart = "29">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/adaptive_integration_impl.h"
+            timestampString = "529780035.75209"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "568"
+            endingLineNumber = "568"
+            landmarkName = "integrate(typename Subinterval&lt;myFloat&gt;::Integrand f, void* ex, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::Integral&lt;double&gt;::operator()()"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "530558074.696634"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "838"
+                  endingLineNumber = "838"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::Integral&lt;mpfr::mpreal&gt;::operator()()"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "530558074.698753"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "838"
+                  endingLineNumber = "838"
+                  offsetFromSymbolStart = "29">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;double&gt;::integrate(void (*)(double*, int, void*), void*, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt; const&amp;, double&amp;, double&amp;, int&amp;, adaptive_integration::IntegrationController&lt;double&gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "530558074.700795"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "568"
+                  endingLineNumber = "568"
+                  offsetFromSymbolStart = "2678">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;mpfr::mpreal&gt;::integrate(void (*)(mpfr::mpreal*, int, void*), void*, std::__1::vector&lt;mpfr::mpreal, std::__1::allocator&lt;mpfr::mpreal&gt; &gt; const&amp;, mpfr::mpreal&amp;, mpfr::mpreal&amp;, int&amp;, adaptive_integration::IntegrationController&lt;mpfr::mpreal&gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "530558074.702836"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "568"
+                  endingLineNumber = "568"
+                  offsetFromSymbolStart = "3671">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/adaptive_integration_impl.h"
+            timestampString = "529780035.75268"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "644"
+            endingLineNumber = "644"
+            landmarkName = "integrate(typename Subinterval&lt;myFloat&gt;::Integrand f, void* ex, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::Integral&lt;double&gt;::operator()()"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "529391158.448136"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "838"
+                  endingLineNumber = "838"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::Integral&lt;mpfr::mpreal&gt;::operator()()"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "529391158.450807"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "838"
+                  endingLineNumber = "838"
+                  offsetFromSymbolStart = "29">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;double&gt;::integrate(void (*)(double*, int, void*), void*, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt; const&amp;, double&amp;, double&amp;, int&amp;, adaptive_integration::IntegrationController&lt;double&gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "529391158.715479"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "644"
+                  endingLineNumber = "644"
+                  offsetFromSymbolStart = "6639">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;mpfr::mpreal&gt;::integrate(void (*)(mpfr::mpreal*, int, void*), void*, std::__1::vector&lt;mpfr::mpreal, std::__1::allocator&lt;mpfr::mpreal&gt; &gt; const&amp;, mpfr::mpreal&amp;, mpfr::mpreal&amp;, int&amp;, adaptive_integration::IntegrationController&lt;mpfr::mpreal&gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "529391158.719387"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "644"
+                  endingLineNumber = "644"
+                  offsetFromSymbolStart = "8722">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/stable_distribution_cdf.h"
+            timestampString = "530637021.630634"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "cdf(myFloat x, int lower_tail, int log_p, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::cdf(double, int, int, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_cdf.h"
+                  timestampString = "529394072.906984"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "1638">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;mpfr::mpreal&gt;::cdf(mpfr::mpreal, int, int, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_cdf.h"
+                  timestampString = "529394072.910013"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "5086">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_base.h"
+            timestampString = "531535606.220153"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "ddx_pdf_alpha_1(ddx_q_integrand&lt;myFloat&gt;, (void *)this, points, *cntl, verbose_integration)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::Zolotarev(double, double, adaptive_integration::IntegrationController&lt;double&gt;*, int, int)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_base.h"
+                  timestampString = "529562243.607639"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96"
+                  offsetFromSymbolStart = "8874">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::Zolotarev(mpfr::mpreal, mpfr::mpreal, adaptive_integration::IntegrationController&lt;mpfr::mpreal&gt;*, int, int)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_base.h"
+                  timestampString = "529562243.610912"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96"
+                  offsetFromSymbolStart = "13882">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_cdf.h"
+            timestampString = "531616555.268832"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "cdf(myFloat x0, int lower_tail, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::cdf(double, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_cdf.h"
+                  timestampString = "529594409.896641"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "103"
+                  endingLineNumber = "103"
+                  offsetFromSymbolStart = "3087">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::cdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_cdf.h"
+                  timestampString = "529594409.89987"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "103"
+                  endingLineNumber = "103"
+                  offsetFromSymbolStart = "9593">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_cdf.h"
+            timestampString = "531616555.268916"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
+            landmarkName = "cdf(myFloat x0, int lower_tail, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::cdf(double, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_cdf.h"
+                  timestampString = "529602215.160891"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "220"
+                  endingLineNumber = "220"
+                  offsetFromSymbolStart = "7565">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::cdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_cdf.h"
+                  timestampString = "529602215.164028"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "220"
+                  endingLineNumber = "220"
+                  offsetFromSymbolStart = "22107">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_cdf.h"
+            timestampString = "531616555.268981"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "cdf(myFloat x0, int lower_tail, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::cdf(double, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_cdf.h"
+                  timestampString = "529605880.359692"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "3431">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::cdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_cdf.h"
+                  timestampString = "529605880.363097"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "10493">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_pdf.h"
+            timestampString = "531616555.269043"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
+            landmarkName = "pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::pdf(double, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_pdf.h"
+                  timestampString = "529620814.375677"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "223"
+                  endingLineNumber = "223"
+                  offsetFromSymbolStart = "8265">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::pdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_pdf.h"
+                  timestampString = "529620814.379004"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "223"
+                  endingLineNumber = "223"
+                  offsetFromSymbolStart = "25703">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_ddx_pdf.h"
+            timestampString = "531616555.269107"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::ddx_pdf(double, stable_distribution::Parameterization)"
+                  moduleName = "Zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "531531168.483021"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "5422">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::ddx_pdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "Zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "531531168.486341"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "18520">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_pdf.h"
+            timestampString = "531616555.269527"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_ddx_pdf.h"
+            timestampString = "531616555.269645"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
+            landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_ddx_pdf.h"
+            timestampString = "531616555.270025"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "314"
+            endingLineNumber = "314"
+            landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::ddx_pdf(double, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "529718364.441326"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "276"
+                  endingLineNumber = "276"
+                  offsetFromSymbolStart = "10904">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::ddx_pdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "529718364.445224"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "276"
+                  endingLineNumber = "276"
+                  offsetFromSymbolStart = "35869">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/stable_distribution_base.h"
+            timestampString = "530245725.389598"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "g_r(myFloat th_r)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::g_r(double) const"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "530231168.008003"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "94"
+                  endingLineNumber = "94"
+                  offsetFromSymbolStart = "312">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;mpfr::mpreal&gt;::g_r(mpfr::mpreal) const"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "530231168.010641"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "94"
+                  endingLineNumber = "94"
+                  offsetFromSymbolStart = "371">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_cdf.h"
+            timestampString = "531616555.270347"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "cdf(myFloat x0, int lower_tail, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::cdf(double, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_cdf.h"
+                  timestampString = "530558907.249712"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "119"
+                  endingLineNumber = "119"
+                  offsetFromSymbolStart = "3844">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::cdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_cdf.h"
+                  timestampString = "530558907.253297"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "119"
+                  endingLineNumber = "119"
+                  offsetFromSymbolStart = "12182">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_ddx_pdf.h"
+            timestampString = "531616555.270437"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::ddx_pdf(double, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "530581759.188005"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
+                  offsetFromSymbolStart = "3533">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::ddx_pdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "530581759.191999"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
+                  offsetFromSymbolStart = "12172">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_ddx_pdf.h"
+            timestampString = "531616555.270741"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
+            landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::ddx_pdf(double, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "530636900.753834"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "258"
+                  endingLineNumber = "258"
+                  offsetFromSymbolStart = "10703">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::ddx_pdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "530636900.757276"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "258"
+                  endingLineNumber = "258"
+                  offsetFromSymbolStart = "32259">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_ddx_pdf.h"
+            timestampString = "531616555.271022"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
+            landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::ddx_pdf(double, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "530636934.649182"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "254"
+                  endingLineNumber = "254"
+                  offsetFromSymbolStart = "10516">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::ddx_pdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "530636934.652662"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "254"
+                  endingLineNumber = "254"
+                  offsetFromSymbolStart = "31834">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_pdf.h"
+            timestampString = "531616555.2713"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
+            landmarkName = "pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::pdf(double, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_pdf.h"
+                  timestampString = "530642268.165411"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "242"
+                  endingLineNumber = "242"
+                  offsetFromSymbolStart = "9319">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::pdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_pdf.h"
+                  timestampString = "530642268.168648"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "242"
+                  endingLineNumber = "242"
+                  offsetFromSymbolStart = "28717">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_ddx_pdf.h"
+            timestampString = "531616555.271364"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::ddx_pdf(double, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "530646641.95348"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96"
+                  offsetFromSymbolStart = "3302">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::ddx_pdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "530646641.957567"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96"
+                  offsetFromSymbolStart = "11390">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_pdf.h"
+            timestampString = "531616555.271854"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
+            landmarkName = "pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::pdf(double, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_pdf.h"
+                  timestampString = "531338873.582848"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "330"
+                  endingLineNumber = "330"
+                  offsetFromSymbolStart = "13124">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::pdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_pdf.h"
+                  timestampString = "531338873.58541"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "330"
+                  endingLineNumber = "330"
+                  offsetFromSymbolStart = "41891">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_cdf.h"
+            timestampString = "531616555.271957"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "cdf(myFloat x0, int lower_tail, Parameterization pm)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_cdf.h"
+            timestampString = "531616555.272046"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "cdf(myFloat x0, int lower_tail, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::cdf(double, int, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_cdf.h"
+                  timestampString = "531529055.171359"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "140"
+                  endingLineNumber = "140"
+                  offsetFromSymbolStart = "5189">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::cdf(mpfr::mpreal, int, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_cdf.h"
+                  timestampString = "531529055.175514"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "140"
+                  endingLineNumber = "140"
+                  offsetFromSymbolStart = "14881">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_cdf.h"
+            timestampString = "531616555.272107"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "cdf(myFloat x0, int lower_tail, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::cdf(double, int, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_cdf.h"
+                  timestampString = "531529071.156046"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "163"
+                  endingLineNumber = "163"
+                  offsetFromSymbolStart = "6094">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::cdf(mpfr::mpreal, int, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_cdf.h"
+                  timestampString = "531529071.159062"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "163"
+                  endingLineNumber = "163"
+                  offsetFromSymbolStart = "17060">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_cdf.h"
+            timestampString = "531616555.272166"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
+            landmarkName = "cdf(myFloat x0, int lower_tail, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::cdf(double, int, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_cdf.h"
+                  timestampString = "531530494.267501"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "325"
+                  endingLineNumber = "325"
+                  offsetFromSymbolStart = "13752">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::cdf(mpfr::mpreal, int, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_cdf.h"
+                  timestampString = "531530494.270654"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "325"
+                  endingLineNumber = "325"
+                  offsetFromSymbolStart = "39213">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_ddx_pdf.h"
+            timestampString = "531616555.272227"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::ddx_pdf(double, stable_distribution::Parameterization)"
+                  moduleName = "Zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "531531070.564467"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "157"
+                  endingLineNumber = "157"
+                  offsetFromSymbolStart = "6470">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::ddx_pdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "Zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "531531070.567987"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "157"
+                  endingLineNumber = "157"
+                  offsetFromSymbolStart = "20954">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_ddx_pdf.h"
+            timestampString = "531616555.272531"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::ddx_pdf(double, stable_distribution::Parameterization)"
+                  moduleName = "Zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "531531563.615051"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "1893">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::ddx_pdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "Zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "531531563.619262"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "6540">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_ddx_pdf.h"
+            timestampString = "531616555.272828"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
+            landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::ddx_pdf(double, stable_distribution::Parameterization)"
+                  moduleName = "Zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "531532888.921062"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "295"
+                  endingLineNumber = "295"
+                  offsetFromSymbolStart = "13015">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::ddx_pdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "Zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "531532888.924375"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "295"
+                  endingLineNumber = "295"
+                  offsetFromSymbolStart = "40450">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_ddx_pdf.h"
+            timestampString = "531616555.27311"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::ddx_pdf(double, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "531532483.357581"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "1659">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::ddx_pdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "trace_zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "531532483.360758"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "6229">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_ddx_pdf.h"
+            timestampString = "531616555.273489"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::ddx_pdf(double, stable_distribution::Parameterization)"
+                  moduleName = "Zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "531532266.459414"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "686">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::ddx_pdf(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "Zolotarev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
+                  timestampString = "531532266.46273"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "1835">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

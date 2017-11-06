@@ -15,7 +15,7 @@ double kolmogorov_asymptotic_cdf(double x) {
     ret=1;
   else {
     for (int i=1; i<100; ++i) {
-      double term = 2 * pow(-1, i-1) * exp(-2*pow(i*x,2));
+      double term = 2 * (0==i%2 ? -1 : 1) * exp(-2*pow(i*x,2));
       ret += term;
       if (fabs(term) < eps * fabs(ret)) break;
     }

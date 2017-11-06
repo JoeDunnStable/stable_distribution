@@ -6,7 +6,7 @@ eigendep = dependency('eigen3', version : '>3.0', required : true)
 
 #Boost header and some libraries.
 #I had to define BOOST_ROOT to get this to work.
-boostdep = dependency('boost', modules : ['filesystem', 'system', 'timer'], required : true)
+boostdep = dependency('boost', modules : ['system', 'filesystem', 'timer'],  required : true)
 
 # The Gnu multiprecision library
 mpfrdep = dependency('mpfr', required : true)
@@ -16,7 +16,8 @@ mpfrcppdep = dependency('mpfrcpp', required : true)
 
 alldep = [eigendep, boostdep, mpfrdep, mpfrcppdep]
 
-incdir=include_directories('stable_distribution')
+incdir=include_directories(['stable_distribution',
+                            'Zolotarev'])
 
 subdir('doc')
 subdir('stable_distribution')
@@ -27,3 +28,5 @@ subdir('FMStable_test')
 subdir('dump_mpreal')
 subdir('xcheck_to_file')
 subdir('trace')
+subdir('Zolotarev')
+subdir('trace_zolotarev')

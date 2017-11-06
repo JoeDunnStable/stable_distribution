@@ -823,8 +823,10 @@ void IntegrationController<myFloat>::integrate(typename Subinterval<myFloat>::In
   if (need_sum){
 //    cout << "Calculating sum" << endl;
     result = 0.0e+00;
+    errsum = 0;
     for (int k=1; k<=last; k++) {
       result += subs.at(k-1).r;
+      errsum += subs.at(k-1).e;
     }
     abserr = errsum;
   }
@@ -848,7 +850,7 @@ void IntegrationController<myFloat>::integrate(typename Subinterval<myFloat>::In
       }
       
       if (termination_code > 0)
-        cout << msg(termination_code) << ":" << endl;
+        cout << msg() << ":" << endl;
       cout << "Integral from " << points.front()
       << " to " << points.back()
       << " = " << result

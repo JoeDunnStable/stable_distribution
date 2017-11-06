@@ -33,6 +33,11 @@ using mpfr::digamma;
 using mpfr::const_pi;
 using mpfr::const_euler;
 
+// the boost version of tgamma_ratio is broken for variable precision mpreal
+inline mpreal tgamma_ratio(mpreal num, mpreal denom) {
+    return tgamma(num)/tgamma(denom);
+}
+
 #include <boost/math/tools/real_cast.hpp>
 namespace mpfr {
   template <class Policy>
@@ -54,6 +59,8 @@ using boost::math::zeta;
 
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/math/special_functions/digamma.hpp>
+#include <boost/math/special_functions/binomial.hpp>
+#include <boost/math/special_functions/factorials.hpp>
 #include <boost/math/special_functions/zeta.hpp>
 #include <boost/math/special_functions/erf.hpp>
 //using fmax = boost::multiprecision::max;
@@ -71,6 +78,9 @@ using boost::math::erfc_inv;
 using boost::math::tgamma;
 using boost::math::lgamma;
 using boost::math::digamma;
+using boost::math::tgamma_ratio;
+using boost::math::binomial_coefficient;
+using boost::math::factorial;
 using boost::math::zeta;
 
 using boost::math::policies::policy;
@@ -88,7 +98,11 @@ myFloat pow(myFloat x, myFloat y) {
   else if (x == 0 && y>0)
     return 0;
   else
-    return boost::multiprecision::pow(x, y);
+    return std::pow(x, y);
+}
+
+template<> double pow<double>(double x, double y){
+  return pow(x,y);
 }
 
 template<> mpreal pow<mpreal>(mpreal x, mpreal y) {

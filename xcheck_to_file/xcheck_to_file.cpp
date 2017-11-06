@@ -12,6 +12,9 @@
 #include <fstream>
 #include <boost/filesystem.hpp>
 #include <mpreal.h>  //Just for input
+#define LIBRARY
+#include "zolotarev.h"
+#undef LIBRARY
 
 using mpfr::mpreal;
 
@@ -39,11 +42,11 @@ class error_comp {
 public:
   double x;
   double stable_error;
-  double Pareto_error;
-  error_comp() : x(NAN), stable_error(NAN), Pareto_error(NAN){}
-  error_comp(double x, double r_double, double r_mpreal, double r_Pareto) :x(x) {
+  double zolotarev_error;
+  error_comp() : x(NAN), stable_error(NAN), zolotarev_error(NAN){}
+  error_comp(double x, double r_double, double r_mpreal, double r_zolotarev) :x(x) {
     stable_error = fabs(r_double-r_mpreal);
-    Pareto_error = fabs(r_Pareto-r_mpreal);
+    zolotarev_error = fabs(r_zolotarev-r_mpreal);
   }
 };
 
@@ -61,8 +64,8 @@ public:
     accuracy::beta=beta;
     ec.resize(0);
   }
-  void add(double x, double r_double, double r_mpreal, double r_Pareto) {
-    ec.push_back(error_comp(x, r_double, r_mpreal, r_Pareto));
+  void add(double x, double r_double, double r_mpreal, double r_zolotarev) {
+    ec.push_back(error_comp(x, r_double, r_mpreal, r_zolotarev));
   }
   friend ostream& operator<<(ostream&, accuracy&);
 };
@@ -73,7 +76,7 @@ ostream& operator<<(ostream& os, accuracy& a) {
   double x_hi=std::numeric_limits<double>::infinity();
   // Assuming the x values are in order this will start with the high and work down
   for (vector<error_comp>::reverse_iterator pec = a.ec.rbegin(); pec<a.ec.rend() && (*pec).x>0 ; pec++) {
-    score+=((pec->Pareto_error) <= (pec->stable_error)) ? 1 : -1;
+    score+=((pec->zolotarev_error) <= (pec->stable_error)) ? 1 : -1;
     if (score>score_hi) {
       score_hi=score;
       x_hi=(pec->x);
@@ -84,7 +87,7 @@ ostream& operator<<(ostream& os, accuracy& a) {
   int score_lo=0;
   double x_lo=-std::numeric_limits<double>::infinity();
   for (vector<error_comp>::iterator pec = a.ec.begin(); pec<a.ec.end() && (*pec).x<0 ; pec++) {
-    score+=((pec->Pareto_error) <= (pec->stable_error)) ? 1 : -1;
+    score+=((pec->zolotarev_error) <= (pec->stable_error)) ? 1 : -1;
     if (score>score_lo) {
       score_lo=score;
       x_lo=(pec->x);
@@ -106,7 +109,7 @@ public:
   double x;
   double r_double;
   double r_mpreal;
-  double r_Pareto;
+  double r_zolotarev;
   double absdiff;
   double reldiff;
   double g_theta2_error;
@@ -114,11 +117,11 @@ public:
   double abserr_mpreal;
   bool good_theta2_double;
   bool good_theta2_mpreal;
-  result(double alpha, double beta, double x, double r_double, double r_mpreal, double r_Pareto,
+  result(double alpha, double beta, double x, double r_double, double r_mpreal, double r_zolotarev,
          double absdiff, double reldiff, double g_theta2_error, double abserr_double, double abserr_mpreal,
          bool good_theta2_double, bool good_theta2_mpreal) :
   alpha(alpha), beta(beta), x(x), r_double(r_double),
-  r_mpreal(r_mpreal), r_Pareto(r_Pareto), absdiff(absdiff), reldiff(reldiff), g_theta2_error(g_theta2_error), abserr_double(abserr_double),
+  r_mpreal(r_mpreal), r_zolotarev(r_zolotarev), absdiff(absdiff), reldiff(reldiff), g_theta2_error(g_theta2_error), abserr_double(abserr_double),
   abserr_mpreal(abserr_mpreal), good_theta2_double(good_theta2_double), good_theta2_mpreal(good_theta2_mpreal){}
 };
 
@@ -171,7 +174,7 @@ public:
   }  //quantile
   results(string type, int max_size) : type(type), max_size(max_size) {
   }
-  void add_result(double alpha, double beta, double x, double r_double, double r_mpreal, double r_Pareto,
+  void add_result(double alpha, double beta, double x, double r_double, double r_mpreal, double r_zolotarev,
                   double g_theta2_error, double abserr_double, double abserr_mpreal, bool good_theta2_double, bool good_theta2_mpreal) {
     double dblmin = std::numeric_limits<double>::min()/std::numeric_limits<double>::epsilon();
     
@@ -187,7 +190,7 @@ public:
       rel_all.push_back(rel_diff);
       if (abs_diff > abs_best)
       {
-        abs_data.push_back(result(alpha, beta, x, r_double, r_mpreal, r_Pareto,
+        abs_data.push_back(result(alpha, beta, x, r_double, r_mpreal, r_zolotarev,
                                   abs_diff, rel_diff, g_theta2_error, abserr_double, abserr_mpreal, good_theta2_double, good_theta2_mpreal));
         sort(abs_data.begin(), abs_data.end(), comp_abs);
         if (abs_data.size() > max_size) abs_data.pop_back();
@@ -195,7 +198,7 @@ public:
         abs_worst = abs_data.front().absdiff;
       }
       if (rel_diff > rel_best) {
-        rel_data.push_back(result(alpha, beta, x, r_double, r_mpreal, r_Pareto,
+        rel_data.push_back(result(alpha, beta, x, r_double, r_mpreal, r_zolotarev,
                                   abs_diff, rel_diff, g_theta2_error, abserr_double, abserr_mpreal, good_theta2_double, good_theta2_mpreal));
         sort(rel_data.begin(),rel_data.end(),comp_rel);
         if (rel_data.size() > max_size) {
@@ -219,7 +222,7 @@ ostream& operator<<(ostream& os, results r) {
   << setw(13) << right << "x"
   << setw(30) << right << r.type+"_double"
   << setw(30) << right << r.type+"_mpreal"
-  << setw(30) << right << r.type+"_Pareto"
+  << setw(30) << right << r.type+"_zolotarev"
   << setw(15) << right << "absdiff"
   << setw(15) << right << "reldiff"
   << setw(15) << right << "g_theta2_error"
@@ -234,7 +237,7 @@ ostream& operator<<(ostream& os, results r) {
     << setw(13) << setprecision(5) << scientific << presult->x
     << setw(30) << setprecision(20) << presult->r_double
     << setw(30) << setprecision(20) << presult->r_mpreal
-    << setw(30) << setprecision(20) << presult->r_Pareto
+    << setw(30) << setprecision(20) << presult->r_zolotarev
     << setw(15) << setprecision(5) << presult->absdiff
     << setw(15) << setprecision(5) << presult->reldiff
     << setw(15) << setprecision(5) << presult->g_theta2_error
@@ -258,7 +261,7 @@ ostream& operator<<(ostream& os, results r) {
   << setw(13) << right << "x"
   << setw(30) << right << r.type+"_double"
   << setw(30) << right << r.type+"_mpreal"
-  << setw(30) << right << r.type+"_Pareto"
+  << setw(30) << right << r.type+"_zolotarev"
   << setw(15) << right << "absdiff"
   << setw(15) << right << "reldiff"
   << setw(15) << right << "g_theta2_error"
@@ -273,7 +276,7 @@ ostream& operator<<(ostream& os, results r) {
     << setw(13) << setprecision(5) << scientific << presult->x
     << setw(30) << setprecision(20) << presult->r_double
     << setw(30) << setprecision(20) << presult->r_mpreal
-    << setw(30) << setprecision(20) << presult->r_Pareto
+    << setw(30) << setprecision(20) << presult->r_zolotarev
     << setw(15) << setprecision(5) << presult->absdiff
     << setw(15) << setprecision(5) << presult->reldiff
     << setw(15) << setprecision(5) << presult->g_theta2_error
@@ -329,7 +332,7 @@ int main(int argc, char *argv[]) {
   int log_flag=0;
   
   bool noext = true, lower_tail=true;
-  int subdivisions = 1000;
+  int subdivisions = 10000;
   int verbose = 0;
   
   double dblepsabs = 0.;
@@ -381,30 +384,31 @@ int main(int argc, char *argv[]) {
     double ddx_pdf_mpreal = double(ddx_d_mpreal);
     double ddx_dabserr_mpreal = double(ddx_d_abserr_mpreal);
     StandardStableDistribution<double> std_stable_dist_double(alpha, beta, ctls, verbose);
+    Zolotarev<double> zol(alpha, beta, &ctls.controller, verbose);
     double cdf_double = std_stable_dist_double.cdf(x, lower_tail, log_flag);
     bool good_theta2_double = std_stable_dist_double.good_theta2;
     double g_theta2_error = std_stable_dist_double.g_theta2_error;
     double cdf_abserr = std_stable_dist_double.abserr;
-    double pPareto_double = pPareto(x, alpha, beta,lower_tail, log_flag );
-    r_cdf.add_result(alpha, beta, x, cdf_double, cdf_mpreal, pPareto_double, g_theta2_error,
+    double cdf_zolotarev_double = zol.cdf(x, lower_tail, S0);
+    r_cdf.add_result(alpha, beta, x, cdf_double, cdf_mpreal, cdf_zolotarev_double, g_theta2_error,
                          cdf_abserr, pabserr_mpreal, good_theta2_double, good_theta2_mpreal);
     if (pabserr_mpreal < dblepsrel * cdf_mpreal)
-      a_cdf.add(x,cdf_double, cdf_mpreal, pPareto_double);
+      a_cdf.add(x,cdf_double, cdf_mpreal, cdf_zolotarev_double);
 
     double pdf_double = std_stable_dist_double.pdf(x, log_flag);
     double pdf_abserr = std_stable_dist_double.abserr;
-    double dPareto_double = dPareto(x, alpha, beta, log_flag);
-    r_pdf.add_result(alpha, beta, x, pdf_double, pdf_mpreal, dPareto_double, g_theta2_error,
+    double pdf_zolotarev_double = zol.pdf(x, S0);
+    r_pdf.add_result(alpha, beta, x, pdf_double, pdf_mpreal, pdf_zolotarev_double, g_theta2_error,
                          pdf_abserr, dabserr_mpreal, good_theta2_double, good_theta2_mpreal);
     if (dabserr_mpreal < dblepsrel * pdf_mpreal)
-      a_pdf.add(x,pdf_double, pdf_mpreal, dPareto_double);
+      a_pdf.add(x,pdf_double, pdf_mpreal, pdf_zolotarev_double);
     double ddx_pdf_double = std_stable_dist_double.ddx_pdf(x);
     double ddx_pdf_abserr = std_stable_dist_double.abserr;
-    double ddx_dPareto_double = -(1+alpha)*dPareto(x, alpha, beta, false)/x;
-    r_ddx_pdf.add_result(alpha, beta, x, ddx_pdf_double, ddx_pdf_mpreal, ddx_dPareto_double, g_theta2_error,
+    double ddx_pdf_zolotarev_double = zol.ddx_pdf(x, S0);
+    r_ddx_pdf.add_result(alpha, beta, x, ddx_pdf_double, ddx_pdf_mpreal, ddx_pdf_zolotarev_double, g_theta2_error,
                              ddx_pdf_abserr, ddx_dabserr_mpreal, good_theta2_double, good_theta2_mpreal);
     if (ddx_dabserr_mpreal < dblepsrel * ddx_pdf_mpreal)
-      a_ddx_pdf.add(x,ddx_pdf_double, ddx_pdf_mpreal, ddx_dPareto_double);
+      a_ddx_pdf.add(x,ddx_pdf_double, ddx_pdf_mpreal, ddx_pdf_zolotarev_double);
   }
   
   // print out the last accuracy summary

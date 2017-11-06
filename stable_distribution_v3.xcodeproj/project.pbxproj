@@ -27,6 +27,10 @@
 		6F7DD3161F81B05B00EE7744 /* libstable_distribution.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF3C0371F7EBB0F00F3371F /* libstable_distribution.dylib */; };
 		6FC6C36A1F848962004E30CC /* xcheck_to_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC6C3691F848962004E30CC /* xcheck_to_file.cpp */; };
 		6FC6C36B1F848EF9004E30CC /* libstable_distribution.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF3C0371F7EBB0F00F3371F /* libstable_distribution.dylib */; };
+		6FF0305C1F89D03600C3AC5B /* zolotarev.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FF0305B1F89D03600C3AC5B /* zolotarev.cpp */; };
+		6FF0305D1F89EA2E00C3AC5B /* libstable_distribution.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF3C0371F7EBB0F00F3371F /* libstable_distribution.dylib */; };
+		6FF0306B1F8BD7A900C3AC5B /* trace_zolotarev.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FF0306A1F8BD7A900C3AC5B /* trace_zolotarev.cpp */; };
+		6FF0306C1F8BEC4500C3AC5B /* libstable_distribution.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF3C0371F7EBB0F00F3371F /* libstable_distribution.dylib */; };
 		6FF3BFE11F7A043000F3371F /* basic_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3BFE01F7A043000F3371F /* basic_test.cpp */; };
 		6FF3C0321F7CA99100F3371F /* kolmogorov_cdf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3C0301F7CA99100F3371F /* kolmogorov_cdf.cpp */; };
 		6FF3C03E1F7EBB0F00F3371F /* stable_distribution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3C03D1F7EBB0F00F3371F /* stable_distribution.cpp */; };
@@ -97,6 +101,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		6FF0304C1F89CD7800C3AC5B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		6FF030611F8BD6EC00C3AC5B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		6FF3BFDB1F7A042F00F3371F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -138,6 +160,17 @@
 		6F7DD3141F81AD1D00EE7744 /* quick_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = quick_test.cpp; sourceTree = "<group>"; };
 		6FC6C3621F8488ED004E30CC /* xcheck_to_file */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = xcheck_to_file; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC6C3691F848962004E30CC /* xcheck_to_file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xcheck_to_file.cpp; sourceTree = "<group>"; };
+		6FF0304E1F89CD7800C3AC5B /* Zolotarev */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Zolotarev; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FF030551F89CFA800C3AC5B /* zolotarev_integral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zolotarev_integral.h; sourceTree = "<group>"; };
+		6FF030571F89D03600C3AC5B /* zolotarev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zolotarev.h; sourceTree = "<group>"; };
+		6FF030581F89D03600C3AC5B /* zolotarev_base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zolotarev_base.h; sourceTree = "<group>"; };
+		6FF030591F89D03600C3AC5B /* zolotarev_pdf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zolotarev_pdf.h; sourceTree = "<group>"; };
+		6FF0305A1F89D03600C3AC5B /* zolotarev_cdf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zolotarev_cdf.h; sourceTree = "<group>"; };
+		6FF0305B1F89D03600C3AC5B /* zolotarev.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zolotarev.cpp; sourceTree = "<group>"; };
+		6FF0305E1F89EB9D00C3AC5B /* gamma_derivative_at_integers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gamma_derivative_at_integers.h; sourceTree = "<group>"; };
+		6FF030631F8BD6EC00C3AC5B /* trace_zolotarev */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = trace_zolotarev; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FF0306A1F8BD7A900C3AC5B /* trace_zolotarev.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = trace_zolotarev.cpp; sourceTree = "<group>"; };
+		6FF0306D1F8C566500C3AC5B /* zolotarev_ddx_pdf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zolotarev_ddx_pdf.h; sourceTree = "<group>"; };
 		6FF3BFDD1F7A043000F3371F /* stable_distribution_v3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = stable_distribution_v3; path = basic_test; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FF3BFE01F7A043000F3371F /* basic_test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = basic_test.cpp; sourceTree = "<group>"; };
 		6FF3C0301F7CA99100F3371F /* kolmogorov_cdf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kolmogorov_cdf.cpp; sourceTree = "<group>"; };
@@ -205,6 +238,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6FF0304B1F89CD7800C3AC5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FF0305D1F89EA2E00C3AC5B /* libstable_distribution.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6FF030601F8BD6EC00C3AC5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FF0306C1F8BEC4500C3AC5B /* libstable_distribution.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6FF3BFDA1F7A042F00F3371F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -253,7 +302,8 @@
 			children = (
 				6F7DD3071F8194AE00EE7744 /* fit_test.cpp */,
 			);
-			path = fit_test;
+			name = fit_test;
+			path = stable_distribution/fit_test;
 			sourceTree = "<group>";
 		};
 		6F7DD30E1F81AC8C00EE7744 /* quick_test */ = {
@@ -272,17 +322,42 @@
 			path = xcheck_to_file;
 			sourceTree = "<group>";
 		};
+		6FF0304F1F89CD7800C3AC5B /* Zolotarev */ = {
+			isa = PBXGroup;
+			children = (
+				6FF0306D1F8C566500C3AC5B /* zolotarev_ddx_pdf.h */,
+				6FF0305E1F89EB9D00C3AC5B /* gamma_derivative_at_integers.h */,
+				6FF030581F89D03600C3AC5B /* zolotarev_base.h */,
+				6FF0305A1F89D03600C3AC5B /* zolotarev_cdf.h */,
+				6FF030591F89D03600C3AC5B /* zolotarev_pdf.h */,
+				6FF030571F89D03600C3AC5B /* zolotarev.h */,
+				6FF030551F89CFA800C3AC5B /* zolotarev_integral.h */,
+				6FF0305B1F89D03600C3AC5B /* zolotarev.cpp */,
+			);
+			path = Zolotarev;
+			sourceTree = "<group>";
+		};
+		6FF030641F8BD6EC00C3AC5B /* trace_zolotarev */ = {
+			isa = PBXGroup;
+			children = (
+				6FF0306A1F8BD7A900C3AC5B /* trace_zolotarev.cpp */,
+			);
+			path = trace_zolotarev;
+			sourceTree = "<group>";
+		};
 		6FF3BFD41F7A042F00F3371F = {
 			isa = PBXGroup;
 			children = (
 				6FF3C0381F7EBB0F00F3371F /* stable_distribution */,
 				6FF3BFDF1F7A043000F3371F /* basic_test */,
 				6FF3C07A1F7EE9A900F3371F /* trace */,
-				6F7DD3001F8193FD00EE7744 /* fit_test */,
 				6F7DD30E1F81AC8C00EE7744 /* quick_test */,
 				6F36D0971F81CD37006686EB /* FMStable_test */,
+				6F7DD3001F8193FD00EE7744 /* fit_test */,
 				6F36D0A71F81EC49006686EB /* dump_mpreal */,
 				6FC6C3631F8488ED004E30CC /* xcheck_to_file */,
+				6FF0304F1F89CD7800C3AC5B /* Zolotarev */,
+				6FF030641F8BD6EC00C3AC5B /* trace_zolotarev */,
 				6FF3BFDE1F7A043000F3371F /* Products */,
 				6FF3C0731F7ED0F400F3371F /* Frameworks */,
 			);
@@ -299,6 +374,8 @@
 				6F36D0961F81CD37006686EB /* FMStable_test */,
 				6F36D0A61F81EC49006686EB /* dump_mpreal */,
 				6FC6C3621F8488ED004E30CC /* xcheck_to_file */,
+				6FF0304E1F89CD7800C3AC5B /* Zolotarev */,
+				6FF030631F8BD6EC00C3AC5B /* trace_zolotarev */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -483,6 +560,40 @@
 			productReference = 6FC6C3621F8488ED004E30CC /* xcheck_to_file */;
 			productType = "com.apple.product-type.tool";
 		};
+		6FF0304D1F89CD7800C3AC5B /* Zolotarev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6FF030541F89CD7800C3AC5B /* Build configuration list for PBXNativeTarget "Zolotarev" */;
+			buildPhases = (
+				6FF0304A1F89CD7800C3AC5B /* Sources */,
+				6FF0304B1F89CD7800C3AC5B /* Frameworks */,
+				6FF0304C1F89CD7800C3AC5B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Zolotarev;
+			productName = Zolotarev;
+			productReference = 6FF0304E1F89CD7800C3AC5B /* Zolotarev */;
+			productType = "com.apple.product-type.tool";
+		};
+		6FF030621F8BD6EC00C3AC5B /* trace_zolotarev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6FF030671F8BD6EC00C3AC5B /* Build configuration list for PBXNativeTarget "trace_zolotarev" */;
+			buildPhases = (
+				6FF0305F1F8BD6EC00C3AC5B /* Sources */,
+				6FF030601F8BD6EC00C3AC5B /* Frameworks */,
+				6FF030611F8BD6EC00C3AC5B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = trace_zolotarev;
+			productName = trace_zolotarev;
+			productReference = 6FF030631F8BD6EC00C3AC5B /* trace_zolotarev */;
+			productType = "com.apple.product-type.tool";
+		};
 		6FF3BFDC1F7A042F00F3371F /* basic_test */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6FF3BFE41F7A043000F3371F /* Build configuration list for PBXNativeTarget "basic_test" */;
@@ -563,6 +674,14 @@
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
 					};
+					6FF0304D1F89CD7800C3AC5B = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					6FF030621F8BD6EC00C3AC5B = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
 					6FF3BFDC1F7A042F00F3371F = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -589,14 +708,16 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6FF3BFDC1F7A042F00F3371F /* basic_test */,
 				6FF3C0361F7EBB0F00F3371F /* stable_distribution */,
+				6FF3BFDC1F7A042F00F3371F /* basic_test */,
 				6FF3C0781F7EE9A900F3371F /* trace */,
 				6F7DD2FE1F8193FD00EE7744 /* fit_test */,
 				6F7DD30C1F81AC8C00EE7744 /* quick_test */,
 				6F36D0951F81CD37006686EB /* FMStable_test */,
 				6F36D0A51F81EC49006686EB /* dump_mpreal */,
 				6FC6C3611F8488ED004E30CC /* xcheck_to_file */,
+				6FF0304D1F89CD7800C3AC5B /* Zolotarev */,
+				6FF030621F8BD6EC00C3AC5B /* trace_zolotarev */,
 			);
 		};
 /* End PBXProject section */
@@ -640,6 +761,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FC6C36A1F848962004E30CC /* xcheck_to_file.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6FF0304A1F89CD7800C3AC5B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FF0305C1F89D03600C3AC5B /* zolotarev.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6FF0305F1F8BD6EC00C3AC5B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FF0306B1F8BD7A900C3AC5B /* trace_zolotarev.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +900,46 @@
 			name = Debug;
 		};
 		6FC6C3681F8488ED004E30CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_COMMA = YES;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		6FF030521F89CD7800C3AC5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_COMMA = YES;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6FF030531F89CD7800C3AC5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_COMMA = YES;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		6FF030681F8BD6EC00C3AC5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_COMMA = YES;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6FF030691F8BD6EC00C3AC5B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_COMMA = YES;
@@ -1013,6 +1190,24 @@
 			buildConfigurations = (
 				6FC6C3671F8488ED004E30CC /* Debug */,
 				6FC6C3681F8488ED004E30CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6FF030541F89CD7800C3AC5B /* Build configuration list for PBXNativeTarget "Zolotarev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FF030521F89CD7800C3AC5B /* Debug */,
+				6FF030531F89CD7800C3AC5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6FF030671F8BD6EC00C3AC5B /* Build configuration list for PBXNativeTarget "trace_zolotarev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FF030681F8BD6EC00C3AC5B /* Debug */,
+				6FF030691F8BD6EC00C3AC5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
