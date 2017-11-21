@@ -171,7 +171,9 @@ void Zolotarev<myFloat>::set_x_m_zeta(myFloat x_m_zeta_in) {
       cout << "betaB = " << betaB << endl;
     }
     gammaB = pow(cos(alpha*theta0),-1/alpha); // = Zolotarev lambda^(1/alpha)
+    xB = x_m_zet/gammaB;
   } else { // alpha = 1
+    // This following is used by the integrals
     x_m_zet=fabs(x_m_zeta_in);
     if (beta_input > 0 || (beta_input == 0 && x_m_zeta_in >=0)) {
       beta = beta_input;
@@ -191,13 +193,21 @@ void Zolotarev<myFloat>::set_x_m_zeta(myFloat x_m_zeta_in) {
       points.push_back((u/fabs(max<myFloat>(1,x_m_zet)))/(1+u/fabs(max<myFloat>(1,x_m_zet))));
          
     points.push_back(1);
+    // This is used by the asymptotic series
     // Zolotarev 1.1.8
-    betaB=beta;
+    gammaB=2/pi;
+    xB = (x_m_zeta_in - beta_input*gammaB*log(gammaB))/gammaB;
+    if (xB >= 0) {
+      betaB = beta_input;
+      positive_xB = true;
+    } else {
+      betaB = -beta_input;
+      positive_xB=false;
+      xB = -xB;
+    }
     if (verbose>0)
       cout << "betaB = " << betaB << endl;
-    gammaB=2/pi;
   }
-  xB = x_m_zet/gammaB;
   if (verbose>0)
     cout << "gammaB = " << gammaB << endl
     << "xB = " << xB << endl;

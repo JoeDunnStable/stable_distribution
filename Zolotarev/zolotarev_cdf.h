@@ -135,15 +135,13 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
         
     // Zolotarev 2.5.23 is asymptotic for large x
     // unlike the convergent formula this formula requires x > 0
-    myFloat xB_ = fabs(xB)+log(gammaB);
-    myFloat betaB_ = (xB>=0) ? betaB : -betaB;
-    if (xB_ == 0) {
+    if (xB == 0) {
       result_asymptotic = std::numeric_limits<myFloat>::quiet_NaN();
       error_asymptotic = std::numeric_limits<myFloat>::max();
       n_asymptotic = 0;
-    } else if (betaB_ == -1) {
+    } else if (betaB == -1) {
       // Zolotarev formula 2.5.20
-      myFloat psi = exp(xB_-1);
+      myFloat psi = exp(xB-1);
       myFloat fac = exp(-psi)/sqrt(2*pi*psi);
       if (verbose > 1)
         cout << "psi = " << psi << endl
@@ -167,9 +165,9 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
         result_asymptotic += term;
       }
       error_asymptotic = fabs(term) + fabs(result_asymptotic-fac)*exp(-pow(psi,.25));
-      result_asymptotic = (lower_tail == positive_x) ? result_asymptotic : 1-result_asymptotic;
-    } else { // xB_ > 0 & betaB_ != -1
-      myFloat log_x=log(xB_);
+      result_asymptotic = (lower_tail == positive_xB) ? 1-result_asymptotic : result_asymptotic;
+    } else { // xB > 0 & betaB_ != -1
+      myFloat log_x=log(xB);
       result_asymptotic = 0;
       myFloat term, old_term;
       int num_small_terms=0;
@@ -180,7 +178,7 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
           for (int m=l; m<=n; ++m) {
             myFloat term0=binomial_coefficient<myFloat>(n,m)*binomial_coefficient<myFloat>(m,l);
             term0 *= (1-2*((m-l)%2)) * gamma_at_integers(m-l,n);
-            term0 *=  pow(betaB_, m) * pow(pi/2*(1+betaB_),n-m) * sin(pi/2*(n-m));
+            term0 *=  pow(betaB, m) * pow(pi/2*(1+betaB),n-m) * sin(pi/2*(n-m));
             r_l_n += term0;
             if (verbose > 2){
               if (m == l)
@@ -199,7 +197,7 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
           if (verbose>1)
             cout << "fac: " << fac << endl;
         }
-        term=fac * pow(xB_,-n) / (factorial<myFloat>(n)*pi);
+        term=fac * pow(xB,-n) / (factorial<myFloat>(n)*pi);
         if (verbose>1)
           cout << "n = "<< n << ", term = " << term << endl;
         if (n>1 && fabs(term) > fabs(old_term)) break;
@@ -216,7 +214,7 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
           old_term=term;
         }
       }
-      result_asymptotic = (lower_tail == positive_x) ? result_asymptotic : 1-result_asymptotic;
+      result_asymptotic = (lower_tail == positive_xB) ? 1-result_asymptotic : result_asymptotic;
       error_asymptotic=fabs(term) + fabs(result_asymptotic) * Machine_eps;
     } // xB !=0
     if (boost::math::isnan(result_convergent) || !boost::math::isfinite(result_convergent)

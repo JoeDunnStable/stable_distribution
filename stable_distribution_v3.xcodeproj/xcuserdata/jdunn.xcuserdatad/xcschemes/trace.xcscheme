@@ -65,19 +65,19 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "cdf_double"
+            argument = "mode_double"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = ".99"
+            argument = ".5"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "1"
+            argument = ".5"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-4.8"
+            argument = "0"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

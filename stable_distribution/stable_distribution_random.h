@@ -32,6 +32,40 @@ myFloat random_stable(myFloat alpha, myFloat beta,
         return std::numeric_limits<myFloat>::infinity();
       else
         return -std::numeric_limits<myFloat>::infinity();
+    } else if (fabs(alpha-1)< 1./128.) {
+      myFloat a_m_1 = alpha - 1;
+      myFloat zeta = beta/tan(pi2*a_m_1);
+      myFloat theta0 = atan(-zeta)/alpha;
+      myFloat cos_a_th0 = pow(1+zeta*zeta,-.5);
+      myFloat sin_a_th0 = ((a_m_1>0) ? -1 : 1) * sqrt(1-cos_a_th0*cos_a_th0);
+/*
+      cout.precision(16);
+      cout << "a_m_1 = " << a_m_1 << endl
+      << "zeta = " << zeta << endl
+      << "theta0 = " << theta0 << endl
+      << "cos_a_th0 = " << cos_a_th0 << endl
+      << "sin_a_th0 = " << sin_a_th0 << endl
+      << "pm = " << pm << endl;
+ */
+      myFloat cos_th_ath =cos(a_m_1*theta)*cos_a_th0-sin(a_m_1*theta)*sin_a_th0;
+      myFloat eps1 = expm1(a_m_1/alpha*(log(cos_a_th0)+log(cos(theta))-log(cos_th_ath/w)));
+      myFloat term1 =(sin(a_m_1*theta)+cos(a_m_1*theta)*tan(theta))+zeta*sin(a_m_1*theta)*tan(theta);
+      term1 *= (1+eps1);
+      myFloat term2 = -zeta*(cos(a_m_1*theta))*eps1;
+      myFloat term3;
+      if (pm==S0)
+        term3 = zeta*2*pow(sin(a_m_1*theta/2),2);
+      else
+        term3 = -zeta*cos(a_m_1*theta);
+      result = term1 + term2 +term3;
+/*
+      cout << "cos_th_ath = " << cos_th_ath << endl
+      << " eps1 = " << eps1 << endl
+      << "term1 = " << term1 << endl
+      << "term2 = " << term2 << endl
+      << "term3 = " << term3 << endl
+      << "result = " << result << endl;
+ */
     } else {
       myFloat b_tan_pa = beta*tan(pi2*alpha);
       myFloat theta0 = min(max<myFloat>(-pi2, atan(b_tan_pa) / alpha), pi2);

@@ -153,17 +153,15 @@ myFloat Zolotarev<myFloat>::pdf(myFloat x0, Parameterization pm) {
     
     // Zolotarev 2.5.23 is the asymptotic series for large x
     // For beta != -1,0
-    // Unlike the convergent formula this one requires x > 0
-    myFloat xB_ = fabs(xB)+log(gammaB);
-    myFloat betaB_ = (xB>=0) ? betaB : -betaB;
+    // Unlike the convergent formula this one requires xB > 0
 
-    if (xB_ == 0) {
+    if (xB == 0) {
       result_asymptotic = std::numeric_limits<myFloat>::quiet_NaN();
       error_asymptotic = std::numeric_limits<myFloat>::max();
       n_asymptotic = 0;
-    } else if (((xB>0)?beta:-beta) == -1) {
+    } else if (betaB == -1) {
       // Zolotarev Theorem 2.5.2 asymptotic for x -> infinity
-      myFloat psi = exp(xB_-1);
+      myFloat psi = exp(xB-1);
       myFloat nu = 1;
       myFloat exp_m_psi = exp(-psi);
       myFloat fac = exp_m_psi !=0 ? nu*pow(psi,(2-alpha)/(2*alpha))*exp_m_psi/sqrt(2*pi*alpha)/gammaB
@@ -191,7 +189,7 @@ myFloat Zolotarev<myFloat>::pdf(myFloat x0, Parameterization pm) {
       }
       error_asymptotic = fabs(term)+fabs(result_asymptotic)*exp(-pow(psi,.25));
     } else {
-      myFloat log_x=log(xB_);
+      myFloat log_x=log(xB);
       result_asymptotic = 0;
       myFloat term, old_term;
       int num_small_terms=0;
@@ -202,7 +200,7 @@ myFloat Zolotarev<myFloat>::pdf(myFloat x0, Parameterization pm) {
           for (int m=l; m<=n; ++m) {
             myFloat term0=binomial_coefficient<myFloat>(n,m)*binomial_coefficient<myFloat>(m,l);
             term0 *= (1-2*((m-l)%2)) * gamma_at_integers(m-l,1+n);
-            term0 *=  pow(betaB_, m) * pow(pi/2*(1+betaB_),n-m) * sin(pi/2*(n-m));
+            term0 *=  pow(betaB, m) * pow(pi/2*(1+betaB),n-m) * sin(pi/2*(n-m));
             r_l_n += term0;
             if (verbose > 2){
               if (m == l)
@@ -222,10 +220,10 @@ myFloat Zolotarev<myFloat>::pdf(myFloat x0, Parameterization pm) {
           if (verbose>1)
             cout << "fac: " << fac << endl;
         }
-        term=fac * pow(xB_,-n-1) / (factorial<myFloat>(n)*pi*gammaB);
+        term=fac * pow(xB,-n-1) / (factorial<myFloat>(n)*pi*gammaB);
         if (n==1) { // check against dpareto
           myFloat dPareto = tgamma(alpha)/pi*sin(pi*alpha/2);
-          dPareto *= alpha * (1+beta) * pow(x_m_zet,-alpha-1);
+          dPareto *= alpha * (1+betaB) * pow(fabs(x_m_zet),-alpha-1);
           if (verbose>0)
             cout << "1 - term1/dPareto = " << (1 -term/dPareto) << endl;
         }

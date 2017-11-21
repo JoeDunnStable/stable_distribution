@@ -34,10 +34,15 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>stable_distribution.xcscheme</key>
+		<key>random_test.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>9</integer>
+		</dict>
+		<key>stable_distribution.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
 		</dict>
 		<key>stable_distribution_v3.xcscheme</key>
 		<dict>
@@ -48,6 +53,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
+		</dict>
+		<key>trace_Vec.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
 		</dict>
 		<key>trace_zolotarev.xcscheme</key>
 		<dict>
@@ -62,6 +72,16 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>6F0F5B7D1FC14186002D310E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6F2DFC711FC2A1A000F32D21</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6F36D0951F81CD37006686EB</key>
 		<dict>
 			<key>primary</key>

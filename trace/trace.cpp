@@ -1,7 +1,7 @@
 //
-/// \file trace_stable_mode.cpp
+/// \file trace.cpp
 /// \author Joseph Dunn
-/// \copyright 2016 Joseph Dunn
+/// \copyright 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include "stable_distribution.h"
@@ -49,7 +49,7 @@ int main(int argc, const char * argv[]) {
   double epsabs_double = 0;
   double epsrel_double = 64 * std::numeric_limits<double>::epsilon();
   int limit = 1000;
-  int verbose_integration = 4;
+  int verbose_integration = 0;
   IntegrationController<double> ctl_double(noext, k_big,
                                            epsabs_double, epsrel_double,
                                            limit, verbose_integration);
@@ -196,6 +196,7 @@ int main(int argc, const char * argv[]) {
       double mode_tol = 64*std::numeric_limits<double>::epsilon();
       result = dist.mode(mode_tol, verbose_mode, pm);
       cout << setw(15) << "Result = (" << result.first << ", " << result.second << ")"<< endl;
+      cout << setw(15) << "ddx at result = " << dist.ddx_pdf(result.first, pm) << endl;
     } else {
       StandardStableDistribution<mpreal> dist(alpha, beta, ctls_mpreal, verbose_pdf);
       std::pair<mpreal, mpreal> result;
@@ -203,6 +204,7 @@ int main(int argc, const char * argv[]) {
       mpreal mode_tol = 64 * std::numeric_limits<mpreal>::epsilon();
       result = dist.mode(mode_tol, verbose_mode, pm);
       cout << setw(15) << "Result = (" << result.first << ", " << result.second << ")"<< endl;
+      cout << setw(15) << "ddx at result = " << dist.ddx_pdf(result.first, pm) << endl;
 
     }
   } else {

@@ -40,6 +40,7 @@ public:
   myFloat beta_input;        ///< beta, the skewness parameter as input
   myFloat beta;              ///< beta actually use.  +/- beta_input
   bool positive_x;           ///< indicates whether x_m_zet has been negated for calculation
+  bool positive_xB;          ///< indicatew wheter xB has been negated for calculation
   myFloat zeta;              ///< beta * tan( pi * alpha / 2)
   myFloat theta0_x_gt_zeta;  ///< the lower limit of integration when x  > zeta
   std::vector<myFloat> Q_cdf; ///< the coefficients in the asumptotic expansion for cdf

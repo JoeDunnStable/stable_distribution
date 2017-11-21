@@ -17,6 +17,8 @@ using std::fixed;
 using std::right;
 #include <fstream>
 using std::ofstream;
+#include <sstream>
+using std::stringstream;
 #include <random>
 using std::mt19937;
 using std::uniform_real_distribution;
@@ -27,6 +29,9 @@ using boost::timer::auto_cpu_timer;
 
 #include "stable_distribution.h"
 #include "kolmogorov.h"
+#define LIBRARY
+#include "zolotarev.h"
+#undef LIBRARY
 #include "bracket_and_solve.h"
 
 using namespace stable_distribution;
@@ -39,6 +44,16 @@ myFloat epsdiff(myFloat r1, myFloat r2) {
     return std::numeric_limits<myFloat>::infinity();
   else
     return fabs(r1-r2)/(max(fabs(r1), fabs(r2))*std::numeric_limits<myFloat>::epsilon());
+}
+
+template<typename myFloat>
+string fmt_eps(myFloat eps) {
+  stringstream ss;
+  if (eps < 10000)
+    ss << setw(10) << setprecision(1) << fixed << eps;
+  else
+    ss << setw(10) << right << "*******" ;
+  return ss.str();
 }
 
 template<typename myFloat>
@@ -97,6 +112,7 @@ int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
   out << "Comparison of cdf to Levy formula for alpha = .5, beta = 1, digits10 = "
   << std::numeric_limits<myFloat>::digits10 << endl << endl;
   StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
+  Zolotarev<myFloat> zol(alpha, beta, &ctls.controller, verbose);
   out << setw(8) << right << "alpha"
   << setw(8) << right << "beta"
   << setw(13) << right << "x"
@@ -105,8 +121,11 @@ int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
   << setw(35) << right << "log(cdf)"
   << setw(10) << right << "epsdiff"
   << setw(15) << right << "abserr"
-  << setw(5) << right << "code"
+  << setw(4) << right << "tc"
   << setw(7) << right << "neval"
+  << setw(35) << right << "log(zol_cdf)"
+  << setw(10) << right << "epsdiff"
+  << setw(2) << right << "T"
   << endl << endl;
   bool pass = true;
   for (auto x : xs) {
@@ -116,8 +135,10 @@ int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
       lower_tail = false;
       r_Levy = stable_levy_cdf<myFloat>(x, lower_tail, log_p);
     }
-    myFloat r = std_stable_dist.cdf(x, lower_tail, log_p, Parameterization::S1);
+    myFloat r = std_stable_dist.cdf(x, lower_tail, log_p, S1);
     myFloat eps = epsdiff(r, r_Levy);
+    myFloat r_zol = log(zol.cdf(x, lower_tail, S1));
+    myFloat eps_zol = epsdiff(r_zol, r_Levy);
     bool pass1 = !boost::math::isnan(eps) && boost::math::isfinite(eps)
                  && eps < 100;
 
@@ -131,6 +152,9 @@ int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
     << setw(15) << setprecision(5) << scientific << std_stable_dist.abserr
     << setw(4) << std_stable_dist.termination_code
     << setw(7) << std_stable_dist.neval
+    << setw(35) << setprecision(26) << scientific << r_zol
+    << setw(10) << fmt_eps(eps_zol)
+    << setw(2) << (zol.result_type==asymptotic ? "A" : "C")
     << (pass1 ? "" : " FAIL") << endl;
     pass = pass && pass1;
   }
@@ -179,6 +203,7 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
   out << "Comparison of pdf to Levy formula for alpha = .5, beta = 1, digits10 = "
   << std::numeric_limits<myFloat>::digits10 << endl << endl;
   StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
+  Zolotarev<myFloat> zol(alpha, beta, &ctls.controller, verbose);
   int log_flag=1;
   out << setw(13) << right << "alpha"
   << setw(13) << right << "beta"
@@ -187,14 +212,19 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
   << setw(35) << right << "log(pdf_myFloat)"
   << setw(10) << right << "epsdiff"
   << setw(15) << right << "abserr"
-  << setw(4) << right << "termination_code"
+  << setw(4) << right << "TC"
   << setw(7) << right << "neval"
+  << setw(35) << right << "log(zol_pdf)"
+  << setw(10) << right << "epsdiff"
+  << setw(2) << right << "T"
   << endl << endl;
   bool pass = true;
   for (auto x : xs) {
-    myFloat r = std_stable_dist.pdf(x, log_flag, S1);
     myFloat r_Levy = stable_levy_pdf<myFloat>(x, log_flag);
+    myFloat r = std_stable_dist.pdf(x, log_flag, S1);
     myFloat eps = epsdiff(r, r_Levy);
+    myFloat r_zol = log(zol.pdf(x, S1));
+    myFloat eps_zol = epsdiff(r_zol, r_Levy);
     bool pass1 = !boost::math::isnan(eps) && boost::math::isfinite(eps)
     && eps < 100;
 
@@ -207,6 +237,9 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
     << setw(15) << setprecision(5) << scientific << std_stable_dist.abserr
     << setw(4) << std_stable_dist.termination_code
     << setw(7) << std_stable_dist.neval
+    << setw(35) << setprecision(26) << scientific << r_zol
+    << setw(10) << fmt_eps(eps_zol)
+    << setw(2) << (zol.result_type==asymptotic ? "A" : "C")
     << (pass1 ? "" : " FAIL") << endl;
     pass = pass && pass1;
 
@@ -256,6 +289,7 @@ int test_stable_ddx_pdf(ostream& out, Controllers<myFloat> ctls) {
   out << "Comparison of ddx_pdf to Levy formula for alpha = .5, beta = 1, digits10 = "
   << std::numeric_limits<myFloat>::digits10 << endl << endl;
   StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
+  Zolotarev<myFloat> zol(alpha, beta, &ctls.controller, verbose);
   out << setw(13) << right << "alpha"
   << setw(13) << right << "beta"
   << setw(13) << right << "x"
@@ -265,12 +299,17 @@ int test_stable_ddx_pdf(ostream& out, Controllers<myFloat> ctls) {
   << setw(15) << right << "abserr"
   << setw(4) << right << "termination_code"
   << setw(7) << right << "neval"
+  << setw(35) << right << "zol_ddx_pdf)"
+  << setw(10) << right << "epsdiff"
+  << setw(2) << right << "T"
   << endl << endl;
   bool pass = true;
   for (auto x : xs) {
-    myFloat r = std_stable_dist.ddx_pdf(x, S1);
     myFloat r_Levy = stable_levy_ddx_pdf<myFloat>(x);
+    myFloat r = std_stable_dist.ddx_pdf(x, S1);
     myFloat eps = epsdiff(r, r_Levy);
+    myFloat r_zol = zol.ddx_pdf(x,S1);
+    myFloat eps_zol = epsdiff(r_zol, r_Levy);
     bool pass1 = !boost::math::isnan(eps) && boost::math::isfinite(eps)
     && eps < 500;
 
@@ -283,6 +322,9 @@ int test_stable_ddx_pdf(ostream& out, Controllers<myFloat> ctls) {
     << setw(15) << setprecision(5) << scientific << std_stable_dist.abserr
     << setw(4) << std_stable_dist.termination_code
     << setw(7) << std_stable_dist.neval
+    << setw(35) << setprecision(26) << scientific << r_zol
+    << setw(10) << fmt_eps(eps_zol)
+    << setw(2) << (zol.result_type==asymptotic ? "A" : "C")
     << (pass1 ? "" : " FAIL") << endl;
     pass = pass && pass1;
   }
@@ -290,57 +332,19 @@ int test_stable_ddx_pdf(ostream& out, Controllers<myFloat> ctls) {
   return !pass;
 } //test_stable_ddx_pdf
 
-/// boost erf_inv is broken for high precision.  This functor is part of fix
 template<typename myFloat>
-class erf_solve {
-  myFloat target;
-  bool lower_tail;
-public:
-  erf_solve(myFloat target, bool lower_tail) : target(target), lower_tail(lower_tail){}
-  myFloat operator() (myFloat x) {
-    return (lower_tail ? erfc(x) : erf(x)) - target;
-  }
-};
-
-template<typename myFloat>
-myFloat stable_levy_quantile(myFloat pp, bool lower_tail=true, bool log_p=false) {
+myFloat stable_levy_quantile(myFloat pp, bool lower_tail, bool log_p) {
   // pm = S1 representation
   myFloat c= 1;
   myFloat p = log_p ? exp(pp) : pp;
   if (p == 0)
     return  lower_tail ? StandardStableDistribution<myFloat>::NegInf
-                       : StandardStableDistribution<myFloat>::PosInf;
+    : StandardStableDistribution<myFloat>::PosInf;
   if (p == 1)
     return lower_tail ? StandardStableDistribution<myFloat>::PosInf
-                      : StandardStableDistribution<myFloat>::NegInf;
+    : StandardStableDistribution<myFloat>::NegInf;
   
-  double u = lower_tail ? erfc_inv(static_cast<double>(p))
-                        : erf_inv(static_cast<double>(p));
-  myFloat guess = c/(2*u*u);
-  erf_solve<myFloat> erf_s(p, lower_tail);
-  std::pair<myFloat,myFloat> r;
-  RelativeComparisonTolerance<myFloat> tol(16*std::numeric_limits<myFloat>::epsilon());
-  myFloat factor = max<myFloat>(static_cast<myFloat>(1),static_cast<myFloat>(.1)*fabs(guess));
-  bool rising = !lower_tail;
-  boost::uintmax_t maxiter = 1000;
-  r=boost::math::tools::bracket_and_solve_root2(erf_s,guess,factor,rising,tol,maxiter);
-  myFloat u2 =(r.first + r.second)/2;
-  return c/(2*u2*u2);
-}
-
-template<>
-double stable_levy_quantile<double>(double pp, bool lower_tail, bool log_p) {
-  // pm = S1 representation
-  double c= 1;
-  double p = log_p ? exp(pp) : pp;
-  if (p == 0)
-    return  lower_tail ? StandardStableDistribution<double>::NegInf
-    : StandardStableDistribution<double>::PosInf;
-  if (p == 1)
-    return lower_tail ? StandardStableDistribution<double>::PosInf
-    : StandardStableDistribution<double>::NegInf;
-  
-  double u = lower_tail ? erfc_inv(p)
+  myFloat u = lower_tail ? erfc_inv(p)
                         : erf_inv(p);
   return c/(2*u*u);
 }
@@ -654,7 +658,11 @@ int main(int argc, const char * argv[]) {
   } else if (test_name == "random_double") {
     cout << "Writing output to ../output/test_stable_random_double.out" << endl;
     ofstream random_double("../output/test_stable_random_double.out");
-    fail = test_stable_random<double>(random_double, 10000, 1.5, .5, Controllers<double>(ctl_double, ctl_double));
+    fail = test_stable_random<double>(random_double, 10000, .5, .5, Controllers<double>(ctl_double, ctl_double));
+    fail = test_stable_random<double>(random_double, 10000, 1.-1./128., .5, Controllers<double>(ctl_double, ctl_double)) || fail;
+    fail = test_stable_random<double>(random_double, 10000, 1, .5, Controllers<double>(ctl_double, ctl_double)) || fail;
+    fail = test_stable_random<double>(random_double, 10000, 1.+1./128., .5, Controllers<double>(ctl_double, ctl_double)) || fail;
+    fail = test_stable_random<double>(random_double, 10000, 1.5, .5, Controllers<double>(ctl_double, ctl_double)) || fail;
   } else if (test_name == "cdf_mpreal") {
     cout << "Writing output to ../output/test_stable_cdf_mpreal.out" << endl;
     ofstream cdf_mpreal("../output/test_stable_cdf_mpreal.out");

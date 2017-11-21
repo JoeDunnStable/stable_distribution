@@ -73,8 +73,6 @@ using boost::math::expm1;
 using boost::math::log1p;
 using boost::math::erf;
 using boost::math::erfc;
-using boost::math::erf_inv;
-using boost::math::erfc_inv;
 using boost::math::tgamma;
 using boost::math::lgamma;
 using boost::math::digamma;
@@ -125,6 +123,57 @@ inline myFloat const_euler() {
 
 template<>
 inline mpreal const_euler<mpreal>() {return const_euler();}
+
+template<typename myFloat>
+inline myFloat erf_inv(myFloat p) {
+  return boost::math::erf_inv(p);
+}
+
+template<typename myFloat>
+inline myFloat erfc_inv(myFloat p) {
+  return boost::math::erfc_inv(p);
+}
+
+#include <boost/math/tools/roots.hpp>
+using boost::math::tools::newton_raphson_iterate;
+
+class ErfSolve {
+  mpreal c;
+  mpreal target;
+  bool lower_tail;
+public:
+  ErfSolve(mpreal target, bool lower_tail)
+     : target(target), lower_tail(lower_tail), c(2/sqrt(const_pi<mpreal>())) {}
+  std::pair<mpreal,mpreal> operator() (mpreal x) {
+    return (lower_tail) ? std::make_pair(erf(x)-target,c * exp(-x*x))
+    :std::make_pair(erfc(x)-target, -c * exp(-x*x));
+  }
+};
+
+template<>
+inline mpreal erf_inv<mpreal> (mpreal p) {
+  ErfSolve erf_s(p, true);
+  mpreal guess = erf_inv(static_cast<double>(p));
+  mpreal min_x = 0;
+  mpreal max_x = std::numeric_limits<mpreal>::max();
+  int digits = static_cast<int>(mpreal::get_default_prec()) - 4;
+  boost::uintmax_t max_iter=100;
+  mpreal ret= newton_raphson_iterate(erf_s, guess, min_x, max_x, digits, max_iter);
+  return ret;
+}
+
+template<>
+inline mpreal erfc_inv<mpreal> (mpreal p) {
+  ErfSolve erfc_s(p, false);
+  mpreal guess = erfc_inv(static_cast<double>(p));
+  mpreal min_x = 0;
+  mpreal max_x = std::numeric_limits<mpreal>::max();
+  int digits = static_cast<int>(mpreal::get_default_prec()) - 4;
+  boost::uintmax_t max_iter=100;
+  mpreal ret = newton_raphson_iterate(erfc_s, guess, min_x, max_x, digits, max_iter);
+  return ret;
+}
+
 
 #include <string>
 using std::string;

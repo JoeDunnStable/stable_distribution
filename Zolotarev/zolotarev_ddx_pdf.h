@@ -157,18 +157,14 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
     if (verbose>0)
       cout << "result convergent = " << result_convergent
       << ", error_convergent = " << error_convergent << endl;
-    // Unlike the convergent integrals, the asymptotic series requires x>0
-    myFloat xB_ = fabs(xB) + log(gammaB);
-    myFloat betaB_ =(xB>=0) ? betaB : -betaB;
-    myFloat beta_ = (xB>=0) ? beta : -beta;
-    bool positive_x_ = (xB < 0) != positive_x;
+    // Unlike the convergent integrals, the asymptotic series requires xB>0
     if (xB == 0) {
       result_asymptotic = std::numeric_limits<myFloat>::quiet_NaN();
       error_asymptotic = std::numeric_limits<myFloat>::max();
       n_asymptotic = 0;
-    } else if (beta_ == -1) {
+    } else if (betaB == -1) {
       // Derivative of Zolotarev formula 2.5.17 which is asymptotic for x large
-      myFloat psi = exp(xB_-1);
+      myFloat psi = exp(xB-1);
       if (exp(-psi) == 0) {
         result_asymptotic = 0;
         n_asymptotic = 0;
@@ -197,13 +193,13 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
           result_asymptotic += term;
           old_term = term;
         }
-        result_asymptotic *= (positive_x_)? 1 : -1;
+        result_asymptotic *= (positive_xB)? 1 : -1;
         error_asymptotic = fabs(term)+fabs(result_asymptotic)*exp(-psi-pow(psi,.25));
       }
     } else {
       // Zolotarev 2.5.23 is the asymptotic series for large x
       // For beta != -1,0
-      myFloat log_x=log(xB_);
+      myFloat log_x=log(xB);
       result_asymptotic = 0;
       myFloat term, old_term;
       int num_small_terms=0;
@@ -215,7 +211,7 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
           for (int m=l; m<=n; ++m) {
             myFloat term0=binomial_coefficient<myFloat>(n,m)*binomial_coefficient<myFloat>(m,l);
             term0 *= (1-2*((m-l)%2)) * gamma_at_integers(m-l,1+n);
-            term0 *=  pow(betaB_, m) * pow(pi/2*(1+betaB_),n-m) * sin(pi/2*(n-m));
+            term0 *=  pow(betaB, m) * pow(pi/2*(1+betaB),n-m) * sin(pi/2*(n-m));
             r_l_n += term0;
             if (verbose > 2){
               if (m == l)
@@ -233,14 +229,14 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
             << " = " << r_l_n * pow(log_x,l) << endl;
           fac += r_l_n*pow(log_x,l);
           if (l>0)
-            fac_deriv += r_l_n * l * pow(log_x, l-1) / (xB_ * gammaB);
+            fac_deriv += r_l_n * l * pow(log_x, l-1) / (xB * gammaB);
           if (verbose>1)
             cout << "fac: " << fac << endl;
         }
-        term= (-(n+1)*fac * pow(xB_,-n-2)/gammaB + fac_deriv * pow(xB_,-n-1)) / (factorial<myFloat>(n)*pi*gammaB);
+        term= (-(n+1)*fac * pow(xB,-n-2)/gammaB + fac_deriv * pow(xB,-n-1)) / (factorial<myFloat>(n)*pi*gammaB);
         if (n==1) { // check against dpareto
           myFloat ddx_dPareto = tgamma(alpha)/pi*sin(pi*alpha/2);
-          ddx_dPareto *= -(alpha+1)*alpha * (1+beta) * pow(x_m_zet,-alpha-2);
+          ddx_dPareto *= -(alpha+1)*alpha * (1+betaB) * pow(fabs(x_m_zet),-alpha-2);
           if (verbose>0)
             cout << "1 - term1/ddx_dPareto = " << (1 -term/ddx_dPareto) << endl;
         }
@@ -260,7 +256,7 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
           old_term=term;
         }
       }
-      result_asymptotic *= (positive_x_) ? 1 : -1;
+      result_asymptotic *= (positive_xB) ? 1 : -1;
       error_asymptotic=fabs(term) + fabs(result_asymptotic) * Machine_eps;
     } // xB != 0
     if (verbose>0)
