@@ -9,9 +9,6 @@
 #include <vector>
 #include <string>
 using std::string;
-#include <iostream>
-using std::cout;
-using std::cerr;
 //#include <cstddef>
 #include "myFloat.h"
 #include "gauss_kronrod.h"

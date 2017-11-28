@@ -6,7 +6,6 @@
 #ifndef stable_distribution_H
 #define stable_distribution_H
 
-#include <iostream>
 #include <string>
 #include <vector>
 #include "adaptive_integration.h"
@@ -15,8 +14,6 @@
 
 namespace stable_distribution {
 
-using std::cout;
-using std::cerr;
 using std::endl;
 using std::ostream;
 
@@ -423,12 +420,28 @@ EXT template T stable_distribution::pPareto<T>(T, T, T, bool, bool);
 #include "stable_distribution_mode.h"
 
 STABLE_TEMPLATES(,double)
+#ifdef CPP_BIN_FLOAT
+STABLE_TEMPLATES(,CppBinFloat)
+#endif
+#ifdef MPFR_FLOAT
+STABLE_TEMPLATES(,MpfrFloat)
+#endif
+#ifdef MPREAL
 STABLE_TEMPLATES(,mpreal)
+#endif
   
 #else
 
 STABLE_TEMPLATES(extern,double)
+#ifdef CPP_BIN_FLOAT
+STABLE_TEMPLATES(extern,CppBinFloat)
+#endif
+#ifdef MPFR_FLOAT
+STABLE_TEMPLATES(extern,MpfrFloat)
+#endif
+#ifdef MPREAL
 STABLE_TEMPLATES(extern,mpreal)
+#endif
 
 #endif
 

@@ -7,10 +7,13 @@
 //
 
 #include <iostream>
+using std::cout;
+using std::cerr;
+using std::endl;
 #include <iomanip>
 #include <sstream>
 #include <fstream>
-#include "myFloat.h"
+#define MPREAL
 #include "stable_distribution.h"
 #include <boost/math/constants/info.hpp>
 #include <boost/filesystem.hpp>
@@ -21,9 +24,6 @@
 #include "zolotarev.h"
 #undef LIBRARY
 
-using std::cout;
-using std::cerr;
-using std::endl;
 using std::setw;
 using std::fixed;
 using std::scientific;

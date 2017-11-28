@@ -18,15 +18,20 @@
 
 #include <Eigen/Eigenvalues>
 
+#ifdef CPP_BIN_FLOAT
 #include <boost/multiprecision/cpp_bin_float.hpp>
 using CppBinFloat = boost::multiprecision::cpp_bin_float_quad;
 using BigCppBinFloat = boost::multiprecision::cpp_bin_float_50;
+#endif
 
+#ifdef MPFR_FLOAT
 #include <boost/multiprecision/mpfr.hpp>
 
 using MpfrFloat = boost::multiprecision::number<boost::multiprecision::mpfr_float_backend<50>, boost::multiprecision::et_off>;
 using BigMpfrFloat = boost::multiprecision::number<boost::multiprecision::mpfr_float_backend<60>, boost::multiprecision::et_off>;
+#endif
 
+#ifdef MPREAL
 #include <mpreal.h>
 using mpfr::mpreal;
 using mpfr::digamma;
@@ -39,6 +44,7 @@ inline mpreal tgamma_ratio(mpreal num, mpreal denom) {
 }
 
 #include <boost/math/tools/real_cast.hpp>
+#include <boost/math/special_functions/trunc.hpp>
 namespace mpfr {
   template <class Policy>
   inline long long lltrunc(mpfr::mpreal const& x, const Policy& pol)
@@ -47,15 +53,11 @@ namespace mpfr {
   }
 
 }
-
+#endif //MPREAL
 
 // These are for double
 
 #include <cmath>
-#include <boost/math/special_functions/digamma.hpp>
-using boost::math::digamma;
-#include <boost/math/special_functions/zeta.hpp>
-using boost::math::zeta;
 
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/math/special_functions/digamma.hpp>
@@ -81,10 +83,6 @@ using boost::math::binomial_coefficient;
 using boost::math::factorial;
 using boost::math::zeta;
 
-using boost::math::policies::policy;
-using boost::math::policies::max_root_iterations;
-typedef policy<max_root_iterations<1000> > my_erf_inv_policy;
-
 template<typename myFloat>
 myFloat pow(myFloat x, myFloat y) {
   if (x<0)
@@ -103,9 +101,11 @@ template<> double pow<double>(double x, double y){
   return pow(x,y);
 }
 
+#ifdef MPREAL
 template<> mpreal pow<mpreal>(mpreal x, mpreal y) {
   return pow(x,y);
 }
+#endif
 
 #include <boost/math/constants/constants.hpp>
 template<typename myFloat>
@@ -113,16 +113,20 @@ inline myFloat const_pi() {
   return boost::math::constants::pi<myFloat>();
 }
 
+#ifdef MPREAL
 template<>
 inline mpreal const_pi<mpreal>() {return const_pi();}
+#endif
 
 template<typename myFloat>
 inline myFloat const_euler() {
   return boost::math::constants::euler<myFloat>();
 }
 
+#ifdef MPREAL
 template<>
 inline mpreal const_euler<mpreal>() {return const_euler();}
+#endif
 
 template<typename myFloat>
 inline myFloat erf_inv(myFloat p) {
@@ -134,16 +138,30 @@ inline myFloat erfc_inv(myFloat p) {
   return boost::math::erfc_inv(p);
 }
 
+template<typename myFloat>
+void reset_prec(myFloat& x) {}
+
+#ifdef MPREAL
+
+template<>
+void reset_prec<mpreal>(mpreal& x) {
+  x.set_prec(mpreal::get_default_prec());
+}
+
+using boost::math::policies::policy;
+using boost::math::policies::max_root_iterations;
+typedef policy<max_root_iterations<1000> > my_erf_inv_policy;
+
 #include <boost/math/tools/roots.hpp>
 using boost::math::tools::newton_raphson_iterate;
 
 class ErfSolve {
-  mpreal c;
   mpreal target;
+  mpreal c;
   bool lower_tail;
 public:
   ErfSolve(mpreal target, bool lower_tail)
-     : target(target), lower_tail(lower_tail), c(2/sqrt(const_pi<mpreal>())) {}
+     : target(target), c(2/sqrt(const_pi<mpreal>())), lower_tail(lower_tail) {}
   std::pair<mpreal,mpreal> operator() (mpreal x) {
     return (lower_tail) ? std::make_pair(erf(x)-target,c * exp(-x*x))
     :std::make_pair(erfc(x)-target, -c * exp(-x*x));
@@ -173,27 +191,33 @@ inline mpreal erfc_inv<mpreal> (mpreal p) {
   mpreal ret = newton_raphson_iterate(erfc_s, guess, min_x, max_x, digits, max_iter);
   return ret;
 }
-
+#endif // MPREAL
 
 #include <string>
 using std::string;
 
 namespace Eigen {
   
+#ifdef CPP_BIN_FLOAT
   template<> struct NumTraits<CppBinFloat> : GenericNumTraits<CppBinFloat>
   {
     static inline Real dummy_precision() { return epsilon()*static_cast<CppBinFloat>(1024); }
   };
-  
-  template<> struct NumTraits<MpfrFloat> : GenericNumTraits<MpfrFloat>
+#endif
+    
+#ifdef MPFR_FLOAT
+    template<> struct NumTraits<MpfrFloat> : GenericNumTraits<MpfrFloat>
   {
     static inline Real dummy_precision() { return epsilon()*static_cast<MpfrFloat>(1024); }
   };
+#endif
   
+#ifdef MPREAL
   template<> struct NumTraits<mpreal> : GenericNumTraits<mpreal>
   {
     static inline Real dummy_precision() { return epsilon()*static_cast<mpreal>(1024); }
   };
+#endif
   
 } // namespace eigen
 

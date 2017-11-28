@@ -4,7 +4,6 @@
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <Eigen/Eigenvalues>
-#include <iostream>
 #include <iomanip>
 #include <vector>
 #include <algorithm>
@@ -12,7 +11,6 @@
 namespace gauss_kronrod {
 using Eigen::SelfAdjointEigenSolver;
 
-using std::cout;
 using std::endl;
 using std::setw;
 using std::setprecision;
@@ -166,7 +164,7 @@ void r_kronrod(const int n_gauss, const vector<myFloat>& a0, const vector<myFloa
       cumsum=cumsum+-(a.at(k+n_gauss+1)-a.at(l))*t.at(j+1)-b.at(k+n_gauss+1)*s.at(j+1)+b.at(l)*s.at(j+2);
       tmp.at(j+1)=cumsum;
     }
-    int j;
+    int j{0};
     for (int k=m+1-n_gauss; k<=((m-1)/2); k++){
       j=n_gauss-1-m+k;
       s.at(j+1)=tmp.at(j+1);

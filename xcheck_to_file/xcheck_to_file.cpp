@@ -4,14 +4,18 @@
 /// \copyright 2016 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
-#include "stable_distribution.h"
+#include <mpreal.h>
+using mpfr::mpreal;
 #include <iostream>
+using std::cerr;
+using std::cout;
+using std::endl;
+#include "stable_distribution.h"
 #include <iomanip>
 #include <sstream>
 #include <limits>
 #include <fstream>
 #include <boost/filesystem.hpp>
-#include <mpreal.h>  //Just for input
 #define LIBRARY
 #include "zolotarev.h"
 #undef LIBRARY
@@ -19,9 +23,6 @@
 using mpfr::mpreal;
 
 using std::string;
-using std::cerr;
-using std::cout;
-using std::endl;
 using std::istringstream;
 using std::setw;
 using std::setprecision;

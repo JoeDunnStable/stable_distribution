@@ -126,14 +126,30 @@ EXT template void ddx_q_integrand<T>(T*, int, void*);
 
 namespace stable_distribution {
 ZOLOTAREV_TEMPLATES(,double)
+#ifdef CPP_BIN_FLOAT
+  ZOLOTAREV_TEMPLATES(,CppBinFloat)
+#endif
+#ifdef MPFR_FLOAT
+  ZOLOTAREV_TEMPLATES(,MpfrFloat)
+#endif
+#ifdef MPREAL
 ZOLOTAREV_TEMPLATES(,mpreal)
+#endif
 }
 
 #else
 
 namespace stable_distribution {
 ZOLOTAREV_TEMPLATES(extern, double)
+#ifdef CPP_BIN_FLOAT
+  ZOLOTAREV_TEMPLATES(extern, CppBinFloat)
+#endif
+#ifdef MPFR_FLOAT
+  ZOLOTAREV_TEMPLATES(extern, MpfrFloat)
+#endif
+#ifdef MPREAL
 ZOLOTAREV_TEMPLATES(extern, mpreal)
+#endif
 }
 
 #endif

@@ -95,7 +95,7 @@ myFloat StandardStableDistribution<myFloat>::ddx_pdf(myFloat x, Parameterization
         cout << "  Outside of support, returning " << 0 << endl;
       return 0;
     case other :
-      myFloat dfdx_zeta;
+      myFloat dfdx_zeta{0};
       
       if (alpha != 1) { // 0 < alpha < 2	&  |beta| <= 1 from above
         // General Case

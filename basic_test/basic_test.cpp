@@ -8,6 +8,7 @@
 
 #include <iostream>
 using std::cout;
+using std::cerr;
 using std::endl;
 #include <iomanip>
 using std::setw;
@@ -27,6 +28,7 @@ using boost::timer::auto_cpu_timer;
 #include <boost/filesystem.hpp>
 
 
+#define MPREAL
 #include "stable_distribution.h"
 #include "kolmogorov.h"
 #define LIBRARY
@@ -520,7 +522,7 @@ int test_stable_mode(ostream& out, Controllers<myFloat> ctls) {
       out << setw(30) << "alpha is too small." << endl;
       continue;
     }
-    for (myFloat beta : betas)
+    for (int i = 0; i< betas.size(); ++i)
       out << setw(30) << setprecision(6) << scientific << pdf_at_mode.at(j++);
     out << endl;
   }

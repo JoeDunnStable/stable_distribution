@@ -7,6 +7,7 @@
 #include <iostream>
 using std::cout;
 using std::cerr;
+using std::endl;
 
 #include <sstream>
 using std::stringstream;
@@ -22,7 +23,8 @@ using std::mt19937;
 using std::uniform_real_distribution;
 #include <boost/filesystem.hpp>
 
-
+#include <mpreal.h>
+using mpfr::mpreal;
 #include "stable_distribution_fit.h"
 using Vec = Eigen::Matrix<double, Eigen::Dynamic, 1>;
 

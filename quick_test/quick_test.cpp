@@ -5,21 +5,23 @@
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <iostream>
+using std::cout;
+using std::cerr;
+using std::endl;
 #include <iomanip>
 #include <fstream>
 #include <sstream>
 #include <string>
 #include <algorithm>
 #include <chrono>
+#include <mpreal.h>
+using mpfr::mpreal;
 #include "stable_distribution_fit.h"
 using Vec = Eigen::Matrix<double, Eigen::Dynamic, 1>;
 
-//#define BOOST_MATH_In_gaussSTRUMEn_gaussT
+//#define BOOST_MATH_INSTRUMENT
 #include <boost/math/tools/toms748_solve.hpp>
 
-using std::cout;
-using std::cerr;
-using std::endl;
 using std::setw;
 using std::right;
 using std::setprecision;

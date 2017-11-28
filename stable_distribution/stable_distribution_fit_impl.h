@@ -10,7 +10,6 @@
 
 #include <chrono>
 
-#include <iostream>
 #include <iomanip>
 #include <fstream>
 #include <sstream>
@@ -46,9 +45,6 @@ namespace boost { namespace math {
 
 namespace stable_distribution {
   
-using std::cout;
-using std::endl;
-
 using std::setw;
 using std::setprecision;
 using std::fixed;
@@ -647,7 +643,7 @@ myFloat p_sample(Vec x_sample, myFloat x ) {
 
 template<typename myFloat>
 myFloat mode_sample(Vec x_sample) {
-  int n = x_sample.size();
+  int n = static_cast<int>(x_sample.size());
   std::sort(x_sample.data(),x_sample.data()+n);
   int m = n/100;
   int i_mode = -1;
@@ -715,7 +711,7 @@ std::vector<FitResult<myFloat> > stable_fit(const Vec& yy, Controllers<myFloat> 
   int iterations;
   myFloat q_kurt=(q(4)-q(0))/(q(3)-q(1));
   myFloat q_skew=(q(4)+q(0)-2*q(2))/(q(4)-q(0));
-  myFloat q_mode, skew;
+  myFloat q_mode{std::numeric_limits<myFloat>::quiet_NaN()}, skew;
   NelderMeadSolver<myFloat> solver;
   typename NelderMeadSolver<myFloat>::Info &myctrl = solver.ctrl();
   myctrl.iterations = 1000;
@@ -727,7 +723,7 @@ std::vector<FitResult<myFloat> > stable_fit(const Vec& yy, Controllers<myFloat> 
     Vec par_McCulloch(2); par_McCulloch << 1., q_skew;
     McCullochFit<myFloat> mcculloch_fit(q_kurt, q_skew, .1, 2., &trace, dbltol, ctls, verbose);
     solver.minimize(mcculloch_fit, par_McCulloch);
-    iterations = myinfo.iterations;
+    iterations = static_cast<int>(myinfo.iterations);
     high_resolution_clock::time_point t1 = high_resolution_clock::now();
     phase1_times = t1 - t0;
     if (myinfo.obj_spread <= myctrl.obj_spread && myinfo.x_spread <= myctrl.x_spread)
@@ -745,7 +741,7 @@ std::vector<FitResult<myFloat> > stable_fit(const Vec& yy, Controllers<myFloat> 
     Vec par_Dunn(2); par_Dunn << 1., skew;
     DunnFit<myFloat> dunn_fit(q_kurt, q_mode, skew, .1, 2., &trace, dbltol, ctls, verbose);
     solver.minimize(dunn_fit, par_Dunn);
-    iterations = myinfo.iterations;
+    iterations = static_cast<int>(myinfo.iterations);
     high_resolution_clock::time_point t1 = high_resolution_clock::now();
     phase1_times = t1 - t0;
     if (myinfo.obj_spread <= myctrl.obj_spread && myinfo.x_spread <= myctrl.x_spread)

@@ -7,13 +7,10 @@
 #include <algorithm>
 #include "gauss_kronrod.h"
 #include <stdio.h>
-#include <iostream>
 #include <iomanip>
 
 namespace adaptive_integration {
   
-using std::cout;
-using std::cerr;
 using std::endl;
 using std::setw;
 using std::setprecision;
@@ -240,7 +237,7 @@ void EpsilonTable<myFloat>::update(myFloat new_result) {
     abserr = std::max<myFloat>(abserr, 5 * epmach * fabs(result));
     return;
   }
-  int limexp = epsilon_table.size()-2;
+  int limexp = static_cast<int>(epsilon_table.size())-2;
   epsilon_table.at(n+1) = epsilon_table.at(n-1);
   int newelm = (n - 1) / 2;
   epsilon_table.at(n-1) = oflow;
@@ -603,7 +600,7 @@ void IntegrationController<myFloat>::integrate(typename Subinterval<myFloat>::In
   int ierro = 0;
   abserr = oflow;
   bool f_doesnt_change_sign =(dres >= (1 - 50 * epmach) * resabs);
-  bool final_check, test_for_divergence, need_sum;
+  bool final_check{noext ? false : true},  need_sum{noext ? true : false};
   //
   //           main do-loop
   //           ------------
@@ -697,7 +694,7 @@ void IntegrationController<myFloat>::integrate(typename Subinterval<myFloat>::In
     if (max<myFloat>(fabs(a1), fabs(b2)) <= (1 + 100 * epmach) * (fabs(a2) + 1000 * uflow)) {
       termination_code = bad_integrand;
     }
-    final_check=true;
+    final_check= noext ? false : true;
     if (errsum <= errbnd) {
       // ***jump out of do-loop
  //     cout << "IntegrationController::integrate: Success errsum <= errbnd" << endl;
@@ -772,6 +769,7 @@ void IntegrationController<myFloat>::integrate(typename Subinterval<myFloat>::In
   //           ---------------------
   //
   if (final_check){
+    bool test_for_divergence{true};
     if (abserr == oflow) {
       test_for_divergence=false;
       need_sum=true;

@@ -3,12 +3,10 @@
 /// \copyright 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
-#include <iostream>
 // This will be included at the end of zolotarev.h if LIBRARY is defined
 
 namespace stable_distribution {
 
-using std::cout;
 using std::endl;
 
 /// derivative of the pdf using zolotarev expansion
@@ -21,7 +19,8 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
     case S1:
       set_x_m_zeta(x0);
   }
-  myFloat term, abs_term;
+  myFloat term{std::numeric_limits<myFloat>::quiet_NaN()};
+  myFloat abs_term{std::numeric_limits<myFloat>::quiet_NaN()};
   myFloat Machine_eps = std::numeric_limits<myFloat>::epsilon();
   if (alpha < 1) {
     // Derivative of Zolotarev 2.4.8, a series that converges for large x
@@ -201,7 +200,8 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
       // For beta != -1,0
       myFloat log_x=log(xB);
       result_asymptotic = 0;
-      myFloat term, old_term;
+      myFloat term{std::numeric_limits<myFloat>::quiet_NaN()};
+      myFloat old_term{std::numeric_limits<myFloat>::quiet_NaN()};
       int num_small_terms=0;
       for (int n=1; n<=max_n_asymp; ++n) {
         myFloat fac{0};
@@ -287,7 +287,8 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
     result_convergent = 0;
     error_convergent = 0;
     myFloat abs_series =0;
-    myFloat term, abs_term;
+    myFloat term{std::numeric_limits<myFloat>::quiet_NaN()};
+    myFloat abs_term{std::numeric_limits<myFloat>::quiet_NaN()};
     for (n=2; n<=max_n_conv; ++n) {
       abs_term = tgamma_ratio(n/alpha+1,myFloat(n+1)) * pow(xB,n-2)*(n-1)/(pi*gammaB*gammaB);
       term = abs_term * (0==n%2 ? -1 : 1) * ((n*rho)!=int(n*rho) ? sin(pi*n*rho) : 0);

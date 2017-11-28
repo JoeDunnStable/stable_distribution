@@ -4,15 +4,16 @@
 /// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
-#include "stable_distribution.h"
-using namespace stable_distribution;
-
 #include <iostream>
 using std::cerr;
 using std::cout;
+using std::endl;
+
+#define MPREAL
+#include "stable_distribution.h"
+using namespace stable_distribution;
 
 #include <iomanip>
-using std::endl;
 using std::setw;
 using std::setprecision;
 using std::right;
@@ -289,7 +290,7 @@ int dump(Kronrod<BigFloat> g_k_big, int digits) {
   for (auto alpha : alphas)
     for (auto beta : betas)
       jobs.abs.push_back(AB{alpha, beta});
-  int number_of_jobs = jobs.abs.size();
+  int number_of_jobs = static_cast<int>(jobs.abs.size());
     
   array<double, 407> xs;
   xs.at(0) = -std::numeric_limits<double>::infinity();

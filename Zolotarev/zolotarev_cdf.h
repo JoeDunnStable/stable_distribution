@@ -3,13 +3,11 @@
 /// \copyright 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
-#include <iostream>
 #include <boost/math/distributions/cauchy.hpp>
 // Thie will be included at the end of zolotarev.h if LIBRARY is defined
 
 namespace stable_distribution {
   
-using std::cout;
 using std::endl;
 
 /// cdf using zolotarev expansion
@@ -35,7 +33,8 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
       result_convergent = 0;
       error_convergent = 0;
       myFloat abs_series = 0;
-      myFloat term, abs_term;
+      myFloat term{std::numeric_limits<myFloat>::quiet_NaN()};
+      myFloat abs_term{std::numeric_limits<myFloat>::quiet_NaN()};
       for (int n=1; n<=max_n_conv; ++n) {
         abs_term = tgamma_ratio(n*alpha+1,myFloat(n+1)) * pow(xB,-n*alpha)/(n*alpha*pi);
         term = abs_term * (0 == n%2 ? -1 : 1) * sin(pi*n*rho*alpha);
@@ -169,7 +168,8 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
     } else { // xB > 0 & betaB_ != -1
       myFloat log_x=log(xB);
       result_asymptotic = 0;
-      myFloat term, old_term;
+      myFloat term{std::numeric_limits<myFloat>::quiet_NaN()};
+      myFloat old_term{std::numeric_limits<myFloat>::quiet_NaN()};
       int num_small_terms=0;
       for (int n=1; n<=max_n_asymp; ++n) {
         myFloat fac{0};

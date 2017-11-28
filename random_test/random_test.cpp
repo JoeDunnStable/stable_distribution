@@ -8,6 +8,7 @@
 
 #include <iostream>
 using std::cout;
+using std::cerr;
 using std::endl;
 #include <iomanip>
 using std::setw;

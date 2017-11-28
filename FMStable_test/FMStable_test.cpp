@@ -4,8 +4,13 @@
 /// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
-#include "stable_distribution.h"
+#include <mpreal.h>
+using mpfr::mpreal;
 #include <iostream>
+using std::cerr;
+using std::cout;
+using std::endl;
+#include "stable_distribution.h"
 #include <iomanip>
 #include <sstream>
 #include <fstream>
@@ -19,10 +24,7 @@
                 double location,double logscale);
 
 using std::string;
-using std::cerr;
-using std::cout;
 using std::ofstream;
-using std::endl;
 using std::setw;
 using std::setprecision;
 using std::right;
@@ -254,7 +256,6 @@ int main(int argc, char *argv[]) {
   int subdivisions = 1000;
   int verbose = 0;
   
-  double eps = std::numeric_limits<double>::epsilon();
   double epsabs = 0.;
   double epsrel = 64*std::numeric_limits<double>::epsilon();
 

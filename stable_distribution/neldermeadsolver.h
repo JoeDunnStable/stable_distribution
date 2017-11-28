@@ -99,7 +99,7 @@ public:
 
     sort(index.begin(), index.end(), [&](int a, int b)-> bool { return f[a] < f[b]; });
 
-    const int maxIter = this->m_ctrl.iterations*DIM;
+    const int maxIter = static_cast<int>(this->m_ctrl.iterations*DIM);
     this->m_info.iterations = 0;
     while (this->m_info.iterations < maxIter) {
 
@@ -203,14 +203,14 @@ public:
 private:
     
   /** shrink the simplex keeping x0 fixed */
-    void shrink(Matrix<T> &x, /**< [in,out]a with the n_gauss+! nodes of the simplex in the columns */
+    void shrink(Matrix<T> &x, /**< [in,out]a with the N+! nodes of the simplex in the columns */
                 std::vector<int> &index,  /**< an ordering of the input simplex putting values in ascending order */
                 std::vector<T> &f, /**< [out] the resulting values of the objective function */
                 Problem<T> &objFunc /**< [in] the objective function */
                 ) {
 
     const T sig = 0.5;   // 0 < sig < 1
-    const int DIM = x.rows();
+    const int DIM = static_cast<int>(x.rows());
     f[index[0]] = objFunc(x.col(index[0]));
     for (int i = 1; i < DIM + 1; ++i) {
       x.col(index[i]) = sig * x.col(index[i]) + (1. - sig) * x.col(index[0]);

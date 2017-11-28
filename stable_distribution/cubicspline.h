@@ -9,9 +9,6 @@
 #include "myFloat.h"
 #include <Eigen/Dense>
 using Eigen::Sequential;
-#include <iostream>
-using std::cout;
-using std::endl;
 #include <algorithm>
 using std::sort;
 

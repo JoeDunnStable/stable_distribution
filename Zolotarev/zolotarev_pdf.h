@@ -3,7 +3,6 @@
 /// \copyright 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
-#include <iostream>
 #include <boost/math/distributions/cauchy.hpp>
 // This will be included at the end of zolotarev.h if LIBRARY is defined
 
@@ -11,7 +10,6 @@ namespace stable_distribution {
 
 using boost::math::binomial_coefficient;
 using boost::math::factorial;
-using std::cout;
 using std::endl;
 
 /// pdf using zolotarev expansion
@@ -191,7 +189,8 @@ myFloat Zolotarev<myFloat>::pdf(myFloat x0, Parameterization pm) {
     } else {
       myFloat log_x=log(xB);
       result_asymptotic = 0;
-      myFloat term, old_term;
+      myFloat term{std::numeric_limits<myFloat>::quiet_NaN()};
+      myFloat old_term{std::numeric_limits<myFloat>::quiet_NaN()};
       int num_small_terms=0;
       for (int n=1; n<=max_n_asymp; ++n) {
         myFloat fac{0};
@@ -272,7 +271,7 @@ myFloat Zolotarev<myFloat>::pdf(myFloat x0, Parameterization pm) {
     
     result_convergent = 0;
     error_convergent =0;
-    myFloat term, abs_term;
+    myFloat term, abs_term{std::numeric_limits<myFloat>::quiet_NaN()};
     for (n=1; n<=max_n_conv; ++n) {
       abs_term = tgamma_ratio(n/alpha+1, myFloat(n+1))*pow(xB,n-1)/(pi*gammaB);
       term = abs_term * (0==n%2 ? -1 : 1) * sin(pi*n*rho);

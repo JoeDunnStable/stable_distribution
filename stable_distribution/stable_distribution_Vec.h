@@ -163,13 +163,29 @@ EXT template Matrix<T,Dynamic,1> random_stable(const T, const T, const Matrix<T,
 
 namespace stable_distribution {
 VEC_TEMPLATES(,double)
-VEC_TEMPLATES(,mpreal)
+#ifdef CPP_BIN_FLOAT
+  VEC_TEMPLATES(,CppBinFloat)
+#endif
+#ifdef MPFR_FLOAT
+  VEC_TEMPLATES(,MpfrFloat)
+#endif
+#ifdef MPREAL
+  VEC_TEMPLATES(,mpreal)
+#endif
 }
 #else
 
 namespace stable_distribution {
 VEC_TEMPLATES(extern,double)
-VEC_TEMPLATES(extern,mpreal)
+#ifdef CPP_BIN_FLOAT
+  VEC_TEMPLATES(extern,CppBinFloat)
+#endif
+#ifdef MPFR_FLOAT
+  VEC_TEMPLATES(extern,MpfrFloat)
+#endif
+#ifdef MPREAL
+  VEC_TEMPLATES(extern,mpreal)
+#endif
 }
 
 #endif

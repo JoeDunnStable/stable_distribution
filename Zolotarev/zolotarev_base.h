@@ -3,7 +3,6 @@
 /// \copyright 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
-#include <iostream>
 #include <iomanip>
 #include <boost/math/special_functions/bernoulli.hpp>
 #include <boost/math/special_functions/factorials.hpp>
@@ -13,7 +12,6 @@
 // This will be included at the end of zolotarev.h if LIBRARY is defined
 namespace stable_distribution {
 
-using std::cout;
 using std::endl;
 using std::setw;
 using std::setprecision;

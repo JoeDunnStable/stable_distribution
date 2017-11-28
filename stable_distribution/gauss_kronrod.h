@@ -90,14 +90,6 @@ void r_kronrod(int n_gauss,                      ///< [in] the number of nodess 
                vector<myFloat>& b         ///< [out] the beta coefficients of the Jacobi-Kronrod recurrence
 );
   
-template<typename myFloat>
-void reset_prec(myFloat& x) {}
-  
-template<>
-void reset_prec<mpreal>(mpreal& x) {
-  x.set_prec(mpreal::get_default_prec());
-}
-  
 template<typename myFloat> class Kronrod;
 /// Operator to print out class Kronrod
 template<typename myFloat> ostream& operator<< (ostream& os, const Kronrod<myFloat>& k);

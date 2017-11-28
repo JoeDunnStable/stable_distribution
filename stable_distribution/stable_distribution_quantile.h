@@ -123,7 +123,7 @@ myFloat StandardStableDistribution<myFloat>::quantile(myFloat p, int lower_tail,
     cout << "r.first = " << r.first << ", r.second - " << r.second
          << " in " << maxiter << " iterations" << endl;
   neval = p_s.neval;
-  num_iter = maxiter;
+  num_iter = static_cast<int>(maxiter);
   return (r.first+r.second)/2;
 }
 } // namespace stable_distribution

@@ -35,7 +35,6 @@ myFloat random_stable(myFloat alpha, myFloat beta,
     } else if (fabs(alpha-1)< 1./128.) {
       myFloat a_m_1 = alpha - 1;
       myFloat zeta = beta/tan(pi2*a_m_1);
-      myFloat theta0 = atan(-zeta)/alpha;
       myFloat cos_a_th0 = pow(1+zeta*zeta,-.5);
       myFloat sin_a_th0 = ((a_m_1>0) ? -1 : 1) * sqrt(1-cos_a_th0*cos_a_th0);
 /*

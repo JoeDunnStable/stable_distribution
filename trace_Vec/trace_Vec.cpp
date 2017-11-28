@@ -4,14 +4,16 @@
 /// \copyright 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
-#include "stable_distribution_Vec.h"
 #include <iostream>
+using std::cout;
+using std::cerr;
+using std::endl;
+#define MPREAL
+#include "stable_distribution_Vec.h"
 #include <iomanip>
 #include <vector>
 #include <boost/filesystem.hpp>
 
-using std::cout;
-using std::endl;
 using std::setw;
 using std::setprecision;
 using std::right;
@@ -42,7 +44,6 @@ int main(int argc, const char * argv[]) {
   mpreal::set_default_prec(128);
   Kronrod<mpreal> k_big(10);
   mpreal::set_default_prec(96);
-  int digits = bits2digits(mpfr::mpreal::get_default_prec());
   int noext = 1;
   mpreal eps_mpreal = std::numeric_limits<mpreal>::epsilon();
   double epsabs_double = 0;

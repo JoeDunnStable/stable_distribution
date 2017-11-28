@@ -7,7 +7,11 @@
 //
 
 #include <iostream>
+using std::cout;
+using std::cerr;
+using std::endl;
 #define LIBRARY
+#define MPREAL
 #include "stable_distribution.h"
 #include "stable_distribution_Vec.h"
 #include "stable_distribution_fit.h"

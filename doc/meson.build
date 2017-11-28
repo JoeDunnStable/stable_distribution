@@ -14,6 +14,7 @@ if(doxygen.found())
 	doc_config.set('PACKAGE_NAME', meson.project_name())
 	doc_config.set('PACKAGE_VERSION', meson.project_version())
 	doc_config.set('PROJECT_SOURCE_DIR', meson.source_root())
+	doc_config.set('INPUT', ' '.join(src_doxygen))
 
 	doxyfile = configure_file(input : 'Doxyfile.in',
 				  output : 'Doxyfile',
