@@ -1,10 +1,8 @@
-//
-//  gamma_derivative_at_integers.hpp
-//  stable_zolotarev
-//
-//  Created by Joseph Dunn on 10/29/16.
-//  Copyright © 2016 Joseph Dunn. All rights reserved.
-//
+/// \file  gamma_derivative_at_integers.h
+/// Derivatives of gamma function at integers
+/// \author Joseph Dunn
+/// \copyright 2017 Joseph Dunn
+/// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #ifndef gamma_derivative_at_integers_h
 #define gamma_derivative_at_integers_h

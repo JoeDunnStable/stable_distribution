@@ -1,10 +1,8 @@
-//
-//  trace_to_zolotarev.cpp
-//  stable_distribution
-//
-//  Created by Joseph Dunn on 8/15/17.
-//  Copyright © 2017 Joseph Dunn. All rights reserved.
-//
+/// \file trace_zolotarev.cpp
+/// Traces for the routines in zolotarev.h
+/// \author Joseph Dunn
+/// \copyright 2017 Joseph Dunn
+/// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <iostream>
 using std::cout;

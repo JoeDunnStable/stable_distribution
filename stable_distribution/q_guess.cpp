@@ -1,7 +1,8 @@
 ///
 /// \file q_guess.cpp
+/// Implementation of rough guess for quantile of stable distribution
 /// \author Joseph Dunn
-/// \copyright 2016 Joseph Dunn
+/// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include "q_guess.h"

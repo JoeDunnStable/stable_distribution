@@ -1,4 +1,5 @@
 /// \file kolomogorov.cpp
+/// Implementation of the cdf of the Kolmogorov Smirnov statistic
 /// \author Joseph Dunn
 /// \copyright 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3

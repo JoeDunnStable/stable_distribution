@@ -1,5 +1,5 @@
-//
-/// \file double_to_mpreal_test.cpp
+/// \file dump_mpreal.cpp
+/// Dumps high precision cdf, pdf, & ddx_pdf of standard stable distribution
 /// \author Joseph Dunn
 /// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3

@@ -1,5 +1,5 @@
 project('Stable Distribution', 'cpp', default_options : ['cpp_std=c++11'],
-         version : '0.9.4')
+         version : '0.9.5')
 
 #Eigen3 headers
 eigendep = dependency('eigen3', version : '>3.0', required : true)

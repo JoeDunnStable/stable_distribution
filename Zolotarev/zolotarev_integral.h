@@ -1,4 +1,6 @@
-// \file zolotarev_integral.cpp
+/// \file zolotarev_integral.h
+/// Implemenation of convergent integral used for alpha = 1 & small x
+/// Included in zolotarev.h when LIBRARY is defined
 /// \author Joseph Dunn
 /// \copyright 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3

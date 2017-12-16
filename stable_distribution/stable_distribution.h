@@ -1,6 +1,7 @@
 /// \file stable_distribution.h
+/// Class for standard stable distriubution
 /// \author Joseph Dunn
-/// \copyright 2016 Joseph Dunn
+/// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #ifndef stable_distribution_H

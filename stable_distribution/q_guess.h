@@ -1,5 +1,6 @@
 //
 /// \file q_guess.h
+/// Initial guess for quantile of standard stable distribution
 /// \author Joseph Dunn
 /// \copyright 2016 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3

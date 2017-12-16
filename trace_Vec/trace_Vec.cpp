@@ -1,5 +1,5 @@
-//
 /// \file trace_Vec.cpp
+/// Trace of the routines in stable_distribution_Vec.h
 /// \author Joseph Dunn
 /// \copyright 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3

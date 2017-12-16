@@ -1,6 +1,8 @@
 /// \file stable_distribution_fit_impl.h
+/// Implementation of routines to fit stable distribution
+/// Included in stable_distribution_fit.h when LIBRARY is defined
 /// \author Joseph Dunn
-/// \copyright 2016 Joseph Dunn
+/// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include "stable_distribution_fit.h"
@@ -143,7 +145,7 @@ DstableQuick<myFloat>::DstableQuick(StandardStableDistribution<myFloat> *std_sta
     x_break_0 = x_break_3;  // Do not use splinelow
   }
   Vec der(2);  der << 0,0;
-  spline_low = cubicspline<myFloat>(pt_knot, y_knot, false, der);
+  spline_low = CubicSpline<myFloat>(pt_knot, y_knot, false, der);
   
   myFloat pt_break_7 = mycdf(complement(dist_t, x_break_7));
   myFloat pt_break_6 = mycdf(complement(dist_t,x_break_6));
@@ -200,7 +202,7 @@ DstableQuick<myFloat>::DstableQuick(StandardStableDistribution<myFloat> *std_sta
   } else {
     x_break_7 = x_break_4;
   }
-  spline_high = cubicspline<myFloat>(pt_knot, y_knot, false, der);
+  spline_high = CubicSpline<myFloat>(pt_knot, y_knot, false, der);
 }
 
 // This function returns an approximation to the log likelihood of the observations x

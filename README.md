@@ -15,7 +15,7 @@ to the extremal, i.e., maximally skewed, cases of the stable distribution.
 This package can calculate the general case, i.e., -1 <= beta <= 1.
 Installation
 ------------
-This package was developed on a Mac running OS X v10.12.6 and Xcode v8.3.3.  It 
+This package was developed on a Mac running OS X v10.13.1 and Xcode v9.1.  It 
 should compile using any C++ compiler that supports C++11. You'll need the
 following to install the package.
 
@@ -32,48 +32,37 @@ Most of these prerequisites can be downloaded using a package management system.
 I used MacPorts to get them on my Mac.
 
 Meson has built in dependency support for the Boost libraries, but I had
-to define the BOOST_ROOT to get it to work.  For the other prequisites meson
+to define the BOOST_ROOT to get it to work.  Also version 0.43 of meson has
+difficulty with the boost libraries when they're generated with the "-mt" suffix, so
+I had to link the system, filesystem and timer libraries to versions without the suffix.
+For the other prequisites meson
 works best using the pkconfig files.  For some reason mpfr and gmp came without
 such files, but it's relatively easy to add appropriate entries.  Once that's
 done Meson should do the rest.  I wanted to use the clang++ compiler so
 I used the following commands from the root directory:
 
-    $ mkdir build_double
-    $ CXX=clang++ BOOST_ROOT=/opt/local meson build_double
-    $ cd build_double
+    $ mkdir build
+    $ CXX=clang++ BOOST_ROOT=/opt/local meson build
+    $ cd build
     $ ninja
     $ ninja test
 
-There are also three options available for building a multiprecision version:
-'mpreal', 'mpfr_float', or 'cpp_bin_float'.  I generally use the mpreal version, 
-which involves the following commands starting from the parent directory:
+There are also three options available for adding a multiprecision support, 
+which are implemented by defining MPREAL, CPP_BIN_FLOAT, and/or MPFR_FLOAT. As 
+distributed MPREAL is defined.
 
-    $ mkdir build_mpreal
-    $ CXX=clang++ BOOST_ROOT=/opt/local meson build_mpreal
-    $ cd build_mpreal
-    $ mesonconf -D floating_type='mpreal'
-    $ ninja
-    $ ninja test
-
-The ninja test suite includes only the more rapidly running tests.  Other 
-testing programs can be found in the test subdirectory of each build director.
-They should be run from the parent build directory.  For instance, the 
-following command can be entered from the build_double directory:
-
-    $ ./test/test_pstable
-
-The output will be in a file in the output directory of the parent directory.
+The output of the tests will be in files in the output directory of the parent directory.
 
 If you have a lot of time on your hands, you can run the following from the
-build_mpreal directory:
+build directory:
 
-    $ ./test/dump_stable
+    $ ./dump_stale/dump_stable
 
 This will create a 224,000 line file 'stable_mpreal.out' in the output directory,
 which can be used to check the double precision calculations by issuing the 
-following command from the build_double directory:
+following command from the build directory:
 
-    $ ./test/xcheck_to_file
+    $ ./xcheck_to_file/xcheck_to_file
    
 The src files beginning with the word "trace" can be used as examples of how to
 call the programs.
@@ -120,6 +109,8 @@ this package.  The original is available at http://www.holoborodko.com/pavel/mpf
 9. Three components, meta.h, Problem.h and NelderMeadSolver.h, of Patrick Wieschollek's CppNumericalSolver package are used 
 by the stable_fit routine and are included in the present package.  The original
 is available at https://github.com/PatWie/CppNumericalSolvers.
+10. The documentation is prepared using Doxygen, which is available at http://doxygen.org, and 
+mathjax
 
 Details
 -------
@@ -137,8 +128,8 @@ of Zolotarev.  Unlike the Zolotarev (M) parameterization, gamma and
 delta are straightforward scale and shift parameters. This
 representation is continuous in all 4 parameters.
 
-Definition
-----------
+### Definition
+
 The random variable \f$ Y \f$ is said to be distriubuted according to the
 \f$ S(\alpha, \beta, \gamma, \delta, 0) \f$ if its characteristic function is
 given by the following:
@@ -159,13 +150,55 @@ where
 \par
 \f$ \delta \f$, the location parameter, is unconstrained.
 
-Setting \f$\gamma = 1\f$ and \f$\delta =0\f$ gives the standard skew stable distribution whose characteristic function is therefore:
+Setting \f$\gamma = 1\f$ and \f$\delta =0\f$ gives the standard skew stable distribution, \f$ S_0 \f$, whose characteristic function is therefore:
 \f{equation}{
 {E \exp(itY)} =
 \begin{cases}
 \exp \{ -|t|^\alpha \left [1+i\beta(\tan{\frac{\pi \alpha}{2}})(\text{sign } t)(|t|^{1-\alpha}-1) \right ] \} &\alpha \ne 1 \\
 \exp \{-|t| \left[ 1+i \beta \frac {2}{\pi}(\text{sign }t)\log{(|t|)} \right ]\} & \alpha=1.
 \end{cases}
+\f}
+
+Traditionally, the parameters in the stable distribution are defined somewhat differently.
+The random variable \f$ Y \f$ is said to be distriubuted according to the
+\f$ S(\alpha, \beta, \gamma, \delta, 1) \f$ if its characteristic function is
+given by the following:
+\f{equation}{
+{E \exp(itY)} =
+\begin{cases}
+\exp \{ -\gamma^\alpha |t|^\alpha \left [1-i\beta(\tan{\frac{\pi \alpha}{2}})(\text{sign } t) \right ]+i \delta t \} &\alpha \ne 1 \\
+\exp \{-\gamma |t| \left[ 1+i \beta \frac {2}{\pi}(\text{sign }t)\log{ |t|} \right ]+i \delta t \} & \alpha=1.
+\end{cases}
+\f}
+where \f$ \alpha \f$, \f$ \beta \f$, \f$ \gamma \f$, \f$ \delta \f$ are in the same ranges as for \f$ S_0 \f$, but with 
+different interpretations for \f$ \gamma \f$ and \f$ \delta \f$.
+
+Setting \f$\gamma = 1\f$ and \f$\delta =0\f$ gives the standard skew stable distribution, \f$ S_1 \f$, whose characteristic function is therefore:
+\f{equation}{
+{E \exp(itY)} =
+\begin{cases}
+\exp \{ -|t|^\alpha \left [1-i\beta(\tan{\frac{\pi \alpha}{2}})(\text{sign } t) \right ] \} &\alpha \ne 1 \\
+\exp \{-|t| \left[ 1+i \beta \frac {2}{\pi}(\text{sign }t)\log{(|t|)} \right ]\} & \alpha=1.
+\end{cases}
+\f}
+
+This package supports either parameterization through the pm parameter.  Generally the \f$ S_1 \f$ works best for small
+\f$ \alpha \f$, otherwise the \f$ S_0 \f$ is to be preferred.
+
+Note that when \f$ \alpha = 1 \f$ and \f$ \beta = 0 \f$ the standard stable distribution is simply the Cauchy distribution,
+and when \f$ \alpha = 2 \f$ the standard stable distribution is a normal distribution with standard deviation of
+\f$ \sqrt{2} \f$.
+
+The package supports a third parameterization, \f$ S_2 \f$, which adjusts the scale parameter
+so that the \f$ \gamma = 1 \f$ corrresponds to the standard normal distribution when \f$ \alpha = 2 \f$ and Cauchy distributon 
+when \f$ \alpha = 1 \f$ and \f$ \beta = 0 \f$.  Specifically
+\f{equation}{
+\gamma_2 = \gamma_0 \alpha ^ {\frac{1}{\alpha}}
+\f}
+
+The parameter \f$ \delta_2 \f$ is determined so that the mode of the distribution is at \f$ \delta_2 \f$. Specifically
+\f{equation}{
+\delta_2 = \delta_0 + \gamma_0 * \text{mode}_0
 \f}
 
 

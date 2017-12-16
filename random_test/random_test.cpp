@@ -1,10 +1,8 @@
-//
-//  main.cpp
-//  random_test
-//
-//  Created by Joseph Dunn on 11/18/17.
-//  Copyright © 2017 Joseph Dunn. All rights reserved.
-//
+/// \file random_test.cpp
+/// Low level unit test of random stable
+/// \author Joseph Dunn
+/// \copyright 2017 Joseph Dunn
+/// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <iostream>
 using std::cout;

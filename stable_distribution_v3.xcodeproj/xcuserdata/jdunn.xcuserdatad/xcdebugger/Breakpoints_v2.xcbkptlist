@@ -645,7 +645,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/stable_distribution_cdf.h"
-            timestampString = "530637021.630634"
+            timestampString = "534318218.479235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "142"
@@ -1061,7 +1061,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/stable_distribution_base.h"
-            timestampString = "532129512.187201"
+            timestampString = "535050927.622273"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "94"
@@ -1834,6 +1834,84 @@
                   startingLineNumber = "39"
                   endingLineNumber = "39"
                   offsetFromSymbolStart = "1835">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/stable_distribution_base.h"
+            timestampString = "535050927.623667"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "ga1_r(myFloat u_r)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::ga1_r(double) const"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "534314945.733545"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "66">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::ga1_r(boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;) const"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "534314945.736635"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "156">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::ga1_r(boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;) const"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "534314945.739403"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "160">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;mpfr::mpreal&gt;::ga1_r(mpfr::mpreal) const"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "534314945.74212"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "160">
                </Location>
             </Locations>
          </BreakpointContent>

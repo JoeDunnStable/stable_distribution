@@ -1,4 +1,5 @@
 /// \file zolotarev.h
+/// cdf, pdf and ddx_pdf of standard stable distribution per Zolotarev
 /// \author Joseph Dunn
 /// \copyright 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3

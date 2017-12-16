@@ -1,6 +1,8 @@
-/// \file gauss_kronrod.cpp
+/// \file gauss_kronrod_impl.h
+/// Implementation of routines to calculate nodes and weights
+/// Included in file gauss_kronrod.h when LIBRARY is defined
 /// \author Joseph Dunn
-/// \copyright 2016 Joseph Dunn
+/// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <Eigen/Eigenvalues>

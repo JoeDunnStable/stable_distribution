@@ -1,10 +1,8 @@
-//
-//  xcheck_to_Zolotarev.cpp
-//  stable_distribution
-//
-//  Created by Joseph Dunn on 10/29/16.
-//  Copyright © 2016 Joseph Dunn. All rights reserved.
-//
+/// \file xcheck_to_Zolotarev.cpp
+/// Unit tests for routines in zolotarev.h
+/// \author Joseph Dunn
+/// \copyright 2017 Joseph Dunn
+/// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <iostream>
 using std::cout;

@@ -1,6 +1,8 @@
 /// \file stable_distribution_cdf.h
+/// Implementation of cdf for standard stable distribution
+/// Included in stable_distribution.h when LIBRARY is defined
 /// \author Joseph Dunn
-/// \copyright 2016 Joseph Dunn
+/// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <iostream>

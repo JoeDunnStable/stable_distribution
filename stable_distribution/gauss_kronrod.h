@@ -1,7 +1,8 @@
 ///
 /// \file  gauss_kronrod.h
+/// Routines calculating Gauss Kronrod nodes and weights
 /// \author Joseph Dunn
-/// \copyright 2016 Joseph Dunn
+/// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #ifndef gauss_kronrod_h

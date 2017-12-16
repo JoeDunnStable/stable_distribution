@@ -1,10 +1,9 @@
-//
-//  bracket_and_solve.h
-//  stable_distribution_v3
-//
-//  Created by Joseph Dunn on 9/29/17.
-//  Copyright © 2017 Joseph Dunn. All rights reserved.
-//
+///
+///  bracket_and_solve.h
+///  Modification of boost bracket_and_solve_root
+/// \author Joseph Dunn
+/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #ifndef bracket_and_solve_h
 #define bracket_and_solve_h

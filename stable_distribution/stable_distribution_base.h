@@ -1,4 +1,6 @@
 /// @file stable_distribution_base.h
+/// Implementation of common routines for standard stable distribution
+/// Included in stable_distribution.h when LIBRARY is defined
 /// \author Joseph Dunn
 /// \copyright 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
@@ -305,7 +307,7 @@ ostream& operator<<(ostream& os, const StandardStableDistribution<myFloat>& dist
              << " h_u2 = " << dist.h_u2 << endl;
         }
       }
-      if (!dist.use_f_zeta) {
+      if (dist.alpha==1 || !dist.use_f_zeta) {
         os << " good_theta2 = " << dist.good_theta2 << endl
            << " g(theta2) error = " <<  dist.g_theta2_error << endl
            << " g_dd_theta2 = " << dist.g_dd_theta2 << endl;

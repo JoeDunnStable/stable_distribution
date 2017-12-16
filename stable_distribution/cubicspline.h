@@ -1,6 +1,7 @@
 /// \file cubicspline.h
+/// General purpose cubic splines
 /// \author Joseph Dunn
-/// \copyright 2016 Joseph Dunn
+/// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #ifndef CUBICSPLINE_H
@@ -53,15 +54,15 @@ inline iVec sort_indexes(const Vec &v /**< the vector of values to be sorted*/) 
 
 /** construct and evaluate a cubic spline with specified values at given knots */
 template<typename myFloat>
-class cubicspline {
+class CubicSpline {
 private:
   Vec knots;
   Mat coefs;
 public:
     /** default constructor doing nothing */
-    cubicspline() {};
+    CubicSpline() {};
   /** constructor taking knots, values and possibly derivative at end */
-  cubicspline(const Vec& x,        /**< [in] the vector of knots */
+  CubicSpline(const Vec& x,        /**< [in] the vector of knots */
               const Vec& y,        /**< [in] the value at the corresponding knot */
               const bool endp2nd, /**< [in] flag indicating endpoints are clamped */
               const Vec& der       /**< [in] a 2 vector with the value of the derivative at endpoints */

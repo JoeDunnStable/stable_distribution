@@ -65,7 +65,11 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "mode_double"
+            argument = "pdf_double"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "1"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
@@ -73,11 +77,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = ".5"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "0"
+            argument = "1e7"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

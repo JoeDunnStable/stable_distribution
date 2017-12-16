@@ -1,7 +1,8 @@
 //
 /// \file stable_distribution_fit.h
+/// Maximum likelihood estimates of stable distrubtion parameters
 /// \author Joseph Dunn
-/// \copyright 2016 Joseph Dunn
+/// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #ifndef stable_distribution_fit_h
@@ -65,8 +66,8 @@ private:
   myFloat x_break_7;        ///< the upper bound for the upper cubic spline
   StandardStableDistribution<myFloat> *std_stable_dist;   ///< pointer to the integration controller
   students_t_distribution<myFloat> dist_t;       ///< the standard student t distribution
-  cubicspline<myFloat> spline_low;  ///< the lower cubic spline
-  cubicspline<myFloat> spline_high; ///< the upper cubic spline
+  CubicSpline<myFloat> spline_low;  ///< the lower cubic spline
+  CubicSpline<myFloat> spline_high; ///< the upper cubic spline
   /// retrieve a vector of the knots for the lower spline
   Vec get_knots_low() {return spline_low.get_knots();}
   

@@ -1,7 +1,9 @@
 ///
 /// @file stable_distribution_random.h
+/// Implementation of random generator for standard stable distribution
+/// Included in stable_distribution.h when LIBRARY is defined
 /// \author Joseph Dunn
-/// \copyright 2016 Joseph Dunn
+/// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 namespace stable_distribution {

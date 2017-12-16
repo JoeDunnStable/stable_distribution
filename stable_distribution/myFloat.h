@@ -7,7 +7,7 @@
 /// 4. cpp_bin_float, the boost multiprecion cpp_bin_float when CPP_BIN_FLOAT is defined
 ///
 /// \author Joseph Dunn
-/// \copyright 2016, 2014 Joseph Dunn
+/// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #ifndef myFloat_h
@@ -20,15 +20,15 @@
 
 #ifdef CPP_BIN_FLOAT
 #include <boost/multiprecision/cpp_bin_float.hpp>
-using CppBinFloat = boost::multiprecision::cpp_bin_float_quad;
-using BigCppBinFloat = boost::multiprecision::cpp_bin_float_50;
+using CppBinFloat = boost::multiprecision::number<boost::multiprecision::backends::cpp_bin_float<28>, boost::multiprecision::et_off>;
+using BigCppBinFloat = boost::multiprecision::number<boost::multiprecision::backends::cpp_bin_float<38>, boost::multiprecision::et_off>;
 #endif
 
 #ifdef MPFR_FLOAT
 #include <boost/multiprecision/mpfr.hpp>
 
-using MpfrFloat = boost::multiprecision::number<boost::multiprecision::mpfr_float_backend<50>, boost::multiprecision::et_off>;
-using BigMpfrFloat = boost::multiprecision::number<boost::multiprecision::mpfr_float_backend<60>, boost::multiprecision::et_off>;
+using MpfrFloat = boost::multiprecision::number<boost::multiprecision::mpfr_float_backend<28>, boost::multiprecision::et_off>;
+using BigMpfrFloat = boost::multiprecision::number<boost::multiprecision::mpfr_float_backend<38>, boost::multiprecision::et_off>;
 #endif
 
 #ifdef MPREAL
@@ -85,28 +85,38 @@ using boost::math::zeta;
 
 template<typename myFloat>
 myFloat pow(myFloat x, myFloat y) {
+  return pow(x, y);
+}
+
+#ifdef CPP_BIN_FLOAT
+template<> CppBinFloat pow<CppBinFloat>(CppBinFloat x, CppBinFloat y) {
   if (x<0)
     return NAN;
   else if (x == 0 && y == 0)
     return NAN;
   else if (x == 0 && y < 0)
-    return std::numeric_limits<myFloat>::infinity();
+    return std::numeric_limits<CppBinFloat>::infinity();
   else if (x == 0 && y>0)
     return 0;
   else
-    return std::pow(x, y);
-}
-
-template<> double pow<double>(double x, double y){
-  return pow(x,y);
-}
-
-#ifdef MPREAL
-template<> mpreal pow<mpreal>(mpreal x, mpreal y) {
-  return pow(x,y);
+    return pow(x, y);
 }
 #endif
 
+#ifdef MPFR_FLOAT
+template<> MpfrFloat pow<MpfrFloat>(MpfrFloat x, MpfrFloat y) {
+  if (x<0)
+    return NAN;
+  else if (x == 0 && y == 0)
+    return NAN;
+  else if (x == 0 && y < 0)
+    return std::numeric_limits<MpfrFloat>::infinity();
+  else if (x == 0 && y>0)
+    return 0;
+  else
+    return pow(x, y);
+}
+#endif
 #include <boost/math/constants/constants.hpp>
 template<typename myFloat>
 inline myFloat const_pi() {

@@ -1,5 +1,5 @@
-//
 /// \file quick_test.cpp
+/// Unit test of the quick verison of the pdf of standard stable distribution
 /// \author Joseph Dunn
 /// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3

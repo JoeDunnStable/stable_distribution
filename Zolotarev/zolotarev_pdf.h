@@ -1,4 +1,6 @@
 /// \file zolotarev_pdf.h
+/// Implementation of pdf of standard stable distribution per Zolotarev
+/// Included in zolotarev.h when LIBRARY is defined
 /// \author Joseph Dunn
 /// \copyright 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
