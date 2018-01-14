@@ -45,8 +45,8 @@ myFloat StandardStableDistribution<myFloat>::integrate_cdf() {
 
   // When x_m_zeta is large use the version that gets small as abs(x) becomes large
   // When x_m_zeta is small use the version that gets small as x approaches zeta
-  bool use_one_m_exp_m_x = ((alpha<1) && (fun_type==fun_g_r))
-                            || ((alpha>1) && (fun_type==fun_g_l))
+  bool use_one_m_exp_m_x = ((alpha<1) && !small_x_m_zet)
+                            || ((alpha>1) && small_x_m_zet)
                             || ((alpha==1) && (beta>0));
   if (verbose)
     cout << "Integrand is " << (use_one_m_exp_m_x ? "1 - exp(-g)" : "exp(-g)") << endl;
@@ -141,36 +141,59 @@ myFloat StandardStableDistribution<myFloat>::cdf(myFloat x, int lower_tail, int 
     case other :
       if (verbose)
         cout << "cdf: General case:" << endl;
-      if (alpha !=1) {
-        if(use_f_zeta || fun_type==fun_g_l) { // We're close to zeta.
+      myFloat F=0;
+      if (alpha !=1 && small_x_m_zet) {
           myFloat F_zeta = (alpha<1 && fabs(beta)==1)
                            ? (lower_tail != (beta_input<1)) ? 0 : 1
                            :(lower_tail) ? static_cast<myFloat>(static_cast<myFloat>(.5) - theta0_x_gt_zeta/pi)
                                          : static_cast<myFloat>(static_cast<myFloat>(.5) + theta0_x_gt_zeta/pi);
           if (verbose)
             cout << "cdf: Using difference from F_zeta, " << F_zeta << endl;
-          myFloat F = F_zeta;
-          if (!use_f_zeta)
-            F -= ((lower_tail != (x_m_zeta_input > 0)) ? 1 : -1) * integrate_cdf();
-          ret = (log_p) ? log(F) : F;
+          F = F_zeta;
+        if (use_f_zeta) {
           if (verbose)
-            cout << "cdf returning " << ret << endl;
+            cout << "cdf:: Using F_zeta" << endl;
+          ret = (log_p) ? log(F) : F;
           return ret;
         } else {
-          bool useF = !((x > zeta && lower_tail) || (x < zeta && !lower_tail));
-          myFloat F = min(static_cast<myFloat>(1),max(static_cast<myFloat>(0),integrate_cdf()));
-          ret = retValue<myFloat>(F, useF, log_p);
           if (verbose)
-            cout << "cdf: " << endl << "  Using tail integral, returning " << ret << endl;
-          return ret;
+            cout << "cdf: Using difference from F_zeta, " << F_zeta << endl;
         }
-      } else { // alpha = 1
-        bool useF = (x>=0) != lower_tail;
-        myFloat F = integrate_cdf();
-        ret = retValue<myFloat>(F,useF,log_p);
+      }
+      if (good_theta2) {
+        myFloat integral = integrate_cdf();
+        myFloat error = abserr;
+        if ( (alpha_minus_one > 0 && beta == -1)
+            || error < max(pow((alpha!=1)?x_m_zet:abs_x,-alpha),
+                           4*controllers.controller.epsrel)* fabs(integral)
+            || small_x_m_zet) {
+          if (verbose)
+            cout << "cdf: Integration error is small or x_m_zet is small.  Using integral" << endl;
+          if (alpha != 1 && small_x_m_zet) {
+            F -= ((lower_tail != (x_m_zeta_input > 0)) ? 1 : -1) * integral;
+            ret = (log_p) ? log(F) : F;
+            if (verbose)
+              cout << "cdf returning " << ret << endl;
+            return ret;
+          } else {
+            bool useF = !((x >= zeta && lower_tail) || (x < zeta && !lower_tail));
+            F = min(static_cast<myFloat>(1),max(static_cast<myFloat>(0),integral));
+            ret = retValue<myFloat>(F, useF, log_p);
+            if (verbose)
+              cout << "cdf: " << endl << "  Using tail integral, returning " << ret << endl;
+            return ret;
+          }
+        }
+      }
+      if (alpha != 1 && small_x_m_zet) {
         if (verbose)
-          cout << "cdf: " << endl << "  Using tail integral, returning " << ret << endl;
-        return ret;
+          cout << "cdf: Bad theta2 for small x_m_zet.  Using F_zeta" << endl;
+        return (log_p) ? log(F) : F;
+      } else {
+        if (verbose)
+          cout << "cdf: Bad theta2 or large integration error for large x_m_zet.  Using pPareto." << endl;
+        // Note we're assuming here that a bad theta2 for alpha==1 implies a large x.
+        return pPareto(x_m_zeta_input, alpha, beta_input, lower_tail, log_p);
       }
   } // switch on dist_type
 } // StandardStableDistribution<myFloat>::cdf

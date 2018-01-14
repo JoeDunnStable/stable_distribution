@@ -143,6 +143,9 @@ myFloat Zolotarev<myFloat>::pdf(myFloat x0, Parameterization pm) {
       cauchy_distribution<myFloat> dist_cauchy(0,1);
       result_convergent = boost::math::pdf(dist_cauchy, x_m_zet);
       error_convergent=5*std::numeric_limits<myFloat>::epsilon()*result_convergent;
+    } else if (!boost::math::isfinite(x0)) {
+      result_convergent = 0;
+      error_convergent = 0;
     } else {
       result_convergent = pdf_alpha_1();
       error_convergent = pdf_alpha_1.abserr;

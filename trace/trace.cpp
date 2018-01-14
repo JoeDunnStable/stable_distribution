@@ -61,7 +61,7 @@ int main(int argc, const char * argv[]) {
   double epsabs_double = 0;
   double epsrel_double = 64 * std::numeric_limits<double>::epsilon();
   int limit = 1000;
-  int verbose_integration = 0;
+  int verbose_integration = 4;
   IntegrationController<double> ctl_double(noext, k_big,
                                            epsabs_double, epsrel_double,
                                            limit, verbose_integration);
@@ -210,7 +210,7 @@ int main(int argc, const char * argv[]) {
       ss5 >> tmp;
       pm = tmp ? S1 : S0;
     }
-    cout << ", pm = " << pm;
+    cout << ", pm = " << pm << endl;
     int verbose = 4;
     if (argc > 6) {
       istringstream ss6((string(argv[6])));

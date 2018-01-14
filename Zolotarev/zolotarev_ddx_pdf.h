@@ -151,6 +151,9 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
       result_convergent=-2*x_m_zet/(pi*pow(1+x_m_zet*x_m_zet,2));
       result_convergent *= positive_x ? 1 : -1;
       error_convergent=5*std::numeric_limits<myFloat>::epsilon()*result_convergent;
+    } else if (!boost::math::isfinite(x0)) {
+      result_convergent = 0;
+      error_convergent = 0;
     } else {
       result_convergent = ((positive_x)? 1 : -1) * ddx_pdf_alpha_1();
       error_convergent = ddx_pdf_alpha_1.abserr;

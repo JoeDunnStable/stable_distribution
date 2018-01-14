@@ -123,7 +123,7 @@ myFloat StandardStableDistribution<myFloat>::ddx_pdf(myFloat x, Parameterization
       } // alpha != 1
       if (good_theta2) {
         ret = integrate_ddx_pdf();
-        if (abserr > .01 * fabs(ret) && fun_type>1) {
+        if (abserr > 1e-6 * fabs(ret) && fun_type>1) {
           ret = -(1+alpha)*dPareto(x_m_zeta_input+zeta, alpha, beta_input, false)/x;
           if (verbose)
             cout << "ddx_pdf:" << endl << "  Integral has large error and x is large. using ddx_dPareto = " << ret << endl;

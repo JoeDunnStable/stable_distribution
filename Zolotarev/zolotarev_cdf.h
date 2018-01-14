@@ -122,6 +122,12 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
       result_convergent = (lower_tail==positive_x) ? boost::math::cdf(dist_cauchy, x_m_zet)
                                       : boost::math::cdf(complement(dist_cauchy, x_m_zet));
       error_convergent=std::numeric_limits<myFloat>::epsilon()*result_convergent;
+    } else if (x_m_zeta_in == std::numeric_limits<myFloat>::infinity()) {
+      result_convergent = (lower_tail)?0:1;
+      error_convergent = 0;
+    } else if (x_m_zeta_in == -std::numeric_limits<myFloat>::infinity()) {
+      result_convergent = (lower_tail)?1:0;
+      error_convergent =0;
     } else {
       // Formula from Zolotarev's Corollary 1 to Theorem 2.2.1
       // requires integrals over an infinite range

@@ -8,6 +8,7 @@
 using std::cerr;
 using std::cout;
 using std::endl;
+using std::getline;
 
 #define MPREAL
 #include "stable_distribution.h"
@@ -24,7 +25,11 @@ using std::fixed;
 using std::string;
 
 #include <fstream>
+using std::ifstream;
 using std::ofstream;
+
+#include <sstream>
+using std::stringstream;
 
 #include <vector>
 using std::vector;
@@ -260,7 +265,7 @@ void calculate_results(int thread_id, int noext, Kronrod<BigFloat> g_k_big,
 }
 
 template<typename myFloat, typename BigFloat>
-int dump(Kronrod<BigFloat> g_k_big, int digits) {
+int dump(Kronrod<BigFloat> g_k_big, int digits, string old_file_name, double alpha_low, double alpha_high) {
   high_resolution_clock::time_point start = high_resolution_clock::now();
   Eigen::initParallel();
 
@@ -286,10 +291,28 @@ int dump(Kronrod<BigFloat> g_k_big, int digits) {
     array<double, 23> betas {{-1.0, -.99, -.9, -.8, -.7, -.6, -.5, -.4, -.3, -.2, -.1, 0,
       .1, .2, .3, .4, .5, .6, .7, .8, .9, .99, 1.}};
   
+  string out_file = "../output/stable_mpreal.out";
+  cout << "Writing output to " + out_file << endl;
+  ofstream out(out_file) ;
+  
+  ifstream in(old_file_name);
+  while (in) {
+    string str_buf;
+    getline(in, str_buf);
+    stringstream ss(str_buf);
+    double alpha; ss >> alpha;
+    if (alpha < alpha_low) {
+      out << str_buf << endl;
+    } else {
+      break;
+    }
+  }
   Jobs jobs;
-  for (auto alpha : alphas)
+  for (auto alpha : alphas) {
+    if (alpha < alpha_low || alpha > alpha_high) continue;
     for (auto beta : betas)
       jobs.abs.push_back(AB{alpha, beta});
+  }
   int number_of_jobs = static_cast<int>(jobs.abs.size());
     
   array<double, 407> xs;
@@ -316,10 +339,6 @@ int dump(Kronrod<BigFloat> g_k_big, int digits) {
   result_buffer<myFloat> res_buf;
   res_buf.initialize(xs);
   
-  string out_file = "../output/double_to_mpreal_test.out";
-  cout << "Writing output to " + out_file << endl;
-  ofstream out(out_file) ;
-
   /*
   out << setw(30) << right << "alpha" << " "
   << setw(30) << right << "beta" << " "
@@ -364,6 +383,17 @@ int dump(Kronrod<BigFloat> g_k_big, int digits) {
   t6.join();
   t7.join();
   
+  while (in) {
+    string str_buf;
+    getline(in, str_buf);
+    stringstream ss(str_buf);
+    double alpha; ss >> alpha;
+    if (alpha > alpha_high) {
+      out << str_buf << endl;
+    } else {
+      continue;
+    }
+  }
   high_resolution_clock::time_point end = high_resolution_clock::now();
   duration<double> elapsed_time = end - start;
   cout << "Number of function calls = " << alphas.size() * betas.size() * xs.size() * 3 << endl;
@@ -373,22 +403,31 @@ int dump(Kronrod<BigFloat> g_k_big, int digits) {
 }
 
 static void show_usage (string name){
-  cerr << "Usage: " << name << endl;
+  cerr << "Usage: " << name << "[old_file_name alpha_low alpha_high]" << endl;
 }
 
 int main(int argc, char *argv[]) {
   
   // Check the number of parameters
-  if (argc != 1) {
+  if (argc != 1 && argc != 4) {
     // Tell the user how to run the program
     show_usage(string(argv[0]));
     return 1;
+  }
+  string old_file_name;
+  double alpha_low = 0;
+  double alpha_high = 2;
+  if (argc == 4) {
+    stringstream ss1((string(argv[1]))), ss2((string(argv[2]))), ss3((string(argv[3])));
+    ss1 >> old_file_name;
+    ss2 >> alpha_low;
+    ss3 >> alpha_high;
   }
   
   mpreal::set_default_prec(128);
   Kronrod<mpreal> g_k_big(10);
   mpreal::set_default_prec(96);
-  return dump<mpreal, mpreal>(g_k_big, 96);
+  return dump<mpreal, mpreal>(g_k_big, 96, old_file_name, alpha_low, alpha_high);
 
 }
 

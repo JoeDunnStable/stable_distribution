@@ -217,7 +217,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/stable_distribution_pdf.h"
-            timestampString = "528419944.375959"
+            timestampString = "537515245.4654779"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "86"
@@ -297,11 +297,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "xcheck_to_file/xcheck_to_file.cpp"
-            timestampString = "533506031.98194"
+            timestampString = "537579647.342499"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "423"
-            endingLineNumber = "423"
+            startingLineNumber = "434"
+            endingLineNumber = "434"
             landmarkName = "main(int argc, char *argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -313,7 +313,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/adaptive_integration_impl.h"
-            timestampString = "533506031.982023"
+            timestampString = "537506531.261466"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "575"
@@ -361,7 +361,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/adaptive_integration_impl.h"
-            timestampString = "533506031.982092"
+            timestampString = "537506531.261682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "678"
@@ -441,7 +441,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/adaptive_integration_impl.h"
-            timestampString = "533506031.982274"
+            timestampString = "537506531.26178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "836"
@@ -489,7 +489,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/adaptive_integration_impl.h"
-            timestampString = "533506031.982332"
+            timestampString = "537506531.261839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "565"
@@ -567,7 +567,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/adaptive_integration_impl.h"
-            timestampString = "533506031.98239"
+            timestampString = "537506531.261896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "641"
@@ -645,7 +645,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/stable_distribution_cdf.h"
-            timestampString = "534318218.479235"
+            timestampString = "537515245.46623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "142"
@@ -741,11 +741,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_cdf.h"
-            timestampString = "533506031.982549"
+            timestampString = "537512254.446208"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "cdf(myFloat x0, int lower_tail, Parameterization pm)"
             landmarkType = "9">
             <Locations>
@@ -789,11 +789,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_cdf.h"
-            timestampString = "533506031.982607"
+            timestampString = "537512254.4464279"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
             landmarkName = "cdf(myFloat x0, int lower_tail, Parameterization pm)"
             landmarkType = "9">
             <Locations>
@@ -837,11 +837,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_cdf.h"
-            timestampString = "533506031.982662"
+            timestampString = "537512254.446489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "cdf(myFloat x0, int lower_tail, Parameterization pm)"
             landmarkType = "9">
             <Locations>
@@ -885,11 +885,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_pdf.h"
-            timestampString = "533506031.98272"
+            timestampString = "535094715.528806"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "pdf(myFloat x0, Parameterization pm)"
             landmarkType = "9">
             <Locations>
@@ -933,7 +933,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_ddx_pdf.h"
-            timestampString = "533506031.982778"
+            timestampString = "535094715.528864"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "147"
@@ -981,7 +981,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_pdf.h"
-            timestampString = "533506031.982839"
+            timestampString = "535094715.528924"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
@@ -997,11 +997,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_ddx_pdf.h"
-            timestampString = "533506031.982893"
+            timestampString = "535094715.528977"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
             landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
             landmarkType = "9">
          </BreakpointContent>
@@ -1013,11 +1013,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_ddx_pdf.h"
-            timestampString = "533506031.982949"
+            timestampString = "535094715.529032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "308"
-            endingLineNumber = "308"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
             landmarkType = "9">
             <Locations>
@@ -1061,11 +1061,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/stable_distribution_base.h"
-            timestampString = "535050927.622273"
+            timestampString = "537515245.4670939"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "g_r(myFloat th_r)"
             landmarkType = "9">
             <Locations>
@@ -1109,7 +1109,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_cdf.h"
-            timestampString = "533506031.983043"
+            timestampString = "537512254.446859"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "124"
@@ -1157,7 +1157,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_ddx_pdf.h"
-            timestampString = "533506031.983098"
+            timestampString = "535094715.529166"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
@@ -1205,11 +1205,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_ddx_pdf.h"
-            timestampString = "533506031.983153"
+            timestampString = "535094715.52922"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
             landmarkType = "9">
             <Locations>
@@ -1253,11 +1253,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_ddx_pdf.h"
-            timestampString = "533506031.983209"
+            timestampString = "535094715.529275"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
             landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
             landmarkType = "9">
             <Locations>
@@ -1301,11 +1301,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_pdf.h"
-            timestampString = "533506031.983266"
+            timestampString = "535094715.529331"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "pdf(myFloat x0, Parameterization pm)"
             landmarkType = "9">
             <Locations>
@@ -1349,7 +1349,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_ddx_pdf.h"
-            timestampString = "533506031.983321"
+            timestampString = "535094715.529384"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "107"
@@ -1397,11 +1397,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_pdf.h"
-            timestampString = "533506031.983377"
+            timestampString = "535094715.529439"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
+            startingLineNumber = "330"
+            endingLineNumber = "330"
             landmarkName = "pdf(myFloat x0, Parameterization pm)"
             landmarkType = "9">
             <Locations>
@@ -1445,11 +1445,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_cdf.h"
-            timestampString = "533506031.983431"
+            timestampString = "537512254.447026"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "cdf(myFloat x0, int lower_tail, Parameterization pm)"
             landmarkType = "9">
          </BreakpointContent>
@@ -1461,11 +1461,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_cdf.h"
-            timestampString = "533506031.983486"
+            timestampString = "537512254.447083"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "cdf(myFloat x0, int lower_tail, Parameterization pm)"
             landmarkType = "9">
             <Locations>
@@ -1509,11 +1509,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_cdf.h"
-            timestampString = "533506031.983541"
+            timestampString = "537512254.447139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "cdf(myFloat x0, int lower_tail, Parameterization pm)"
             landmarkType = "9">
             <Locations>
@@ -1557,11 +1557,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_cdf.h"
-            timestampString = "533506031.983596"
+            timestampString = "537512254.447194"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
             landmarkName = "cdf(myFloat x0, int lower_tail, Parameterization pm)"
             landmarkType = "9">
             <Locations>
@@ -1605,11 +1605,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_ddx_pdf.h"
-            timestampString = "533506031.983649"
+            timestampString = "535094715.529722"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
             landmarkType = "9">
             <Locations>
@@ -1653,7 +1653,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_ddx_pdf.h"
-            timestampString = "533506031.983704"
+            timestampString = "535094715.529777"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "66"
@@ -1701,11 +1701,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_ddx_pdf.h"
-            timestampString = "533506031.98376"
+            timestampString = "535094715.529833"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
             landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
             landmarkType = "9">
             <Locations>
@@ -1749,7 +1749,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_ddx_pdf.h"
-            timestampString = "533506031.983814"
+            timestampString = "535094715.529889"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "57"
@@ -1797,7 +1797,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_ddx_pdf.h"
-            timestampString = "533506031.983868"
+            timestampString = "535094715.529943"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
@@ -1845,11 +1845,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/stable_distribution_base.h"
-            timestampString = "535050927.623667"
+            timestampString = "537515245.4676009"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "ga1_r(myFloat u_r)"
             landmarkType = "9">
             <Locations>
@@ -1912,6 +1912,2052 @@
                   startingLineNumber = "125"
                   endingLineNumber = "125"
                   offsetFromSymbolStart = "160">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/stable_distribution_base.h"
+            timestampString = "537515245.467689"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
+            landmarkName = "ga1_c(myFloat u_c)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/stable_distribution_cdf.h"
+            timestampString = "537515245.467783"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "cdf(myFloat x, int lower_tail, int log_p, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::cdf(double, int, int, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_cdf.h"
+                  timestampString = "535094205.664801"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "51">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::cdf(boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, int, int, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_cdf.h"
+                  timestampString = "535094205.669599"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "62">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::cdf(boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, int, int, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_cdf.h"
+                  timestampString = "535094205.674473"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;mpfr::mpreal&gt;::cdf(mpfr::mpreal, int, int, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_cdf.h"
+                  timestampString = "535094205.679317"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/stable_distribution_base.h"
+            timestampString = "537515245.4681669"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "647"
+            endingLineNumber = "647"
+            landmarkName = "set_x_m_zeta(myFloat x, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::set_x_m_zeta(double, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "535303722.357321"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "482"
+                  endingLineNumber = "482"
+                  offsetFromSymbolStart = "3072">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::set_x_m_zeta(boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "535303722.360767"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "482"
+                  endingLineNumber = "482"
+                  offsetFromSymbolStart = "4878">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::set_x_m_zeta(boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "535303722.363909"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "482"
+                  endingLineNumber = "482"
+                  offsetFromSymbolStart = "7058">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;mpfr::mpreal&gt;::set_x_m_zeta(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "535303722.367123"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "482"
+                  endingLineNumber = "482"
+                  offsetFromSymbolStart = "7621">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dump_mpreal/dump_mpreal.cpp"
+            timestampString = "537172173.333138"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
+            landmarkName = "dump(Kronrod&lt;BigFloat&gt; g_k_big, int digits, string old_file_name, double alpha_low, double alpha_high)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/adaptive_integration_impl.h"
+            timestampString = "537506531.263689"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "559"
+            endingLineNumber = "559"
+            landmarkName = "integrate(typename Subinterval&lt;myFloat&gt;::Integrand f, void* ex, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;double&gt;::integrate(void (*)(double*, int, void*), void*, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt; const&amp;, double&amp;, double&amp;, int&amp;, adaptive_integration::IntegrationController&lt;double&gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "535593943.470295"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "559"
+                  endingLineNumber = "559"
+                  offsetFromSymbolStart = "2173">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::integrate(void (*)(boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;*, int, void*), void*, std::__1::vector&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, std::__1::allocator&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt; &gt; const&amp;, boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;&amp;, boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;&amp;, int&amp;, adaptive_integration::IntegrationController&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "535593943.473629"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "559"
+                  endingLineNumber = "559"
+                  offsetFromSymbolStart = "2442">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::integrate(void (*)(boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;*, int, void*), void*, std::__1::vector&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, std::__1::allocator&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt; &gt; const&amp;, boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;&amp;, boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;&amp;, int&amp;, adaptive_integration::IntegrationController&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "535593943.476741"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "559"
+                  endingLineNumber = "559"
+                  offsetFromSymbolStart = "2886">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;mpfr::mpreal&gt;::integrate(void (*)(mpfr::mpreal*, int, void*), void*, std::__1::vector&lt;mpfr::mpreal, std::__1::allocator&lt;mpfr::mpreal&gt; &gt; const&amp;, mpfr::mpreal&amp;, mpfr::mpreal&amp;, int&amp;, adaptive_integration::IntegrationController&lt;mpfr::mpreal&gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "535593943.47998"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "559"
+                  endingLineNumber = "559"
+                  offsetFromSymbolStart = "2863">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "basic_test/basic_test.cpp"
+            timestampString = "536488001.341368"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
+            landmarkName = "stable_taleb_pdf(myFloat x, bool log_flag=false)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "double stable_taleb_pdf&lt;double&gt;(double, bool)"
+                  moduleName = "basic_test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/basic_test/basic_test.cpp"
+                  timestampString = "536296472.998614"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "221"
+                  endingLineNumber = "221"
+                  offsetFromSymbolStart = "890">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "mpfr::mpreal stable_taleb_pdf&lt;mpfr::mpreal&gt;(mpfr::mpreal, bool)"
+                  moduleName = "basic_test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/basic_test/basic_test.cpp"
+                  timestampString = "536296473.004179"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "221"
+                  endingLineNumber = "221"
+                  offsetFromSymbolStart = "3314">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; stable_taleb_pdf&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, bool)"
+                  moduleName = "basic_test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/basic_test/basic_test.cpp"
+                  timestampString = "536296473.009335"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "221"
+                  endingLineNumber = "221"
+                  offsetFromSymbolStart = "1398">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; stable_taleb_pdf&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, bool)"
+                  moduleName = "basic_test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/basic_test/basic_test.cpp"
+                  timestampString = "536296473.013416"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "221"
+                  endingLineNumber = "221"
+                  offsetFromSymbolStart = "2878">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "basic_test/basic_test.cpp"
+            timestampString = "536488001.341445"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "269"
+            endingLineNumber = "269"
+            landmarkName = "stable_taleb_pdf(myFloat x, bool log_flag=false)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "double stable_taleb_pdf&lt;double&gt;(double, bool)"
+                  moduleName = "basic_test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/basic_test/basic_test.cpp"
+                  timestampString = "536297525.497477"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "230"
+                  endingLineNumber = "230"
+                  offsetFromSymbolStart = "1285">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "mpfr::mpreal stable_taleb_pdf&lt;mpfr::mpreal&gt;(mpfr::mpreal, bool)"
+                  moduleName = "basic_test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/basic_test/basic_test.cpp"
+                  timestampString = "536297525.50145"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "230"
+                  endingLineNumber = "230"
+                  offsetFromSymbolStart = "5087">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; stable_taleb_pdf&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, bool)"
+                  moduleName = "basic_test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/basic_test/basic_test.cpp"
+                  timestampString = "536297525.505527"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "230"
+                  endingLineNumber = "230"
+                  offsetFromSymbolStart = "2083">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; stable_taleb_pdf&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, bool)"
+                  moduleName = "basic_test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/basic_test/basic_test.cpp"
+                  timestampString = "536297525.509095"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "230"
+                  endingLineNumber = "230"
+                  offsetFromSymbolStart = "4547">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "duality_check/duality_check.cpp"
+            timestampString = "537579647.343698"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "duality_check/duality_check.cpp"
+            timestampString = "537579647.343774"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "quantile()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;double&gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;double&gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537085078.76515"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
+                  offsetFromSymbolStart = "3636">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;mpfr::mpreal&gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;mpfr::mpreal&gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537085078.76869"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
+                  offsetFromSymbolStart = "10647">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537085078.771862"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
+                  offsetFromSymbolStart = "5358">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537085078.774883"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
+                  offsetFromSymbolStart = "9316">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "duality_check/duality_check.cpp"
+            timestampString = "537579647.343838"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; fmt_eps&lt;double&gt;(double)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "536732404.281314"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "2038">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; fmt_eps&lt;mpfr::mpreal&gt;(mpfr::mpreal)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "536732404.285382"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "2064">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; fmt_eps&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "536732404.289607"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "2080">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; fmt_eps&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "536732404.292586"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "2080">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "duality_check/duality_check.cpp"
+            timestampString = "537579647.343899"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "add_result(Result&lt;myFloat&gt; res)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;double&gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;double&gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537065214.279152"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "164"
+                  endingLineNumber = "164"
+                  offsetFromSymbolStart = "6213">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;mpfr::mpreal&gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;mpfr::mpreal&gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537065214.282667"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "164"
+                  endingLineNumber = "164"
+                  offsetFromSymbolStart = "11103">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537065214.28561"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "164"
+                  endingLineNumber = "164"
+                  offsetFromSymbolStart = "7395">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537065214.288761"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "164"
+                  endingLineNumber = "164"
+                  offsetFromSymbolStart = "10382">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "duality_check/duality_check.cpp"
+            timestampString = "537579647.343961"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "quantile()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;double&gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;double&gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537065218.7196"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "2805">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;mpfr::mpreal&gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;mpfr::mpreal&gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537065218.722744"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "6696">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537065218.725911"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "3642">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537065218.728935"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "6017">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "duality_check/duality_check.cpp"
+            timestampString = "537579647.344022"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "Results"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;double&gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;double&gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537086740.068856"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "3079">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;mpfr::mpreal&gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;mpfr::mpreal&gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537086740.071906"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "9192">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537086740.0748399"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "4494">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, stable_distribution::Controllers&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/duality_check/duality_check.cpp"
+                  timestampString = "537086740.078444"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "8263">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "random_test/random_test.cpp"
+            timestampString = "537167707.744926"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "main(int argc, const char * argv[])"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "parallel_duality_check/parallel_duality_check.cpp"
+            timestampString = "537248253.537812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "454"
+            endingLineNumber = "454"
+            landmarkName = "create_jobs(Kronrod&lt;BigFloat&gt; g_k_big, ostream&amp; os)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "int create_jobs&lt;double, mpfr::mpreal&gt;(gauss_kronrod::Kronrod&lt;mpfr::mpreal&gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537168447.912311"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "452"
+                  endingLineNumber = "452"
+                  offsetFromSymbolStart = "3531">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "int create_jobs&lt;mpfr::mpreal, mpfr::mpreal&gt;(gauss_kronrod::Kronrod&lt;mpfr::mpreal&gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537168447.916522"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "452"
+                  endingLineNumber = "452"
+                  offsetFromSymbolStart = "4368">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "int create_jobs&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;38u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(gauss_kronrod::Kronrod&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;38u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537168447.919842"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "452"
+                  endingLineNumber = "452"
+                  offsetFromSymbolStart = "3732">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "int create_jobs&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;38u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(gauss_kronrod::Kronrod&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;38u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537168447.922676"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "452"
+                  endingLineNumber = "452"
+                  offsetFromSymbolStart = "4201">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "parallel_duality_check/parallel_duality_check.cpp"
+            timestampString = "537248253.538208"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "408"
+            endingLineNumber = "408"
+            landmarkName = "calculate_job_outputs(int thread_id, int noext, Kronrod&lt;BigFloat&gt; g_k_big, myFloat epsabs, myFloat epsrel, int subdivisions, int verbose, vector&lt;double&gt; xs, Jobs* jobs, JobBuffer&lt;myFloat&gt;* job_buffer, int digits)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void calculate_job_outputs&lt;double, mpfr::mpreal&gt;(int, int, gauss_kronrod::Kronrod&lt;mpfr::mpreal&gt;, double, double, int, int, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, Jobs*, JobBuffer&lt;double&gt;*, int)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537169659.3616509"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "406"
+                  endingLineNumber = "406"
+                  offsetFromSymbolStart = "2012">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void calculate_job_outputs&lt;mpfr::mpreal, mpfr::mpreal&gt;(int, int, gauss_kronrod::Kronrod&lt;mpfr::mpreal&gt;, mpfr::mpreal, mpfr::mpreal, int, int, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, Jobs*, JobBuffer&lt;mpfr::mpreal&gt;*, int)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537169659.366179"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "406"
+                  endingLineNumber = "406"
+                  offsetFromSymbolStart = "2301">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void calculate_job_outputs&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;38u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(int, int, gauss_kronrod::Kronrod&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;38u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, int, int, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, Jobs*, JobBuffer&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;*, int)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537169659.370628"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "406"
+                  endingLineNumber = "406"
+                  offsetFromSymbolStart = "2246">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void calculate_job_outputs&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;38u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(int, int, gauss_kronrod::Kronrod&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;38u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, int, int, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, Jobs*, JobBuffer&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;*, int)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537169659.373579"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "406"
+                  endingLineNumber = "406"
+                  offsetFromSymbolStart = "2277">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "parallel_duality_check/parallel_duality_check.cpp"
+            timestampString = "537248253.538493"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "409"
+            endingLineNumber = "409"
+            landmarkName = "calculate_job_outputs(int thread_id, int noext, Kronrod&lt;BigFloat&gt; g_k_big, myFloat epsabs, myFloat epsrel, int subdivisions, int verbose, vector&lt;double&gt; xs, Jobs* jobs, JobBuffer&lt;myFloat&gt;* job_buffer, int digits)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void calculate_job_outputs&lt;double, mpfr::mpreal&gt;(int, int, gauss_kronrod::Kronrod&lt;mpfr::mpreal&gt;, double, double, int, int, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, Jobs*, job_buffer&lt;double&gt;*, int)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537169278.3701251"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "407"
+                  endingLineNumber = "407"
+                  offsetFromSymbolStart = "2047">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void calculate_job_outputs&lt;mpfr::mpreal, mpfr::mpreal&gt;(int, int, gauss_kronrod::Kronrod&lt;mpfr::mpreal&gt;, mpfr::mpreal, mpfr::mpreal, int, int, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, Jobs*, job_buffer&lt;mpfr::mpreal&gt;*, int)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537169278.373753"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "407"
+                  endingLineNumber = "407"
+                  offsetFromSymbolStart = "2336">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void calculate_job_outputs&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;38u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(int, int, gauss_kronrod::Kronrod&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;38u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, int, int, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, Jobs*, job_buffer&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;*, int)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537169278.377582"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "407"
+                  endingLineNumber = "407"
+                  offsetFromSymbolStart = "2281">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void calculate_job_outputs&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;38u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(int, int, gauss_kronrod::Kronrod&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;38u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, int, int, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;, Jobs*, job_buffer&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;*, int)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537169278.382161"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "407"
+                  endingLineNumber = "407"
+                  offsetFromSymbolStart = "2312">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "parallel_duality_check/parallel_duality_check.cpp"
+            timestampString = "537248253.538771"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "320"
+            endingLineNumber = "320"
+            landmarkName = "duality_check(double alpha, double beta, vector&lt;double&gt;&amp; xs, Controllers&lt;myFloat&gt; ctls, JobOutput&lt;myFloat&gt;&amp; job_output)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;double&gt;(double, double, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;&amp;, stable_distribution::Controllers&lt;double&gt;, JobOutput&lt;double&gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537168447.9316421"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "320"
+                  endingLineNumber = "320"
+                  offsetFromSymbolStart = "46">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;mpfr::mpreal&gt;(double, double, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;&amp;, stable_distribution::Controllers&lt;mpfr::mpreal&gt;, JobOutput&lt;mpfr::mpreal&gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537168447.935208"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "320"
+                  endingLineNumber = "320"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(double, double, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;&amp;, stable_distribution::Controllers&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, JobOutput&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537168447.9384741"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "320"
+                  endingLineNumber = "320"
+                  offsetFromSymbolStart = "73">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void duality_check&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(double, double, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;&amp;, stable_distribution::Controllers&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, JobOutput&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537168447.941649"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "320"
+                  endingLineNumber = "320"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "parallel_duality_check/parallel_duality_check.cpp"
+            timestampString = "537248253.539049"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "459"
+            endingLineNumber = "459"
+            landmarkName = "create_jobs(Kronrod&lt;BigFloat&gt; g_k_big, ostream&amp; os)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "int create_jobs&lt;double, mpfr::mpreal&gt;(gauss_kronrod::Kronrod&lt;mpfr::mpreal&gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537169278.391675"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "457"
+                  endingLineNumber = "457"
+                  offsetFromSymbolStart = "4197">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "int create_jobs&lt;mpfr::mpreal, mpfr::mpreal&gt;(gauss_kronrod::Kronrod&lt;mpfr::mpreal&gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537169278.39457"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "457"
+                  endingLineNumber = "457"
+                  offsetFromSymbolStart = "5034">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "int create_jobs&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;38u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(gauss_kronrod::Kronrod&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;38u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537169278.398217"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "457"
+                  endingLineNumber = "457"
+                  offsetFromSymbolStart = "4398">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "int create_jobs&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;38u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;(gauss_kronrod::Kronrod&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;38u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537169278.4015239"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "457"
+                  endingLineNumber = "457"
+                  offsetFromSymbolStart = "4867">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "parallel_duality_check/parallel_duality_check.cpp"
+            timestampString = "537248253.539323"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
+            landmarkName = "reserve_buffer()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "JobBuffer&lt;double&gt;::reserve_buffer()"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537170303.123623"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "247"
+                  endingLineNumber = "247"
+                  offsetFromSymbolStart = "19">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "JobBuffer&lt;mpfr::mpreal&gt;::reserve_buffer()"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537170303.127712"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "247"
+                  endingLineNumber = "247"
+                  offsetFromSymbolStart = "19">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "JobBuffer&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::reserve_buffer()"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537170303.131843"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "247"
+                  endingLineNumber = "247"
+                  offsetFromSymbolStart = "19">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "JobBuffer&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::reserve_buffer()"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537170303.135561"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "247"
+                  endingLineNumber = "247"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "parallel_duality_check/parallel_duality_check.cpp"
+            timestampString = "537248253.539595"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
+            landmarkName = "transfer_front(Results&lt;myFloat&gt;&amp; final_results)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "JobBuffer&lt;double&gt;::transfer_front(Results&lt;double&gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537170303.1440049"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "264"
+                  endingLineNumber = "264"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "JobBuffer&lt;mpfr::mpreal&gt;::transfer_front(Results&lt;mpfr::mpreal&gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537170303.147123"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "264"
+                  endingLineNumber = "264"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "JobBuffer&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::transfer_front(Results&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537170303.149941"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "264"
+                  endingLineNumber = "264"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "JobBuffer&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::transfer_front(Results&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;&amp;)"
+                  moduleName = "parallel_duality_check"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/parallel_duality_check/parallel_duality_check.cpp"
+                  timestampString = "537170303.153932"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "264"
+                  endingLineNumber = "264"
+                  offsetFromSymbolStart = "23">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/stable_distribution_base.h"
+            timestampString = "537515245.468534"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "501"
+            endingLineNumber = "501"
+            landmarkName = "set_x_m_zeta(myFloat x, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::set_x_m_zeta(double, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "537429467.611111"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "498"
+                  endingLineNumber = "498"
+                  offsetFromSymbolStart = "998">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::set_x_m_zeta(boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "537429467.614817"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "498"
+                  endingLineNumber = "498"
+                  offsetFromSymbolStart = "1407">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::set_x_m_zeta(boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "537429467.6182261"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "498"
+                  endingLineNumber = "498"
+                  offsetFromSymbolStart = "1945">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;mpfr::mpreal&gt;::set_x_m_zeta(mpfr::mpreal, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "537429467.62157"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "498"
+                  endingLineNumber = "498"
+                  offsetFromSymbolStart = "1939">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/stable_distribution_base.h"
+            timestampString = "537515245.468599"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "782"
+            endingLineNumber = "782"
+            landmarkName = "map_g()"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::map_g()"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "537431406.464644"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "778"
+                  endingLineNumber = "778"
+                  offsetFromSymbolStart = "6061">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::map_g()"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "537431406.467862"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "778"
+                  endingLineNumber = "778"
+                  offsetFromSymbolStart = "6917">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::map_g()"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "537431406.471161"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "778"
+                  endingLineNumber = "778"
+                  offsetFromSymbolStart = "9544">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;mpfr::mpreal&gt;::map_g()"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "537431406.474498"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "778"
+                  endingLineNumber = "778"
+                  offsetFromSymbolStart = "10382">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/stable_distribution_base.h"
+            timestampString = "537515245.46866"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::g_r_c(double) const"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "537429740.336167"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::g_r_c(boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;) const"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "537429740.3393281"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "61">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::g_r_c(boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;) const"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "537429740.342252"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "22">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;mpfr::mpreal&gt;::g_r_c(mpfr::mpreal) const"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_base.h"
+                  timestampString = "537429740.344929"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "22">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/stable_distribution_cdf.h"
+            timestampString = "537515245.468722"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "cdf(myFloat x, int lower_tail, int log_p, Parameterization pm)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::cdf(double, int, int, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_cdf.h"
+                  timestampString = "537515246.264637"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
+                  offsetFromSymbolStart = "1467">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::cdf(boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, int, int, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_cdf.h"
+                  timestampString = "537515246.268041"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
+                  offsetFromSymbolStart = "2222">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::cdf(boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, int, int, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_cdf.h"
+                  timestampString = "537515246.27123"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
+                  offsetFromSymbolStart = "4463">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;mpfr::mpreal&gt;::cdf(mpfr::mpreal, int, int, stable_distribution::Parameterization)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution_cdf.h"
+                  timestampString = "537515246.2743959"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
+                  offsetFromSymbolStart = "4914">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/adaptive_integration_impl.h"
+            timestampString = "537506531.264504"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "527"
+            endingLineNumber = "527"
+            landmarkName = "integrate(typename Subinterval&lt;myFloat&gt;::Integrand f, void* ex, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;double&gt;::integrate(void (*)(double*, int, void*), void*, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt; const&amp;, double&amp;, double&amp;, int&amp;, adaptive_integration::IntegrationController&lt;double&gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "537497767.9219691"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "527"
+                  endingLineNumber = "527"
+                  offsetFromSymbolStart = "344">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::integrate(void (*)(boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;*, int, void*), void*, std::__1::vector&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, std::__1::allocator&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt; &gt; const&amp;, boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;&amp;, boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;&amp;, int&amp;, adaptive_integration::IntegrationController&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "537497767.9252549"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "527"
+                  endingLineNumber = "527"
+                  offsetFromSymbolStart = "404">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::integrate(void (*)(boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;*, int, void*), void*, std::__1::vector&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, std::__1::allocator&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt; &gt; const&amp;, boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;&amp;, boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;&amp;, int&amp;, adaptive_integration::IntegrationController&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "537497767.928604"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "527"
+                  endingLineNumber = "527"
+                  offsetFromSymbolStart = "393">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;mpfr::mpreal&gt;::integrate(void (*)(mpfr::mpreal*, int, void*), void*, std::__1::vector&lt;mpfr::mpreal, std::__1::allocator&lt;mpfr::mpreal&gt; &gt; const&amp;, mpfr::mpreal&amp;, mpfr::mpreal&amp;, int&amp;, adaptive_integration::IntegrationController&lt;mpfr::mpreal&gt;::TerminationCode&amp;, int&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "537497767.931861"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "527"
+                  endingLineNumber = "527"
+                  offsetFromSymbolStart = "419">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FMStable_test/FMStable_test.cpp"
+            timestampString = "537515245.4691041"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
+            landmarkName = "main(int argc, char *argv[])"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "main"
+                  moduleName = "FMStable_test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/FMStable_test/FMStable_test.cpp"
+                  timestampString = "537511260.415588"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "302"
+                  endingLineNumber = "302"
+                  offsetFromSymbolStart = "10272">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "main"
+                  moduleName = "FMStable_test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/FMStable_test/FMStable_test.cpp"
+                  timestampString = "537511260.4187911"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "302"
+                  endingLineNumber = "302"
+                  offsetFromSymbolStart = "10692">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FMStable_test/FMStable_test.cpp"
+            timestampString = "537515245.469407"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
+            landmarkName = "main(int argc, char *argv[])"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "main"
+                  moduleName = "FMStable_test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/FMStable_test/FMStable_test.cpp"
+                  timestampString = "537511334.976823"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "302"
+                  endingLineNumber = "302"
+                  offsetFromSymbolStart = "10272">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "main"
+                  moduleName = "FMStable_test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/FMStable_test/FMStable_test.cpp"
+                  timestampString = "537511334.980426"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "302"
+                  endingLineNumber = "302"
+                  offsetFromSymbolStart = "10692">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FMStable_test/FMStable_test.cpp"
+            timestampString = "537515245.4694771"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
+            landmarkName = "main(int argc, char *argv[])"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FMStable_test/FMStable_test.cpp"
+            timestampString = "537515245.4695441"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
+            landmarkName = "main(int argc, char *argv[])"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/stable_distribution.h"
+            timestampString = "537579647.344543"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "StandardStableDistribution(myFloat alpha, ///&lt; [in] the structural parameter of the distribution myFloat beta, ///&lt; [in] the skewness parameter of the distribution Controllers&lt;myFloat&gt; ctls, ///&lt; [in] reference to integration controller int verbose"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::~StandardStableDistribution()"
+                  moduleName = "trace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "537569802.351531"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "524"
+                  endingLineNumber = "524"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;double&gt;::~IntegrationController()"
+                  moduleName = "trace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "537569802.355816"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "524"
+                  endingLineNumber = "524"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::~StandardStableDistribution()"
+                  moduleName = "trace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "537569802.360092"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "524"
+                  endingLineNumber = "524"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;double&gt;::~IntegrationController()"
+                  moduleName = "trace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "537569802.364275"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "524"
+                  endingLineNumber = "524"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::StandardStableDistribution(double, double, stable_distribution::Controllers&lt;double&gt;, int)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "537569802.823627"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
+                  offsetFromSymbolStart = "478">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::StandardStableDistribution(boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, stable_distribution::Controllers&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, int)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "537569802.8280081"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
+                  offsetFromSymbolStart = "1240">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::StandardStableDistribution(boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, stable_distribution::Controllers&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;, int)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "537569802.83217"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
+                  offsetFromSymbolStart = "2318">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;mpfr::mpreal&gt;::StandardStableDistribution(mpfr::mpreal, mpfr::mpreal, stable_distribution::Controllers&lt;mpfr::mpreal&gt;, int)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "537569802.836484"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
+                  offsetFromSymbolStart = "2353">
                </Location>
             </Locations>
          </BreakpointContent>

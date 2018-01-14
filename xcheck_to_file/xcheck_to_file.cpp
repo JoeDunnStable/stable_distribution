@@ -222,8 +222,10 @@ ostream& operator<<(ostream& os, results r) {
   << setw(13) << right << "beta"
   << setw(13) << right << "x"
   << setw(30) << right << r.type+"_double"
+  << setw(1) << " "
   << setw(30) << right << r.type+"_mpreal"
   << setw(30) << right << r.type+"_zolotarev"
+  << setw(1) << " "
   << setw(15) << right << "absdiff"
   << setw(15) << right << "reldiff"
   << setw(15) << right << "g_theta2_error"
@@ -233,12 +235,15 @@ ostream& operator<<(ostream& os, results r) {
   << setw(5) << right << "th2m"
   << endl << endl;
   for (vector<result>::iterator presult=r.abs_data.begin(); presult < r.abs_data.end(); presult++) {
+    bool zol_better = (fabs(presult->r_zolotarev-presult->r_mpreal)<fabs(presult->r_double-presult->r_mpreal));
     os << setw(13) << setprecision(5) << fixed << presult->alpha
     << setw(13) << setprecision(5) << presult->beta
     << setw(13) << setprecision(5) << scientific << presult->x
     << setw(30) << setprecision(20) << presult->r_double
+    << setw(1) << (zol_better?" ":"*")
     << setw(30) << setprecision(20) << presult->r_mpreal
     << setw(30) << setprecision(20) << presult->r_zolotarev
+    << setw(1) << (zol_better?"*":" ")
     << setw(15) << setprecision(5) << presult->absdiff
     << setw(15) << setprecision(5) << presult->reldiff
     << setw(15) << setprecision(5) << presult->g_theta2_error
@@ -248,12 +253,12 @@ ostream& operator<<(ostream& os, results r) {
     << setw(5) << right << presult->good_theta2_mpreal << endl;
   }
   
-  os << endl << setw(129) << "Average"
+  os << endl << setw(131) << "Average"
   << setw(15) << setprecision(5) << r.abs_diff_sum/r.count
   << setw(15) << setprecision(5) << r.rel_diff_sum/r.count << endl << endl;
-  os << setw(129) << "Quantile" << endl << endl;
+  os << setw(131) << "Quantile" << endl << endl;
   for (int i =0; i<results::probs.size(); ++i)
-    os << setw(128) << fixed << setprecision(0) << results::probs.at(i)*100 << "%"
+    os << setw(130) << fixed << setprecision(0) << results::probs.at(i)*100 << "%"
     << setw(15) << " " << setw(15) << setprecision(5) << scientific<< qs.at(i) << endl;
   
   os << "Table of worst " << r.rel_data.size() << " out of " << r.count << " relative differences for " << r.type << endl << endl;
@@ -261,8 +266,10 @@ ostream& operator<<(ostream& os, results r) {
   << setw(13) << right << "beta"
   << setw(13) << right << "x"
   << setw(30) << right << r.type+"_double"
+  << setw(1) << " "
   << setw(30) << right << r.type+"_mpreal"
   << setw(30) << right << r.type+"_zolotarev"
+  << setw(1) << " "
   << setw(15) << right << "absdiff"
   << setw(15) << right << "reldiff"
   << setw(15) << right << "g_theta2_error"
@@ -272,12 +279,15 @@ ostream& operator<<(ostream& os, results r) {
   << setw(5) << right << "th2m"
   << endl << endl;
   for (vector<result>::iterator presult=r.rel_data.begin(); presult < r.rel_data.end(); presult++) {
+    bool zol_better = (fabs(presult->r_zolotarev-presult->r_mpreal)<fabs(presult->r_double-presult->r_mpreal));
     os << setw(13) << setprecision(5) << fixed << presult->alpha
     << setw(13) << setprecision(5) << presult->beta
     << setw(13) << setprecision(5) << scientific << presult->x
     << setw(30) << setprecision(20) << presult->r_double
+    << setw(1) << (zol_better?" ":"*")
     << setw(30) << setprecision(20) << presult->r_mpreal
     << setw(30) << setprecision(20) << presult->r_zolotarev
+    << setw(1) << (zol_better?"*":" ")
     << setw(15) << setprecision(5) << presult->absdiff
     << setw(15) << setprecision(5) << presult->reldiff
     << setw(15) << setprecision(5) << presult->g_theta2_error
@@ -287,12 +297,12 @@ ostream& operator<<(ostream& os, results r) {
     << setw(5) << right << presult->good_theta2_mpreal << endl;
   }
   
-  os << endl << setw(129) << "Average"
+  os << endl << setw(131) << "Average"
   << setw(15) << setprecision(5) << r.abs_diff_sum/r.count
   << setw(15) << setprecision(5) << r.rel_diff_sum/r.count << endl << endl;
-  os << setw(129)<< "Quantile" << endl << endl;
+  os << setw(131)<< "Quantile" << endl << endl;
   for (int i =0; i<results::probs.size(); ++i)
-    os << setw(128) << fixed << setprecision(0) << results::probs.at(i)*100 << "%"
+    os << setw(130) << fixed << setprecision(0) << results::probs.at(i)*100 << "%"
     << setw(15) << " " << setw(15) << setprecision(5) << scientific<< qs.at(i) << endl;
   
   return os;
@@ -318,7 +328,7 @@ int main(int argc, char *argv[]) {
   cout << "Reading from " + in_file << endl;
   ifstream in(in_file);
   
-  string out_file = "../output/xcheck_double_to mpreal.out";
+  string out_file = "../output/xcheck_double_to_mpreal.out";
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
   
@@ -422,7 +432,7 @@ int main(int argc, char *argv[]) {
   pass = pass && (r_cdf.abs_diff_sum/r_cdf.count < 1e-16) && (r_cdf.rel_diff_sum/r_cdf.count) < 1e-14;
   out << r_cdf << endl;
 
-  pass = pass && r_pdf.rel_worst < 1e-9;
+  pass = pass && r_pdf.rel_worst < 1e-10;
   pass = pass && (r_pdf.rel_diff_sum/r_pdf.count) < 1e-13;
   out << r_pdf << endl;
 

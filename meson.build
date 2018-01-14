@@ -1,5 +1,5 @@
 project('Stable Distribution', 'cpp', default_options : ['cpp_std=c++11'],
-         version : '0.9.5')
+         version : '0.9.6')
 
 #Eigen3 headers
 eigendep = dependency('eigen3', version : '>3.0', required : true)
@@ -31,3 +31,4 @@ subdir('trace')
 subdir('Zolotarev')
 subdir('trace_zolotarev')
 subdir('random_test')
+subdir('duality_check')

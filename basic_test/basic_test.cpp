@@ -21,10 +21,12 @@ using std::stringstream;
 #include <random>
 using std::mt19937;
 using std::uniform_real_distribution;
+#include <algorithm>
+using std::sort;
 #include <boost/timer/timer.hpp>
 using boost::timer::auto_cpu_timer;
 #include <boost/filesystem.hpp>
-
+#include <boost/math/special_functions/airy.hpp>
 
 #define MPREAL
 #define CPP_BIN_FLOAT
@@ -44,8 +46,10 @@ myFloat epsdiff(myFloat r1, myFloat r2) {
     return 0;
   else if (!boost::math::isfinite(r1) || !boost::math::isfinite(r2))
     return std::numeric_limits<myFloat>::infinity();
-  else
-    return fabs(r1-r2)/(max(fabs(r1), fabs(r2))*std::numeric_limits<myFloat>::epsilon());
+  else {
+    myFloat one{1};
+    return fabs(r1-r2)/(max(one, max(fabs(r1), fabs(r2)))*std::numeric_limits<myFloat>::epsilon());
+  }
 }
 
 template<typename myFloat>
@@ -165,6 +169,109 @@ int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
   return !pass;
 }
 
+template <typename myFloat>
+myFloat Ai(myFloat x) {
+  if (x < .1) {
+    const myFloat two{2}, three{3};
+    const myFloat ai_0 = 1/(pow(three,two/three)*tgamma(two/three));
+    const myFloat ai_prime_0 = -1/(pow(three, 1/three) * tgamma(1/three));
+    myFloat term1 = ai_0;
+    myFloat term2 = ai_prime_0 * x;
+    myFloat sum1 = term1;
+    myFloat sum2 = term2;
+    myFloat tol = std::numeric_limits<myFloat>::epsilon();
+    myFloat x_cubed = x*x*x;
+    for (int k = 1; fabs(term1)> tol*fabs(sum1) || fabs(term2)>tol*fabs(sum2); ++k) {
+      term1 *= x_cubed/((3*k)*(3*k-1));
+      sum1 += term1;
+      term2 *= x_cubed/((3*k+1)*(3*k));
+      sum2 += term2;
+    }
+    return sum1+sum2;
+  } else {
+    return boost::math::airy_ai(x);
+  }
+}
+
+template <>
+mpreal Ai<mpreal>(mpreal x) {
+  // Boost special function determine precision at compile time
+  // MpfrFloat precision is defined at compile time. mpreal is not.
+  MpfrFloat tmp{x.mpfr_ptr()};
+  return mpreal(Ai(tmp).backend().data());
+}
+
+template <typename myFloat>
+myFloat Ai_prime(myFloat x) {
+  if (fabs(x) < .1) {
+    const myFloat two{2}, three{3};
+    const myFloat ai_0 = 1/(pow(three,two/three)*tgamma(two/three));
+    const myFloat ai_prime_0 = -1/(pow(three, 1/three) * tgamma(1/three));
+    myFloat term1 = ai_prime_0;
+    myFloat term2 = ai_0 * x * x/2;
+    myFloat sum1 = term1;
+    myFloat sum2 = term2;
+    myFloat tol = std::numeric_limits<myFloat>::epsilon();
+    myFloat x_cubed = x*x*x;
+    for (int k = 1; fabs(term1)> tol*fabs(sum1) || fabs(term2)>tol*fabs(sum2); ++k) {
+      term1 *= x_cubed/((3*k)*(3*k-2));
+      sum1 += term1;
+      term2 *= x_cubed/((3*k+2)*(3*k));
+      sum2 += term2;
+    }
+    return sum1+sum2;
+
+  } else {
+    return boost::math::airy_ai_prime(x);
+  }
+}
+
+template <>
+mpreal Ai_prime<mpreal>(mpreal x) {
+  MpfrFloat tmp{x.mpfr_ptr()};
+  return mpreal(Ai_prime(tmp).backend().data());
+}
+
+template<typename myFloat>
+myFloat stable_taleb_pdf(myFloat x, bool log_flag=false){
+  // stable for alpha=3/2, beta=1, pm=1
+  // From Taleb Silent Risk page 50 with slight modification (x=-x)
+  const myFloat one{1}, two{2}, three{3}, four{4};
+  const myFloat denom1 = pow(three,four/three)*pow(two, two/three);
+  const myFloat factor1 = -pow(two, one/three) * pow(three , -four/three);
+  const myFloat factor2 = -pow(two, two/three) * pow(three, -two/three);
+  myFloat arg = pow(x,2)/denom1;
+  if (x < 100) {
+    myFloat res = exp(pow(x,3)/27)*(factor1 * x * Ai(arg)+ factor2 * Ai_prime(arg));
+    return log_flag ? log(res) : res;
+  } else {
+    // For x large both Ai and Ai_prime contain of factor exp(-(x^3)/27)
+    // Which underflows at the same time that the exp((x^3)/27) overflows
+    // We'll go directly to the asymptotic expansion of Ai and Ai_prime
+    myFloat airy_zeta = pow(x,3)/27;
+    myFloat pi = const_pi<myFloat>();
+    myFloat u = 1;
+    myFloat v = 1;
+    myFloat sum_Ai = 0;
+    myFloat sum_Ai_prime = 0;
+    myFloat zeta_k = 1;
+    myFloat old_term=1;
+    for (int k = 1; k<100; ++k) {
+      u = u * (6*k-5)*(6*k-3)*(6*k-1)/((2*k-1)*216*k);
+      v = u * (6*k+1)/(1-6*k);
+      zeta_k *= -1/airy_zeta;
+      myFloat term = u * zeta_k;
+      if (fabs(term) > fabs(old_term) || fabs(term) < std::numeric_limits<myFloat>::min()) break;
+      sum_Ai += term;
+      sum_Ai_prime += v * zeta_k;
+      old_term = term;
+    }
+    myFloat res = factor1 * x / (2 * sqrt(pi) * pow(arg,one/four))*sum_Ai
+                 -factor2 * pow(arg,one/four)/(2 * sqrt(pi))*sum_Ai_prime;
+    return log_flag ? log(res) : res;
+  }
+}
+
 template<typename myFloat>
 myFloat stable_levy_pdf(myFloat x, bool log_flag=false) {
   // pm=1 representation, zeta = -beta*tan(pi/4) = -1
@@ -249,6 +356,59 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
 
   }
   out << endl;
+  out << "Comparison of pdf to Taleb formula for alpha = 1.5, beta = 1, digits10 = "
+  << digits10 << endl << endl;
+  alpha = 1.5;
+  StandardStableDistribution<myFloat> stable_1_pt_5(alpha, beta, ctls, verbose);
+  Zolotarev<myFloat> zol_1_pt_5(alpha, beta, &ctls.controller, verbose);
+  out << setw(13) << right << "alpha"
+  << setw(13) << right << "beta"
+  << setw(13) << right << "x"
+  << setw(35) << right << "log(pdf_Taleb)"
+  << setw(35) << right << "log(pdf_myFloat)"
+  << setw(10) << right << "epsdiff"
+  << setw(15) << right << "abserr"
+  << setw(4) << right << "TC"
+  << setw(7) << right << "neval"
+  << setw(35) << right << "log(zol_pdf)"
+  << setw(10) << right << "epsdiff"
+  << setw(2) << right << "T"
+  << endl << endl;
+  vector<myFloat> xs2;
+  for (auto x : xs) {
+    if (x <= 1e100) {
+      xs2.push_back(-x);
+      xs2.push_back(x);
+    }
+  }
+  sort(xs2.begin(), xs2.end());
+  
+  for (auto x : xs2) {
+    myFloat r_taleb = stable_taleb_pdf<myFloat>(x, log_flag);
+    myFloat r = stable_1_pt_5.pdf(x, log_flag, S1);
+    myFloat eps = epsdiff(r, r_taleb);
+    myFloat r_zol = log(zol_1_pt_5.pdf(x, S1));
+    myFloat eps_zol = epsdiff(r_zol, r_taleb);
+    bool pass1 = !boost::math::isnan(eps) && boost::math::isfinite(eps)
+    && eps < 300;
+    
+    out << setw(13) << setprecision(5) << fixed << myFloat(alpha)
+    << setw(13) << setprecision(5) << fixed << myFloat(beta)
+    << setw(13) << setprecision(3) << scientific << myFloat(x)
+    << setw(35) << setprecision(26) << scientific << r_taleb
+    << setw(35) << setprecision(26) << scientific << r
+    << setw(10) << setprecision(1) << fixed << eps
+    << setw(15) << setprecision(5) << scientific << stable_1_pt_5.abserr
+    << setw(4) << stable_1_pt_5.termination_code
+    << setw(7) << stable_1_pt_5.neval
+    << setw(35) << setprecision(26) << scientific << r_zol
+    << setw(10) << fmt_eps(eps_zol)
+    << setw(2) << (zol_1_pt_5.result_type==asymptotic ? "A" : "C")
+    << (pass1 ? "" : " FAIL") << endl;
+    pass = pass && pass1;
+    
+  }
+  out << endl;
   return !pass;
 } //test_stable_pdf
 
@@ -312,11 +472,11 @@ int test_stable_ddx_pdf(ostream& out, Controllers<myFloat> ctls) {
   for (auto x : xs) {
     myFloat r_Levy = stable_levy_ddx_pdf<myFloat>(x);
     myFloat r = std_stable_dist.ddx_pdf(x, S1);
-    myFloat eps = epsdiff(r, r_Levy);
+    myFloat eps = epsdiff(log(fabs(r)), log(fabs(r_Levy)));
     myFloat r_zol = zol.ddx_pdf(x,S1);
-    myFloat eps_zol = epsdiff(r_zol, r_Levy);
+    myFloat eps_zol = epsdiff(log(fabs(r_zol)), log(fabs(r_Levy)));
     bool pass1 = !boost::math::isnan(eps) && boost::math::isfinite(eps)
-    && eps < 550;
+    && eps < 100;
 
     out << setw(13) << setprecision(5) << fixed << myFloat(alpha)
     << setw(13) << setprecision(5) << fixed << myFloat(beta)

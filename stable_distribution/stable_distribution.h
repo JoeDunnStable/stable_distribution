@@ -45,6 +45,13 @@ public:
 /// the types of parameterizations supported by StandardStableDistribution
 enum Parameterization {S0=0, S1=1};
   
+/// a class allowing the use of alpha-1 to initialize StandardStableDistribution
+template<typename myFloat>
+struct AlphaMinusOne {
+  myFloat alpha_minus_one;
+  AlphaMinusOne(myFloat alpha_minus_one) : alpha_minus_one(alpha_minus_one) {}
+};
+  
 /// the data and functions to calculate the standard stable distribution
 template<typename myFloat>
 class StandardStableDistribution {
@@ -52,12 +59,15 @@ public:
   static myFloat pi;                        ///< pi
   static myFloat pi2;                       ///< pi/2
   static myFloat eps;                       ///< machine epsilon
+  static myFloat xmin;                      ///< the minimum positive number
   static myFloat large_exp_arg;             ///< the largest argument for exp()
   static myFloat PosInf;                    ///< positive inifinity 
   static myFloat NegInf;                    ///< negative inifinity
   static myFloat zeta_tol;                  ///< tolerance for the use of f_zeta
+  static double threshhold_1;               ///< used to define near=abs(alpha-1) < threshhold_1 * abs(beta)
   static bool initialized;                  ///< have the static member been initialized
   myFloat alpha;                            ///< the structural parameter to stable distribution
+  myFloat alpha_minus_one;                  ///< alpha minus one.  Used near 1
   myFloat beta_input;                       ///< beta as input,  sign might be flipped in the computation 
 private:
   myFloat x_input;                          ///< the input x in the S0 parameterization, sign might be flipped in computation
@@ -74,8 +84,9 @@ private:
   myFloat x_m_zet;                          ///< x - zeta actually used 
   myFloat add_l;                            ///< adjustment parameter used when lower limit is moved to zero 
   myFloat add_r;                            ///< adjustment parameter used when upper limit is moved to zero
-  myFloat th_min;                           ///< the lower limit of integration, usually 0
-  myFloat th_max;                           ///< the limit of integration, both th_l and th_r range from th_min to th_max
+  myFloat th_span;                          ///< the length of the interval of integration
+  myFloat th_min;                           ///< the lower limit of integration
+  myFloat th_max;                           ///< the upper limit of integration
   myFloat c2;                               ///< scaling parameter for pdf 
   myFloat c_ddx;                            ///< scaling parameter for ddx_pdf
   bool use_f_zeta;                          ///< use result for zeta w/o integrating
@@ -84,11 +95,18 @@ private:
   enum dist {Cauchy=1, normal=2, fin_support=3, other=4};
   dist dist_type;                          ///< the type indicating special case 
 
-  /// types of g function 
-  enum Fun {fun_g_l=1,   ///< g uses th_l for alpha != 1 
-            fun_g_r=2,   ///< g uses th_r for alpha !=1 
-            fun_ga1_r=3, ///< g use u_r for alpha == 1
-            fun_ga1_c=4  ///< g use u_c for alpha == 1
+  /// flag used to determine which calculation to use
+  bool small_x_m_zet;
+  
+  /// types of g function
+  enum Fun {fun_g_l=1,        ///< g uses th_l for alpha != 1
+            fun_g_r=2,        ///< g uses th_r for alpha !=1
+            fun_ga1_r=3,      ///< g use u_r for alpha == 1
+            fun_g_l_c=4,      ///< g w th_l primary and th_c secondary for alpha ! 1
+            fun_g_r_c=5,      ///< g w th_r primary and th_c secondary for alpha != 1
+            fun_ga1_c=6,      ///< g use u_c for alpha == 1
+            fun_g_a_near_1_l=7, ///< g uses th_c for small x_m_zet and alpha ~ 1
+            fun_g_a_near_1_r=8  ///< g uses th_c for large x_m_zet and alpha ~ 1
            };
   Fun fun_type;                            ///< function type 
 
@@ -96,7 +114,12 @@ private:
   myFloat abs_x;                            ///< abs(x) 
   myFloat i2b;                              ///< 1 / (2*beta) 
   myFloat p2b;                              ///< pi / (2*beta) 
-  myFloat ea;                               ///< -p2b*abs_x 
+  myFloat ea;                               ///< -p2b*abs_x
+  // variables used when using th_c when alpha != 1
+  myFloat ln_g_th2;                         ///< ln of g at th2
+  myFloat cot_th2_1;                        ///< first cotan in formuala for g(th_c)
+  myFloat cot_th2_2;                        ///< second cotan in formula for g(th_c)
+  myFloat cot_th2_3;                        ///< third cotan in formula for g(th_c)
   // variables only used when alpha == 1 and abs(x) is large
   myFloat ln_g_u2;                          ///< the residual ln(g) when u==u2
   myFloat costh_u2;                         ///< cos(th) when u_r==u2
@@ -131,23 +154,59 @@ public:
                              myFloat beta,                       ///< [in] the skewness parameter of the distribution
                              Controllers<myFloat> ctls,        ///< [in] reference to integration controller
                              int verbose                        ///< [in] indicator for verbose output
-  ) : alpha(alpha), beta_input(beta), x_input(NAN),
+  ) : alpha(alpha), alpha_minus_one(alpha-1), beta_input(beta), x_input(NAN),
   x_m_zeta_input(NAN), controllers(ctls), verbose(verbose) {
     if (!initialized) initialize();
-    if (fabs(alpha-1)>100*std::numeric_limits<myFloat>::epsilon()){
-      zeta = -beta_input*tan(alpha*pi2);
-      theta0_x_gt_zeta = atan(beta_input*tan(alpha*pi2))/alpha;
+    if (fabs(alpha_minus_one)>64*std::numeric_limits<myFloat>::epsilon()){
+      if (fabs(alpha_minus_one) > threshhold_1 * fabs(beta)) {
+        zeta = -beta_input*tan(alpha*pi2);
+        theta0_x_gt_zeta = atan(beta_input*tan(alpha*pi2))/alpha;
+      } else {
+        zeta = beta_input/tan(pi2*alpha_minus_one);
+        theta0_x_gt_zeta = ((zeta<0)? 1 : -1) *
+                           (pi2 - (pi2*alpha_minus_one + atan(1/fabs(zeta)))/alpha);
+      }
       theta0_x_gt_zeta = min(pi2,max<myFloat>(-pi2,theta0_x_gt_zeta));
       cat0=1/sqrt(1+zeta*zeta);
     } else {
       zeta=0;
       this->alpha=1;
+      this->alpha_minus_one=0;
       c2=pi2*fabs(1/(2*beta_input));
       c_ddx=-c2*pi2/beta_input;
     }
 
   };
 
+  /// consturctor using AlphaMinusOne
+  StandardStableDistribution(AlphaMinusOne<myFloat> a_m_1,      ///< [in] the structural parameter minus one
+                             myFloat beta,                       ///< [in] the skewness parameter of the distribution
+                             Controllers<myFloat> ctls,        ///< [in] reference to integration controller
+                             int verbose                        ///< [in] indicator for verbose output
+  ) : alpha(a_m_1.alpha_minus_one + 1), alpha_minus_one(a_m_1.alpha_minus_one), beta_input(beta), x_input(NAN),
+  x_m_zeta_input(NAN), controllers(ctls), verbose(verbose) {
+    if (!initialized) initialize();
+    if (fabs(alpha_minus_one)> 64 * std::numeric_limits<myFloat>::min()){
+      if (fabs(alpha_minus_one) > threshhold_1 * fabs(beta)) {
+        zeta = -beta_input*tan(alpha*pi2);
+        theta0_x_gt_zeta = atan(beta_input*tan(alpha*pi2))/alpha;
+      } else {
+        zeta = beta_input/tan(pi2*alpha_minus_one);
+        theta0_x_gt_zeta = ((zeta<0)? 1 : -1) *
+        (pi2 - (pi2*alpha_minus_one + atan(1/fabs(zeta)))/alpha);
+      }
+      theta0_x_gt_zeta = min(pi2,max<myFloat>(-pi2,theta0_x_gt_zeta));
+      cat0=1/sqrt(1+zeta*zeta);
+    } else {
+      zeta=0;
+      this->alpha=1;
+      this->alpha_minus_one=0;
+      c2=pi2*fabs(1/(2*beta_input));
+      c_ddx=-c2*pi2/beta_input;
+    }
+    
+  };
+  
   /// set or reset x - zeta
   void set_x_m_zeta(myFloat x,  ///< [in] x - zeta whether positive or negative
                     Parameterization pm  ///< [in] the type of parameterization
@@ -155,21 +214,30 @@ public:
 
   /// returns the value of the integrand at th
   myFloat g(myFloat th ///< [in] the variable of integration
-          ) const{
+          ) const
+  {
     switch(fun_type){
-    case fun_g_l:
-      return g_l(th);
-    case fun_g_r:
-      return g_r(th);
-    case fun_ga1_r:
-      return ga1_r(th);
-    case fun_ga1_c:
-      return ga1_c(th);
+      case fun_g_l:
+        return g_l(th);
+      case fun_g_r:
+        return g_r(th);
+      case fun_ga1_r:
+        return ga1_r(th);
+      case fun_g_l_c:
+        return g_l_c(th);
+      case fun_g_r_c:
+        return g_r_c(th);
+      case fun_ga1_c:
+        return ga1_c(th);
+      case fun_g_a_near_1_l:
+        return g_a_near_1_l(th);
+      case fun_g_a_near_1_r:
+        return g_a_near_1_r(th);
     }
   }
 private:
   /// g when th_l is theta 0 
-  myFloat g_l(myFloat th_l ///> [in] point of integration when theta0 is moved to zero
+  myFloat g_l(myFloat th_l ///< [in] point of integration when theta0 is moved to zero
              ) const;
 
   /// g when th_r is pi/2 - th 
@@ -179,21 +247,41 @@ private:
   /// g when alpha=1 and u_r = 1-u = 1 - th/pi2 
   myFloat ga1_r(myFloat u_r ///< [in]the distance down from 1
                ) const;
+  
+  /// g when alpha!=1, th_l is primary and th_c is secondary
+  myFloat g_l_c(myFloat th_c ///< [in] the th_l-theta2
+               ) const;
     
+  /// g when alpha!=1, th_r is primary and th_c is secondary
+  myFloat g_r_c(myFloat th_c ///< [in] the th_r-theta2
+               ) const;
+  
   /// g when alpha=1 & x large with u_c = u_r - u_r_2 where g(u_r_2) = 1
   myFloat ga1_c(myFloat u_c ///< [in]the distance up from u_r_2
   ) const;
+  
+  /// g when alpha near 1 & sign(x) = sign(zeta)
+  myFloat g_a_near_1_l(myFloat th_l  ///< [in] th_l = th - theta0
+                      ) const;
+  
+  /// g when alpha near 1 & sign(x) != sign(zeta)
+  myFloat g_a_near_1_r(myFloat th_r  ///< [in] th_r = pi/2 -th
+                      )const;
   
   /// return the derivative of ln(g) wrt to th
   myFloat dlng_dth(myFloat th ///< the point of integration
                     ) {
     switch(fun_type){
       case fun_g_l:
+      case fun_g_a_near_1_l :
         return dlng_dth_l(th);
       case fun_g_r:
+      case fun_g_a_near_1_r :
         return dlng_dth_r(th);
       case fun_ga1_r:
         return dlnga1_du_r(th);
+      case fun_g_l_c:
+      case fun_g_r_c:
       case fun_ga1_c:
         return dlnga1_du_r(th-th_min);
     }
@@ -313,10 +401,10 @@ private:
   myFloat value;            ///< the target value 
   bool log_flag;           ///< interpret the value as the log of the target 
   myFloat g_min;            ///< the floor on the allowable g 
+public:
   myFloat g_max;            ///< the cap on the allowable g 
   
-public:
-  /// constructor 
+  /// constructor
   gSolve(myFloat value,              ///< [in] the value or log of the value to solve for
          StandardStableDistribution<myFloat>* std_stable_dist, ///< [in] pointer to an instance of StandardStableDistribution
          bool log_flag=false        ///< [in] interpret value as the log of g
@@ -331,7 +419,7 @@ public:
     g_=max(g_min,min(g_,g_max));
     if (std_stable_dist->verbose >=3)
       cout << "      theta = " << th
-      << ", g(theta) = " << g_ << endl;
+      << ", " << (log_flag?"ln_":"") << "g(theta) = " << (log_flag?log(g_):g_) << endl;
     if (log_flag)
       return log(g_)-value;
     else

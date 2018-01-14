@@ -144,7 +144,7 @@ myFloat StandardStableDistribution<myFloat>::pdf(myFloat x, int log_flag, Parame
         ret = integrate_pdf(log_flag);
         if (verbose) cout << "pdf:" << endl;
         myFloat error = max(c_g_theta2_error, abserr);
-        if (error < controllers.controller.epsrel * ret || (fun_type == 1) || (fun_type == 3 && x < 10)) {
+        if (error < controllers.controller.epsrel * ret || small_x_m_zet) {
           if (verbose)
             cout << "  Error is below threshhold or x is small. Using integral = " << ret << endl;
         } else {
@@ -162,7 +162,7 @@ myFloat StandardStableDistribution<myFloat>::pdf(myFloat x, int log_flag, Parame
         abserr = NAN;
         termination_code = IntegrationController<myFloat>::bad_integrand;
         last = 0;
-        if (fun_type>1){
+        if (!small_x_m_zet){
           ret = dPareto(x_m_zeta_input+zeta, alpha, beta_input, log_flag);
           if (verbose){
             cout<< "  Theta2 is bad & x is large so using dPareto = " << ret << endl;
