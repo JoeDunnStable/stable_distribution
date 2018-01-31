@@ -38,21 +38,8 @@ using mpfr::digamma;
 using mpfr::const_pi;
 using mpfr::const_euler;
 
-// the boost version of tgamma_ratio is broken for variable precision mpreal
-inline mpreal tgamma_ratio(mpreal num, mpreal denom) {
-    return tgamma(num)/tgamma(denom);
-}
-
 #include <boost/math/tools/real_cast.hpp>
 #include <boost/math/special_functions/trunc.hpp>
-namespace mpfr {
-  template <class Policy>
-  inline long long lltrunc(mpfr::mpreal const& x, const Policy& pol)
-  {
-    return boost::math::tools::real_cast<long long>(boost::math::trunc(x, pol));
-  }
-
-}
 #endif //MPREAL
 
 // These are for double
@@ -82,6 +69,52 @@ using boost::math::tgamma_ratio;
 using boost::math::binomial_coefficient;
 using boost::math::factorial;
 using boost::math::zeta;
+
+template<typename myFloat>
+inline myFloat erf_inv(myFloat p) {
+  return boost::math::erf_inv(p);
+}
+
+template<typename myFloat>
+inline myFloat erfc_inv(myFloat p) {
+  return boost::math::erfc_inv(p);
+}
+
+#ifdef MPREAL
+#include <boost/multiprecision/mpfr.hpp>
+using boost::multiprecision::mpfr_float;
+
+// the boost version of tgamma_ratio, erf_inv, erfc_inv is broken for variable precision mpreal
+
+mpreal tgamma_ratio(mpreal num, mpreal denom) {
+  mpfr_float::default_precision(static_cast<unsigned int>(mpreal::get_default_prec()*log10(2)));
+  mpfr_float num_mpfr{num.mpfr_ptr()}, denom_mpfr{denom.mpfr_ptr()};
+  return static_cast<mpreal>(tgamma_ratio(num_mpfr, denom_mpfr).backend().data());
+}
+
+mpreal erf_inv(mpreal x) {
+  mpfr_float::default_precision(static_cast<unsigned int>(mpreal::get_default_prec()*log10(2)));
+  mpfr_float x_mpfr{x.mpfr_ptr()};
+  return static_cast<mpreal>(boost::math::erf_inv(x_mpfr).backend().data());
+}
+
+mpreal erfc_inv(mpreal x) {
+  mpfr_float::default_precision(static_cast<unsigned int>(mpreal::get_default_prec()*log10(2)));
+  mpfr_float x_mpfr{x.mpfr_ptr()};
+  return static_cast<mpreal>(boost::math::erfc_inv(x_mpfr).backend().data());
+}
+
+namespace mpfr {
+inline long long lltrunc(mpfr::mpreal const& x)
+{
+  mpfr_float::default_precision(static_cast<unsigned int>(mpreal::get_default_prec()*log10(2)));
+  mpfr_float x_mpfr{x.mpfr_ptr()};
+  return boost::math::lltrunc(x_mpfr);
+}
+}
+
+
+#endif
 
 template<typename myFloat>
 myFloat pow(myFloat x, myFloat y) {
@@ -139,16 +172,6 @@ inline mpreal const_euler<mpreal>() {return const_euler();}
 #endif
 
 template<typename myFloat>
-inline myFloat erf_inv(myFloat p) {
-  return boost::math::erf_inv(p);
-}
-
-template<typename myFloat>
-inline myFloat erfc_inv(myFloat p) {
-  return boost::math::erfc_inv(p);
-}
-
-template<typename myFloat>
 void reset_prec(myFloat& x) {}
 
 #ifdef MPREAL
@@ -158,50 +181,7 @@ void reset_prec<mpreal>(mpreal& x) {
   x.set_prec(mpreal::get_default_prec());
 }
 
-using boost::math::policies::policy;
-using boost::math::policies::max_root_iterations;
-typedef policy<max_root_iterations<1000> > my_erf_inv_policy;
-
-#include <boost/math/tools/roots.hpp>
-using boost::math::tools::newton_raphson_iterate;
-
-class ErfSolve {
-  mpreal target;
-  mpreal c;
-  bool lower_tail;
-public:
-  ErfSolve(mpreal target, bool lower_tail)
-     : target(target), c(2/sqrt(const_pi<mpreal>())), lower_tail(lower_tail) {}
-  std::pair<mpreal,mpreal> operator() (mpreal x) {
-    return (lower_tail) ? std::make_pair(erf(x)-target,c * exp(-x*x))
-    :std::make_pair(erfc(x)-target, -c * exp(-x*x));
-  }
-};
-
-template<>
-inline mpreal erf_inv<mpreal> (mpreal p) {
-  ErfSolve erf_s(p, true);
-  mpreal guess = erf_inv(static_cast<double>(p));
-  mpreal min_x = 0;
-  mpreal max_x = std::numeric_limits<mpreal>::max();
-  int digits = static_cast<int>(mpreal::get_default_prec()) - 4;
-  boost::uintmax_t max_iter=100;
-  mpreal ret= newton_raphson_iterate(erf_s, guess, min_x, max_x, digits, max_iter);
-  return ret;
-}
-
-template<>
-inline mpreal erfc_inv<mpreal> (mpreal p) {
-  ErfSolve erfc_s(p, false);
-  mpreal guess = erfc_inv(static_cast<double>(p));
-  mpreal min_x = 0;
-  mpreal max_x = std::numeric_limits<mpreal>::max();
-  int digits = static_cast<int>(mpreal::get_default_prec()) - 4;
-  boost::uintmax_t max_iter=100;
-  mpreal ret = newton_raphson_iterate(erfc_s, guess, min_x, max_x, digits, max_iter);
-  return ret;
-}
-#endif // MPREAL
+#endif
 
 #include <string>
 using std::string;

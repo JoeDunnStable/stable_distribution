@@ -281,7 +281,9 @@ private:
       case fun_ga1_r:
         return dlnga1_du_r(th);
       case fun_g_l_c:
+        return dlng_dth_l(th-th_min);
       case fun_g_r_c:
+        return dlng_dth_r(th-th_min);
       case fun_ga1_c:
         return dlnga1_du_r(th-th_min);
     }

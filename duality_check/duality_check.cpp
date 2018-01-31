@@ -330,9 +330,11 @@ void duality_check(double alpha_m_1, double beta, vector<double>& xs,
     throw std::range_error("duality check parameter error");
   }
   myFloat alpha = myFloat(alpha_m_1)+1;
+  /*
   bool near = abs(alpha_m_1) < StandardStableDistribution<myFloat>::threshhold_1*abs(beta);
+   */
   myFloat alpha_prime, alpha_prime_m_1, zeta, Q, beta_star, D;
-  if (true) {
+  if (true /* near */) {
     alpha_prime_m_1 = expm1(-log1p(myFloat(alpha_m_1)));
     alpha_prime = 1 + alpha_prime_m_1;
     zeta = beta/tan(pi2*alpha_m_1);
