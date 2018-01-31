@@ -116,6 +116,7 @@ inline long long lltrunc(mpfr::mpreal const& x)
 
 #endif
 
+/*
 template<typename myFloat>
 myFloat pow(myFloat x, myFloat y) {
   return pow(x, y);
@@ -150,6 +151,8 @@ template<> MpfrFloat pow<MpfrFloat>(MpfrFloat x, MpfrFloat y) {
     return pow(x, y);
 }
 #endif
+ 
+ */
 #include <boost/math/constants/constants.hpp>
 template<typename myFloat>
 inline myFloat const_pi() {

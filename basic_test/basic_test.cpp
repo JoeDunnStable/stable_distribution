@@ -529,7 +529,7 @@ int test_stable_quantile(ostream& out, Controllers<myFloat> ctls) {
   ps.push_back(0);
   lower_tails.push_back(1);
   for (int i = -6; i<-1; ++i) {
-    ps.push_back(pow<myFloat>(10,i));
+    ps.push_back(pow(static_cast<myFloat>(10),i));
     lower_tails.push_back(1);
   }
   for (int i = 1; i<=5; ++i) {
@@ -541,7 +541,7 @@ int test_stable_quantile(ostream& out, Controllers<myFloat> ctls) {
     lower_tails.push_back(0);
   }
   for (int i = -2; i>=-6; --i) {
-    ps.push_back(pow<myFloat>(10,i));
+    ps.push_back(pow(static_cast<myFloat>(10),i));
     lower_tails.push_back(0);
   }
   ps.push_back(0);
