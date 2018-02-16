@@ -23,6 +23,34 @@ using Eigen::Dynamic;
 using std::vector;
 using std::string;
   
+template<typename myFloat> class Zolotarev;
+  
+template<typename myFloat>
+class Q_integrand {
+  Zolotarev<myFloat>& zol;
+public:
+  Q_integrand(Zolotarev<myFloat>& zol) : zol(zol) {}
+  void operator() (vector<myFloat>& u);
+};
+
+/// integrand for  use in calculating pdf for alpha=1 and small x
+template<typename myFloat>
+class q_integrand{
+  Zolotarev<myFloat>& zol;
+public:
+  q_integrand(Zolotarev<myFloat>& zol) : zol(zol) {}
+  void operator() (vector<myFloat>& u);
+};
+
+/// integrand for  use in calculating ddx_pdf for alpha=1 and small x
+template<typename myFloat>
+class ddx_q_integrand {
+  Zolotarev<myFloat>& zol;
+public:
+  ddx_q_integrand(Zolotarev<myFloat>& zol) : zol(zol) {}
+  void operator() (vector<myFloat>& u);
+};
+  
 enum ResultType {asymptotic, convergent};  ///< enum for the result
 
   /// The data and functions needed to calculated Zolotarev's series for
@@ -88,35 +116,23 @@ public:
   myFloat cdf(myFloat x0, int lower_tail, Parameterization pm=S0);
   
   /// Functor to evaluate cdf when alpha=1 and x is small
-  Integral<myFloat> cdf_alpha_1;
+  Integral<myFloat, Q_integrand<myFloat> > cdf_alpha_1;
 
   /// Functor to evaluate pdf when alpha=1 and x is small
-  Integral<myFloat> pdf_alpha_1;
+  Integral<myFloat, q_integrand<myFloat> > pdf_alpha_1;
   
   /// Functor to evaluate ddx_pdf when alpha=1 and x is small
-  Integral<myFloat> ddx_pdf_alpha_1;
+  Integral<myFloat, ddx_q_integrand<myFloat> > ddx_pdf_alpha_1;
   
 };  //Zolotarev
 
-/// integrand for use in calculating cdf for alpha=1 and small x
-template<typename myFloat>
-void Q_integrand(myFloat* u, int n, void* ex );
-
-/// integrand for  use in calculating pdf for alpha=1 and small x
-template<typename myFloat>
-void q_integrand(myFloat* u, int n, void* ex);
-  
-/// integrand for  use in calculating ddx_pdf for alpha=1 and small x
-template<typename myFloat>
-void ddx_q_integrand(myFloat* u, int n, void* ex);
-  
 }  //namespace stable_distribution
 
 #define ZOLOTAREV_TEMPLATES(EXT, T) \
 EXT template class Zolotarev<T>; \
-EXT template void Q_integrand<T>(T*, int, void*); \
-EXT template void q_integrand<T>(T*, int, void*); \
-EXT template void ddx_q_integrand<T>(T*, int, void*);
+EXT template class Q_integrand<T>; \
+EXT template class q_integrand<T>; \
+EXT template class ddx_q_integrand<T>;
 
 #ifdef LIBRARY
 #include "zolotarev_base.h"

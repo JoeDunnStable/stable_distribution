@@ -23,10 +23,27 @@ using std::mt19937;
 using std::uniform_real_distribution;
 #include <algorithm>
 using std::sort;
-#include <boost/timer/timer.hpp>
-using boost::timer::auto_cpu_timer;
+#include <chrono>
+using std::chrono::high_resolution_clock;
+using std::chrono::duration;
+
+struct auto_timer {
+  high_resolution_clock::time_point start;
+  std::ostream& os;
+  auto_timer(std::ostream& os) : start(high_resolution_clock::now()),
+                                os(os){}
+  auto_timer() : start(high_resolution_clock::now()),
+                     os(std::cout) {}
+  ~auto_timer() {
+    duration<double> elapsed = high_resolution_clock::now() - start;
+    os << "Elapsed time = " << setprecision(3) << fixed << elapsed.count() << " seconds" << endl;
+  }
+};
+
 #include <boost/filesystem.hpp>
 #include <boost/math/special_functions/airy.hpp>
+
+
 
 #define MPREAL
 #define CPP_BIN_FLOAT
@@ -89,7 +106,7 @@ myFloat stable_levy_cdf(myFloat x, bool lower_tail=true, bool log_p=false) {
 
 template<typename myFloat>
 int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
-  auto_cpu_timer timer(out);
+  auto_timer timer(out);
   int verbose = 0;
   
   bool log_p=true, lower_tail=false;
@@ -287,7 +304,7 @@ myFloat stable_levy_pdf(myFloat x, bool log_flag=false) {
 
 template<typename myFloat>
 int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
-  auto_cpu_timer timer(out);
+  auto_timer timer(out);
   myFloat alpha = .5;
   myFloat beta = 1;
   vector<myFloat> xs;
@@ -427,7 +444,7 @@ myFloat stable_levy_ddx_pdf(myFloat x) {
 
 template<typename myFloat>
 int test_stable_ddx_pdf(ostream& out, Controllers<myFloat> ctls) {
-  auto_cpu_timer timer(out);
+  auto_timer timer(out);
   myFloat alpha = .5;
   myFloat beta = 1;
   vector<myFloat> xs;
@@ -516,7 +533,7 @@ myFloat stable_levy_quantile(myFloat pp, bool lower_tail, bool log_p) {
 
 template<typename myFloat>
 int test_stable_quantile(ostream& out, Controllers<myFloat> ctls) {
-  auto_cpu_timer timer(out);
+  auto_timer timer(out);
   int verbose = 0;
   
   bool log_p=false;
@@ -601,7 +618,7 @@ void print_stable_mode_heading(ostream& os, const vector<myFloat>& betas) {
 
 template<typename myFloat>
 int test_stable_mode(ostream& out, Controllers<myFloat> ctls) {
-  auto_cpu_timer timer(out);
+  auto_timer timer(out);
   myFloat pi2 = const_pi<myFloat>()/2;
   out << endl;
   out << "Test of stable_mode" << endl << endl;
@@ -712,7 +729,7 @@ myFloat D(vector<myFloat>& data, StandardStableDistribution<myFloat>& dist) {
 template<typename myFloat>
 int test_stable_random (ostream& out, int n, myFloat alpha, myFloat beta,
                     Controllers<myFloat> ctls) {
-  auto_cpu_timer timer(out);
+  auto_timer timer(out);
   mt19937 gen(200);
   uniform_real_distribution<> dis;
   vector<myFloat> r(n);

@@ -13,6 +13,7 @@ using std::endl;
 #include "stable_distribution.h"
 #include <iomanip>
 #include <sstream>
+using std::stringstream;
 #include <limits>
 #include <fstream>
 #include <boost/filesystem.hpp>
@@ -325,8 +326,12 @@ int main(int argc, char *argv[]) {
   mpreal::set_default_prec(96);
   
   string in_file = "../output/stable_mpreal.out";
-  cout << "Reading from " + in_file << endl;
+  cout << "Reading from " << in_file << endl;
   ifstream in(in_file);
+  if (!in) {
+    cerr << "Unable to open input file." << endl;
+    return 1;
+  }
   
   string out_file = "../output/xcheck_double_to_mpreal.out";
   cout << "Writing output to " + out_file << endl;
@@ -371,13 +376,22 @@ int main(int argc, char *argv[]) {
   mpreal p_abserr_mpreal, d_abserr_mpreal, ddx_d_abserr_mpreal;
   bool good_theta2_mpreal;
   mpreal g_dd_theta2_mpreal;
+  string x_str;
   double alpha, beta, x;
   double alpha_old=-1;
   double beta_old=-10;
   
-  while (in >> alpha >> beta >> x >> p_mpreal >> d_mpreal >> ddx_d_mpreal
+  while (in >> alpha >> beta >> x_str >> p_mpreal >> d_mpreal >> ddx_d_mpreal
          >> p_abserr_mpreal >> d_abserr_mpreal >> ddx_d_abserr_mpreal
          >> good_theta2_mpreal >> g_dd_theta2_mpreal) {
+    if (x_str=="inf")
+      x = std::numeric_limits<double>::infinity();
+    else if (x_str=="-inf")
+      x = -std::numeric_limits<double>::infinity();
+    else {
+      stringstream ss(x_str);
+      ss >> x;
+    }
     if (alpha != alpha_old || beta != beta_old) {
       cout << "alpha = " << alpha << ", beta = " << beta << endl;
       if (a_cdf.ec.size()>0)

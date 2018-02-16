@@ -1,5 +1,5 @@
 project('Stable Distribution', 'cpp', default_options : ['cpp_std=c++11'],
-         version : '0.9.6')
+         version : '0.9.7')
 
 #Eigen3 headers
 eigendep = dependency('eigen3', version : '>3.0', required : true)
@@ -18,6 +18,8 @@ alldep = [eigendep, boostdep, mpfrdep, mpfrcppdep]
 
 incdir=include_directories(['stable_distribution',
                             'Zolotarev'])
+
+add_test_setup('gcc', env: 'LD_LIBRARY_PATH='+join_paths(meson.build_root(),'stable_distribution'))
 
 subdir('doc')
 subdir('stable_distribution')

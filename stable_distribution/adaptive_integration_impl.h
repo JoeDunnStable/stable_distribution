@@ -387,12 +387,13 @@ void EpsilonTable<myFloat>::update(myFloat new_result) {
 }
 
 template<typename myFloat>
-void Subinterval<myFloat>::integrate(Integrand f,
-                       void* ex,
+template<typename F>
+void Subinterval<myFloat>::integrate(F& f,
                        const int n_gauss,
                        const std::vector<myFloat>& w_gauss,
                        const std::vector<myFloat>& x_kronrod,
-                       const std::vector<myFloat>& w_kronrod)
+                       const std::vector<myFloat>& w_kronrod,
+                       std::vector<myFloat>& fv)
 {
     //           list of major variables
     //           -----------------------
@@ -428,12 +429,11 @@ void Subinterval<myFloat>::integrate(Integrand f,
     myFloat resk = 0.;
     rabs = 0.;
     myFloat fval = 0.;
-    vector<myFloat> fv(2*n_gauss+1);
 
     for (int j=0; j<2*n_gauss+1; j++) {
         fv[j]=centr+hlgth * x_kronrod[j];
     }
-    f(&fv[0], 2*n_gauss+1, ex);
+    f(fv);
     for (int j=0; j<2*n_gauss+1; j++) {
         fval = fv[j];
         resk += w_kronrod[j] * fval;
@@ -461,8 +461,8 @@ void Subinterval<myFloat>::integrate(Integrand f,
 }
 
 template<typename myFloat>
-void IntegrationController<myFloat>::integrate(typename Subinterval<myFloat>::Integrand f,
-                                 void* ex,
+template<typename F>
+void IntegrationController<myFloat>::integrate(F& f,
                                  const vector<myFloat>& points,
                                  myFloat& result,
                                  myFloat& abserr,
@@ -552,7 +552,7 @@ void IntegrationController<myFloat>::integrate(typename Subinterval<myFloat>::In
   for (i=1; i<=nint; i++) {
     subs.at(i-1).a = points.at(i-1);
     subs.at(i-1).b = points.at(i);
-    subs.at(i-1).integrate(f, ex, g_k.n_gauss, g_k.w_gauss, g_k.x_kronrod, g_k.w_kronrod);
+    subs.at(i-1).integrate(f, g_k.n_gauss, g_k.w_gauss, g_k.x_kronrod, g_k.w_kronrod, fv);
     abserr += subs.at(i-1).e;
     result += subs.at(i-1).r;
     if (subs.at(i-1).e == subs.at(i-1).defabs && subs.at(i-1).e != 0.0e+00) {
@@ -630,8 +630,8 @@ void IntegrationController<myFloat>::integrate(typename Subinterval<myFloat>::In
     subs.at(maxerr-1).b = b1;
     subs.at(last-1).a = a2;
     subs.at(last-1).b = b2;
-    subs.at(maxerr-1).integrate(f, ex, g_k.n_gauss, g_k.w_gauss, g_k.x_kronrod, g_k.w_kronrod);
-    subs.at(last-1).integrate(f, ex, g_k.n_gauss, g_k.w_gauss, g_k.x_kronrod, g_k.w_kronrod);
+    subs.at(maxerr-1).integrate(f, g_k.n_gauss, g_k.w_gauss, g_k.x_kronrod, g_k.w_kronrod, fv);
+    subs.at(last-1).integrate(f, g_k.n_gauss, g_k.w_gauss, g_k.x_kronrod, g_k.w_kronrod, fv);
     //
     //           improve previous approximations to integral
     //           and error and test for accuracy.
@@ -832,14 +832,14 @@ void IntegrationController<myFloat>::integrate(typename Subinterval<myFloat>::In
   }
 }
   
-  template<typename myFloat>
-  myFloat Integral<myFloat>::operator() () {
+  template<typename myFloat, typename F>
+  myFloat Integral<myFloat, F>::operator() () {
     
     if (verbose==4){
       cout << endl
       << "Integral " << "with controller:" << endl << controller << endl;
     }
-    controller.integrate(f, ex, points,
+    controller.integrate(f, points,
                           result, abserr, neval, termination_code, last);
     
     if (verbose>=3){

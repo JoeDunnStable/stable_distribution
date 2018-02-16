@@ -366,8 +366,12 @@ private:
   
 public:
   /// return f of g 
-  myFloat f_of_g(myFloat th ///< [in] point at which to evaluate
-                ) {return (*f)(std_stable_dist->g(th), std_stable_dist);}
+  void operator() (vector<myFloat>& th ///< [in, out] point at which to evaluate
+                ) {
+                  for (int i=0; i<th.size(); ++i)
+                  th.at(i) = (*f)(std_stable_dist->g(th.at(i)), std_stable_dist);
+                  
+                }
 
   /// construct the functor
   Integral_f_of_g(myFloat (*f)(myFloat, StandardStableDistribution<myFloat>*),  ///< [in]pointer to function to be evaluated

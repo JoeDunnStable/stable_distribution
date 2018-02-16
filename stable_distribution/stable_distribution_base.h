@@ -425,7 +425,7 @@ myFloat Integral_f_of_g<myFloat>::operator() () {
     cout << endl
          << "IntegrationController::integrate(f_of_g,..)" << endl;
   }
-  controllers->controller.integrate(stable_distribution::f_of_g, (void *) this, std_stable_dist->points,
+  controllers->controller.integrate(*this, std_stable_dist->points,
                         result, abserr, neval, termination_code, last);
   
   if (verbose>=3){

@@ -297,11 +297,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "xcheck_to_file/xcheck_to_file.cpp"
-            timestampString = "537579647.342499"
+            timestampString = "540282037.207703"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "434"
-            endingLineNumber = "434"
+            startingLineNumber = "449"
+            endingLineNumber = "449"
             landmarkName = "main(int argc, char *argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -313,12 +313,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/adaptive_integration_impl.h"
-            timestampString = "537506531.261466"
+            timestampString = "539713181.013563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "575"
             endingLineNumber = "575"
-            landmarkName = "integrate(typename Subinterval&lt;myFloat&gt;::Integrand f, void* ex, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
+            landmarkName = "integrate(F&amp; f, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
             landmarkType = "9">
             <Locations>
                <Location
@@ -361,12 +361,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/adaptive_integration_impl.h"
-            timestampString = "537506531.261682"
+            timestampString = "539713181.0136859"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "678"
             endingLineNumber = "678"
-            landmarkName = "integrate(typename Subinterval&lt;myFloat&gt;::Integrand f, void* ex, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
+            landmarkName = "integrate(F&amp; f, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
             landmarkType = "9">
             <Locations>
                <Location
@@ -425,11 +425,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/adaptive_integration.h"
-            timestampString = "533506031.982217"
+            timestampString = "539720704.08134"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "Integral"
             landmarkType = "3">
          </BreakpointContent>
@@ -441,7 +441,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/adaptive_integration_impl.h"
-            timestampString = "537506531.26178"
+            timestampString = "539713181.014264"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "836"
@@ -489,12 +489,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/adaptive_integration_impl.h"
-            timestampString = "537506531.261839"
+            timestampString = "539713181.014323"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "565"
             endingLineNumber = "565"
-            landmarkName = "integrate(typename Subinterval&lt;myFloat&gt;::Integrand f, void* ex, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
+            landmarkName = "integrate(F&amp; f, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
             landmarkType = "9">
             <Locations>
                <Location
@@ -567,12 +567,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/adaptive_integration_impl.h"
-            timestampString = "537506531.261896"
+            timestampString = "539713181.01438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "641"
             endingLineNumber = "641"
-            landmarkName = "integrate(typename Subinterval&lt;myFloat&gt;::Integrand f, void* ex, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
+            landmarkName = "integrate(F&amp; f, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
             landmarkType = "9">
             <Locations>
                <Location
@@ -693,12 +693,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zolotarev/zolotarev_base.h"
-            timestampString = "533506031.982488"
+            timestampString = "539670828.974251"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "106"
             endingLineNumber = "106"
-            landmarkName = "ddx_pdf_alpha_1(ddx_q_integrand&lt;myFloat&gt;, (void *)this, points, *cntl, verbose_integration)"
+            landmarkName = "ddx_pdf_alpha_1(ddx_q_integrand&lt;myFloat&gt;(*this), points, *cntl, verbose_integration)"
             landmarkType = "9">
             <Locations>
                <Location
@@ -1061,7 +1061,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/stable_distribution_base.h"
-            timestampString = "538799164.015841"
+            timestampString = "539670828.974538"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
@@ -1260,38 +1260,6 @@
             endingLineNumber = "265"
             landmarkName = "ddx_pdf(myFloat x0, Parameterization pm)"
             landmarkType = "9">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "stable_distribution::Zolotarev&lt;double&gt;::ddx_pdf(double, stable_distribution::Parameterization)"
-                  moduleName = "trace_zolotarev"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
-                  timestampString = "530636934.649182"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "254"
-                  endingLineNumber = "254"
-                  offsetFromSymbolStart = "10516">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "stable_distribution::Zolotarev&lt;mpfr::mpreal&gt;::ddx_pdf(mpfr::mpreal, stable_distribution::Parameterization)"
-                  moduleName = "trace_zolotarev"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev_ddx_pdf.h"
-                  timestampString = "530636934.652662"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "254"
-                  endingLineNumber = "254"
-                  offsetFromSymbolStart = "31834">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1845,7 +1813,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/stable_distribution_base.h"
-            timestampString = "538799164.0165859"
+            timestampString = "539670828.975031"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "127"
@@ -1923,7 +1891,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/stable_distribution_base.h"
-            timestampString = "538799164.016848"
+            timestampString = "539670828.975091"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "230"
@@ -2017,7 +1985,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/stable_distribution_base.h"
-            timestampString = "538799164.017115"
+            timestampString = "539670828.975178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "647"
@@ -2111,12 +2079,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/adaptive_integration_impl.h"
-            timestampString = "537506531.263689"
+            timestampString = "539713181.0149471"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "559"
             endingLineNumber = "559"
-            landmarkName = "integrate(typename Subinterval&lt;myFloat&gt;::Integrand f, void* ex, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
+            landmarkName = "integrate(F&amp; f, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
             landmarkType = "9">
             <Locations>
                <Location
@@ -2189,11 +2157,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "basic_test/basic_test.cpp"
-            timestampString = "539113669.9357719"
+            timestampString = "539982590.5655971"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
             landmarkName = "stable_taleb_pdf(myFloat x, bool log_flag=false)"
             landmarkType = "9">
             <Locations>
@@ -2267,11 +2235,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "basic_test/basic_test.cpp"
-            timestampString = "539113669.9361399"
+            timestampString = "539982590.565976"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
             landmarkName = "stable_taleb_pdf(myFloat x, bool log_flag=false)"
             landmarkType = "9">
             <Locations>
@@ -3313,7 +3281,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/stable_distribution_base.h"
-            timestampString = "538799164.017629"
+            timestampString = "539670828.975976"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "501"
@@ -3391,7 +3359,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/stable_distribution_base.h"
-            timestampString = "538799164.0178781"
+            timestampString = "539670828.9760391"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "782"
@@ -3469,7 +3437,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/stable_distribution_base.h"
-            timestampString = "538799164.018123"
+            timestampString = "539670828.976096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "92"
@@ -3625,12 +3593,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/adaptive_integration_impl.h"
-            timestampString = "537506531.264504"
+            timestampString = "539713181.015319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "527"
             endingLineNumber = "527"
-            landmarkName = "integrate(typename Subinterval&lt;myFloat&gt;::Integrand f, void* ex, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
+            landmarkName = "integrate(F&amp; f, const vector&lt;myFloat&gt;&amp; points, myFloat&amp; result, myFloat&amp; abserr, int&amp; neval, TerminationCode&amp; termination_code, int&amp; last)"
             landmarkType = "9">
             <Locations>
                <Location
@@ -3831,7 +3799,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "stable_distribution/stable_distribution.h"
-            timestampString = "537579647.344543"
+            timestampString = "539670828.9765871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "160"
@@ -3960,6 +3928,382 @@
                   offsetFromSymbolStart = "2353">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/adaptive_integration_impl.h"
+            timestampString = "539713181.015455"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "436"
+            endingLineNumber = "436"
+            landmarkName = "integrate(F&amp; f, const int n_gauss, const std::vector&lt;myFloat&gt;&amp; w_gauss, const std::vector&lt;myFloat&gt;&amp; x_kronrod, const std::vector&lt;myFloat&gt;&amp; w_kronrod)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void adaptive_integration::Subinterval&lt;double&gt;::integrate&lt;stable_distribution::Integral_f_of_g&lt;double&gt; &gt;(stable_distribution::Integral_f_of_g&lt;double&gt;&amp;, int, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt; const&amp;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt; const&amp;, std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt; const&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "539670709.137431"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "436"
+                  endingLineNumber = "436"
+                  offsetFromSymbolStart = "509">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void adaptive_integration::Subinterval&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::integrate&lt;stable_distribution::Integral_f_of_g&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt; &gt;(stable_distribution::Integral_f_of_g&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;&amp;, int, std::__1::vector&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, std::__1::allocator&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt; &gt; const&amp;, std::__1::vector&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, std::__1::allocator&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt; &gt; const&amp;, std::__1::vector&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, std::__1::allocator&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt; &gt; const&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "539670709.1413029"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "436"
+                  endingLineNumber = "436"
+                  offsetFromSymbolStart = "730">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void adaptive_integration::Subinterval&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::integrate&lt;stable_distribution::Integral_f_of_g&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt; &gt;(stable_distribution::Integral_f_of_g&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;&amp;, int, std::__1::vector&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, std::__1::allocator&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt; &gt; const&amp;, std::__1::vector&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, std::__1::allocator&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt; &gt; const&amp;, std::__1::vector&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, std::__1::allocator&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt; &gt; const&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "539670709.145623"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "436"
+                  endingLineNumber = "436"
+                  offsetFromSymbolStart = "1075">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void adaptive_integration::Subinterval&lt;mpfr::mpreal&gt;::integrate&lt;stable_distribution::Integral_f_of_g&lt;mpfr::mpreal&gt; &gt;(stable_distribution::Integral_f_of_g&lt;mpfr::mpreal&gt;&amp;, int, std::__1::vector&lt;mpfr::mpreal, std::__1::allocator&lt;mpfr::mpreal&gt; &gt; const&amp;, std::__1::vector&lt;mpfr::mpreal, std::__1::allocator&lt;mpfr::mpreal&gt; &gt; const&amp;, std::__1::vector&lt;mpfr::mpreal, std::__1::allocator&lt;mpfr::mpreal&gt; &gt; const&amp;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/adaptive_integration_impl.h"
+                  timestampString = "539670709.149984"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "436"
+                  endingLineNumber = "436"
+                  offsetFromSymbolStart = "1232">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "stable_distribution/stable_distribution.h"
+            timestampString = "539670828.976926"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "371"
+            endingLineNumber = "371"
+            landmarkName = "operator() (vector&lt;myFloat&gt;&amp; th"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::~StandardStableDistribution()"
+                  moduleName = "trace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "539669890.961368"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "530"
+                  endingLineNumber = "530"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;double&gt;::~IntegrationController()"
+                  moduleName = "trace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "539669890.964471"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "530"
+                  endingLineNumber = "530"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::StandardStableDistribution&lt;double&gt;::~StandardStableDistribution()"
+                  moduleName = "trace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "539669890.967149"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "530"
+                  endingLineNumber = "530"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "adaptive_integration::IntegrationController&lt;double&gt;::~IntegrationController()"
+                  moduleName = "trace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "539669890.969964"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "530"
+                  endingLineNumber = "530"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Integral_f_of_g&lt;double&gt;::operator()(std::__1::vector&lt;double, std::__1::allocator&lt;double&gt; &gt;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "539669890.9726501"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "371"
+                  endingLineNumber = "371"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Integral_f_of_g&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::operator()(std::__1::vector&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt;, std::__1::allocator&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::cpp_bin_float&lt;28u, (boost::multiprecision::backends::digit_base_type)10, void, int, 0, 0&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt; &gt;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "539669890.975284"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "371"
+                  endingLineNumber = "371"
+                  offsetFromSymbolStart = "33">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Integral_f_of_g&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt;::operator()(std::__1::vector&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt;, std::__1::allocator&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::mpfr_float_backend&lt;28u, (boost::multiprecision::mpfr_allocation_type)1&gt;, (boost::multiprecision::expression_template_option)0&gt; &gt; &gt;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "539669890.978223"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "371"
+                  endingLineNumber = "371"
+                  offsetFromSymbolStart = "19">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::Integral_f_of_g&lt;mpfr::mpreal&gt;::operator()(std::__1::vector&lt;mpfr::mpreal, std::__1::allocator&lt;mpfr::mpreal&gt; &gt;)"
+                  moduleName = "libstable_distribution.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/stable_distribution/stable_distribution.h"
+                  timestampString = "539669890.981199"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "371"
+                  endingLineNumber = "371"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_integral.h"
+            timestampString = "539679482.740679"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "operator() (vector&lt;myFloat&gt;&amp; u)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev_integral.h"
+            timestampString = "539679482.7407531"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "operator() (vector&lt;myFloat&gt;&amp; u)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev.h"
+            timestampString = "539676928.84128"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "ddx_q_integrand"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::ddx_q_integrand&lt;double&gt;::ddx_q_integrand(stable_distribution::Zolotarev&lt;double&gt;&amp;)"
+                  moduleName = "xcheck_to_file"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev.h"
+                  timestampString = "539679260.776814"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::ddx_q_integrand&lt;double&gt;::ddx_q_integrand(stable_distribution::Zolotarev&lt;double&gt;&amp;)"
+                  moduleName = "xcheck_to_file"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev.h"
+                  timestampString = "539679260.780984"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Zolotarev/zolotarev.h"
+            timestampString = "539676928.841655"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "q_integrand"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::q_integrand&lt;double&gt;::q_integrand(stable_distribution::Zolotarev&lt;double&gt;&amp;)"
+                  moduleName = "xcheck_to_file"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev.h"
+                  timestampString = "539679260.792466"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "stable_distribution::q_integrand&lt;double&gt;::q_integrand(stable_distribution::Zolotarev&lt;double&gt;&amp;)"
+                  moduleName = "xcheck_to_file"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jdunn/Documents/XCode/stable_distribution_v3/Zolotarev/zolotarev.h"
+                  timestampString = "539679260.796235"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "xcheck_to_file/xcheck_to_file.cpp"
+            timestampString = "540282037.209226"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "425"
+            endingLineNumber = "425"
+            landmarkName = "main(int argc, char *argv[])"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "xcheck_to_file/xcheck_to_file.cpp"
+            timestampString = "540282037.2095079"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "328"
+            endingLineNumber = "328"
+            landmarkName = "main(int argc, char *argv[])"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

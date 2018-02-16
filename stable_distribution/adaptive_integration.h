@@ -25,11 +25,6 @@ namespace adaptive_integration {
   template<typename myFloat>
   class Subinterval {
   public:
-    /// vectorizing function   f(x[1:n], ...) -> x[]  {overwriting x[]}.
-    typedef void Integrand(myFloat *x, ///< [in,out] points to evaluate and result of evaluation
-                           int n,     ///< [in] the number of points
-                           void *ex   ///< [in] pointer to the environment
-                          );
     myFloat a;              ///< the left endpoint
     myFloat b;              ///< the right endpoint
     myFloat r;              ///< the approximation to the integral of f
@@ -53,16 +48,17 @@ namespace adaptive_integration {
     ///
     /// computes i = integral of f over (a,b), with error estimate
     ///          j = integral of abs(f) over (a,b)
-    void integrate(Integrand f,                       ///< the function to be integrated
-                   void* ex,                          ///< a pointer to the data used by f
-                   const int n_gauss,                 ///< the number of Gauss nodes
-                   const vector<myFloat>& w_gauss,    ///< the n_gauss weights for the Gauss integration
-                   const vector<myFloat>& x_kronrod,  ///< the 2n_gauss+1 abscissae for the Kronrod integration.
+    template<typename F>
+    void integrate(F& f,                       ///< [in] the functor to be integrated
+                   const int n_gauss,                 ///< [in]the number of Gauss nodes
+                   const vector<myFloat>& w_gauss,    ///< [in] the n_gauss weights for the Gauss integration
+                   const vector<myFloat>& x_kronrod,  ///< [in] the 2n_gauss+1 abscissae for the Kronrod integration.
                    ///< x_kronrod(1), x_kronrod(3), ...  abscissae of the n_gauss-point
                    ///< gauss rule.
                    ///< x_kronrod(0), x_kronrod(2), ...  abscissae which are optimally
                    ///< added to the n_gauss-point gauss rule.
-                   const vector<myFloat>& w_kronrod  ///< the 2n_gauss+1 weights for the Kronrod integration
+                   const vector<myFloat>& w_kronrod,  ///< [in] the 2n_gauss+1 weights for the Kronrod integration
+                   vector<myFloat>& fv                ///< [in,out] buffer for temporary storage of function values
     );
   };
   
@@ -127,6 +123,7 @@ namespace adaptive_integration {
     Kronrod<myFloat> g_k;      ///< the number of Gauss nodes
     int limit;                 ///< the maximum number of subintervals
     int verbose;               ///< flag indicating verbose output
+    vector<myFloat> fv;         ///< buffer to temporarily hold function values
   public:
     /// constructor for integration controller.  Nodes and weights are input
     template<typename BigFloat>
@@ -137,7 +134,7 @@ namespace adaptive_integration {
                           int limit,        ///< the maximum number of subintervals
                           int verbose       ///< flag indicating verbose output
     ) : noext(noext), g_k(g_k_big), limit(limit),
-    verbose(verbose), epsabs(epsabs), epsrel(epsrel),
+    verbose(verbose), fv(2*g_k_big.n_gauss+1), epsabs(epsabs), epsrel(epsrel),
     subs(limit)
     {
       myFloat epmach = std::numeric_limits<myFloat>::epsilon();
@@ -165,8 +162,8 @@ namespace adaptive_integration {
       extrapolation_roundoff_error, divergent_integral, bad_input};
     
     /// integrate the function f over the subinterval using the adaptive integration
-    void integrate(typename Subinterval<myFloat>::Integrand f,  ///< [in] the function to integrate
-                   void* ex,                           ///< [in] pointer to the environment of the function
+    template<typename F>
+    void integrate(F& f,  ///< [in] the function to integrate
                    const vector<myFloat>& points,      ///< [in] the initial subdivsioin of the interval
                    myFloat& result,                    ///< [out] the approximation to the integral of f
                    myFloat& abserr,                    ///< [out] the estimated abs error of the approximation
@@ -189,11 +186,10 @@ namespace adaptive_integration {
   };
   
   /// A class with information needed to integrate a partiuclar Integrand
-  template<typename myFloat>
+  template<typename myFloat, typename F>
   class Integral {
   private:
-    typename Subinterval<myFloat>::Integrand* f;
-    void *ex;                ///< a pointer to an instance of
+    F f;
     const vector<myFloat>& points;      ///< the initial subdivsioin of the interval
     
     IntegrationController<myFloat>& controller;  ///< the controller to use
@@ -202,13 +198,20 @@ namespace adaptive_integration {
   public:
     
     /// construct the functor
-    Integral(typename Subinterval<myFloat>::Integrand* f, ///< pointer to the integrand
-             void* ex,                      ///< a pointer to the integrands environment
+    Integral(F& f, ///< pointer to the integrand
              const vector<myFloat>& points, ///< A reference to the initial subdivision
              IntegrationController<myFloat>& ctl, ///< [in] pointer to the integration controller
              int verbose                    ///< the level of diagnostic output
     )
-    : f(f), ex(ex), points(points), controller(ctl), verbose(verbose){}
+    : f(f), points(points), controller(ctl), verbose(verbose){}
+    
+    
+     Integral(F&& f, ///< pointer to the integrand
+             const vector<myFloat>& points, ///< A reference to the initial subdivision
+             IntegrationController<myFloat>& ctl, ///< [in] pointer to the integration controller
+             int verbose                    ///< the level of diagnostic output
+    )
+    : f(f), points(points), controller(ctl), verbose(verbose){}
     
     /// return a human readable error message
     string msg() {

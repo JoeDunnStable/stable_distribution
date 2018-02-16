@@ -17,8 +17,22 @@ using std::right;
 #include <sstream>
 using std::stringstream;
 
-#include <boost/timer/timer.hpp>
-using boost::timer::auto_cpu_timer;
+#include <chrono>
+using std::chrono::high_resolution_clock;
+using std::chrono::duration;
+
+struct auto_timer {
+  high_resolution_clock::time_point start;
+  std::ostream& os;
+  auto_timer(std::ostream& os) : start(high_resolution_clock::now()),
+  os(os){}
+  auto_timer() : start(high_resolution_clock::now()),
+  os(std::cout) {}
+  ~auto_timer() {
+    duration<double> elapsed = high_resolution_clock::now() - start;
+    os << "Elapsed time = " << setprecision(3) << fixed << elapsed.count() << " seconds" << endl;
+  }
+};
 
 #include <boost/filesystem.hpp>
 
