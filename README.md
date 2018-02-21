@@ -49,7 +49,7 @@ I used the following commands from the root directory:
 
 There are also three options available for adding a multiprecision support, 
 which are implemented by defining MPREAL, CPP_BIN_FLOAT, and/or MPFR_FLOAT. As 
-distributed MPREAL is defined.
+distributed they are all defined.
 
 The output of the tests will be in files in the output directory of the parent directory.
 
