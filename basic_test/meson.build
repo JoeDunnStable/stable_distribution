@@ -38,6 +38,9 @@ test('cdf_cpp_bin_float', basic_test, args: 'cdf_cpp_bin_float', timeout: cpp_bi
 test('pdf_cpp_bin_float', basic_test, args: 'pdf_cpp_bin_float', timeout: cpp_bin_float_timeout)
 test('ddx_pdf_cpp_bin_float', basic_test, args: 'ddx_pdf_cpp_bin_float', timeout: cpp_bin_float_timeout)
 test('quantile_cpp_bin_float', basic_test, args: 'quantile_cpp_bin_float', timeout: cpp_bin_float_timeout)
+
+cpp_bin_float_timeout = 10000
+
 test('mode_cpp_bin_float', basic_test, args: 'mode_cpp_bin_float', timeout: cpp_bin_float_timeout)
 test('random_cpp_bin_float', basic_test, args: 'random_cpp_bin_float', timeout: cpp_bin_float_timeout)
 

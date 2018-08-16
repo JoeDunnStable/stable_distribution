@@ -657,7 +657,7 @@ int test_stable_mode(ostream& out, Controllers<myFloat> ctls) {
   bool pass = true;
   for (auto alpha : alphas) {
     out << setw(20) << setprecision(14) << fixed << alpha;
-    if (tgamma(1+1/alpha) > std::numeric_limits<myFloat>::max()) {
+    if (lgamma(1+1/alpha) > log(std::numeric_limits<myFloat>::max())) {
       out << setw(30) << "alpha is too small." << endl;
       continue;
     } else {

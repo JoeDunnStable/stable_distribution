@@ -230,9 +230,9 @@ void calculate_results(int thread_id, int noext, Kronrod<BigFloat> g_k_big,
       else {
         ab = jobs->abs.front();
         jobs->abs.pop_front();
+        i = res_buf->reserve_buffer();
       }
     }
-    i = res_buf->reserve_buffer();
     result<myFloat>& res = res_buf->results.at(i);
     myFloat alpha = static_cast<myFloat>(ab.alpha);
     myFloat beta = static_cast<myFloat>(ab.beta);
