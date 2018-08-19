@@ -90,7 +90,6 @@ myFloat StandardStableDistribution<myFloat>::cdf(myFloat x, int lower_tail, int 
   myFloat ret;
   set_x_m_zeta(x, pm);
   // default values which will be reset if the integrator is used
-  c_g_theta2_error = 0;
   abserr = 0;
   neval = 0;
   termination_code = IntegrationController<myFloat>::TerminationCode::normal;

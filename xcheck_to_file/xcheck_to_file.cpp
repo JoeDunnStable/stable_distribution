@@ -23,6 +23,7 @@ using std::stringstream;
 
 using mpfr::mpreal;
 
+#include <string>
 using std::string;
 using std::istringstream;
 using std::setw;

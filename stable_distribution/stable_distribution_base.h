@@ -465,6 +465,11 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
   }
 
   if (x_m_zeta_in != x_m_zeta_input) {
+    // Default values which will be redetermined if g_map is called
+    good_theta2 = true;
+    g_dd_theta2=0;
+    c_g_theta2_error = 0;
+
     x_m_zeta_input=x_m_zeta_in;
     if (!boost::math::isfinite(x_m_zeta_in)) {
       if (verbose)
