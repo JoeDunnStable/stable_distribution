@@ -7,6 +7,27 @@
 #ifndef stable_distribution_H
 #define stable_distribution_H
 
+// Generic definitions for shared library support
+#define STABLE_DLL_IMPORT extern
+#if defined _WIN32 || defined __CYGWIN__
+#define STABLE_DLL_EXPORT __declspec(dllexport)
+#define STABLE_DLL_LOCAL
+#else
+#define STABLE_DLL_EXPORT
+#define STABLE_DLL_LOCAL
+#endif
+
+// Now we use the helper definitions above to define STABLE_API and STABLE_LOCAL.
+// STABLE_API is used for the public API symbols. It either DLL imports or DLL exports
+// STABLE_LOCAL is used for non-api symbols.
+
+#ifdef LIBRARY // defined if we are building the DLL (instead of using it)
+#define STABLE_API STABLE_DLL_EXPORT
+#else
+#define STABLE_API STABLE_DLL_IMPORT
+#endif // LIBRARY
+#define STABLE_LOCAL STABLE_DLL_LOCAL
+
 #include <string>
 #include <vector>
 #include "adaptive_integration.h"
@@ -514,30 +535,18 @@ EXT template T stable_distribution::pPareto<T>(T, T, T, bool, bool);
 #include "stable_distribution_random.h"
 #include "stable_distribution_mode.h"
 
-STABLE_TEMPLATES(,double)
+#endif
+
+STABLE_TEMPLATES(STABLE_API,double)
 #ifdef CPP_BIN_FLOAT
-STABLE_TEMPLATES(,CppBinFloat)
+STABLE_TEMPLATES(STABLE_API,CppBinFloat)
 #endif
 #ifdef MPFR_FLOAT
-STABLE_TEMPLATES(,MpfrFloat)
+STABLE_TEMPLATES(STABLE_API,MpfrFloat)
 #endif
 #ifdef MPREAL
-STABLE_TEMPLATES(,mpreal)
+STABLE_TEMPLATES(STABLE_API,mpreal)
 #endif
   
-#else
-
-STABLE_TEMPLATES(extern,double)
-#ifdef CPP_BIN_FLOAT
-STABLE_TEMPLATES(extern,CppBinFloat)
-#endif
-#ifdef MPFR_FLOAT
-STABLE_TEMPLATES(extern,MpfrFloat)
-#endif
-#ifdef MPREAL
-STABLE_TEMPLATES(extern,mpreal)
-#endif
-
-#endif
 
 #endif // ndef stable_distribution.H

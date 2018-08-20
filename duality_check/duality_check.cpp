@@ -10,6 +10,8 @@ using std::cout;
 using std::endl;
 using std::getline;
 
+#include "stable_config.h"
+
 #define MPREAL
 #define MPFR_FLOAT
 #define CPP_BIN_FLOAT
@@ -25,7 +27,6 @@ using std::fixed;
 
 #include <string>
 using std::string;
-string version{"0.9.6"};
 
 #include <fstream>
 using std::ifstream;
@@ -533,8 +534,14 @@ int main(int argc, char *argv[]) {
     return 1;
   }
   
+  string out_dir = string("../output-") + 
+	           string(PACKAGE_VERSION) + 
+		   string("-") + 
+		   string(PACKAGE_COMPILER);
+  if (!boost::filesystem::is_directory(out_dir))
+    boost::filesystem::create_directory(out_dir);
   string test_name{argv[1]};
-  string out_file_name = "../output/duality_check_" + test_name + "." + version + ".out";
+  string out_file_name = out_dir + "/duality_check_" + test_name + ".out";
   string title = "Duality Check for " + test_name ;
   
 #ifdef MPREAL

@@ -16,10 +16,21 @@ mpfrcppdep = dependency('mpfrcpp', required : true)
 
 alldep = [eigendep, boostdep, mpfrdep, mpfrcppdep]
 
-incdir=include_directories(['stable_distribution',
+stable_config = configuration_data()
+stable_config.set('PACKAGE_NAME', meson.project_name())
+stable_config.set('PACKAGE_VERSION', meson.project_version())
+stable_config.set('PACKAGE_COMPILER', meson.get_compiler('cpp').get_id())
+
+stable_config_h = configure_file(input : 'stable_config.h.in',
+				  output : 'stable_config.h',
+				  configuration : stable_config,
+				  install : false)
+
+incdir=include_directories(['.',
+                            'stable_distribution',
                             'Zolotarev'])
 
-add_test_setup('gcc', env: 'LD_LIBRARY_PATH='+join_paths(meson.build_root(),'stable_distribution'))
+add_test_setup('gcc', env: 'DYLD_LIBRARY_PATH='+join_paths(meson.build_root(),'stable_distribution'))
 
 subdir('doc')
 subdir('stable_distribution')

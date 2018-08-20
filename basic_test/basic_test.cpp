@@ -43,7 +43,7 @@ struct auto_timer {
 #include <boost/filesystem.hpp>
 #include <boost/math/special_functions/airy.hpp>
 
-
+#include "stable_config.h"
 
 #define MPREAL
 #define CPP_BIN_FLOAT
@@ -845,30 +845,42 @@ int main(int argc, const char * argv[]) {
   Controllers<MpfrFloat> ctls_mpfr_float(ctl_mpfr_float, ctl_double);
 #endif
 
+  string out_dir = string("../output-") + 
+	           string(PACKAGE_VERSION) + 
+		   string("-") + 
+		   string(PACKAGE_COMPILER);
+  if (!boost::filesystem::is_directory(out_dir))
+    boost::filesystem::create_directory(out_dir);
   bool fail = false;
   if (test_name == "cdf_double") {
-    cout << "Writing output to ../output/test_stable_cdf_double.out" << endl;
-    ofstream cdf_double("../output/test_stable_cdf_double.out");
+    string outfile = out_dir + "/test_stable_cdf_double.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream cdf_double(outfile);
     fail = test_stable_cdf<double>(cdf_double, ctls_double);
   } else if (test_name == "pdf_double") {
-    cout << "Writing output to ../output/test_stable_pdf_double.out" << endl;
-    ofstream pdf_double("../output/test_stable_pdf_double.out");
+    string outfile = out_dir + "/test_stable_pdf_double.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream pdf_double(outfile);
     fail = test_stable_pdf<double>(pdf_double, ctls_double);
   } else if (test_name == "ddx_pdf_double") {
-    cout << "Writing output to ../output/test_stable_ddx_pdf_double.out" << endl;
-    ofstream ddx_pdf_double("../output/test_stable_ddx_pdf_double.out");
+    string outfile = out_dir + "/test_stable_ddx_pdf_double.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream ddx_pdf_double(outfile);
     fail = test_stable_ddx_pdf<double>(ddx_pdf_double, ctls_double);
   } else if (test_name == "quantile_double") {
-    cout << "Writing output to ../output/test_stable_quantile_double.out" << endl;
-    ofstream quantile_double("../output/test_stable_quantile_double.out");
+    string outfile = out_dir + "/test_stable_quantile_double.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream quantile_double(outfile);
     fail = test_stable_quantile<double>(quantile_double, ctls_double);
   } else if (test_name == "mode_double") {
-    cout << "Writing output to ../output/test_stable_mode_double.out" << endl;
-    ofstream mode_double("../output/test_stable_mode_double.out");
+    string outfile = out_dir + "/test_stable_mode_double.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream mode_double(outfile);
     fail = test_stable_mode<double>(mode_double, ctls_double);
   } else if (test_name == "random_double") {
-    cout << "Writing output to ../output/test_stable_random_double.out" << endl;
-    ofstream random_double("../output/test_stable_random_double.out");
+    string outfile = out_dir + "/test_stable_random_double.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream random_double(outfile);
     fail = test_stable_random<double>(random_double, 10000, .5, .5, ctls_double);
     fail = test_stable_random<double>(random_double, 10000, 1.-1./128., .5, ctls_double) || fail;
     fail = test_stable_random<double>(random_double, 10000, 1, .5, ctls_double) || fail;
@@ -877,82 +889,100 @@ int main(int argc, const char * argv[]) {
   }
 #ifdef MPREAL
   else if (test_name == "cdf_mpreal") {
-    cout << "Writing output to ../output/test_stable_cdf_mpreal.out" << endl;
-    ofstream cdf_mpreal("../output/test_stable_cdf_mpreal.out");
+    string outfile = out_dir + "/test_stable_cdf_mpreal.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream cdf_mpreal(outfile);
     fail = test_stable_cdf<mpreal>(cdf_mpreal,  ctls_mpreal);
   } else if (test_name == "pdf_mpreal") {
-    cout << "Writing output to ../output/test_stable_pdf_mpreal.out" << endl;
-    ofstream pdf_mpreal("../output/test_stable_pdf_mpreal.out");
+    string outfile = out_dir + "/test_stable_pdf_mpreal.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream pdf_mpreal(outfile);
     fail = test_stable_pdf<mpreal>(pdf_mpreal,  ctls_mpreal);
   } else if (test_name == "ddx_pdf_mpreal") {
-    cout << "Writing output to ../output/test_stable_ddx_pdf_mpreal.out" << endl;
-    ofstream ddx_pdf_mpreal("../output/test_stable_ddx_pdf_mpreal.out");
+    string outfile = out_dir + "/test_stable_ddx_pdf_mpreal.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream ddx_pdf_mpreal(outfile);
     fail = test_stable_ddx_pdf<mpreal>(ddx_pdf_mpreal,  ctls_mpreal);
   } else if (test_name == "quantile_mpreal") {
-    cout << "Writing output to ../output/test_stable_quantile_mpreal.out" << endl;
-    ofstream quantile_mpreal("../output/test_stable_quantile_mpreal.out");
+    string outfile = out_dir + "/test_stable_quantile_mpreal.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream quantile_mpreal(outfile);
     fail = test_stable_quantile<mpreal>(quantile_mpreal, ctls_mpreal);
   } else if (test_name == "mode_mpreal") {
-    cout << "Writing output to ../output/test_stable_mode_mpreal.out" << endl;
-    ofstream mode_mpreal("../output/test_stable_mode_mpreal.out");
+    string outfile = out_dir + "/test_stable_mode_mpreal.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream mode_mpreal(outfile);
     fail = test_stable_mode<mpreal>(mode_mpreal,  ctls_mpreal);
   } else if (test_name == "random_mpreal") {
-    cout << "Writing output to ../output/test_stable_random_mpreal.out" << endl;
-    ofstream random_mpreal("../output/test_stable_random_mpreal.out");
+    string outfile = out_dir + "/test_stable_random_mpreal.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream random_mpreal(outfile);
     fail = test_stable_random<mpreal>(random_mpreal, 10000, 1.5, .5,  ctls_mpreal);
   }
 #endif //MPREAL
 #ifdef CPP_BIN_FLOAT
   else if (test_name == "cdf_cpp_bin_float") {
-    cout << "Writing output to ../output/test_stable_cdf_cpp_bin_float.out" << endl;
-    ofstream cdf_cpp_bin_float("../output/test_stable_cdf_cpp_bin_float.out");
+    string outfile = out_dir + "/test_stable_cdf_cpp_bin_float.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream cdf_cpp_bin_float(outfile);
     fail = test_stable_cdf<CppBinFloat>(cdf_cpp_bin_float,  ctls_cpp_bin_float);
   } else if (test_name == "pdf_cpp_bin_float") {
-    cout << "Writing output to ../output/test_stable_pdf_cpp_bin_float.out" << endl;
-    ofstream pdf_cpp_bin_float("../output/test_stable_pdf_cpp_bin_float.out");
+    string outfile = out_dir + "/test_stable_pdf_cpp_bin_float.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream pdf_cpp_bin_float(outfile);
     fail = test_stable_pdf<CppBinFloat>(pdf_cpp_bin_float,  ctls_cpp_bin_float);
   } else if (test_name == "ddx_pdf_cpp_bin_float") {
-    cout << "Writing output to ../output/test_stable_ddx_pdf_cpp_bin_float.out" << endl;
-    ofstream ddx_pdf_cpp_bin_float("../output/test_stable_ddx_pdf_cpp_bin_float.out");
+    string outfile = out_dir + "/test_stable_ddx_pdf_cpp_bin_float.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream ddx_pdf_cpp_bin_float(outfile);
     fail = test_stable_ddx_pdf<CppBinFloat>(ddx_pdf_cpp_bin_float,  ctls_cpp_bin_float);
   } else if (test_name == "quantile_cpp_bin_float") {
-    cout << "Writing output to ../output/test_stable_quantile_cpp_bin_float.out" << endl;
-    ofstream quantile_cpp_bin_float("../output/test_stable_quantile_cpp_bin_float.out");
+    string outfile = out_dir + "/test_stable_quantile_cpp_bin_float.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream quantile_cpp_bin_float(outfile);
     fail = test_stable_quantile<CppBinFloat>(quantile_cpp_bin_float, ctls_cpp_bin_float);
   } else if (test_name == "mode_cpp_bin_float") {
-    cout << "Writing output to ../output/test_stable_mode_cpp_bin_float.out" << endl;
-    ofstream mode_cpp_bin_float("../output/test_stable_mode_cpp_bin_float.out");
+    string outfile = out_dir + "/test_stable_mode_cpp_bin_float.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream mode_cpp_bin_float(outfile);
     fail = test_stable_mode<CppBinFloat>(mode_cpp_bin_float,  ctls_cpp_bin_float);
   } else if (test_name == "random_cpp_bin_float") {
-    cout << "Writing output to ../output/test_stable_random_cpp_bin_float.out" << endl;
-    ofstream random_cpp_bin_float("../output/test_stable_random_cpp_bin_float.out");
+    string outfile = out_dir + "/test_stable_random_cpp_bin_float.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream random_cpp_bin_float(outfile);
     fail = test_stable_random<CppBinFloat>(random_cpp_bin_float, 10000, 1.5, .5,  ctls_cpp_bin_float);
   }
 #endif //CPP_BIN_FLOAT
 #ifdef MPFR_FLOAT
   else if (test_name == "cdf_mpfr_float") {
-    cout << "Writing output to ../output/test_stable_cdf_mpfr_float.out" << endl;
-    ofstream cdf_mpfr_float("../output/test_stable_cdf_mpfr_float.out");
+    string outfile = out_dir + "/test_stable_cdf_mpfr_float.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream cdf_mpfr_float(outfile);
     fail = test_stable_cdf<MpfrFloat>(cdf_mpfr_float,  ctls_mpfr_float);
   } else if (test_name == "pdf_mpfr_float") {
-    cout << "Writing output to ../output/test_stable_pdf_mpfr_float.out" << endl;
-    ofstream pdf_mpfr_float("../output/test_stable_pdf_mpfr_float.out");
+    string outfile = out_dir + "/test_stable_pdf_mpfr_float.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream pdf_mpfr_float(outfile);
     fail = test_stable_pdf<MpfrFloat>(pdf_mpfr_float,  ctls_mpfr_float);
   } else if (test_name == "ddx_pdf_mpfr_float") {
-    cout << "Writing output to ../output/test_stable_ddx_pdf_mpfr_float.out" << endl;
-    ofstream ddx_pdf_mpfr_float("../output/test_stable_ddx_pdf_mpfr_float.out");
+    string outfile = out_dir + "/test_stable_ddx_pdf_mpfr_float.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream ddx_pdf_mpfr_float(outfile);
     fail = test_stable_ddx_pdf<MpfrFloat>(ddx_pdf_mpfr_float,  ctls_mpfr_float);
   } else if (test_name == "quantile_mpfr_float") {
-    cout << "Writing output to ../output/test_stable_quantile_mpfr_float.out" << endl;
-    ofstream quantile_mpfr_float("../output/test_stable_quantile_mpfr_float.out");
+    string outfile = out_dir + "/test_stable_quantile_mpfr_float.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream quantile_mpfr_float(outfile);
     fail = test_stable_quantile<MpfrFloat>(quantile_mpfr_float, ctls_mpfr_float);
   } else if (test_name == "mode_mpfr_float") {
-    cout << "Writing output to ../output/test_stable_mode_mpfr_float.out" << endl;
-    ofstream mode_mpfr_float("../output/test_stable_mode_mpfr_float.out");
+    string outfile = out_dir + "/test_stable_mode_mpfr_float.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream mode_mpfr_float(outfile);
     fail = test_stable_mode<MpfrFloat>(mode_mpfr_float,  ctls_mpfr_float);
   } else if (test_name == "random_mpfr_float") {
-    cout << "Writing output to ../output/test_stable_random_mpfr_float.out" << endl;
-    ofstream random_mpfr_float("../output/test_stable_random_mpfr_float.out");
+    string outfile = out_dir + "/test_stable_random_mpfr_float.out"; 
+    cout << "Writing output to " << outfile << endl;
+    ofstream random_mpfr_float(outfile);
     fail = test_stable_random<MpfrFloat>(random_mpfr_float, 10000, 1.5, .5,  ctls_mpfr_float);
   }
 #endif //MPFR_FLOAT

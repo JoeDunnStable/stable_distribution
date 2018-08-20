@@ -10,6 +10,7 @@ using mpfr::mpreal;
 using std::cerr;
 using std::cout;
 using std::endl;
+#include "stable_config.h"
 #include "stable_distribution.h"
 #include <iomanip>
 #include <sstream>
@@ -326,7 +327,14 @@ int main(int argc, char *argv[]) {
   
   mpreal::set_default_prec(96);
   
-  string in_file = "../output/stable_mpreal.out";
+  string out_dir = string("../output-") + 
+	           string(PACKAGE_VERSION) + 
+		   string("-") + 
+		   string(PACKAGE_COMPILER);
+  if (!boost::filesystem::is_directory(out_dir))
+    boost::filesystem::create_directory(out_dir);
+
+  string in_file = out_dir + "/stable_mpreal.out";
   cout << "Reading from " << in_file << endl;
   ifstream in(in_file);
   if (!in) {
@@ -334,11 +342,11 @@ int main(int argc, char *argv[]) {
     return 1;
   }
   
-  string out_file = "../output/xcheck_double_to_mpreal.out";
+  string out_file = out_dir + "/xcheck_double_to_mpreal.out";
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
   
-  string tail_out_file = "../output/tail_comp.out";
+  string tail_out_file = out_dir + "/tail_comp.out";
   cout << "Writing tail output to " + tail_out_file << endl;
   ofstream tail_out(tail_out_file);
   

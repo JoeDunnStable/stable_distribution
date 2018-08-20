@@ -5,6 +5,7 @@
 /// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
+#include "stable_config.h"
 #include "stable_distribution_fit.h"
 
 #include "stable_distribution_Vec.h"
@@ -20,6 +21,7 @@
 
 //#define BOOST_MATH_INSTRUMENT
 #include <boost/math/tools/toms748_solve.hpp>
+#include <boost/filesystem.hpp>
 
 #include "neldermeadsolver.h"
 #include "stable_distribution.h"
@@ -699,7 +701,14 @@ template<typename myFloat>
 std::vector<FitResult<myFloat> > stable_fit(const Vec& yy, Controllers<myFloat> ctls, const myFloat dbltol,
                                   const string type,const bool quick, const int verbose) {
   int n=static_cast<int>(yy.size());
-  ofstream trace("../output/stable_fit_trace.txt");
+  string out_dir = string("../output-") + 
+	           string(PACKAGE_VERSION) + 
+		   string("-") + 
+		   string(PACKAGE_COMPILER);
+  if (!boost::filesystem::is_directory(out_dir))
+    boost::filesystem::create_directory(out_dir);
+
+  ofstream trace(out_dir + "/stable_fit_trace.txt");
   
   // First McCulloch's method
   

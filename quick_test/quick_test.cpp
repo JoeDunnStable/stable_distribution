@@ -16,11 +16,14 @@ using std::endl;
 #include <chrono>
 #include <mpreal.h>
 using mpfr::mpreal;
+#include "stable_config.h"
 #include "stable_distribution_fit.h"
 using Vec = Eigen::Matrix<double, Eigen::Dynamic, 1>;
 
 //#define BOOST_MATH_INSTRUMENT
 #include <boost/math/tools/toms748_solve.hpp>
+
+#include <boost/filesystem.hpp>
 
 using std::setw;
 using std::right;
@@ -73,7 +76,14 @@ int main(int argc, char *argv[]) {
     return 1;
   }
   
-  string out_file = "../output/quick_test.out";
+  string out_dir = string("../output-") + 
+	           string(PACKAGE_VERSION) + 
+		   string("-") + 
+		   string(PACKAGE_COMPILER);
+  if (!boost::filesystem::is_directory(out_dir))
+    boost::filesystem::create_directory(out_dir);
+
+  string out_file = out_dir + "/quick_test.out";
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
   

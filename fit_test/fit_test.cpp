@@ -25,6 +25,8 @@ using std::uniform_real_distribution;
 
 #include <mpreal.h>
 using mpfr::mpreal;
+
+#include "stable_config.h"
 #include "stable_distribution_fit.h"
 using Vec = Eigen::Matrix<double, Eigen::Dynamic, 1>;
 
@@ -57,7 +59,14 @@ int main(int argc, char *argv[]) {
   if (type != "q" && type != "q_mle" && type != "mle") {
     show_usage(string(argv[0]));
   }
-  string out_file = "../output/test_stable_fit.out";
+  string out_dir = string("../output-") + 
+	           string(PACKAGE_VERSION) + 
+		   string("-") + 
+		   string(PACKAGE_COMPILER);
+  if (!boost::filesystem::is_directory(out_dir))
+    boost::filesystem::create_directory(out_dir);
+
+  string out_file = out_dir + "/test_stable_fit.out";
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
 

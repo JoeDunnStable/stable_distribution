@@ -186,14 +186,11 @@ EXT template ostream& operator<< <T>(ostream &,const FitResult<T> &);
 #ifdef LIBRARY
 
 #include "stable_distribution_fit_impl.h"
-namespace stable_distribution {
-FIT_TEMPLATES(, double)
-}
-#else
-namespace stable_distribution {
-FIT_TEMPLATES(extern, double)
-}
 #endif
+
+namespace stable_distribution {
+FIT_TEMPLATES(STABLE_API, double)
+}
 
 #undef Vec
 

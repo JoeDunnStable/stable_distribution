@@ -10,6 +10,7 @@ using mpfr::mpreal;
 using std::cerr;
 using std::cout;
 using std::endl;
+#include "stable_config.h"
 #include "stable_distribution.h"
 #include <iomanip>
 #include <sstream>
@@ -240,7 +241,14 @@ int main(int argc, char *argv[]) {
     show_usage(string(argv[0]));
     return 1;
   }
-  string out_file = "../output/FMStable_test.out";
+  string out_dir = string("../output-") + 
+	           string(PACKAGE_VERSION) + 
+		   string("-") + 
+		   string(PACKAGE_COMPILER);
+  if (!boost::filesystem::is_directory(out_dir))
+    boost::filesystem::create_directory(out_dir);
+
+  string out_file = out_dir + "/FMStable_test.out";
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
   
