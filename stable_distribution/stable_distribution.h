@@ -8,13 +8,20 @@
 #define stable_distribution_H
 
 // Generic definitions for shared library support
-#define STABLE_DLL_IMPORT extern
-#if defined _WIN32 || defined __CYGWIN__
-#define STABLE_DLL_EXPORT __declspec(dllexport)
-#define STABLE_DLL_LOCAL
+#ifdef LIBRARY
+  #define STABLE_EXT
+  #if defined _MSC_VER
+    #define STABLE_EXP __declspec(dllexport)
+  #else
+    #define STABLE_EXP __attribute__ ((visibility("default")))
+  #endif
 #else
-#define STABLE_DLL_EXPORT
-#define STABLE_DLL_LOCAL
+  #define STABLE_EXT extern
+  #if defined _MSC_VER
+    #define STABLE_EXP __declspec(dllimport)
+  #else
+    #define STABLE_EXP
+  #endif
 #endif
 
 // Now we use the helper definitions above to define STABLE_API and STABLE_LOCAL.
@@ -516,13 +523,13 @@ private:
 };
 } // namespace stable_distribution
 
-#define STABLE_TEMPLATES(EXT,T) \
-EXT template class adaptive_integration::IntegrationController<T>; \
-EXT template class stable_distribution::StandardStableDistribution<T>; \
-EXT template T stable_distribution::random_stable<T>(T, T, T, T, Parameterization); \
-EXT template T stable_distribution::C_stable_tail<T>(T, bool); \
-EXT template T stable_distribution::dPareto<T>(T, T, T, bool); \
-EXT template T stable_distribution::pPareto<T>(T, T, T, bool, bool);
+#define STABLE_TEMPLATES(EXT,EXP,T) \
+EXT template class EXP adaptive_integration::IntegrationController<T>; \
+EXT template class EXP stable_distribution::StandardStableDistribution<T>; \
+EXT template EXP T stable_distribution::random_stable<T>(T, T, T, T, Parameterization); \
+EXT template EXP T stable_distribution::C_stable_tail<T>(T, bool); \
+EXT template EXP T stable_distribution::dPareto<T>(T, T, T, bool); \
+EXT template EXP T stable_distribution::pPareto<T>(T, T, T, bool, bool);
 
 
 #ifdef LIBRARY
@@ -537,15 +544,15 @@ EXT template T stable_distribution::pPareto<T>(T, T, T, bool, bool);
 
 #endif
 
-STABLE_TEMPLATES(STABLE_API,double)
+STABLE_TEMPLATES(STABLE_EXT, STABLE_EXP ,double)
 #ifdef CPP_BIN_FLOAT
-STABLE_TEMPLATES(STABLE_API,CppBinFloat)
+STABLE_TEMPLATES(STABLE_EXT, STABLE_EXP ,CppBinFloat)
 #endif
 #ifdef MPFR_FLOAT
-STABLE_TEMPLATES(STABLE_API,MpfrFloat)
+STABLE_TEMPLATES(STABLE_EXT, STABLE_EXP ,MpfrFloat)
 #endif
 #ifdef MPREAL
-STABLE_TEMPLATES(STABLE_API,mpreal)
+STABLE_TEMPLATES(STABLE_EXT, STABLE_EXP ,mpreal)
 #endif
   
 

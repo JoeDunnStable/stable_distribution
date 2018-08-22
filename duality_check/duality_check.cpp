@@ -8,7 +8,6 @@
 using std::cerr;
 using std::cout;
 using std::endl;
-using std::getline;
 
 #include "stable_config.h"
 
@@ -27,6 +26,7 @@ using std::fixed;
 
 #include <string>
 using std::string;
+using std::getline;
 
 #include <fstream>
 using std::ifstream;
@@ -414,9 +414,9 @@ void calculate_job_outputs(int thread_id, int noext, Kronrod<BigFloat> g_k_big,
     }
     i = job_buffer->reserve_buffer();
     JobOutput<myFloat>& res = job_buffer->job_outputs.at(i);
-    cout_lock.lock();
+//    cout_lock.lock();
     duality_check(ab.alpha_m_1, ab.beta, xs, ctls, res);
-    cout_lock.unlock();
+//    cout_lock.unlock();
     job_buffer->finish_buffer(i);
   }
   free_cache<myFloat>();

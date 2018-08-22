@@ -8,7 +8,6 @@
 using std::cerr;
 using std::cout;
 using std::endl;
-using std::getline;
 
 #include "stable_config.h"
 
@@ -25,6 +24,7 @@ using std::fixed;
 
 #include <string>
 using std::string;
+using std::getline;
 
 #include <fstream>
 using std::ifstream;

@@ -1,0 +1,9 @@
+// stable_config.h
+#ifndef STABLE_CONFIG_H
+#define STABLE_CONFIG_H
+
+#define PACKAGE_NAME "@PACKAGE_NAME@"
+#define PACKAGE_VERSION "@PACKAGE_VERSION@"
+#define PACKAGE_COMPILER "@PACKAGE_COMPILER@"
+
+#endif // STABLE_CONFIG_H

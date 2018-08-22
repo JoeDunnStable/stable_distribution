@@ -22,7 +22,7 @@ src = ['adaptive_integration.h',
 
 lib_stable_distribution = shared_library('stable_distribution', 
                                          src,
-					 cpp_args : '-Wno-non-virtual-dtor',
+#					 cpp_args : '-Wno-non-virtual-dtor',
 					 soversion : meson.project_version() ,
                                          dependencies : alldep,
                                          include_directories : incdir)

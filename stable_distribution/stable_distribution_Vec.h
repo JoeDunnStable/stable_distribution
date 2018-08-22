@@ -147,17 +147,17 @@ Vec random_stable(const myFloat alpha,    ///< [in] the structural parameter of 
   
 } //namespace stable_distribution
   
-#define VEC_TEMPLATES(EXT, T) \
-EXT template Matrix<T,Dynamic,1> std_pdf(const Matrix<T,Dynamic,1>&, const T, const T, const Parameterization, const int, Controllers<T>, const int); \
-EXT template Matrix<T,Dynamic,1> pdf(const Matrix<T,Dynamic,1>&, const T, const T, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&, const int, const int, Controllers<T>, const int); \
-EXT template Matrix<T,Dynamic,1> std_cdf(const Matrix<T,Dynamic,1>&, const T, const T, const Parameterization, const int, const int, Controllers<T>, const int); \
-EXT template Matrix<T,Dynamic,1> cdf(const Matrix<T,Dynamic,1>&, const T, const T, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&, const int, const int, const int, Controllers<T>, const int); \
-EXT template Matrix<T,Dynamic,1> std_quantile(const Matrix<T,Dynamic,1>&, const T, const T, const Parameterization, const int, const int, const T, Controllers<T>, const int); \
-EXT template Matrix<T,Dynamic,1> quantile(const Matrix<T,Dynamic,1>&, const T, const T, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&, const int, const int, const int, const T, Controllers<T>, const int); \
-EXT template Matrix<T,Dynamic,1> std_ddx_pdf(const Matrix<T,Dynamic,1>&, const T, const T, const Parameterization, Controllers<T>, const int); \
-EXT template Matrix<T,Dynamic,1> ddx_pdf(const Matrix<T,Dynamic,1>&, const T, const T, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&, const int, Controllers<T>, const int); \
-EXT template Matrix<T,Dynamic,1> std_random_stable(const T, const T, const Parameterization, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&); \
-EXT template Matrix<T,Dynamic,1> random_stable(const T, const T, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&, const int, Controllers<T>, const int, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&);
+#define VEC_TEMPLATES(EXT, EXP, T) \
+EXT template EXP Matrix<T,Dynamic,1> std_pdf(const Matrix<T,Dynamic,1>&, const T, const T, const Parameterization, const int, Controllers<T>, const int); \
+EXT template EXP Matrix<T,Dynamic,1> pdf(const Matrix<T,Dynamic,1>&, const T, const T, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&, const int, const int, Controllers<T>, const int); \
+EXT template EXP Matrix<T,Dynamic,1> std_cdf(const Matrix<T,Dynamic,1>&, const T, const T, const Parameterization, const int, const int, Controllers<T>, const int); \
+EXT template EXP Matrix<T,Dynamic,1> cdf(const Matrix<T,Dynamic,1>&, const T, const T, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&, const int, const int, const int, Controllers<T>, const int); \
+EXT template EXP Matrix<T,Dynamic,1> std_quantile(const Matrix<T,Dynamic,1>&, const T, const T, const Parameterization, const int, const int, const T, Controllers<T>, const int); \
+EXT template EXP Matrix<T,Dynamic,1> quantile(const Matrix<T,Dynamic,1>&, const T, const T, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&, const int, const int, const int, const T, Controllers<T>, const int); \
+EXT template EXP Matrix<T,Dynamic,1> std_ddx_pdf(const Matrix<T,Dynamic,1>&, const T, const T, const Parameterization, Controllers<T>, const int); \
+EXT template EXP Matrix<T,Dynamic,1> ddx_pdf(const Matrix<T,Dynamic,1>&, const T, const T, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&, const int, Controllers<T>, const int); \
+EXT template EXP Matrix<T,Dynamic,1> std_random_stable(const T, const T, const Parameterization, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&); \
+EXT template EXP Matrix<T,Dynamic,1> random_stable(const T, const T, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&, const int, Controllers<T>, const int, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&);
 
 #ifdef LIBRARY
 
@@ -166,15 +166,15 @@ EXT template Matrix<T,Dynamic,1> random_stable(const T, const T, const Matrix<T,
 #endif
 
 namespace stable_distribution {
-VEC_TEMPLATES(STABLE_API,double)
+VEC_TEMPLATES(STABLE_EXT, STABLE_EXP, double)
 #ifdef CPP_BIN_FLOAT
-  VEC_TEMPLATES(STABLE_API,CppBinFloat)
+  VEC_TEMPLATES(STABLE_EXT, STABLE_EXP, CppBinFloat)
 #endif
 #ifdef MPFR_FLOAT
-  VEC_TEMPLATES(STABLE_API,MpfrFloat)
+  VEC_TEMPLATES(STABLE_EXT, STABLE_EXP, MpfrFloat)
 #endif
 #ifdef MPREAL
-  VEC_TEMPLATES(STABLE_API,mpreal)
+  VEC_TEMPLATES(STABLE_EXT, STABLE_EXP, mpreal)
 #endif
 }
 

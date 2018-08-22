@@ -1,6 +1,18 @@
 project('Stable Distribution', 'cpp', default_options : ['cpp_std=c++11'],
          version : '0.9.7')
 
+compiler=meson.get_compiler('cpp').get_id()
+
+if compiler == 'gcc' or compiler == 'clang'
+  add_global_arguments(
+      [ '-fvisibility=hidden' ,
+	       '-Wno-non-virtual-dtor' ,
+	       '-Wno-sign-compare' ,
+	       '-Wno-uninitialized'
+      ] ,
+      language : 'cpp' )
+endif
+
 #Eigen3 headers
 eigendep = dependency('eigen3', version : '>3.0', required : true)
 

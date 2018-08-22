@@ -159,7 +159,7 @@ public:
 }; // class FitResult
 
 /// place a heading on os for display of fit results
-void result_heading(ostream &os ///< reference to the ostream to use
+STABLE_EXP STABLE_EXT void result_heading(ostream &os ///< reference to the ostream to use
                    );
 
 /// return a vector of fit results for the sample points in y
@@ -174,14 +174,14 @@ std::vector<FitResult<myFloat> > stable_fit(const Vec& y,                 ///< [
 
 } // namespace stable_distribution
 
-#define FIT_TEMPLATES(EXT, T) \
-EXT template class DstableQuick<T>; \
-EXT template Matrix<T,Dynamic,1> pdf_quick(const Matrix<T,Dynamic,1>&,const T, const T, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&, const int, const int, Controllers<T>, const int); \
-EXT template T capped_pdf(const Matrix<T,Dynamic,1>&, const T, const T, const T, const T, const bool, Controllers<T>, const int); \
-EXT template Matrix<T,Dynamic,1> quantile(Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&); \
-EXT template class FitResult<T>; \
-EXT template std::vector<FitResult<T> > stable_fit(const Matrix<T,Dynamic,1>&, Controllers<T>, const T, const string, const bool, const int); \
-EXT template ostream& operator<< <T>(ostream &,const FitResult<T> &);
+#define FIT_TEMPLATES(EXT,EXP, T) \
+EXT template class EXP DstableQuick<T>; \
+EXT template EXP Matrix<T,Dynamic,1> pdf_quick(const Matrix<T,Dynamic,1>&,const T, const T, const Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&, const int, const int, Controllers<T>, const int); \
+EXT template EXP T capped_pdf(const Matrix<T,Dynamic,1>&, const T, const T, const T, const T, const bool, Controllers<T>, const int); \
+EXT template EXP Matrix<T,Dynamic,1> quantile(Matrix<T,Dynamic,1>&, const Matrix<T,Dynamic,1>&); \
+EXT template class EXP FitResult<T>; \
+EXT template EXP std::vector<FitResult<T> > stable_fit(const Matrix<T,Dynamic,1>&, Controllers<T>, const T, const string, const bool, const int); \
+EXT template EXP ostream& operator<< <T>(ostream &,const FitResult<T> &);
 
 #ifdef LIBRARY
 
@@ -189,7 +189,7 @@ EXT template ostream& operator<< <T>(ostream &,const FitResult<T> &);
 #endif
 
 namespace stable_distribution {
-FIT_TEMPLATES(STABLE_API, double)
+FIT_TEMPLATES(STABLE_EXT, STABLE_EXP, double)
 }
 
 #undef Vec
