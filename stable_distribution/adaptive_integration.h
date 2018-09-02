@@ -128,7 +128,7 @@ namespace adaptive_integration {
     /// constructor for integration controller.  Nodes and weights are input
     template<typename BigFloat>
     IntegrationController(bool noext,       ///< flag indicating no extrapolation is to used
-                          Kronrod<BigFloat> g_k_big, ///< A higher precision class of nodes & weights
+                          const Kronrod<BigFloat>& g_k_big, ///< A higher precision class of nodes & weights
                           myFloat epsabs,   ///< the target absolute error
                           myFloat epsrel,   ///< the target relative error
                           int limit,        ///< the maximum number of subintervals

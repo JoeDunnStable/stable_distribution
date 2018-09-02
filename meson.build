@@ -1,15 +1,30 @@
 project('Stable Distribution', 'cpp', default_options : ['cpp_std=c++11'],
-         version : '0.9.7')
+         version : '1.0.0')
 
 compiler=meson.get_compiler('cpp').get_id()
 
 if compiler == 'gcc' or compiler == 'clang'
   add_global_arguments(
       [ '-fvisibility=hidden' ,
+        '-fpermissive' ,
 	       '-Wno-non-virtual-dtor' ,
 	       '-Wno-sign-compare' ,
-	       '-Wno-uninitialized'
+	       '-Wno-uninitialized',
+               '-Wno-return-type' ,
+               '-Wno-parentheses'
       ] ,
+      language : 'cpp' )
+elif compiler == 'msvc'
+  add_global_arguments(
+      ['/bigobj',
+       '/wd4146',
+       '/wd4244' ,
+       '/wd4251' ,
+       '/wd4715'
+      ] ,
+      language : 'cpp' )
+  add_global_link_arguments(
+       '/STACK:16000000',
       language : 'cpp' )
 endif
 

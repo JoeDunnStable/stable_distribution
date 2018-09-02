@@ -202,7 +202,7 @@ void free_cache<mpreal>() {
 }
 
 template<typename myFloat, typename BigFloat>
-void calculate_results(int thread_id, int noext, Kronrod<BigFloat> g_k_big,
+void calculate_results(int thread_id, int noext, const Kronrod<BigFloat>& g_k_big,
                        myFloat epsabs, myFloat epsrel, int subdivisions, int verbose,
                        Jobs* jobs, result_buffer<myFloat>* res_buf, int digits) {
   reset_prec<myFloat>(digits);
@@ -269,7 +269,7 @@ void calculate_results(int thread_id, int noext, Kronrod<BigFloat> g_k_big,
 }
 
 template<typename myFloat, typename BigFloat>
-int dump(Kronrod<BigFloat> g_k_big, int digits, string old_file_name, double alpha_low, double alpha_high) {
+int dump(const Kronrod<BigFloat>& g_k_big, int digits, string old_file_name, double alpha_low, double alpha_high) {
   high_resolution_clock::time_point start = high_resolution_clock::now();
   Eigen::initParallel();
 

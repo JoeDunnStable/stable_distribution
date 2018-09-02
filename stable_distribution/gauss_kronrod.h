@@ -108,7 +108,7 @@ template<typename myFloat>
     vector<myFloat> w_kronrod; ///< the kronrod weights
     Kronrod(const int n_gauss, const int verbose=0);
     template<typename BigFloat>
-    Kronrod(Kronrod<BigFloat>& k_big)
+    Kronrod(const Kronrod<BigFloat>& k_big)
     : n_gauss(k_big.n_gauss), verbose(k_big.verbose){
       x_gauss.resize(n_gauss);
       w_gauss.resize(n_gauss);

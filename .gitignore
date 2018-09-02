@@ -1,9 +1,12 @@
 
 *~
 
+*.bak
+*.old
+
 build*/*
 
-output/*
+output*/*
 
 *.xcodeproj/*
 
