@@ -1,0 +1,10 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: gmp
+Description: GNU Multiprecision Library
+Version: 6.1.2_1
+Libs: -L${libdir} -lgmp 
+Cflags: -I${includedir}

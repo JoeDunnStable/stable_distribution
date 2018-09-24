@@ -75,10 +75,7 @@ public:
 
     const size_t DIM = x.rows();
       
-    string out_dir = string("../output-") + 
-   	             string(PACKAGE_VERSION) + 
-		     string("-") + 
-		     string(PACKAGE_COMPILER);
+    string out_dir = string(OUT_DIR);
     if (!boost::filesystem::is_directory(out_dir))
       boost::filesystem::create_directory(out_dir);
 

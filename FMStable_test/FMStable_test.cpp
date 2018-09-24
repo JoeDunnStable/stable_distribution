@@ -16,6 +16,24 @@ using std::endl;
 #include <sstream>
 #include <fstream>
 #include <limits>
+#include <chrono>
+using std::chrono::high_resolution_clock;
+using std::chrono::duration;
+
+struct auto_timer {
+  high_resolution_clock::time_point start;
+  std::ostream& os;
+  auto_timer(std::ostream& os) : start(high_resolution_clock::now()),
+  os(os){}
+  auto_timer() : start(high_resolution_clock::now()),
+  os(std::cout) {}
+  ~auto_timer() {
+    duration<double> elapsed = high_resolution_clock::now() - start;
+    os << "Elapsed time = " << std::setprecision(3) << std::fixed << elapsed.count() << " seconds" << endl;
+  }
+};
+
+
 #include <boost/filesystem.hpp>
 
 // This is the only function that we'll use from FMStable
@@ -241,16 +259,14 @@ int main(int argc, char *argv[]) {
     show_usage(string(argv[0]));
     return 1;
   }
-  string out_dir = string("../output-") + 
-	           string(PACKAGE_VERSION) + 
-		   string("-") + 
-		   string(PACKAGE_COMPILER);
+  string out_dir = string(OUT_DIR);
   if (!boost::filesystem::is_directory(out_dir))
     boost::filesystem::create_directory(out_dir);
 
   string out_file = out_dir + "/FMStable_test.out";
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
+  auto_timer timer(out);
   
   StandardStableDistribution<double>::initialize();
   
@@ -337,6 +353,7 @@ int main(int argc, char *argv[]) {
   out << endl << endl;
   out << r_cdf << endl;
   out << r_pdf << endl;
+  out << endl << (pass?"Test Passed":"Test Failed") << endl;
   
   return !pass;
 }

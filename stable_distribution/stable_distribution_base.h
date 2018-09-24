@@ -62,13 +62,13 @@ void StandardStableDistribution<myFloat>::initialize(){
 template<typename myFloat>
 myFloat StandardStableDistribution<myFloat>::g_l(myFloat th_l) const{
   // Similar to g except the input variable is th_l = th+theta0
-  if ((alpha < 1 && fabs(th_l)<4*xmin) || (alpha > 1 && fabs(th_l-th_span)<4*eps)) {
+  if ((alpha < 1 && th_l<4*xmin) || (alpha > 1 && th_l>th_span*(1-4*eps))) {
     myFloat g0 = 0;
     if ((alpha<1 && beta == 1) || (alpha > 1 && beta == -1))
       g0 = pow(cat0*pow(x_m_zet/alpha,alpha),(1/(alpha-1)))*fabs(1-alpha);
     return g0;
   }
-  else if ((alpha < 1 && fabs(th_l-th_span)<4*eps) || (alpha >1 && fabs(th_l)<4*xmin))
+  else if ((alpha < 1 && th_l > th_span*(1-4*eps)) || (alpha >1 && th_l<4*xmin))
     return PosInf;
   else {
     myFloat costh = max<myFloat>(static_cast<myFloat>(0),sin(th_l-add_l));
@@ -85,16 +85,19 @@ myFloat StandardStableDistribution<myFloat>::g_l(myFloat th_l) const{
       myFloat ln_pow2 = (log(cat0) + ln_pow1)/(alpha-1);
       pow2 = exp(ln_pow2);
     }
-    return pow2*cos_costh;
+    
+    myFloat ret = pow2*cos_costh;
+    return ret;
+    
   }
 }
 
 template<typename myFloat>
 myFloat StandardStableDistribution<myFloat>::g_r(myFloat th_r) const{
   // Similar to g except the input variable is th_r = pi/2 - th
-  if ((alpha>1 && fabs(th_r-th_span)<4*eps) || (alpha<1 && fabs(th_r)<4*xmin) )
+  if ((alpha>1 && th_r > th_span*(1-4*eps)) || (alpha<1 && th_r<4*xmin) )
     return PosInf;
-  else if ((alpha>1 && fabs(th_r)<4*xmin) || (alpha <1 && fabs(th_r-th_span)<4*eps)){
+  else if ((alpha>1 && th_r<4*xmin) || (alpha <1 && th_r > th_span*(1-4*eps))){
     myFloat g0 = 0;
     if ((alpha<1 && beta == 1) || (alpha > 1 && beta == -1))
       g0=pow(cat0*pow(x_m_zet/alpha,alpha),(1/(alpha-1)))*fabs(1-alpha);
@@ -103,7 +106,7 @@ myFloat StandardStableDistribution<myFloat>::g_r(myFloat th_r) const{
   else {
     myFloat th_l = max<myFloat>(0, th_span - th_r);
     // rounding errors cause problems when th_r is near th_span.  th_l works better.
-    if (th_l< min(th_span*1000*eps, th_span/2))
+    if (th_l< min(256*eps, th_span/2))
       return g_l(th_l);
     myFloat att = alpha*th_r+add_r;
     myFloat costh = max<myFloat>(0,sin(th_r));
@@ -116,7 +119,9 @@ myFloat StandardStableDistribution<myFloat>::g_r(myFloat th_r) const{
       myFloat ln_pow1 = alpha*(log(x_m_zet) + log(costh/sin(att)));
       pow2 = exp((log(cat0) + ln_pow1)/(alpha - 1));
     }
-    return pow2*cos_costh;
+    myFloat ret = pow2*cos_costh;
+    return ret;
+    
   }
 }
 

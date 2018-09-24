@@ -4,13 +4,14 @@
 /// \copyright 2016, 2017 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
-#include <mpreal.h>
-using mpfr::mpreal;
 #include <iostream>
 using std::cerr;
 using std::cout;
 using std::endl;
 #include "stable_config.h"
+#define MPREAL
+#define MPFR_FLOAT
+#define CPP_BIN_FLOAT
 #include "stable_distribution.h"
 #include <iomanip>
 #include <sstream>
@@ -18,6 +19,23 @@ using std::stringstream;
 #include <limits>
 #include <fstream>
 #include <boost/filesystem.hpp>
+#include <chrono>
+using std::chrono::high_resolution_clock;
+using std::chrono::duration;
+
+struct auto_timer {
+  high_resolution_clock::time_point start;
+  std::ostream& os;
+  auto_timer(std::ostream& os) : start(high_resolution_clock::now()),
+  os(os){}
+  auto_timer() : start(high_resolution_clock::now()),
+  os(std::cout) {}
+  ~auto_timer() {
+    duration<double> elapsed = high_resolution_clock::now() - start;
+    os << "Elapsed time = " << std::setprecision(3) << std::fixed << elapsed.count() << " seconds" << endl;
+  }
+};
+
 #define LIBRARY
 #include "zolotarev.h"
 #undef LIBRARY
@@ -226,14 +244,14 @@ ostream& operator<<(ostream& os, results r) {
   << setw(13) << right << "x"
   << setw(30) << right << r.type+"_double"
   << setw(1) << " "
-  << setw(30) << right << r.type+"_mpreal"
+  << setw(30) << right << r.type+"_file"
   << setw(30) << right << r.type+"_zolotarev"
   << setw(1) << " "
   << setw(15) << right << "absdiff"
   << setw(15) << right << "reldiff"
   << setw(15) << right << "g_theta2_error"
   << setw(15) << right << "abserr_double"
-  << setw(15) << right << "abserr_mpreal"
+  << setw(15) << right << "abserr_file"
   << setw(5) << right << "th2d"
   << setw(5) << right << "th2m"
   << endl << endl;
@@ -270,14 +288,14 @@ ostream& operator<<(ostream& os, results r) {
   << setw(13) << right << "x"
   << setw(30) << right << r.type+"_double"
   << setw(1) << " "
-  << setw(30) << right << r.type+"_mpreal"
+  << setw(30) << right << r.type+"_file"
   << setw(30) << right << r.type+"_zolotarev"
   << setw(1) << " "
   << setw(15) << right << "absdiff"
   << setw(15) << right << "reldiff"
   << setw(15) << right << "g_theta2_error"
   << setw(15) << right << "abserr_double"
-  << setw(15) << right << "abserr_mpreal"
+  << setw(15) << right << "abserr_file"
   << setw(5) << right << "th2d"
   << setw(5) << right << "th2m"
   << endl << endl;
@@ -313,28 +331,47 @@ ostream& operator<<(ostream& os, results r) {
 
 static void show_usage (string name){
   boost::filesystem::path p(name);
-  cerr << "Usage: " << p.filename().string() << endl;
+  cerr << "Usage: " << p.filename().string() << "float_type" << endl;
+  cerr << "Where float_type can be double, "
+#ifdef MPREAL
+  << "mpreal, "
+#endif
+#ifdef MPFR_FLOAT
+  << "mpfr_float, "
+#endif
+#ifdef CPP_BIN_FLOAT
+  << "cpp_bin "
+#endif
+  << endl;
 }
 
 int main(int argc, char *argv[]) {
   
   // Check the number of parameters
-  if (argc != 1) {
+  if (argc != 2) {
     // Tell the user how to run the program
     show_usage(string(argv[0]));
     return 1;
   }
   
+  stringstream ss1((string(argv[1])));
+  string float_type_str; ss1 >> float_type_str;
+  if (!(float_type_str == "double"
+        || float_type_str == "mpreal"
+        || float_type_str == "mpfr_float"
+        || float_type_str == "cpp_bin_float")) {
+    cerr << "Unknown float type" << endl;
+    show_usage(string(argv[0]));
+    return 1;
+  }
+
   mpreal::set_default_prec(96);
   
-  string out_dir = string("../output-") + 
-	           string(PACKAGE_VERSION) + 
-		   string("-") + 
-		   string(PACKAGE_COMPILER);
+  string out_dir = string(OUT_DIR);
   if (!boost::filesystem::is_directory(out_dir))
     boost::filesystem::create_directory(out_dir);
 
-  string in_file = out_dir + "/stable_mpreal.out";
+  string in_file = out_dir + "/stable_" + float_type_str +".out";
   cout << "Reading from " << in_file << endl;
   ifstream in(in_file);
   if (!in) {
@@ -342,11 +379,12 @@ int main(int argc, char *argv[]) {
     return 1;
   }
   
-  string out_file = out_dir + "/xcheck_double_to_mpreal.out";
+  string out_file = out_dir + "/xcheck_double_to_" + float_type_str + ".out";
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
+  auto_timer timer(out);
   
-  string tail_out_file = out_dir + "/tail_comp.out";
+  string tail_out_file = out_dir + "/tail_comp_" + float_type_str +".out";
   cout << "Writing tail output to " + tail_out_file << endl;
   ofstream tail_out(tail_out_file);
   
@@ -462,7 +500,7 @@ int main(int argc, char *argv[]) {
   pass = pass && r_ddx_pdf.abs_worst < 1e-10 && r_ddx_pdf.rel_worst < 1e-2;
   pass = pass && (r_ddx_pdf.abs_diff_sum/r_ddx_pdf.count < 1e-15) && (r_ddx_pdf.rel_diff_sum/r_ddx_pdf.count) < 1e-7;
   out << r_ddx_pdf << endl;
-
+  out << endl << (pass?"Test Passed":"Test Failed") << endl;
   return !pass;
 }
 

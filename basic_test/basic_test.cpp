@@ -182,7 +182,7 @@ int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
     << (pass1 ? "" : " FAIL") << endl;
     pass = pass && pass1;
   }
-  out << endl;
+  out << endl << (pass?"Test Passed":"Test Failed") << endl;
   return !pass;
 }
 
@@ -425,7 +425,7 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
     pass = pass && pass1;
     
   }
-  out << endl;
+  out << endl << (pass?"Test Passed":"Test Failed") << endl;
   return !pass;
 } //test_stable_pdf
 
@@ -510,7 +510,7 @@ int test_stable_ddx_pdf(ostream& out, Controllers<myFloat> ctls) {
     << (pass1 ? "" : " FAIL") << endl;
     pass = pass && pass1;
   }
-  out << endl;
+  out << endl << (pass?"Test Passed":"Test Failed") << endl;
   return !pass;
 } //test_stable_ddx_pdf
 
@@ -602,7 +602,7 @@ int test_stable_quantile(ostream& out, Controllers<myFloat> ctls) {
     << (pass1 ? "" : " FAIL") << endl;
     pass = pass && pass1;
   }
-  out << endl;
+  out << endl << (pass?"Test Passed":"Test Failed") << endl;
   return !pass;
 }
 
@@ -707,7 +707,7 @@ int test_stable_mode(ostream& out, Controllers<myFloat> ctls) {
       out << setw(30) << setprecision(6) << scientific << pdf_at_mode.at(j++);
     out << endl;
   }
-  out << endl;
+  out << endl << (pass?"Test Passed":"Test Failed") << endl;
   return !pass;
 }
 
@@ -776,7 +776,7 @@ int test_stable_random (ostream& out, int n, myFloat alpha, myFloat beta,
   bool pass = one_minus_k > .01;
   out << "D = " << d << ", KS Probability = " << kolmogorov_asymptotic_cdf(d * sqrt(n))
       << ", 1 - K(n,d) = " << one_minus_k << (pass ? "" : " FAIL") << endl;
-  out << endl;
+  out << endl << (pass?"Test Passed":"Test Failed") << endl;
   return !pass;
 }
 
@@ -845,10 +845,7 @@ int main(int argc, const char * argv[]) {
   Controllers<MpfrFloat> ctls_mpfr_float(ctl_mpfr_float, ctl_double);
 #endif
 
-  string out_dir = string("../output-") + 
-	           string(PACKAGE_VERSION) + 
-		   string("-") + 
-		   string(PACKAGE_COMPILER);
+  string out_dir = string(OUT_DIR);
   if (!boost::filesystem::is_directory(out_dir))
     boost::filesystem::create_directory(out_dir);
   bool fail = false;

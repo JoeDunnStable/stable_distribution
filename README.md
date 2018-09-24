@@ -25,7 +25,7 @@ following to install the package.
 3. The Boost headers and libraries available at http://www.boost.org
 4. The Eigen 3 headers available at http://eigen.tuxfamily.org
 5. For multiprecision support, which is used in some of the test programs, 
-   you'll need eithhe GNU mpfr library available at http://www.mpfr.org and
+   you'll need the GNU mpfr library available at http://www.mpfr.org and
    the GNU gmp library available at https://gmplib.org
 
 Most of these prerequisites can be downloaded using a package management system.
@@ -51,7 +51,8 @@ There are also three options available for adding a multiprecision support,
 which are implemented by defining MPREAL, CPP_BIN_FLOAT, and/or MPFR_FLOAT. As 
 distributed they are all defined.
 
-The output of the tests will be in files in the output directory of the parent directory.
+The output of the tests will be in files in the 
+output-$PACKAGE_VERSION-$PACKAGE_COMPILER directory of the parent directory.
 
 If you have a lot of time on your hands, you can run the following from the
 build directory:
@@ -85,9 +86,7 @@ distribution that's used in this package
 He has released a compiled version 3.12.02 of his Fortran 
 program STABLE,
 [stable.exe](http://academic2.american.edu/~jpnolan/stable/stable.exe).
-It's not open source and he's not explicit about its license.  The two of the
-test programs compare the output of the present package to the output of Nolan's
-package.
+It's not open source and he's not explicit about its license. 
 2. Many of the routines in this package started out life as C++ translations of
 the stabledist package for R, the source code for which is available at 
 [stabledist_0.7-0](https://cran.r-project.org/src/contrib/stabledist_0.7-0.tar.gz)

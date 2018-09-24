@@ -59,6 +59,19 @@ using std::condition_variable;
 using std::chrono::high_resolution_clock;
 using std::chrono::duration;
 
+struct auto_timer {
+  high_resolution_clock::time_point start;
+  std::ostream& os;
+  auto_timer(std::ostream& os) : start(high_resolution_clock::now()),
+  os(os){}
+  auto_timer() : start(high_resolution_clock::now()),
+  os(std::cout) {}
+  ~auto_timer() {
+    duration<double> elapsed = high_resolution_clock::now() - start;
+    os << "Elapsed time = " << setprecision(3) << fixed << elapsed.count() << " seconds" << endl;
+  }
+};
+
 #include <algorithm>
 using std::sort;
 
@@ -215,6 +228,7 @@ ostream& operator<<(ostream& os, Results<myFloat>& r) {
   for (int i =0; i<Results<myFloat>::probs.size(); ++i)
     os << setw(139) << fixed << setprecision(0) << Results<myFloat>::probs.at(i)*100 << "%"
        << setw(10) << fmt_eps(qs.at(i)) << endl;
+  os << endl << (r.pass()?"Test Passed":"Test Failed") << endl;
 
   return os;
 }
@@ -424,7 +438,6 @@ void calculate_job_outputs(int thread_id, int noext, Kronrod<BigFloat> g_k_big,
 
 template<typename myFloat, typename BigFloat>
 int create_jobs(Kronrod<BigFloat> g_k_big, ostream& os) {
-  high_resolution_clock::time_point start = high_resolution_clock::now();
   Eigen::initParallel();
   
   Results<myFloat> final_results(100);
@@ -501,10 +514,7 @@ int create_jobs(Kronrod<BigFloat> g_k_big, ostream& os) {
   
   os << final_results;
   
-  high_resolution_clock::time_point end = high_resolution_clock::now();
-  duration<double> elapsed_time = end - start;
   os << "Number of function calls = " << alphas_m_1.size() * betas.size() * xs.size() * 2 << endl;
-  os << "Elapsed time = " << fixed << setprecision(2) << elapsed_time.count() << " seconds" << endl;
   
   return !final_results.pass();
 }
@@ -534,16 +544,18 @@ int main(int argc, char *argv[]) {
     return 1;
   }
   
-  string out_dir = string("../output-") + 
-	           string(PACKAGE_VERSION) + 
-		   string("-") + 
-		   string(PACKAGE_COMPILER);
+  string out_dir = string(OUT_DIR);
   if (!boost::filesystem::is_directory(out_dir))
     boost::filesystem::create_directory(out_dir);
   string test_name{argv[1]};
   string out_file_name = out_dir + "/duality_check_" + test_name + ".out";
   string title = "Duality Check for " + test_name ;
-  
+  cout << title << endl << endl;
+  cout << "Writing to file " << out_file_name << endl << endl;
+
+  ofstream os{out_file_name};
+  auto_timer timer(os);
+
 #ifdef MPREAL
   // First create some high precision coeficients for
   mpreal::set_default_prec(128);
@@ -562,9 +574,6 @@ int main(int argc, char *argv[]) {
 #endif
 
   if (test_name == "double") {
-    cout << title << endl << endl;
-    cout << "Writing to file " << out_file_name << endl << endl;
-    ofstream os{out_file_name};
     os << title
        << ".  Machine epsilon = " << std::numeric_limits<double>::epsilon() << endl << endl;
     create_jobs<double, BIGFLOAT>(k_big, os);
@@ -572,9 +581,6 @@ int main(int argc, char *argv[]) {
   
 #ifdef MPREAL
   else if(test_name == "mpreal") {
-    cout << title << endl << endl;
-    cout << "Writing to file " << out_file_name << endl << endl;
-    ofstream os{out_file_name};
     os << title
     << ".  Machine epsilon = " << std::numeric_limits<mpreal>::epsilon() << endl << endl;
     create_jobs<mpreal, mpreal>(k_big, os);
@@ -584,9 +590,6 @@ int main(int argc, char *argv[]) {
 #ifdef CPP_BIN_FLOAT
   else if (test_name == "cpp_bin_float") {
     Kronrod<BigCppBinFloat> k_big_cpp_bin_float(10);
-    cout << title << endl << endl;
-    cout << "Writing to file " << out_file_name << endl << endl;
-    ofstream os{out_file_name};
     os << title
     << ".  Machine epsilon = " << std::numeric_limits<CppBinFloat>::epsilon() << endl << endl;
     create_jobs<CppBinFloat, BigCppBinFloat>(k_big_cpp_bin_float, os);
@@ -596,9 +599,6 @@ int main(int argc, char *argv[]) {
 #ifdef MPFR_FLOAT
   else if (test_name == "mpfr_float") {
     Kronrod<BigMpfrFloat> k_big_mpfr_float(10);
-    cout << title << endl << endl;
-    cout << "Writing to file " << out_file_name << endl << endl;
-    ofstream os{out_file_name};
     os << title
     << ".  Machine epsilon = " << std::numeric_limits<MpfrFloat>::epsilon() << endl << endl;
     create_jobs<MpfrFloat, BigMpfrFloat>(k_big_mpfr_float, os);

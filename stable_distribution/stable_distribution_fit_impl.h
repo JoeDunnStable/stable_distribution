@@ -701,10 +701,7 @@ template<typename myFloat>
 std::vector<FitResult<myFloat> > stable_fit(const Vec& yy, Controllers<myFloat> ctls, const myFloat dbltol,
                                   const string type,const bool quick, const int verbose) {
   int n=static_cast<int>(yy.size());
-  string out_dir = string("../output-") + 
-	           string(PACKAGE_VERSION) + 
-		   string("-") + 
-		   string(PACKAGE_COMPILER);
+  string out_dir = string(OUT_DIR);
   if (!boost::filesystem::is_directory(out_dir))
     boost::filesystem::create_directory(out_dir);
 

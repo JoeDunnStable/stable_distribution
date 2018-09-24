@@ -24,17 +24,6 @@
   #endif
 #endif
 
-// Now we use the helper definitions above to define STABLE_API and STABLE_LOCAL.
-// STABLE_API is used for the public API symbols. It either DLL imports or DLL exports
-// STABLE_LOCAL is used for non-api symbols.
-
-#ifdef LIBRARY // defined if we are building the DLL (instead of using it)
-#define STABLE_API STABLE_DLL_EXPORT
-#else
-#define STABLE_API STABLE_DLL_IMPORT
-#endif // LIBRARY
-#define STABLE_LOCAL STABLE_DLL_LOCAL
-
 #include <string>
 #include <vector>
 #include "adaptive_integration.h"
@@ -82,7 +71,7 @@ struct AlphaMinusOne {
   
 /// the data and functions to calculate the standard stable distribution
 template<typename myFloat>
-class StandardStableDistribution {
+class STABLE_EXP StandardStableDistribution {
 public:
   static myFloat pi;                        ///< pi
   static myFloat pi2;                       ///< pi/2

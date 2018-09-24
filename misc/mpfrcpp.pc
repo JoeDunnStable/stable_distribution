@@ -1,0 +1,8 @@
+prefix=/usr/local
+includedir=${prefix}/include
+
+Name: mpfrcpp
+Description: MPFR C++: Multi-precision floating point number class for C++.
+Version: 3.6.2
+Libs:
+Cflags: -I${includedir}

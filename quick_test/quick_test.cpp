@@ -38,6 +38,19 @@ using boost::math::tools::toms748_solve;
 using std::chrono::high_resolution_clock;
 using std::chrono::duration;
 
+struct auto_timer {
+  high_resolution_clock::time_point start;
+  std::ostream& os;
+  auto_timer(std::ostream& os) : start(high_resolution_clock::now()),
+  os(os){}
+  auto_timer() : start(high_resolution_clock::now()),
+  os(std::cout) {}
+  ~auto_timer() {
+    duration<double> elapsed = high_resolution_clock::now() - start;
+    os << "Elapsed time = " << setprecision(3) << fixed << elapsed.count() << " seconds" << endl;
+  }
+};
+
 using namespace stable_distribution;
 
 static void show_usage (string name){
@@ -76,16 +89,14 @@ int main(int argc, char *argv[]) {
     return 1;
   }
   
-  string out_dir = string("../output-") + 
-	           string(PACKAGE_VERSION) + 
-		   string("-") + 
-		   string(PACKAGE_COMPILER);
+  string out_dir = string(OUT_DIR);
   if (!boost::filesystem::is_directory(out_dir))
     boost::filesystem::create_directory(out_dir);
 
   string out_file = out_dir + "/quick_test.out";
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
+  auto_timer timer(out);
   
   Vec alphas(6);    alphas << .1, .5, 1, 1.5, 1.99, 2;
   Vec betas(5);     betas << -1., -.5, 0, .5, 1;
@@ -167,6 +178,7 @@ int main(int argc, char *argv[]) {
     << setw(20) << setprecision(10) << results.at(i).pt
     << setw(20) << setprecision(10) << results.at(i).d_quick
     << setw(10) << setprecision(5) << results.at(i).delta << endl;
+  out << endl << (pass?"Test Passed":"Test Failed") << endl;
   
   return !pass;
 }

@@ -1,12 +1,11 @@
 project('Stable Distribution', 'cpp', default_options : ['cpp_std=c++11'],
-         version : '1.0.0')
+         version : '1.0.2')
 
 compiler=meson.get_compiler('cpp').get_id()
 
 if compiler == 'gcc' or compiler == 'clang'
   add_global_arguments(
       [ '-fvisibility=hidden' ,
-        '-fpermissive' ,
 	       '-Wno-non-virtual-dtor' ,
 	       '-Wno-sign-compare' ,
 	       '-Wno-uninitialized',
@@ -43,10 +42,16 @@ mpfrcppdep = dependency('mpfrcpp', required : true)
 
 alldep = [eigendep, boostdep, mpfrdep, mpfrcppdep]
 
+if host_machine.system() == 'linux'
+  alldep = [alldep, meson.get_compiler('cpp').find_library('pthread')]
+endif
+
+
 stable_config = configuration_data()
 stable_config.set('PACKAGE_NAME', meson.project_name())
 stable_config.set('PACKAGE_VERSION', meson.project_version())
 stable_config.set('PACKAGE_COMPILER', meson.get_compiler('cpp').get_id())
+stable_config.set('PACKAGE_OS',host_machine.system())
 
 stable_config_h = configure_file(input : 'stable_config.h.in',
 				  output : 'stable_config.h',
@@ -65,7 +70,7 @@ subdir('basic_test')
 subdir('fit_test')
 subdir('quick_test')
 subdir('FMStable_test')
-subdir('dump_mpreal')
+subdir('stable_dump')
 subdir('xcheck_to_file')
 subdir('trace')
 subdir('Zolotarev')

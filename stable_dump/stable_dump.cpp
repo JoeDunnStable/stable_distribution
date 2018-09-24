@@ -12,6 +12,8 @@ using std::endl;
 #include "stable_config.h"
 
 #define MPREAL
+#define MPFR_FLOAT
+#define CPP_BIN_FLOAT
 #include "stable_distribution.h"
 using namespace stable_distribution;
 
@@ -217,8 +219,9 @@ void calculate_results(int thread_id, int noext, const Kronrod<BigFloat>& g_k_bi
     cout << "Machine epsilon used: " << std::numeric_limits<myFloat>::epsilon() << endl;
     cout << "Digits10: " << int(digits * log(2)/log(10)) << endl;
     cout << "Input epsabs: " << epsabs << ", epsrel: " << epsrel << endl;
-
+/*
     cout << cntl << endl;
+ */
   }
   while(true) {
     int i;
@@ -269,7 +272,8 @@ void calculate_results(int thread_id, int noext, const Kronrod<BigFloat>& g_k_bi
 }
 
 template<typename myFloat, typename BigFloat>
-int dump(const Kronrod<BigFloat>& g_k_big, int digits, string old_file_name, double alpha_low, double alpha_high) {
+int dump(string float_type_str, const Kronrod<BigFloat>& g_k_big, int digits,
+         string old_file_name, double alpha_low, double alpha_high) {
   high_resolution_clock::time_point start = high_resolution_clock::now();
   Eigen::initParallel();
 
@@ -295,13 +299,10 @@ int dump(const Kronrod<BigFloat>& g_k_big, int digits, string old_file_name, dou
     array<double, 23> betas {{-1.0, -.99, -.9, -.8, -.7, -.6, -.5, -.4, -.3, -.2, -.1, 0,
       .1, .2, .3, .4, .5, .6, .7, .8, .9, .99, 1.}};
   
-  string out_dir = string("../output-") + 
-	           string(PACKAGE_VERSION) + 
-		   string("-") + 
-		   string(PACKAGE_COMPILER);
+  string out_dir = string(OUT_DIR);
   if (!boost::filesystem::is_directory(out_dir))
     boost::filesystem::create_directory(out_dir);
-  string out_file = out_dir +"/stable_mpreal.out";
+  string out_file = out_dir +"/stable_" + float_type_str + ".out";
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file) ;
   
@@ -363,21 +364,21 @@ int dump(const Kronrod<BigFloat>& g_k_big, int digits, string old_file_name, dou
   << setw(15) << right << "g_dd_theta2" << endl;
    */
   
-  thread t0(calculate_results<mpreal, mpreal>,
+  thread t0(calculate_results<myFloat, BigFloat>,
             1, noext, g_k_big, epsabs, epsrel, subdivisions, verbose, &jobs, &res_buf, digits);
-  thread t1(calculate_results<mpreal, mpreal>,
+  thread t1(calculate_results<myFloat, BigFloat>,
             2, noext, g_k_big, epsabs, epsrel, subdivisions, verbose, &jobs, &res_buf, digits);
-  thread t2(calculate_results<mpreal, mpreal>,
+  thread t2(calculate_results<myFloat, BigFloat>,
             3, noext, g_k_big, epsabs, epsrel, subdivisions, verbose, &jobs, &res_buf, digits);
-  thread t3(calculate_results<mpreal, mpreal>,
+  thread t3(calculate_results<myFloat, BigFloat>,
             4, noext, g_k_big, epsabs, epsrel, subdivisions, verbose, &jobs, &res_buf, digits);
-  thread t4(calculate_results<mpreal, mpreal>,
+  thread t4(calculate_results<myFloat, BigFloat>,
             5, noext, g_k_big, epsabs, epsrel, subdivisions, verbose, &jobs, &res_buf, digits);
-  thread t5(calculate_results<mpreal, mpreal>,
+  thread t5(calculate_results<myFloat, BigFloat>,
             6, noext, g_k_big, epsabs, epsrel, subdivisions, verbose, &jobs, &res_buf, digits);
-  thread t6(calculate_results<mpreal, mpreal>,
+  thread t6(calculate_results<myFloat, BigFloat>,
             7, noext, g_k_big, epsabs, epsrel, subdivisions, verbose, &jobs, &res_buf, digits);
-  thread t7(calculate_results<mpreal, mpreal>,
+  thread t7(calculate_results<myFloat, BigFloat>,
             8, noext, g_k_big, epsabs, epsrel, subdivisions, verbose, &jobs, &res_buf, digits);
   
   for (int i=0; i<number_of_jobs; ++i) {
@@ -413,31 +414,93 @@ int dump(const Kronrod<BigFloat>& g_k_big, int digits, string old_file_name, dou
 }
 
 static void show_usage (string name){
-  cerr << "Usage: " << name << "[old_file_name alpha_low alpha_high]" << endl;
+  cerr << "Usage: " << name << "float_type [old_file_name alpha_low alpha_high]" << endl
+  << "Where float_type can by double, "
+#ifdef MPREAL
+  << "mpreal, "
+#endif
+#ifdef MPFR_FLOAT
+  << "mpfr_float, "
+#endif
+#ifdef CPP_BIN_FLOAT
+  << "cpp_bin "
+#endif
+  << endl;
+  cerr << "If the old file name and alpha_low and alpha_high are given" << endl
+       << " then only alphas in [alpha_low, alpha_high] are recalculated" << endl
+       << " and the rest are taken from the old file." << endl;
 }
 
 int main(int argc, char *argv[]) {
   
   // Check the number of parameters
-  if (argc != 1 && argc != 4) {
+  if (argc != 2 && argc != 5) {
     // Tell the user how to run the program
+    show_usage(string(argv[0]));
+    return 1;
+  }
+  enum {double_type, mpreal_type, mpfr_float_type, cpp_bin_float_type} float_type;
+  stringstream ss1((string(argv[1])));
+  string float_type_str; ss1 >> float_type_str;
+  if (float_type_str == "double") float_type=double_type;
+  else if (float_type_str == "mpreal") float_type=mpreal_type;
+  else if (float_type_str == "mpfr_float") float_type=mpfr_float_type;
+  else if (float_type_str == "cpp_bin_float") float_type=cpp_bin_float_type;
+  else {
+    cerr << "Unknown float type" << endl;
     show_usage(string(argv[0]));
     return 1;
   }
   string old_file_name;
   double alpha_low = 0;
   double alpha_high = 2;
-  if (argc == 4) {
-    stringstream ss1((string(argv[1]))), ss2((string(argv[2]))), ss3((string(argv[3])));
-    ss1 >> old_file_name;
-    ss2 >> alpha_low;
-    ss3 >> alpha_high;
+  if (argc == 5) {
+    stringstream ss2((string(argv[2]))), ss3((string(argv[3]))), ss4((string(argv[4])));
+    ss2 >> old_file_name;
+    ss3 >> alpha_low;
+    ss4 >> alpha_high;
   }
   
-  mpreal::set_default_prec(128);
-  Kronrod<mpreal> g_k_big(10);
-  mpreal::set_default_prec(96);
-  return dump<mpreal, mpreal>(g_k_big, 96, old_file_name, alpha_low, alpha_high);
+  switch (float_type) {
+    case double_type:
+      {
+        Kronrod<double> g_k(10);
+        return dump<double, double>(float_type_str, g_k, std::numeric_limits<double>::digits,
+                                    old_file_name, alpha_low, alpha_high);
+        break;
+      }
+#ifdef MPREAL
+    case mpreal_type:
+      {
+        mpreal::set_default_prec(128);
+        Kronrod<mpreal> g_k_big(10);
+        mpreal::set_default_prec(96);
+        return dump<mpreal, mpreal>(float_type_str, g_k_big, 96,
+                                    old_file_name, alpha_low, alpha_high);
+        break;
+      }
+#endif
+#ifdef MPFR_FLOAT
+    case mpfr_float_type:
+      {
+        Kronrod<BigMpfrFloat> g_k_big(10);
+        return dump<MpfrFloat, BigMpfrFloat>(float_type_str, g_k_big, std::numeric_limits<MpfrFloat>::digits,
+                                             old_file_name, alpha_low, alpha_high);
+        break;
+      }
+#endif
+#ifdef CPP_BIN_FLOAT
+    case cpp_bin_float_type:
+      {
+        Kronrod<BigCppBinFloat> g_k_big(10);
+        return dump<CppBinFloat, BigCppBinFloat>(float_type_str, g_k_big, std::numeric_limits<CppBinFloat>::digits,
+                                                 old_file_name, alpha_low, alpha_high);
+        break;
+      }
+#endif
+    default:
+      return 1;
+  } // float_type
 
 }
 

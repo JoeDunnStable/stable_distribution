@@ -9,6 +9,8 @@ using std::cout;
 using std::cerr;
 using std::endl;
 
+#include <iomanip>
+
 #include <sstream>
 using std::stringstream;
 
@@ -21,6 +23,25 @@ using std::string;
 #include <random>
 using std::mt19937;
 using std::uniform_real_distribution;
+
+#include <chrono>
+using std::chrono::high_resolution_clock;
+using std::chrono::duration;
+
+struct auto_timer {
+  high_resolution_clock::time_point start;
+  std::ostream& os;
+  auto_timer(std::ostream& os) : start(high_resolution_clock::now()),
+  os(os){}
+  auto_timer() : start(high_resolution_clock::now()),
+  os(std::cout) {}
+  ~auto_timer() {
+    duration<double> elapsed = high_resolution_clock::now() - start;
+    os << "Elapsed time = " << std::setprecision(3) << std::fixed << elapsed.count() << " seconds" << endl;
+  }
+};
+
+
 #include <boost/filesystem.hpp>
 
 #include <mpreal.h>
@@ -59,16 +80,14 @@ int main(int argc, char *argv[]) {
   if (type != "q" && type != "q_mle" && type != "mle") {
     show_usage(string(argv[0]));
   }
-  string out_dir = string("../output-") + 
-	           string(PACKAGE_VERSION) + 
-		   string("-") + 
-		   string(PACKAGE_COMPILER);
+  string out_dir = string(OUT_DIR);
   if (!boost::filesystem::is_directory(out_dir))
     boost::filesystem::create_directory(out_dir);
 
   string out_file = out_dir + "/test_stable_fit.out";
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
+  auto_timer timer(out);
 
   NullBuffer null_buffer;
   ostream null_stream(&null_buffer);
@@ -119,6 +138,7 @@ int main(int argc, char *argv[]) {
     }
     
   }
+  out << endl << (pass?"Test Passed":"Test Failed") << endl;
   return !pass;
   
 }

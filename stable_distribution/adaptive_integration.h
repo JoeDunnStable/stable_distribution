@@ -117,7 +117,7 @@ namespace adaptive_integration {
   /// \author de doncker,elise, appl. math & progr. div. - k.u.leuven
   ///
   template<typename myFloat>
-  class IntegrationController {
+  class STABLE_EXP IntegrationController {
   private:
     bool  noext;               ///< flag indicating no extrapolation is to be used.
     Kronrod<myFloat> g_k;      ///< the number of Gauss nodes

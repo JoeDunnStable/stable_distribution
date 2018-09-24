@@ -82,33 +82,30 @@ inline myFloat erfc_inv(myFloat p) {
 
 #ifdef MPREAL
 #include <boost/multiprecision/mpfr.hpp>
-using boost::multiprecision::mpfr_float;
+using boost::multiprecision::mpfr_float_50;
 
 // the boost version of tgamma_ratio, erf_inv, erfc_inv is broken for variable precision mpreal
 
 mpreal tgamma_ratio(mpreal num, mpreal denom) {
-  mpfr_float::default_precision(static_cast<unsigned int>(mpreal::get_default_prec()*log10(2)));
-  mpfr_float num_mpfr{num.mpfr_ptr()}, denom_mpfr{denom.mpfr_ptr()};
+  // Unfortunatly tgamma_ratio doen't work with mpfr_float
+  mpfr_float_50 num_mpfr{num.mpfr_ptr()}, denom_mpfr{denom.mpfr_ptr()};
   return static_cast<mpreal>(tgamma_ratio(num_mpfr, denom_mpfr).backend().data());
 }
 
 mpreal erf_inv(mpreal x) {
-  mpfr_float::default_precision(static_cast<unsigned int>(mpreal::get_default_prec()*log10(2)));
-  mpfr_float x_mpfr{x.mpfr_ptr()};
+  mpfr_float_50 x_mpfr{x.mpfr_ptr()};
   return static_cast<mpreal>(boost::math::erf_inv(x_mpfr).backend().data());
 }
 
 mpreal erfc_inv(mpreal x) {
-  mpfr_float::default_precision(static_cast<unsigned int>(mpreal::get_default_prec()*log10(2)));
-  mpfr_float x_mpfr{x.mpfr_ptr()};
+  mpfr_float_50 x_mpfr{x.mpfr_ptr()};
   return static_cast<mpreal>(boost::math::erfc_inv(x_mpfr).backend().data());
 }
 
 namespace mpfr {
 inline long long lltrunc(mpfr::mpreal const& x)
 {
-  mpfr_float::default_precision(static_cast<unsigned int>(mpreal::get_default_prec()*log10(2)));
-  mpfr_float x_mpfr{x.mpfr_ptr()};
+  mpfr_float_50 x_mpfr{x.mpfr_ptr()};
   return boost::math::lltrunc(x_mpfr);
 }
 }
