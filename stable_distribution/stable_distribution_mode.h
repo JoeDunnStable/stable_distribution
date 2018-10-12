@@ -34,6 +34,7 @@ public:
   : value(value), std_stable_dist(std_stable_dist), verbose_mode(verbose_mode), pm(pm), x_flag(x_flag) {}
   /// return the value of the derivative wrt x os th pdf of the std. stable distribution
   myFloat operator()(const myFloat x_in) {
+    Fmt<myFloat> fmt;
     myFloat ddx_min = std::numeric_limits<myFloat>::lowest();
     myFloat ddx_max = std::numeric_limits<myFloat>::max();
     myFloat x = x_in;
@@ -53,12 +54,12 @@ public:
       myFloat zeta = -std_stable_dist->beta_input*tan(StandardStableDistribution<myFloat>::pi2*std_stable_dist->alpha);
       switch (pm) {
         case S0:
-          cout << "x = " << x << ", x - zeta = " << x - zeta
-               << ", ddx_pdf(x) = " << ret << endl;
+          cout << "x = " << fmt << x << ", x - zeta = " << fmt << x - zeta
+               << ", ddx_pdf(x) = " << fmt << ret << endl;
           break;
         case S1:
-          cout << "x = " << x + zeta << ", x - zeta = " << x
-               << ", ddx_pdf(x) = " << ret << endl;
+          cout << "x = " << fmt << x + zeta << ", x - zeta = " << fmt << x
+               << ", ddx_pdf(x) = " << fmt << ret << endl;
           break;
           
       }
@@ -85,6 +86,7 @@ public:
   : std_stable_dist(std_stable_dist), verbose_mode(verbose_mode), pm(pm), x_flag(x_flag) {}
   /// return the - value of the pdf
   myFloat operator()(const myFloat x_in) {
+    Fmt<myFloat> fmt;
     myFloat x = x_in;
     switch (x_flag) {
       case 0:
@@ -103,12 +105,12 @@ public:
       myFloat zeta = -std_stable_dist->beta_input*tan(StandardStableDistribution<myFloat>::pi2*std_stable_dist->alpha);
       switch (pm) {
         case S0:
-          cout << "x = " << x << ", x - zeta = " << x - zeta
-          << ", pdf(x) = " << -ret << endl;
+          cout << "x = " << fmt << x << ", x - zeta = " << fmt << x - zeta
+          << ", pdf(x) = " << fmt << -ret << endl;
           break;
         case S1:
-          cout << "x = " << x + zeta << ", x - zeta = " << x
-          << ", pdf(x) = " << -ret << endl;
+          cout << "x = " << fmt << x + zeta << ", x - zeta = " << fmt << x
+          << ", pdf(x) = " << fmt << -ret << endl;
           break;
           
       }

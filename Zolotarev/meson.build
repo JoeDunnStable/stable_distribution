@@ -7,7 +7,7 @@ zolotarev = executable('zolotarev',
 			 'zolotarev_cdf.h',
 			 'zolotarev_pdf.h',
 			 'zolotarev_integral.h',
-			 'gamma_derivative_at_integers.h'],
+			 '../stable_distribution/gamma_derivative_at_integers.h'],
                         dependencies : stable_distribution_dep) 
 
 

@@ -1,0 +1,10 @@
+Build started at 2018-10-06T12:27:28.466143
+Main binary: /usr/bin/python3
+Python system: Linux
+The Meson build system
+Version: 0.45.1
+Source dir: /home/joe/Projects/stable_distribution/doc
+Build dir: /home/joe/Projects/stable_distribution/doc/build_linux_gcc
+Build type: native build
+
+ERROR: First statement must be a call to project

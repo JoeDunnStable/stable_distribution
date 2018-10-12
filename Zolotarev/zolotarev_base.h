@@ -10,7 +10,7 @@
 #include <boost/math/special_functions/factorials.hpp>
 #include <boost/math/special_functions/binomial.hpp>
 #include <boost/math/tools/polynomial.hpp>
-#include "gamma_derivative_at_integers.h"
+#include "../stable_distribution/gamma_derivative_at_integers.h"
 // This will be included at the end of zolotarev.h if LIBRARY is defined
 namespace stable_distribution {
 
@@ -26,6 +26,7 @@ using boost::math::tools::polynomial;
 
 template<typename myFloat> bool Zolotarev<myFloat>::initialized=false;
 template<typename myFloat> myFloat Zolotarev<myFloat>::pi;
+template<typename myFloat> int Zolotarev<myFloat>::digits10;
 template<typename myFloat>
 Array<myFloat, Dynamic, Dynamic> Zolotarev<myFloat>::gamma_at_integers;
 template<typename myFloat> int Zolotarev<myFloat>::max_n_conv;
@@ -44,6 +45,7 @@ Zolotarev<myFloat>::Zolotarev(myFloat alpha, myFloat beta_input,
   ddx_pdf_alpha_1(ddx_q_integrand<myFloat>(*this), points, *cntl, verbose_integration){
   if (!initialized) {
     pi = const_pi<myFloat>();
+    digits10 = static_cast<int>(-log10(std::numeric_limits<myFloat>::epsilon()));
     points = {0, pi/2};
     max_n_conv = 1000;
     max_n_asymp = 50;
@@ -166,9 +168,9 @@ void Zolotarev<myFloat>::set_x_m_zeta(myFloat x_m_zeta_in) {
     myFloat k_alpha = (alpha>1) ? alpha - 2 : alpha;
     betaB =alpha * theta/ k_alpha;
     if (verbose>0) {
-      cout << "theta = " << theta << endl;
-      cout << "rho = " << rho << endl;
-      cout << "betaB = " << betaB << endl;
+      cout << "theta = " << setprecision(digits10) << scientific << theta << endl;
+      cout << "rho =   " << setprecision(digits10) << scientific << rho << endl;
+      cout << "betaB = " << setprecision(digits10) << scientific<< betaB << endl;
     }
     gammaB = pow(cos(alpha*theta0),-1/alpha); // = Zolotarev lambda^(1/alpha)
     xB = x_m_zet/gammaB;
@@ -206,11 +208,11 @@ void Zolotarev<myFloat>::set_x_m_zeta(myFloat x_m_zeta_in) {
       xB = -xB;
     }
     if (verbose>0)
-      cout << "betaB = " << betaB << endl;
+      cout << setprecision(digits10) << scientific<< "betaB = " << betaB << endl;
   }
   if (verbose>0)
-    cout << "gammaB = " << gammaB << endl
-    << "xB = " << xB << endl;
+    cout << setprecision(digits10) << scientific<< "gammaB = " << gammaB << endl
+         << setprecision(digits10) << scientific<< "xB = " << xB << endl;
   
 }
   

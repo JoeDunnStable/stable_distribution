@@ -11,7 +11,12 @@
 #include <sstream>
 #include <vector>
 #include <boost/math/tools/toms748_solve.hpp>
+#include <boost/math/special_functions/bernoulli.hpp>
+#include <boost/math/special_functions/factorials.hpp>
+#include <boost/math/special_functions/binomial.hpp>
+#include <boost/math/tools/polynomial.hpp>
 #include <cassert>
+#include "gamma_derivative_at_integers.h"
 
 namespace stable_distribution {
 
@@ -28,7 +33,11 @@ using std::pair;
 using std::max;
 using std::min;
 using boost::math::tools::toms748_solve;
-
+using boost::math::factorial;
+using boost::math::double_factorial;
+using boost::math::binomial_coefficient;
+using boost::math::bernoulli_b2n;
+using boost::math::tools::polynomial;
 
 /* This is an ancillary functions used by pdf for small alpha */
 template<typename myFloat>
@@ -44,6 +53,9 @@ template<typename myFloat> myFloat StandardStableDistribution<myFloat>::NegInf;
 template<typename myFloat> myFloat StandardStableDistribution<myFloat>::zeta_tol;
 template<typename myFloat> double StandardStableDistribution<myFloat>::threshhold_1;
 template<typename myFloat> bool StandardStableDistribution<myFloat>::initialized = false;
+template<typename myFloat>
+Array<myFloat, Dynamic, Dynamic> StandardStableDistribution<myFloat>::gamma_at_integers;
+template<typename myFloat> int StandardStableDistribution<myFloat>::max_n;
 
 template<typename myFloat>
 void StandardStableDistribution<myFloat>::initialize(){
@@ -56,9 +68,166 @@ void StandardStableDistribution<myFloat>::initialize(){
   NegInf = -PosInf;
   zeta_tol = 200*eps;
   threshhold_1 = .5;
+  max_n = 50;
+  gamma_at_integers = gamma_derivative_at_integers<myFloat>(max_n);
   initialized = true;
 }
 
+/// consturctor
+template<typename myFloat>StandardStableDistribution<myFloat>::StandardStableDistribution(
+                             myFloat alpha,                  ///< [in] the structural parameter of the distribution
+                             myFloat beta,                       ///< [in] the skewness parameter of the distribution
+                             Controllers<myFloat> ctls,        ///< [in] reference to integration controllers
+                             int verbose                        ///< [in] indicator for verbose output
+  ) : alpha(alpha), alpha_minus_one(alpha-1), beta_input(beta), x_input(NAN),
+  x_m_zeta_input(NAN), controllers(ctls), verbose(verbose) {
+  if (!initialized) initialize();
+  if (fabs(alpha_minus_one)>64*std::numeric_limits<myFloat>::epsilon()){
+    if (fabs(alpha_minus_one) > threshhold_1 * fabs(beta)) {
+      zeta = -beta_input*tan(alpha*pi2);
+      theta0_x_gt_zeta = atan(beta_input*tan(alpha*pi2))/alpha;
+    } else {
+      zeta = beta_input/tan(pi2*alpha_minus_one);
+      theta0_x_gt_zeta = ((zeta<0)? 1 : -1) *
+      (pi2 - (pi2*alpha_minus_one + atan(1/fabs(zeta)))/alpha);
+    }
+    theta0_x_gt_zeta = min(pi2,max<myFloat>(-pi2,theta0_x_gt_zeta));
+    cat0=1/sqrt(1+zeta*zeta);
+  } else {
+    zeta=0;
+    this->alpha=1;
+    this->alpha_minus_one=0;
+    c2=pi2*fabs(1/(2*beta_input));
+    c_ddx=-c2*pi2/beta_input;
+  }
+  if (fabs(beta_input) == 1)
+    Q_initializer();
+}
+  
+template<typename myFloat>
+StandardStableDistribution<myFloat>::StandardStableDistribution(
+                             AlphaMinusOne<myFloat> a_m_1,      ///< [in] the structural parameter minus one
+                             myFloat beta,                       ///< [in] the skewness parameter of the distribution
+                             Controllers<myFloat> ctls,        ///< [in] reference to integration controller
+                             int verbose                        ///< [in] indicator for verbose output
+  ) : alpha(a_m_1.alpha_minus_one + 1), alpha_minus_one(a_m_1.alpha_minus_one), beta_input(beta), x_input(NAN),
+  x_m_zeta_input(NAN), controllers(ctls), verbose(verbose) {
+  if (!initialized) initialize();
+  if (fabs(alpha_minus_one)> 64 * std::numeric_limits<myFloat>::min()){
+    if (fabs(alpha_minus_one) > threshhold_1 * fabs(beta)) {
+      zeta = -beta_input*tan(alpha*pi2);
+      theta0_x_gt_zeta = atan(beta_input*tan(alpha*pi2))/alpha;
+    } else {
+      zeta = beta_input/tan(pi2*alpha_minus_one);
+      theta0_x_gt_zeta = ((zeta<0)? 1 : -1) *
+      (pi2 - (pi2*alpha_minus_one + atan(1/fabs(zeta)))/alpha);
+    }
+    theta0_x_gt_zeta = min(pi2,max<myFloat>(-pi2,theta0_x_gt_zeta));
+    cat0=1/sqrt(1+zeta*zeta);
+  } else {
+    zeta=0;
+    this->alpha=1;
+    this->alpha_minus_one=0;
+    c2=pi2*fabs(1/(2*beta_input));
+    c_ddx=-c2*pi2/beta_input;
+  }
+  if (fabs(beta_input) == 1)
+    Q_initializer();
+  
+}
+
+template<typename myFloat>
+void StandardStableDistribution<myFloat>::Q_initializer() {
+  myFloat alpha_star = (alpha < 1) ? alpha : 1/alpha;
+  std::vector<myFloat> bernoulli_2n;
+  
+  // Stuff we may need if alpha < 1, beta=1 and x -> 0, or
+  // alpha >=1 beta=-1 and x -> infinity
+  // See Zolotarev's Theorems 2.5.2 and 2.5.3
+  
+  // The Bernoulli for 2n =  0 to max_n_asymp
+  bernoulli_b2n<myFloat>(0, max_n+1, std::back_inserter(bernoulli_2n)); // Fill vector with even Bernoulli numbers.
+  // Zolotarev formula 2.5.13
+  std::vector<myFloat> a_n;
+  a_n.push_back(0);
+  for (int n = 1; n<=max_n; ++n) {
+    myFloat tmp =pow(myFloat(2),2*n)*fabs(bernoulli_2n.at(n))/(2*n*factorial<myFloat>(2*n));
+    if (alpha_star==1)
+      tmp *= 2*n+1;
+    else
+      tmp *= (alpha_star*(1-pow(alpha_star,2*n))/(1-alpha_star) + 1 -pow(1-alpha_star, 2*n));
+    a_n.push_back(tmp);
+  }
+  // Zolotarev formula 2.5.14
+  std::vector<myFloat> C_n;   // the complete exponential Bell polynomial
+  std::vector<myFloat> b_n;
+  C_n.push_back(1);
+  b_n.push_back(1);
+  for (int n = 1; n<=max_n; ++n) {
+    myFloat tmp{0};
+    for ( int i = 0; i<n; ++i)
+      tmp += binomial_coefficient<myFloat>(n-1,i) * C_n.at(n-1-i) * (factorial<myFloat>(i+1)*a_n.at(i+1));
+    C_n.push_back(tmp);
+    b_n.push_back(tmp/factorial<myFloat>(n));
+  }
+  // Zolotarev formula 2.5.16
+  std::vector<polynomial<myFloat> > d_n;
+  myFloat c0[] = {0};
+  myFloat c1[] = {1};
+  myFloat x1[] = {0,1};
+  d_n.push_back(polynomial<myFloat>{c0,0});
+  polynomial<myFloat> x{x1, 1};
+  polynomial<myFloat> x_2n_p_2 = x * x;
+  for (int n = 1; n<=max_n-1; ++n) {
+    x_2n_p_2 *= x * x;
+    polynomial<myFloat> tmp = (-b_n.at(n+1)/alpha_star) * x_2n_p_2;
+    d_n.push_back(tmp);
+  }
+  std::vector<polynomial<myFloat> > C_n_poly;
+  std::vector<polynomial<myFloat> > q_cdf_n;
+  C_n_poly.push_back(polynomial<myFloat>{c1, 0});
+  q_cdf_n.push_back(polynomial<myFloat>{c1, 0});
+  for (int n = 1; n<=max_n-1; ++n) {
+    polynomial<myFloat> tmp{0};
+    // Recurrence relation for complete exponential Bell polynomials
+    for ( int i = 0; i<n; ++i)
+      tmp += binomial_coefficient<myFloat>(n-1,i) * C_n_poly.at(n-1-i) * (factorial<myFloat>(i+1)*d_n.at(i+1));
+    C_n_poly.push_back(tmp);
+    q_cdf_n.push_back((1/factorial<myFloat>(n))*tmp);
+  }
+  Q_cdf.push_back(1);
+  Q_pdf.push_back(1);
+  Q_ddx_pdf.push_back(1);
+  if (verbose > 1)
+    cout << setw(10) << "n"
+    << setw(fmt.width) << "Q_cdf"
+    << setw(fmt.width) << "Q_pdf"
+    << setw(fmt.width) << "Q_ddx_pdf" << endl << endl;
+  if (verbose > 1)
+    cout << setw(10) << 0
+    << fmt << Q_cdf.back()
+    << fmt << Q_pdf.back()
+    << fmt<< Q_ddx_pdf.back()
+    << endl;
+  
+  for (int n = 1; n<=max_n-1; ++n ) {
+    myFloat tmp{0};
+    for (int i = 2; i<=4*n; i+=2)
+      // Zolotarev formula 2.5.8
+      // the 2 * i moment of normal distriubtion is (i-1)!!
+      tmp += double_factorial<myFloat>(i-1)*q_cdf_n.at(n)[i];
+    Q_cdf.push_back(tmp);
+    Q_pdf.push_back((alpha_star/2)*(2*n+1)*Q_cdf.at(n-1)+Q_cdf.at(n));
+    Q_ddx_pdf.push_back(((alpha_star/2)*(2*n+1)-1)*Q_pdf.at(n-1) + Q_pdf.at(n));
+    if (verbose > 1)
+      cout << setw(10) << n
+      << fmt << Q_cdf.back()
+      << fmt << Q_pdf.back()
+      << fmt << Q_ddx_pdf.back()
+      << endl;
+  }
+} // Q_initializer
+  
 template<typename myFloat>
 myFloat StandardStableDistribution<myFloat>::g_l(myFloat th_l) const{
   // Similar to g except the input variable is th_l = th+theta0
@@ -343,12 +512,20 @@ myFloat StandardStableDistribution<myFloat>::dlnga1_du_r(myFloat u_r) {
 
 template<typename myFloat>
 ostream& operator<<(ostream& os, const StandardStableDistribution<myFloat>& dist) {
+const int w = 21;
   os << "StandardStableDistribution: " << endl
-     << " alpha = " << dist.alpha << endl
-     << " beta_input = " << dist.beta_input << endl
-     << " x_input = " << dist.x_input << endl
-     << " x_m_zeta_input = " << dist.x_m_zeta_input << endl
-     << " beta = " << dist.beta << endl;
+     << setw(w) << " alpha = " << dist.fmt << dist.alpha << endl
+     << setw(w) << " beta_input = " << dist.fmt << dist.beta_input << endl
+     << setw(w) << " x_input = " << dist.fmt << dist.x_input << endl
+     << setw(w) << " x_m_zeta_input = " << dist.fmt << dist.x_m_zeta_input << endl;
+  if (!boost::math::isfinite(dist.x_input)) return os;
+  os << setw(w) << " theta = " << dist.fmt << dist.theta << endl
+     << setw(w) << " rho = " << dist.fmt << dist.rho << endl
+     << setw(w) << " betaB = " << dist.fmt << dist.betaB << endl
+     << setw(w) << " betaB_p_1 = " << dist.fmt << dist.betaB_p_1 << endl
+     << setw(w) << " gammaB = " << dist.fmt << dist.gammaB << endl
+     << setw(w) << " xB = " << dist.fmt << dist.xB << endl
+     << setw(w) << " beta = " << dist.fmt << dist.beta << endl;
   switch (dist.dist_type) {
     case StandardStableDistribution<myFloat>::Cauchy :
       os << "Cauchy distribution." << endl;
@@ -360,58 +537,58 @@ ostream& operator<<(ostream& os, const StandardStableDistribution<myFloat>& dist
       os << "Outside support of distribution." << endl;
       return os;
     case StandardStableDistribution<myFloat>::other :
+      if (dist.use_series_small_x) return os << "Use_series_small x = true"<< endl;
+      if (dist.use_series_large_x) return os << "Use_series_large x = true"<< endl;
       if (dist.alpha!=1) {
-        os << " zeta = " << dist.zeta << endl
-           << " theta0_x_gt_zeta = " << dist.theta0_x_gt_zeta << endl
-           << " cos(alpha*theta0) = " << dist.cat0 << endl
-           << " theta0 = " << dist.theta0 << endl
-           << " x_m_zet = " << dist.x_m_zet << endl;
-        if (!dist.use_f_zeta)
-          os << " th_span = " << dist.th_span << endl
-             << " add_l = " << dist.add_l << endl
-             << " add_r = " << dist.add_r << endl;
+        os << setw(w) << " zeta = " << dist.fmt << dist.zeta << endl
+           << setw(w) << " theta0_x_gt_zeta = " << dist.fmt << dist.theta0_x_gt_zeta << endl
+           << setw(w) << " cos(alpha*theta0) = " << dist.fmt << dist.cat0 << endl
+           << setw(w) << " theta0 = " << dist.fmt << dist.theta0 << endl
+           << setw(w) << " x_m_zet = " << dist.fmt << dist.x_m_zet << endl
+           << setw(w) << " small_x_m_zet = " << dist.fmt << dist.small_x_m_zet << endl
+           << setw(w) << " add_l = " << dist.fmt << dist.add_l << endl
+           << setw(w) << " add_r = " << dist.fmt << dist.add_r << endl;
       }
-      if (dist.alpha == 1 || !dist.use_f_zeta) {
-        os << " th_min" << dist.th_min << endl
-           << " th_max = " << dist.th_max << endl         //Both th_l and th_r range from 0 to th_max
-           << " c2 = " << dist.c2 << endl
-           << " c_ddx = " << dist.c_ddx << endl
-           << " small_x_m_zet = " << dist.small_x_m_zet << endl
-           << " fun_type = " << dist.fun_type << endl;
-        if (dist.fun_type == StandardStableDistribution<myFloat>::fun_g_l_c
-            || dist.fun_type == StandardStableDistribution<myFloat>::fun_g_r_c) {
-          os << " ln_g_th2 = " << dist.ln_g_th2 << endl
-             << " cot_th2_1 = " << dist.cot_th2_1 << endl
-             << " cot_th2_2 = " << dist.cot_th2_2 << endl
-             << " cot_th2_3 = " << dist.cot_th2_3 << endl;
-        }
+      /*
+        if (!dist.use_f_zeta)
+      */
+      os << setw(w) << " th_span = " << dist.fmt << dist.th_span << endl
+         << setw(w) << " th_min = " << dist.fmt << dist.th_min << endl
+         << setw(w) << " th_max = " << dist.fmt << dist.th_max << endl         //Both th_l and th_r range from 0 to th_max
+         << setw(w) << " c2 = " << dist.fmt << dist.c2 << endl
+         << setw(w) << " c_ddx = " << dist.fmt << dist.c_ddx << endl
+         << setw(w) << " fun_type = " << dist.fmt << dist.fun_type << endl;
+      if (dist.fun_type == StandardStableDistribution<myFloat>::fun_g_l_c
+          || dist.fun_type == StandardStableDistribution<myFloat>::fun_g_r_c) {
+        os << setw(w) << " ln_g_th2 = " << dist.fmt << dist.ln_g_th2 << endl
+           << setw(w) << " cot_th2_1 = " << dist.fmt << dist.cot_th2_1 << endl
+           << setw(w) << " cot_th2_2 = " << dist.fmt << dist.cot_th2_2 << endl
+           << setw(w) << " cot_th2_3 = " << dist.fmt << dist.cot_th2_3 << endl;
       }
       
       if (dist.alpha==1) {  // variable used when alpha = 1
-        os << " abs_x = " << dist.abs_x << endl
-           << " i2b = " << dist.i2b << endl
-           << " p2b = " << dist.p2b << endl
-           << " ea = " << dist.ea << endl;
+        os << setw(w) << " abs_x = " << dist.fmt << dist.abs_x << endl
+           << setw(w) << " i2b = " << dist.fmt << dist.i2b << endl
+           << setw(w) << " p2b = " << dist.fmt << dist.p2b << endl
+           << setw(w) << " ea = " << dist.fmt << dist.ea << endl;
         if (dist.fun_type==StandardStableDistribution<myFloat>::fun_ga1_c) {
-          os << " ln_g_u2 - " << dist.ln_g_u2 << endl
-             << " costh_u2 = " << dist.costh_u2 << endl
-             << " tanth_u2 = " << dist.tanth_u2 << endl
-             << " h_u2 = " << dist.h_u2 << endl;
+          os << setw(w) << " ln_g_u2 - " << dist.fmt << dist.ln_g_u2 << endl
+             << setw(w) << " costh_u2 = " << dist.fmt << dist.costh_u2 << endl
+             << setw(w) << " tanth_u2 = " << dist.fmt << dist.tanth_u2 << endl
+             << setw(w) << " h_u2 = " << dist.fmt << dist.h_u2 << endl;
         }
       }
-      if (dist.alpha==1 || !dist.use_f_zeta) {
-        os << " good_theta2 = " << dist.good_theta2 << endl
-           << " g(theta2) error = " <<  dist.g_theta2_error << endl
-           << " g_dd_theta2 = " << dist.g_dd_theta2 << endl;
+      os << setw(w) << " good_theta2 = " << dist.fmt << dist.good_theta2 << endl
+         << setw(w) << " g(theta2) error = " << dist.fmt <<  dist.g_theta2_error << endl
+         << setw(w) << " g_dd_theta2 = " << dist.fmt << dist.g_dd_theta2 << endl;
         
-        os << "g_map: " << endl << setw(33) << right << "theta" << setw(33) << "g(theta)" <<endl;
-        for (typename vector<myFloat>::const_iterator ppoint=dist.points.begin(); ppoint<dist.points.end(); ppoint++) {
-          os << setw(33) << setprecision(24) << scientific << *ppoint
-             << setw(33) << setprecision(24) << scientific << dist.g(*ppoint) << ((*ppoint==dist.theta2)? " *":"") << endl;
-        }
+      os << "g_map: " << endl << dist.fmt << "theta" << dist.fmt << "g(theta)" <<endl;
+      for (typename vector<myFloat>::const_iterator ppoint=dist.points.begin(); ppoint<dist.points.end(); ppoint++) {
+        os << dist.fmt << *ppoint
+           << dist.fmt << dist.g(*ppoint) << ((*ppoint==dist.theta2)? " *":"") << endl;
       }
       return os;
-  }
+  }   //switch on dist.dist_type
 }
 
 template<typename myFloat>
@@ -424,7 +601,7 @@ void f_of_g (myFloat *th, int n, void *ext) {
 
 template<typename myFloat>
 myFloat Integral_f_of_g<myFloat>::operator() () {
-  
+  Fmt<myFloat> fmt; 
   int verbose = controllers->controller.get_verbose();
   if (verbose==4){
     cout << endl
@@ -442,12 +619,12 @@ myFloat Integral_f_of_g<myFloat>::operator() () {
     
     if (termination_code > 0)
       cout << msg() << ":" << endl;
-    cout << "Integral of f_of_g from theta = " << std_stable_dist->points.front()
-         << " to theta = " << std_stable_dist->points.back()
-         << " = " << result
-         << ", with absolute error = " << abserr
+    cout << "Integral of f_of_g from theta = " << fmt << std_stable_dist->points.front()
+         << " to theta = " << fmt << std_stable_dist->points.back()
+         << " = " << fmt << result
+         << ", with absolute error = "<< fmt  << abserr
          << ", subintervals = " << last << endl
-         << "rsum = " << rsum << ", esum = " << esum << endl;
+         << "rsum = " << fmt << rsum << ", esum = " << fmt << esum << endl;
     print_subs_summary(cout, controllers->controller.subs, last, std_stable_dist->points);
   }
   if (verbose>=4){
@@ -509,16 +686,54 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
     dist_type=other;
     if (alpha!=1){
       x_m_zet=fabs(x_m_zeta_in);
-      myFloat zeta_adj;
       if (x_m_zeta_in>=0){
         beta=beta_input;
         theta0 =theta0_x_gt_zeta;
-        zeta_adj=zeta;
+        positive_x = true;
       } else {
         beta=-beta_input;
         theta0 = -theta0_x_gt_zeta;
-        zeta_adj=-zeta;
+        positive_x = false;
       }
+      theta = (beta == -1 && alpha < 1) ? -1 : theta0/(pi/2);
+      rho = (1+theta)/2;
+      myFloat k_alpha = (alpha>1) ? alpha - 2 : alpha;
+      betaB =alpha * theta/ k_alpha;
+      if (fabs(betaB + 1) > .1)
+        betaB_p_1 = betaB + 1;
+      else
+        betaB_p_1 = atan((1+beta)*tan(alpha*pi/2)/(1-beta*pow(tan(alpha*pi/2),2)))
+                    /(k_alpha*pi/2);
+      gammaB = pow(cat0,-1/alpha); // = Zolotarev lambda^(1/alpha)
+      xB = x_m_zet/gammaB;
+    } else {
+      gammaB = 2/pi;
+      xB = (x_m_zeta_in - beta_input*gammaB*log(gammaB))/gammaB;
+      if (xB >= 0) {
+        betaB = beta_input;
+        positive_xB = true;
+      } else {
+        betaB = -beta_input;
+        positive_xB=false;
+        xB = -xB;
+      }
+      betaB_p_1=betaB+1;
+      if (x_m_zeta_in >= 0) {
+        beta = beta_input;
+      } else {
+        beta = -beta_input;
+      }
+    }  //alpha == 1
+    avoid_series_small_x = xB!=0 && ((alpha == 1) || (alpha <= .1) || (alpha<1 && beta == 1));
+    use_series_small_x = !avoid_series_small_x && xB < .001;
+    avoid_series_large_x = (alpha > 1) && (beta == -1);
+    use_series_large_x = (!avoid_series_large_x) && pow(xB,-alpha) < .001;
+
+    if (use_series_small_x || use_series_large_x) return; 
+    
+    // Set up the items needed for the integration
+    if (alpha !=1) {
+/*
       myFloat x_m_zet_tol = 0;
       switch (pm) {
         case S0:
@@ -535,13 +750,14 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
       } else {
         use_f_zeta = false;
       }
-      // Set up the items needed for the integration
+*/
       th_min=0;
       if (fabs(alpha_minus_one)> threshhold_1 * fabs(beta)) {
         th_span=(pi2)+theta0;
         add_l = theta0-(pi2);
         add_r = max<myFloat>(static_cast<myFloat>(0),pi-alpha*(th_span));
       } else {
+	myFloat zeta_adj = (x_m_zeta_in>=0) ? zeta : -zeta;     
         th_span = (zeta_adj<0)
                     ? pi-(pi2*alpha_minus_one+atan(1/abs(zeta_adj)))/alpha
                     : (pi2*alpha_minus_one+atan(1/abs(zeta_adj)))/alpha;
@@ -627,11 +843,6 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
       c_ddx = c2/((alpha_minus_one)*(x_m_zeta_in));
     } else { // alpha = 1
       abs_x=fabs(x_m_zeta_in);
-      if (x_m_zeta_in >= 0) {
-        beta = beta_input;
-      } else {
-        beta = -beta_input;
-      }
       small_x_m_zet = abs_x < 10;
       i2b=1/(2*beta);
       p2b=pi*i2b;
@@ -710,7 +921,7 @@ void StandardStableDistribution<myFloat>::map_g() {
   neval+=2;
   
   if (verbose>1)
-    cout << "  g_hi = " << g_hi << ", g_lo = " << g_lo << endl;
+    cout << "  g_hi = " << fmt << g_hi << ", g_lo = " << fmt << g_lo << endl;
   gSolve<myFloat> g_s(0., this, true);
   if (g_hi>=g_lo && g_lo>1){
     if (verbose>1)
@@ -741,7 +952,7 @@ void StandardStableDistribution<myFloat>::map_g() {
     th_guess(1,lower, g_lower, upper, g_upper);
     
     if (verbose>1)
-      cout << "  theta 2 range from th_guess = " << lower << " to " << upper << endl;
+      cout << "  theta 2 range from th_guess = " << fmt << lower << " to " << fmt << upper << endl;
     // toms748_solve passes lower, upper and max_iter by reference and changes them.
     max_iter = 1000;
     
@@ -756,11 +967,11 @@ void StandardStableDistribution<myFloat>::map_g() {
     if ( boost::math::isnan(g_theta2_error) || g_theta2_error > cap_g_theta2_error ){
       if (verbose>1) {
         cout << endl << "  theta2 is not good, g_theta_error: "
-        << g_theta2_error;
+        << fmt << g_theta2_error;
         if (boost::math::isnan(g_theta2_error))
           cout << endl;
         else
-          cout << " > " << cap_g_theta2_error << endl;
+          cout << " > " << fmt << cap_g_theta2_error << endl;
       }
       good_theta2=false;
 //      sort(points.begin(),points.end());
@@ -772,9 +983,9 @@ void StandardStableDistribution<myFloat>::map_g() {
   g_dd_theta2=dlng_dth(theta2);
   myFloat th;
   if (verbose>=2)
-    cout << endl << "    theta2 = " << theta2
-    << ", log(g(theta2)) = " << ln_g_theta2 << ", iterations = " << max_iter << endl
-    << "    ddx_lng(theta2) = " << g_dd_theta2 <<endl;
+    cout << endl << "    theta2 = " << fmt << theta2
+    << ", log(g(theta2)) = " << fmt << ln_g_theta2 << ", iterations = " << max_iter << endl
+    << "    ddx_lng(theta2) = " << fmt << g_dd_theta2 <<endl;
   vector<double> ln_g_lo={-.1,-.2,-.3,-.4,-.5,-.75,
     -1,-2,-3,-4,-6,-8,-10,-12,-14,-16,
     -18,-20,-24,-28,-32,-36,-40,-50, -60,-70,-80, -100, -120, -140};
@@ -786,7 +997,7 @@ void StandardStableDistribution<myFloat>::map_g() {
       myFloat target = ln_g_theta2+(*ln_g)[j];
       if (target >= log(g_s.g_max)) break;
       if (verbose >=2) {
-        cout << "    target log(g) = " << target << endl;
+        cout << "    target log(g) = " << fmt << target << endl;
       }
       g_s.set_value(target);
       pair<myFloat,myFloat> th_pair;
@@ -807,8 +1018,8 @@ void StandardStableDistribution<myFloat>::map_g() {
       points.push_back(th_new);
       th=th_new;
       if (verbose>=2){
-        cout << "    theta = " << th
-        << ", log(g(theta)) = " << log(g(th)) << ", Iterations = " << max_iter << endl;
+        cout << "    theta = " << fmt << th
+        << ", log(g(theta)) = " << fmt << log(g(th)) << ", Iterations = " << max_iter << endl;
       }
     }
     if (points.size() == 3) {
@@ -855,8 +1066,8 @@ void StandardStableDistribution<myFloat>::map_g() {
       points.push_back(th_new);
       th=th_new;
       if (verbose>=2){
-        cout << "    theta = " << th
-        << ", log(g(theta)) = " << log(g(th)) << ", Iterations = " << max_iter << endl;
+        cout << "    theta = " << fmt << th
+        << ", log(g(theta)) = " << fmt << log(g(th)) << ", Iterations = " << max_iter << endl;
       }
     }
     if (points.size() == npts_low) {

@@ -100,7 +100,7 @@ int main(int argc, char *argv[]) {
   
   Vec alphas(6);    alphas << .1, .5, 1, 1.5, 1.99, 2;
   Vec betas(5);     betas << -1., -.5, 0, .5, 1;
-  
+ 
   int n_gauss = 10;   // Use 10point Gauss, 21 point Kronrod rule
   mpreal::set_default_prec(64);
   Kronrod<mpreal> g_k_big(n_gauss);
@@ -130,12 +130,18 @@ int main(int argc, char *argv[]) {
     for (int ib=0; ib<betas.size(); ib++) {
       Vec q =quantile(probs , alphas(ia), betas(ib), gamma, delta, pm, true, false,
                       1e-9, ctls, verbose);
+	  for (int i = 0; i < q.size(); ++i) {
+		  if (boost::math::isnan(q(i)))
+			  cout << setw(10) << "i = " << setw(10) << i
+			  << setw(10) << "prob = " << Fmt<double>() << probs(i)
+			  << setw(10) << "q = " << Fmt<double>() << q(i) << endl;
+	  }
       StandardStableDistribution<double> std_stable_dist(alphas(ia), betas(ib), ctls, verbose);
       DstableQuick<double> std_stable_dist_quick(&std_stable_dist);
       high_resolution_clock::time_point t0 = high_resolution_clock::now();
       Vec d_exact = pdf(q, alphas(ia), betas(ib), gamma, delta, pm, true, ctls, verbose);
       high_resolution_clock::time_point t1 = high_resolution_clock::now();
-      Vec d_quick = std_stable_dist_quick(q);
+	  Vec d_quick = std_stable_dist_quick(q);
       high_resolution_clock::time_point t2 = high_resolution_clock::now();
       duration<double, std::milli> time_exact = (t1-t0);
       duration<double, std::milli> time_quick = (t2-t1);

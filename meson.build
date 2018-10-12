@@ -1,5 +1,5 @@
 project('Stable Distribution', 'cpp', default_options : ['cpp_std=c++11'],
-         version : '1.0.2')
+         version : '1.1.0')
 
 compiler=meson.get_compiler('cpp').get_id()
 
@@ -10,7 +10,8 @@ if compiler == 'gcc' or compiler == 'clang'
 	       '-Wno-sign-compare' ,
 	       '-Wno-uninitialized',
                '-Wno-return-type' ,
-               '-Wno-parentheses'
+               '-Wno-parentheses' ,
+               '-Wno-attributes'
       ] ,
       language : 'cpp' )
 elif compiler == 'msvc'
@@ -75,5 +76,6 @@ subdir('xcheck_to_file')
 subdir('trace')
 subdir('Zolotarev')
 subdir('trace_zolotarev')
+subdir('xcheck_series_to_file')
 subdir('random_test')
 subdir('duality_check')

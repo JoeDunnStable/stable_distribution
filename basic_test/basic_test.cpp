@@ -128,26 +128,25 @@ int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
   xs.push_back(pow(10.,120));
   xs.push_back(pow(10.,150));
   xs.push_back(pow(10.,200));
-  xs.push_back(pow(10.,300));
   xs.push_back(std::numeric_limits<myFloat>::infinity());
   
+  Fmt<myFloat> fmt;
   out << endl;
-  int digits10 = static_cast<int>(-log(std::numeric_limits<myFloat>::epsilon())/log(myFloat(10)));
   out << "Comparison of cdf to Levy formula for alpha = .5, beta = 1, digits10 = "
-  << digits10 << endl << endl;
+  << fmt.digits10 << endl << endl;
   StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
   Zolotarev<myFloat> zol(alpha, beta, &ctls.controller, verbose);
   out << setw(8) << right << "alpha"
   << setw(8) << right << "beta"
   << setw(13) << right << "x"
   << setw(8) << right << "tail"
-  << setw(35) << right << "log(pLevy)"
-  << setw(35) << right << "log(cdf)"
+  << setw(fmt.width) << right << "log(pLevy)"
+  << setw(fmt.width) << right << "log(cdf)"
   << setw(10) << right << "epsdiff"
   << setw(15) << right << "abserr"
   << setw(4) << right << "tc"
   << setw(7) << right << "neval"
-  << setw(35) << right << "log(zol_cdf)"
+  << setw(fmt.width) << right << "log(zol_cdf)"
   << setw(10) << right << "epsdiff"
   << setw(2) << right << "T"
   << endl << endl;
@@ -170,13 +169,13 @@ int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
     << setw(8) << setprecision(3) << fixed << myFloat(beta)
     << setw(13) << setprecision(3) << scientific << myFloat(x)
     << setw(8) << right << ((lower_tail) ? "lower" : "upper")
-    << setw(35) << setprecision(26) << scientific << r_Levy
-    << setw(35) << setprecision(26) << scientific << r
+    << fmt << r_Levy
+    << fmt << r
     << setw(10) << setprecision(1) << fixed << eps
     << setw(15) << setprecision(5) << scientific << std_stable_dist.abserr
     << setw(4) << std_stable_dist.termination_code
     << setw(7) << std_stable_dist.neval
-    << setw(35) << setprecision(26) << scientific << r_zol
+    << fmt << r_zol
     << setw(10) << fmt_eps(eps_zol)
     << setw(2) << (zol.result_type==asymptotic ? "A" : "C")
     << (pass1 ? "" : " FAIL") << endl;
@@ -322,27 +321,26 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
   xs.push_back(pow(10.,120));
   xs.push_back(pow(10.,150));
   xs.push_back(pow(10.,200));
-  xs.push_back(pow(10.,300));
   xs.push_back(std::numeric_limits<myFloat>::infinity());
   
   int verbose = 0;
+  Fmt<myFloat> fmt;
   out << endl;
-  int digits10 = static_cast<int>(-log(std::numeric_limits<myFloat>::epsilon())/log(myFloat(10)));
   out << "Comparison of pdf to Levy formula for alpha = .5, beta = 1, digits10 = "
-  << digits10 << endl << endl;
+  << fmt.digits10 << endl << endl;
   StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
   Zolotarev<myFloat> zol(alpha, beta, &ctls.controller, verbose);
   int log_flag=1;
   out << setw(13) << right << "alpha"
   << setw(13) << right << "beta"
   << setw(13) << right << "x"
-  << setw(35) << right << "log(dLevy)"
-  << setw(35) << right << "log(pdf_myFloat)"
+  << setw(fmt.width) << right << "log(dLevy)"
+  << setw(fmt.width) << right << "log(pdf_myFloat)"
   << setw(10) << right << "epsdiff"
   << setw(15) << right << "abserr"
   << setw(4) << right << "TC"
   << setw(7) << right << "neval"
-  << setw(35) << right << "log(zol_pdf)"
+  << setw(fmt.width) << right << "log(zol_pdf)"
   << setw(10) << right << "epsdiff"
   << setw(2) << right << "T"
   << endl << endl;
@@ -359,13 +357,13 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
     out << setw(13) << setprecision(5) << fixed << myFloat(alpha)
     << setw(13) << setprecision(5) << fixed << myFloat(beta)
     << setw(13) << setprecision(3) << scientific << myFloat(x)
-    << setw(35) << setprecision(26) << scientific << r_Levy
-    << setw(35) << setprecision(26) << scientific << r
+    << fmt << r_Levy
+    << fmt << r
     << setw(10) << setprecision(1) << fixed << eps
     << setw(15) << setprecision(5) << scientific << std_stable_dist.abserr
     << setw(4) << std_stable_dist.termination_code
     << setw(7) << std_stable_dist.neval
-    << setw(35) << setprecision(26) << scientific << r_zol
+    << fmt << r_zol
     << setw(10) << fmt_eps(eps_zol)
     << setw(2) << (zol.result_type==asymptotic ? "A" : "C")
     << (pass1 ? "" : " FAIL") << endl;
@@ -374,20 +372,20 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
   }
   out << endl;
   out << "Comparison of pdf to Taleb formula for alpha = 1.5, beta = 1, digits10 = "
-  << digits10 << endl << endl;
+  << fmt.digits10 << endl << endl;
   alpha = 1.5;
   StandardStableDistribution<myFloat> stable_1_pt_5(alpha, beta, ctls, verbose);
   Zolotarev<myFloat> zol_1_pt_5(alpha, beta, &ctls.controller, verbose);
   out << setw(13) << right << "alpha"
   << setw(13) << right << "beta"
   << setw(13) << right << "x"
-  << setw(35) << right << "log(pdf_Taleb)"
-  << setw(35) << right << "log(pdf_myFloat)"
+  << setw(fmt.width) << right << "log(pdf_Taleb)"
+  << setw(fmt.width) << right << "log(pdf_myFloat)"
   << setw(10) << right << "epsdiff"
   << setw(15) << right << "abserr"
   << setw(4) << right << "TC"
   << setw(7) << right << "neval"
-  << setw(35) << right << "log(zol_pdf)"
+  << setw(fmt.width) << right << "log(zol_pdf)"
   << setw(10) << right << "epsdiff"
   << setw(2) << right << "T"
   << endl << endl;
@@ -412,13 +410,13 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
     out << setw(13) << setprecision(5) << fixed << myFloat(alpha)
     << setw(13) << setprecision(5) << fixed << myFloat(beta)
     << setw(13) << setprecision(3) << scientific << myFloat(x)
-    << setw(35) << setprecision(26) << scientific << r_taleb
-    << setw(35) << setprecision(26) << scientific << r
+    << fmt << r_taleb
+    << fmt << r
     << setw(10) << setprecision(1) << fixed << eps
     << setw(15) << setprecision(5) << scientific << stable_1_pt_5.abserr
     << setw(4) << stable_1_pt_5.termination_code
     << setw(7) << stable_1_pt_5.neval
-    << setw(35) << setprecision(26) << scientific << r_zol
+    << fmt << r_zol
     << setw(10) << fmt_eps(eps_zol)
     << setw(2) << (zol_1_pt_5.result_type==asymptotic ? "A" : "C")
     << (pass1 ? "" : " FAIL") << endl;
@@ -462,26 +460,25 @@ int test_stable_ddx_pdf(ostream& out, Controllers<myFloat> ctls) {
   xs.push_back(pow(10.,120));
   xs.push_back(pow(10.,150));
   xs.push_back(pow(10.,200));
-  xs.push_back(pow(10.,300));
   xs.push_back(std::numeric_limits<myFloat>::infinity());
   
   int verbose = 0;
+  Fmt<myFloat> fmt;
   out << endl;
-  int digits10 = static_cast<int>(-log(std::numeric_limits<myFloat>::epsilon())/log(myFloat(10)));
   out << "Comparison of ddx_pdf to Levy formula for alpha = .5, beta = 1, digits10 = "
-  << digits10 << endl << endl;
+  << fmt.digits10 << endl << endl;
   StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
   Zolotarev<myFloat> zol(alpha, beta, &ctls.controller, verbose);
   out << setw(13) << right << "alpha"
   << setw(13) << right << "beta"
   << setw(13) << right << "x"
-  << setw(35) << right << "Levy_ddx_pdf"
-  << setw(35) << right << "ddx_pdf_myFloat"
+  << setw(fmt.width) << right << "Levy_ddx_pdf"
+  << setw(fmt.width) << right << "ddx_pdf_myFloat"
   << setw(10) << right << "epsdiff"
   << setw(15) << right << "abserr"
   << setw(4) << right << "termination_code"
   << setw(7) << right << "neval"
-  << setw(35) << right << "zol_ddx_pdf)"
+  << setw(fmt.width) << right << "zol_ddx_pdf)"
   << setw(10) << right << "epsdiff"
   << setw(2) << right << "T"
   << endl << endl;
@@ -498,13 +495,13 @@ int test_stable_ddx_pdf(ostream& out, Controllers<myFloat> ctls) {
     out << setw(13) << setprecision(5) << fixed << myFloat(alpha)
     << setw(13) << setprecision(5) << fixed << myFloat(beta)
     << setw(13) << setprecision(3) << scientific << myFloat(x)
-    << setw(35) << setprecision(26) << scientific << r_Levy
-    << setw(35) << setprecision(26) << scientific << r
+    << fmt << r_Levy
+    << fmt << r
     << setw(10) << setprecision(1) << fixed << eps
     << setw(15) << setprecision(5) << scientific << std_stable_dist.abserr
     << setw(4) << std_stable_dist.termination_code
     << setw(7) << std_stable_dist.neval
-    << setw(35) << setprecision(26) << scientific << r_zol
+    << fmt << r_zol
     << setw(10) << fmt_eps(eps_zol)
     << setw(2) << (zol.result_type==asymptotic ? "A" : "C")
     << (pass1 ? "" : " FAIL") << endl;
@@ -565,16 +562,16 @@ int test_stable_quantile(ostream& out, Controllers<myFloat> ctls) {
   lower_tails.push_back(0);
   
   out << endl;
-  int digits10 = static_cast<int>(-log(std::numeric_limits<myFloat>::epsilon())/log(myFloat(10)));
+  Fmt<myFloat> fmt;
   out << "Comparison of quantile to Levy formula for alpha = .5, beta = 1, digits10 = "
-  << digits10 << endl << endl;
+  << fmt.digits10 << endl << endl;
   StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
   out << setw(8) << right << "alpha"
   << setw(8) << right << "beta"
   << setw(13) << right << "p"
   << setw(8) << right << "tail"
-  << setw(35) << right << "Levy_quantile"
-  << setw(35) << right << "quantile"
+  << setw(fmt.width) << right << "Levy_quantile"
+  << setw(fmt.width) << right << "quantile"
   << setw(10) << right << "epsdiff"
   << setw(7) << right << "iters"
   << setw(7) << right << "neval"
@@ -594,8 +591,8 @@ int test_stable_quantile(ostream& out, Controllers<myFloat> ctls) {
     << setw(8) << setprecision(3) << fixed << myFloat(beta)
     << setw(13) << setprecision(3) << scientific << myFloat(p)
     << setw(8) << right << ((lower_tail) ? "lower" : "upper")
-    << setw(35) << setprecision(26) << scientific << r_Levy
-    << setw(35) << setprecision(26) << scientific << r
+    << fmt << r_Levy
+    << fmt << r
     << setw(10) << setprecision(1) << fixed << eps
     << setw(7) << std_stable_dist.num_iter
     << setw(7) << std_stable_dist.neval

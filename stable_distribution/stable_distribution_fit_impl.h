@@ -229,7 +229,7 @@ Vec DstableQuick<myFloat>::operator() (const Vec& x)
     for (n1=n0; n1<n-1 && xx(n1)<x_break_3; ++n1);
     Vec pt_x_low(n1-n0);
     Vec ln_dt_x_low(n1-n0);
-    for (unsigned int i = n0; i<n1; ++i) {
+    for (unsigned int i= n0; i<n1; ++i) {
       pt_x_low(i-n0) = mycdf(dist_t,xx(i));
       ln_dt_x_low(i-n0) = log(pdf(dist_t, xx(i)));
     }

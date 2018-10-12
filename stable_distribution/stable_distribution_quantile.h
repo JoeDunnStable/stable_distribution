@@ -33,15 +33,16 @@ public:
   p(p), std_stable_dist(std_stable_dist), lower_tail(lower_tail),
   log_p(log_p), pm(pm), neval(0) {}
   myFloat operator()(const myFloat q) {
+    Fmt<myFloat> fmt;
     if (std_stable_dist->verbose)
       cout << "Calling cdf with parmerters" << endl
-           << "q = " << q << ", alpha = " << std_stable_dist->alpha
-           << ", beta = " << std_stable_dist->beta_input << endl
-           << "targeting p = " << p << endl;
+           << "q = "  << fmt << q << ", alpha = "  << fmt << std_stable_dist->alpha
+           << ", beta = " << fmt << std_stable_dist->beta_input << endl
+           << "targeting p = " << fmt << p << endl;
     
     myFloat r = std_stable_dist->cdf(q, lower_tail, log_p, pm)-p;
     if (std_stable_dist->verbose)
-      cout << ", Resulting delta = " << r << endl;
+      cout << ", Resulting delta = " << fmt << r << endl;
     neval += std_stable_dist->neval;
     return r;
   }
@@ -116,13 +117,13 @@ myFloat StandardStableDistribution<myFloat>::quantile(myFloat p, int lower_tail,
                                               static_cast<double>(beta_input),
                                               lower_tail,log_p)));
   if (verbose)
-    cout << "Guess for q " << guess << endl;
+    cout << "Guess for q " << fmt << guess << endl;
   myFloat factor = max<myFloat>(static_cast<myFloat>(1),static_cast<myFloat>(.1)*fabs(guess));
   bool rising = lower_tail;
   boost::uintmax_t maxiter = 1000;
   r=boost::math::tools::bracket_and_solve_root2(p_s,guess,factor,rising,tol,maxiter);
   if (verbose)
-    cout << "r.first = " << r.first << ", r.second - " << r.second
+    cout << "r.first = " << fmt << r.first << ", r.second - " << fmt << r.second
          << " in " << maxiter << " iterations" << endl;
   neval = p_s.neval;
   num_iter = static_cast<int>(maxiter);

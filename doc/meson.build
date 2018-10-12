@@ -1,4 +1,4 @@
-doxygen = find_program('Doxygen')
+doxygen = find_program('doxygen')
 
 if(doxygen.found())
   src_doxygen = [meson.source_root()+'/README.md', \

@@ -39,6 +39,7 @@ bool sd_lt(const sort_data<T> &lhs,const sort_data<T>& rhs) {
 template<typename myFloat>
 void toms726(const int n_gauss, const vector<myFloat>& a, const vector<myFloat>& b,
              vector<myFloat>& x, vector<myFloat>& w, const int verbose){
+  Fmt<myFloat> fmt;
   using MatrixXF = Eigen::Matrix<myFloat,Eigen::Dynamic,Eigen::Dynamic>;
   using VectorXF = Eigen::Matrix<myFloat,Eigen::Dynamic,1>;
   int sumbgt0=0;
@@ -74,8 +75,8 @@ void toms726(const int n_gauss, const vector<myFloat>& a, const vector<myFloat>&
   std::sort(srt_d.begin(), srt_d.end(),sd_lt<myFloat>);
   for (int i=0; i<n_gauss; i++){
     if (verbose)
-      cout << setw(25) << setprecision(16) << srt_d.at(i).a
-           << setw(25) << srt_d.at(i).index << endl;
+      cout<< fmt  << srt_d.at(i).a
+           << fmt << srt_d.at(i).index << endl;
     x.at(i)=srt_d.at(i).a;
     w.at(i)=e.at(srt_d.at(i).index);
   }

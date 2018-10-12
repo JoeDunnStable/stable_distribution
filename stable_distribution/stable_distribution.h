@@ -28,7 +28,9 @@
 #include <vector>
 #include "adaptive_integration.h"
 #include "myFloat.h"
-
+#include <Eigen/Dense>
+using Eigen::Array;
+using Eigen::Dynamic;
 
 namespace stable_distribution {
 
@@ -82,11 +84,14 @@ public:
   static myFloat NegInf;                    ///< negative inifinity
   static myFloat zeta_tol;                  ///< tolerance for the use of f_zeta
   static double threshhold_1;               ///< used to define near=abs(alpha-1) < threshhold_1 * abs(beta)
+  static Array<myFloat, Dynamic, Dynamic> gamma_at_integers;  ///<gamma function and derivatives at integers
+  static int max_n;     ///< the maximum number of terms for series expansions
   static bool initialized;                  ///< have the static member been initialized
   myFloat alpha;                            ///< the structural parameter to stable distribution
   myFloat alpha_minus_one;                  ///< alpha minus one.  Used near 1
   myFloat beta_input;                       ///< beta as input,  sign might be flipped in the computation 
 private:
+  Fmt<myFloat> fmt;                         /// a manipulator to format myFloat to maximum precision
   myFloat x_input;                          ///< the input x in the S0 parameterization, sign might be flipped in computation
   myFloat x_m_zeta_input;                   ///< x - zeta as input, sign might be flipped in computation
 
@@ -94,19 +99,36 @@ private:
   myFloat zeta;                             ///< beta * tan( pi * alpha / 2 
   myFloat theta0_x_gt_zeta;                 ///< the lower limit of integration when x  > zeta 
   myFloat cat0;                             ///< cos(alpha * theta0) 
+  myFloat gammaB;                           ///< Zolotarev lambda^(1/alpha)
+  std::vector<myFloat> Q_cdf;               ///< the coefficients in the asumptotic expansion for cdf
+                                            ///< when abs(beta) == 1
+  std::vector<myFloat> Q_pdf;               ///< the coefficents in the asymptotic expansion for pdf
+                                            ///< when abs(beta) == 1
+  std::vector<myFloat> Q_ddx_pdf;           ///< the coefficents in the asymptotic expansion for ddx_pdf
+                                            ///< when abs(beta) == 1
 
   // variable dependent on x used when alpha != 1
   myFloat beta;                             ///< the skewness parameter actually used in computation 
-  myFloat theta0;                           ///< the lower limit of integration used 
-  myFloat x_m_zet;                          ///< x - zeta actually used 
-  myFloat add_l;                            ///< adjustment parameter used when lower limit is moved to zero 
+  myFloat betaB;                            ///< for alpha==1, beta for Zolotarev's B representation
+  myFloat betaB_p_1;                        ///< betaB + 1 via numerically stable method
+  myFloat theta0;                           ///< the lower limit of integration used
+  bool positive_x;                          ///< Indicator the sign x has been flipped
+  bool positive_xB;                         ///< Indicator the sign of xB has been flipped
+  myFloat theta;                            ///< for alpha!=1, theta0/(pi/2)
+  myFloat rho;                              ///< for alpah!=1, (1+theta)/2
+  myFloat x_m_zet;                          ///< x - zeta actually used
+  myFloat xB;                               ///< x in Zolotarev's B representation = x_m_zeta/gammaB
+  bool avoid_series_small_x;                ///< avoid the use of the small x series even if integral is inaccurate
+  bool use_series_small_x;                  ///< use the Zolotarev small x serries
+  bool avoid_series_large_x;                ///< avoid the use of the large x series even if integral is inaccurate
+  bool use_series_large_x;                  ///< use the Zolotarev large x series
+  myFloat add_l;                            ///< adjustment parameter used when lower limit is moved to zero
   myFloat add_r;                            ///< adjustment parameter used when upper limit is moved to zero
   myFloat th_span;                          ///< the length of the interval of integration
   myFloat th_min;                           ///< the lower limit of integration
   myFloat th_max;                           ///< the upper limit of integration
   myFloat c2;                               ///< scaling parameter for pdf 
   myFloat c_ddx;                            ///< scaling parameter for ddx_pdf
-  bool use_f_zeta;                          ///< use result for zeta w/o integrating
 
   /// special cases 
   enum dist {Cauchy=1, normal=2, fin_support=3, other=4};
@@ -162,6 +184,9 @@ public:
   // additional output from integrator
   myFloat abserr;                           ///< the estimated absolute error of calculation 
   int neval;                               ///< the number of function evaluations 
+  // additional output from series
+  int n_series;                             ///< the number of terms used in the series
+  myFloat error_series;                     ///< the estimated error in the series expansion
   typename IntegrationController<myFloat>::TerminationCode termination_code;                                 ///< the error code from the integrator
   int num_iter;                             ///< the number of iterations required by quantile
   /// initialize the constants pi and pi2
@@ -171,58 +196,13 @@ public:
                              myFloat beta,                       ///< [in] the skewness parameter of the distribution
                              Controllers<myFloat> ctls,        ///< [in] reference to integration controller
                              int verbose                        ///< [in] indicator for verbose output
-  ) : alpha(alpha), alpha_minus_one(alpha-1), beta_input(beta), x_input(NAN),
-  x_m_zeta_input(NAN), controllers(ctls), verbose(verbose) {
-    if (!initialized) initialize();
-    if (fabs(alpha_minus_one)>64*std::numeric_limits<myFloat>::epsilon()){
-      if (fabs(alpha_minus_one) > threshhold_1 * fabs(beta)) {
-        zeta = -beta_input*tan(alpha*pi2);
-        theta0_x_gt_zeta = atan(beta_input*tan(alpha*pi2))/alpha;
-      } else {
-        zeta = beta_input/tan(pi2*alpha_minus_one);
-        theta0_x_gt_zeta = ((zeta<0)? 1 : -1) *
-                           (pi2 - (pi2*alpha_minus_one + atan(1/fabs(zeta)))/alpha);
-      }
-      theta0_x_gt_zeta = min(pi2,max<myFloat>(-pi2,theta0_x_gt_zeta));
-      cat0=1/sqrt(1+zeta*zeta);
-    } else {
-      zeta=0;
-      this->alpha=1;
-      this->alpha_minus_one=0;
-      c2=pi2*fabs(1/(2*beta_input));
-      c_ddx=-c2*pi2/beta_input;
-    }
-
-  };
-
+  );
   /// consturctor using AlphaMinusOne
   StandardStableDistribution(AlphaMinusOne<myFloat> a_m_1,      ///< [in] the structural parameter minus one
                              myFloat beta,                       ///< [in] the skewness parameter of the distribution
                              Controllers<myFloat> ctls,        ///< [in] reference to integration controller
                              int verbose                        ///< [in] indicator for verbose output
-  ) : alpha(a_m_1.alpha_minus_one + 1), alpha_minus_one(a_m_1.alpha_minus_one), beta_input(beta), x_input(NAN),
-  x_m_zeta_input(NAN), controllers(ctls), verbose(verbose) {
-    if (!initialized) initialize();
-    if (fabs(alpha_minus_one)> 64 * std::numeric_limits<myFloat>::min()){
-      if (fabs(alpha_minus_one) > threshhold_1 * fabs(beta)) {
-        zeta = -beta_input*tan(alpha*pi2);
-        theta0_x_gt_zeta = atan(beta_input*tan(alpha*pi2))/alpha;
-      } else {
-        zeta = beta_input/tan(pi2*alpha_minus_one);
-        theta0_x_gt_zeta = ((zeta<0)? 1 : -1) *
-        (pi2 - (pi2*alpha_minus_one + atan(1/fabs(zeta)))/alpha);
-      }
-      theta0_x_gt_zeta = min(pi2,max<myFloat>(-pi2,theta0_x_gt_zeta));
-      cat0=1/sqrt(1+zeta*zeta);
-    } else {
-      zeta=0;
-      this->alpha=1;
-      this->alpha_minus_one=0;
-      c2=pi2*fabs(1/(2*beta_input));
-      c_ddx=-c2*pi2/beta_input;
-    }
-    
-  };
+  );
   
   /// set or reset x - zeta
   void set_x_m_zeta(myFloat x,  ///< [in] x - zeta whether positive or negative
@@ -252,7 +232,13 @@ public:
         return g_a_near_1_r(th);
     }
   }
+  bool use_series() {
+    return (boost::math::isfinite(x_input) && dist_type==other && (fabs(xB) <= 1e-3 || fabs(xB) >= 1e3));
+  }
 private:
+  /// Q initializer used by series when |beta| == 1
+  void Q_initializer() ;
+  
   /// g when th_l is theta 0 
   myFloat g_l(myFloat th_l ///< [in] point of integration when theta0 is moved to zero
              ) const;
@@ -352,6 +338,26 @@ public:
                   Parameterization pm=S0  ///< [in] the parameterization
                   );
   /// return the location and size of the mode of the standard stable distribution
+  
+  /// pdf using zolotarev expansion for very large x
+  myFloat series_large_x_pdf(myFloat x0, Parameterization pm=S0);
+  
+  /// ddx_pdf using zolotarev expansion for very large x
+  myFloat series_large_x_ddx_pdf(myFloat x0, Parameterization pm=S0);
+  
+  /// cdf using zolotarev expansion for very large x
+  myFloat series_large_x_cdf(myFloat x0, int lower_tail, Parameterization pm=S0);
+  
+  /// pdf using zolotarev expansion for very small x
+  myFloat series_small_x_pdf(myFloat x0, Parameterization pm=S0);
+  
+  /// ddx_pdf using zolotarev expansion for very small x
+  myFloat series_small_x_ddx_pdf(myFloat x0, Parameterization pm=S0);
+  
+  /// cdf using zolotarev expansion for very small x
+  myFloat series_small_x_cdf(myFloat x0, int lower_tail, Parameterization pm=S0);
+  
+
   std::pair<myFloat, myFloat> mode(myFloat dbltol,         ///< [in] the tolerance needed for the solution
                int verbose=0,          ///< [in] verbose indicator for mode calculation
                Parameterization pm=S0  ///< [in] the parameterization

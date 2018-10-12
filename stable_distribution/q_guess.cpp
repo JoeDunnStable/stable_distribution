@@ -10,6 +10,13 @@
 #include <boost/math/tools/toms748_solve.hpp>
 #include <boost/math/constants/constants.hpp>
 #include <iostream>
+using std::cout;
+using std::endl;
+using std::ostream;
+#include <iomanip>
+using std::setw;
+using std::setprecision;
+using std::scientific;
 
 namespace stable_distribution {
 
@@ -76,6 +83,22 @@ public:
             return r-p;
         }
     }
+	friend
+	ostream& operator<< (ostream& os, pt_solve& solver) {
+	os << "rplus  = " << setprecision(16) << scientific << solver.rplus << endl
+		<< "rminus = " << setprecision(16) << scientific << solver.rminus << endl
+		<< "knot1  = " << setprecision(16) << scientific << solver.knot1 << endl
+		<< "knot2  = " << setprecision(16) << scientific << solver.knot2 << endl
+		<< "a0     = " << setprecision(16) << scientific << solver.a0 << endl
+		<< "a1     = " << setprecision(16) << scientific << solver.a1 << endl
+		<< "a2     = " << setprecision(16) << scientific << solver.a2 << endl
+		<< "a3     = " << setprecision(16) << scientific << solver.a3 << endl
+		<< "p      = " << setprecision(16) << scientific << solver.p << endl
+		<< "pi     = " << setprecision(16) << scientific << pt_solve::pi << endl
+		<< "pi2    = " << setprecision(16) << scientific << pt_solve::pi2 << endl;
+
+	return os;
+	}
     
 };
 
@@ -84,6 +107,8 @@ const double pt_solve::pi2 = boost::math::constants::half_pi<double>();
 
 class rel_eps_tolerance
 {
+
+
 public:
     rel_eps_tolerance(double eps) : eps(eps) {};
     inline bool operator()(const double& a, const double& b)
@@ -103,7 +128,7 @@ typedef policy<overflow_error<ignore_error> > my_policy;
 
 double q_guess(double p,double alpha,double beta,int lower_tail,int log_p){
     pt_solve pt_s(p,alpha,beta,lower_tail,log_p);
-    students_t_distribution<double, my_policy> st(alpha);
+	students_t_distribution<double, my_policy> st(alpha);
     double lower = 0;
     double upper = 1;
     rel_eps_tolerance tol(1e-6);

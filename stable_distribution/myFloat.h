@@ -183,6 +183,24 @@ void reset_prec<mpreal>(mpreal& x) {
 
 #endif
 
+template<typename T>
+class Fmt {
+public:
+  int digits10;
+  int width;
+  Fmt() {
+    digits10=static_cast<int>(-log(std::numeric_limits<T>::epsilon())/log(10));
+    width=digits10+8;
+  }
+  friend
+  std::ostream& operator<< (std::ostream& os, const Fmt<T>& fmt) {
+    os << std::setw(fmt.width)
+    << std::setprecision(fmt.digits10)
+    << std::scientific;
+    return os;
+  }
+};
+
 #include <string>
 using std::string;
 
@@ -210,12 +228,6 @@ namespace Eigen {
 #endif
   
 } // namespace eigen
-
-
-
-
-
-
 
 #endif /* myFloat_h */
 

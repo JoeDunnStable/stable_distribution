@@ -200,10 +200,30 @@ int main(int argc, const char * argv[]) {
 #endif //MPFR_FLOAT
   } else if (test_name.substr(0,3) == "pdf" || test_name.substr(0,7) == "ddx_pdf") {
     if (argc < 5) { show_usage(string(argv[0])); return 1;}
+	size_t len = test_name.length();
     istringstream ss4((string(argv[4])));
     double x; ss4 >> x;
-    cout << ", x = " << x;
-    Parameterization pm = S0;
+	if (len >= 6 && test_name.substr(len-6,6)=="double")
+      cout << ", x = " << x;
+#ifdef MPREAL
+	istringstream ss4_mpreal((string(argv[4])));
+	mpreal x_mpreal; ss4_mpreal >> x_mpreal;
+	if (len >=6 && test_name.substr(len - 6, 6) == "mpreal")
+	  cout << ", x_mpreal = " << x_mpreal;
+#endif
+#ifdef MPFR_FLOAT
+	istringstream ss4_mpfr_float((string(argv[4])));
+	MpfrFloat x_mpfr_float; ss4_mpfr_float >> x_mpfr_float;
+	if (len >= 10 && test_name.substr(len - 10, 10) == "mpfr_float")
+		cout << ", x_mpfr_float = " << x_mpfr_float;
+#endif
+#ifdef CPP_BIN_FLOAT
+	istringstream ss4_cpp_bin_float((string(argv[4])));
+	CppBinFloat x_cpp_bin_float;  ss4_cpp_bin_float >> x_cpp_bin_float;
+	if (len >= 13 && test_name.substr(len - 13, 13) == "cpp_bin_float")
+		cout << ", x_cpp_bin_float = " << x_cpp_bin_float;
+#endif
+	Parameterization pm = S0;
     if (argc > 5) {
       istringstream ss5((string(argv[5])));
       int tmp;
@@ -233,9 +253,9 @@ int main(int argc, const char * argv[]) {
       mpreal result;
       cout.precision(bits2digits(mpfr::mpreal::get_default_prec()));
       if (test_name == "pdf_mpreal") {
-        result = dist.pdf(x, log_p, pm);
+        result = dist.pdf(x_mpreal, log_p, pm);
       } else {
-        result = dist.ddx_pdf(x, pm);
+        result = dist.ddx_pdf(x_mpreal, pm);
       }
       cout << setw(15) << "Result = " << result << endl;
     }
@@ -246,9 +266,9 @@ int main(int argc, const char * argv[]) {
       CppBinFloat result;
       cout.precision(std::numeric_limits<CppBinFloat>::digits10);
       if (test_name == "pdf_cpp_bin_float") {
-        result = dist.pdf(x, log_p, pm);
+        result = dist.pdf(x_cpp_bin_float, log_p, pm);
       } else {
-        result = dist.ddx_pdf(x, pm);
+        result = dist.ddx_pdf(x_cpp_bin_float, pm);
       }
       cout << setw(15) << "Result = " << result << endl;
     }
@@ -259,9 +279,9 @@ int main(int argc, const char * argv[]) {
       MpfrFloat result;
       cout.precision(std::numeric_limits<MpfrFloat>::digits10);
       if (test_name == "pdf_mpfr_float") {
-        result = dist.pdf(x, log_p, pm);
+        result = dist.pdf(x_mpfr_float, log_p, pm);
       } else {
-        result = dist.ddx_pdf(x, pm);
+        result = dist.ddx_pdf(x_mpfr_float, pm);
       }
       cout << setw(15) << "Result = " << result << endl;
     }

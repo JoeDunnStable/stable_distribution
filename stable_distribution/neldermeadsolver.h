@@ -118,7 +118,7 @@ public:
         if (tmp1 > max1)
           max1 = tmp1;
 
-          T tmp2 = (x0.col(index[i]) - x0.col(index[0]) ).template lpNorm<Eigen::Infinity>();
+        T tmp2 = (x0.col(index[i]) - x0.col(index[0]) ).template lpNorm<Eigen::Infinity>();
         if (tmp2 > max2)
           max2 = tmp2;
       }

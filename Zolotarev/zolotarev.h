@@ -61,6 +61,7 @@ public:
   static Array<myFloat, Dynamic, Dynamic> gamma_at_integers;  ///<gamma function and derivatives at integers
   static bool initialized;   ///< Are the static elements initialized
   static myFloat pi;         ///< Cached pi to requisite precision
+  static int digits10;           ///< Precision at time of initialization
   static int max_n_conv;     ///< the maximum number of terms for convergent series
   static int max_n_asymp;    ///< the maximum number of terms for asymptotic series
   static vector<myFloat> points;     ///< the initial subdivision of [0, pi/2] for integration

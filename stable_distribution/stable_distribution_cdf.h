@@ -140,6 +140,18 @@ myFloat StandardStableDistribution<myFloat>::cdf(myFloat x, int lower_tail, int 
     case other :
       if (verbose)
         cout << "cdf: General case:" << endl;
+      if (use_series_small_x) {
+        ret = series_small_x_cdf(x, lower_tail, pm);
+	ret = (log_p) ? log(ret) : ret;
+	abserr = fabs(error_series);
+	return ret;
+      } 
+      if (use_series_large_x) {
+        ret = series_large_x_cdf(x, lower_tail, pm);
+	ret = (log_p) ? log(ret) : ret;
+	abserr = fabs(error_series);
+	return ret;
+      }
       myFloat F=0;
       if (alpha !=1 && small_x_m_zet) {
           myFloat F_zeta = (alpha<1 && fabs(beta)==1)
@@ -149,6 +161,7 @@ myFloat StandardStableDistribution<myFloat>::cdf(myFloat x, int lower_tail, int 
           if (verbose)
             cout << "cdf: Using difference from F_zeta, " << F_zeta << endl;
           F = F_zeta;
+	 /*
         if (use_f_zeta) {
           if (verbose)
             cout << "cdf:: Using F_zeta" << endl;
@@ -158,21 +171,24 @@ myFloat StandardStableDistribution<myFloat>::cdf(myFloat x, int lower_tail, int 
           if (verbose)
             cout << "cdf: Using difference from F_zeta, " << F_zeta << endl;
         }
+	*/
       }
-      if (good_theta2) {
+      bool avoid_series = small_x_m_zet ? avoid_series_small_x : avoid_series_large_x;
+      if (good_theta2 || avoid_series) {
         myFloat integral = integrate_cdf();
         myFloat error = abserr;
-        if ( (alpha_minus_one > 0 && beta == -1)
+        if ( avoid_series
             || error < max(pow((alpha!=1)?x_m_zet:abs_x,-alpha),
                            4*controllers.controller.epsrel)* fabs(integral)
-            || small_x_m_zet) {
+            ) {
           if (verbose)
-            cout << "cdf: Integration error is small or x_m_zet is small.  Using integral" << endl;
+            cout << "cdf: Integration error is small or series is unreiable.  Using integral" << endl;
           if (alpha != 1 && small_x_m_zet) {
             F -= ((lower_tail != (x_m_zeta_input > 0)) ? 1 : -1) * integral;
             ret = (log_p) ? log(F) : F;
             if (verbose)
-              cout << "cdf returning " << ret << endl;
+              cout << "cdf: " << endl
+	      << "integral is delta with F_zeta returning: " << ret << endl;
             return ret;
           } else {
             bool useF = !((x >= zeta && lower_tail) || (x < zeta && !lower_tail));
@@ -182,17 +198,21 @@ myFloat StandardStableDistribution<myFloat>::cdf(myFloat x, int lower_tail, int 
               cout << "cdf: " << endl << "  Using tail integral, returning " << ret << endl;
             return ret;
           }
-        }
-      }
+        } // avoid series or low integration error
+      } // good_theta2
       if (alpha != 1 && small_x_m_zet) {
         if (verbose)
-          cout << "cdf: Bad theta2 for small x_m_zet.  Using F_zeta" << endl;
-        return (log_p) ? log(F) : F;
+          cout << "cdf: Bad theta2 or large integration error for small x_m_zet.  Using series for small x" << endl;
+        F = series_small_x_cdf(x, lower_tail, pm);
+	abserr = fabs(error_series);
+     	return (log_p) ? log(F) : F;
       } else {
         if (verbose)
-          cout << "cdf: Bad theta2 or large integration error for large x_m_zet.  Using pPareto." << endl;
+          cout << "cdf: Bad theta2 or large integration error for large x_m_zet.  Using series large x." << endl;
         // Note we're assuming here that a bad theta2 for alpha==1 implies a large x.
-        return pPareto(x_m_zeta_input, alpha, beta_input, lower_tail, log_p);
+        ret = series_large_x_cdf(x, lower_tail, pm);
+        abserr = fabs(error_series);
+	return (log_p) ? log(ret) : ret;
       }
   } // switch on dist_type
 } // StandardStableDistribution<myFloat>::cdf
@@ -211,4 +231,299 @@ myFloat pPareto(myFloat x, myFloat alpha, myFloat beta, bool lower_tail, bool lo
   }
 } // pPareto
   
+/// cdf using zolotarev expansion for large x
+template<typename myFloat>
+myFloat StandardStableDistribution<myFloat>::series_large_x_cdf(myFloat x0, int lower_tail, Parameterization pm) {
+  if (verbose>0)
+    cout << endl << "series_large_x_cdf: " << endl;
+  myFloat Machine_eps = std::numeric_limits<myFloat>::epsilon();
+  myFloat result_series;
+  if (alpha < 1) {
+    // Zolotarev formula 2.4.3 for upper tail, convergent for large x
+    if (xB == 0) {
+      result_series= std::numeric_limits<myFloat>::quiet_NaN();
+      error_series = std::numeric_limits<myFloat>::infinity();
+      n_series = 0;
+    } else {
+      result_series = 0;
+      error_series = 0;
+      myFloat abs_series = 0;
+      myFloat term{std::numeric_limits<myFloat>::quiet_NaN()};
+      myFloat abs_term{std::numeric_limits<myFloat>::quiet_NaN()};
+      for (int n=1; n<=max_n; ++n) {
+        abs_term = tgamma_ratio(n*alpha+1,myFloat(n+1)) * pow(xB,-n*alpha)/(n*alpha*pi);
+        term = abs_term * (0 == n%2 ? -1 : 1) * sin(pi*n*rho*alpha);
+        myFloat error = fabs(term) * ((n*alpha+1)*digamma(n*alpha+1) + n*alpha) * Machine_eps;
+        if (verbose>1)
+          cout << "n = " << n << ", term = " << fmt << term << endl;
+        n_series = n;
+        result_series += term;
+        error_series += error;
+        abs_series += fabs(term);
+        if (!boost::math::isfinite(abs_term) || abs_term < 2*Machine_eps*fabs(result_series)) break;
+      }
+      result_series = (lower_tail == positive_x) ? 1-result_series : result_series;
+      error_series += abs_term;
+    } //xB !=0
+    
+  } else if (alpha == 1) {
+    
+    // Zolotarev 2.5.23 is asymptotic for large x
+    // unlike the convergent formula this formula requires x > 0
+    if (xB == 0) {
+      result_series = std::numeric_limits<myFloat>::quiet_NaN();
+      error_series = std::numeric_limits<myFloat>::max();
+      n_series= 0;
+    } else if (betaB == -1) {
+      // Zolotarev formula 2.5.20
+      myFloat psi = exp(xB-1);
+      myFloat fac = exp(-psi)/sqrt(2*pi*psi);
+      if (verbose > 1)
+        cout << "psi = " << fmt << psi << endl
+        << "fac = " << fmt << fac << endl;
+      myFloat term = fac;
+      if (verbose > 1)
+        cout << "n = " << 0 << ", term = " << fmt << term << endl;
+      result_series = term;
+      myFloat old_term=term;
+      myFloat psi_n = 1;
+      n_series = 0;
+      for (int n=1; n<Q_cdf.size(); ++n) {
+        psi_n /= psi;
+        term = fac * Q_cdf.at(n) * psi_n;
+        if (fabs(term) > fabs(old_term)) {
+          break;
+        }
+        n_series = n;
+        if (verbose > 1)
+          cout << "n = " << n << ", term = " << fmt << term << endl;
+        result_series += term;
+      }
+      error_series = fabs(term) + fabs(result_series-fac)*exp(-pow(psi,.25));
+      result_series = (lower_tail == positive_xB) ? 1-result_series : result_series;
+    } else { // xB > 0 & betaB_ != -1
+      myFloat log_x=log(xB);
+      result_series = 0;
+      myFloat term{std::numeric_limits<myFloat>::quiet_NaN()};
+      myFloat old_term{std::numeric_limits<myFloat>::quiet_NaN()};
+      int num_small_terms=0;
+      for (int n=1; n<=max_n; ++n) {
+        n_series=n;
+        myFloat fac{0};
+        for (int l=0; l<=n; ++l){
+          myFloat r_l_n{0};
+          for (int m=l; m<=n; ++m) {
+            myFloat term0=binomial_coefficient<myFloat>(n,m)*binomial_coefficient<myFloat>(m,l);
+            term0 *= (1-2*((m-l)%2)) * gamma_at_integers(m-l,n);
+            term0 *=  pow(betaB, m) * pow(pi/2*(betaB_p_1),n-m) * sin(pi/2*(n-m));
+            r_l_n += term0;
+            if (verbose > 2){
+              if (m == l)
+                cout << "r(" << l << ", " << n << "} = " << fmt << term0;
+              else
+                cout << " + " << fmt << term0;
+            }
+          }
+          if (verbose > 2) cout << endl;
+          if (verbose>1)
+            cout << "r(" << l << ", " << n << ") * log_x ^ l = "
+            << fmt << r_l_n << " * " << fmt << log_x << " ^ " << l
+            << " = " << fmt << r_l_n << " * " << fmt << pow(log_x,l)
+            << " = " << fmt << r_l_n * pow(log_x,l) << endl;
+          fac += r_l_n*pow(log_x,l);
+          if (verbose>1)
+            cout << "fac: " << fmt << fac << endl;
+        }
+        term=fac * pow(xB,-n) / (factorial<myFloat>(n)*pi);
+        if (verbose>1)
+          cout << "n = "<< n << ", term = " << fmt << term << endl;
+        if (n>1 && fabs(term) > fabs(old_term)) break;
+        result_series += term;
+        if (verbose>0)
+          cout << "n = " << n
+          << ", result_series = " << fmt << result_series << endl;
+        if (fabs(term) < fabs(result_series) * Machine_eps) {
+          if (num_small_terms > 0) break;
+          num_small_terms=num_small_terms+1;
+        } else {
+          num_small_terms=0;
+          old_term=term;
+        }
+      }
+      result_series = (lower_tail == positive_xB) ? 1-result_series : result_series;
+      error_series=fabs(term) + fabs(result_series) * Machine_eps;
+    } // xB !=0
+    
+  } else {
+    // alpha > 1
+    
+    // Zolotarev Formula 2.5.4 is an asymptotic series for large x
+    // for beta != -1
+    if (xB == 0) {
+      result_series = std::numeric_limits<myFloat>::quiet_NaN();
+      error_series = std::numeric_limits<myFloat>::max();
+      n_series = 0;
+    } else if (beta == -1) {
+      myFloat psi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
+      myFloat fac = exp(-psi)/sqrt(2*pi*alpha*psi);
+      if (verbose > 1)
+        cout << "psi = " << fmt << psi << endl
+        << "fac = " << fmt << fac << endl;
+      myFloat term = fac;
+      myFloat old_term = term;
+      n_series=0;
+      if (verbose > 1)
+        cout << "n = " << 0 << ", term = " << fmt << term << endl;
+      result_series = term;
+      myFloat alpha_star = 1/alpha;
+      myFloat alpha_psi_n = 1;
+      for (int n = 1; n<Q_cdf.size(); ++n) {
+        alpha_psi_n /= (alpha_star*psi);
+        term = fac * Q_cdf.at(n) * alpha_psi_n;
+        if (fabs(term) > fabs(old_term)) break;
+        if (verbose > 1)
+          cout << "n = " << n << ", term = " << fmt << term << endl;
+        n_series = n;
+        result_series += term;
+        old_term = term;
+      }
+      error_series = fabs(term)+fabs(result_series-fac)*exp(-pow(psi,.25));
+      result_series = (lower_tail==positive_x) ? 1 - result_series : result_series;
+    } else {
+      myFloat abs_term =(1/(pi))*tgamma(alpha)/tgamma<myFloat>(2)*pow(xB,-alpha);
+      myFloat term=abs_term*sin(pi/2*(2-alpha)*(betaB_p_1));
+      result_series=term;
+      myFloat old_abs_term=abs_term;
+      n_series =1;
+      if (verbose > 1)
+        cout << "n = " << n_series
+        << ", term = " << fmt << term << endl;
+      for (int k=2; k<=max_n; ++k) {
+        abs_term=(1/(pi))*tgamma_ratio(k*alpha,myFloat(k+1))* pow(xB,-alpha*k);
+        term=abs_term*sin(pi*k/2*(2-alpha)*(betaB_p_1));
+        if (abs_term > old_abs_term) break;
+        n_series = k;
+        if (verbose>1)
+          cout <<"n = " << k << ", term = " << fmt << term << endl;
+        result_series += term;
+        if (abs_term < Machine_eps * fabs(result_series)) break;
+        old_abs_term=abs_term;
+      }
+      error_series = abs_term + fabs(result_series)*Machine_eps;
+      result_series = (lower_tail==positive_x) ? 1-result_series : result_series;
+    } // xB != 0
+    
+  }  // alpha > 1
+  if (verbose>0)
+    cout <<"result_series = " << fmt << result_series
+    << ", error_series = " << fmt << error_series
+    << ", n_series = " << n_series << endl;
+
+  return result_series;
+} // series_large_x_cdf
+
+/// cdf using zolotarev expansion for small x_m_zeta
+template<typename myFloat>
+myFloat StandardStableDistribution<myFloat>::series_small_x_cdf(myFloat x0, int lower_tail, Parameterization pm) {
+  if (verbose>0)
+    cout << endl << "series_small_x_cdf: " << endl;
+  myFloat result_series;
+  myFloat Machine_eps = std::numeric_limits<myFloat>::epsilon();
+  if (alpha < 1) {
+    if (beta == 1) {
+      // Zolotarev Theorem 2.5.3, asymptotic for small x
+      myFloat psi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
+      myFloat fac = exp(-psi)/sqrt(2*pi*alpha*psi);
+      if (verbose > 1)
+        cout << "psi = " << fmt << psi << endl
+        << "fac = " << fmt << fac << endl;
+      myFloat term = fac;
+      if (verbose > 1)
+        cout << "n = " << 0 << ", term = " << fmt << term << endl;
+      myFloat old_term = term;
+      result_series = term;
+      myFloat alpha_star = alpha;
+      myFloat alpha_psi_n = 1;
+      for (int n = 1; n<Q_cdf.size(); ++n) {
+        alpha_psi_n /= (alpha_star*psi);
+        term = fac * Q_cdf.at(n) * alpha_psi_n;
+        if (fabs(term) > fabs(old_term)) break;
+        if (verbose > 1)
+          cout << "n = " << n << ", term = " << fmt << term << endl;
+        n_series = n;
+        result_series += term;
+        old_term = term;
+      }
+      error_series = fabs(term) + fabs(result_series-fac)*exp(-pow(psi,.25));
+      result_series = (lower_tail == positive_x) ? result_series : 1 - result_series;
+      
+    } else { // beta != 1
+      // Zolotarev Formula 2.5.3 asymptotic for x -> 0 adjusted to give upper tail
+      n_series = 0;
+      myFloat term = (beta==-1)?0:.5 * (1 + betaB);
+      myFloat abs_term = 0;
+      result_series = term;
+      myFloat old_abs_term = fabs(term);
+      myFloat abs_tail = fabs(term);
+      if (verbose > 1)
+        cout << "n = " << n_series << ", term = " << fmt << result_series << endl;
+      if (xB != 0 && beta != -1) {
+        for (int k=1; k<=max_n; ++k) {
+          abs_term = tgamma_ratio(k/alpha,myFloat(k+1))* pow(xB,k)/(pi * alpha);
+          term = -abs_term * sin(pi/2 * k * (1-betaB));
+          if (k > 1 && abs_term > old_abs_term) break;
+          if (verbose>1)
+            cout << "n = " << k << ", term = " << fmt << term << endl;
+          n_series = k;
+          result_series += term;
+          abs_tail += fabs(term);
+          if (abs_term < Machine_eps * result_series) break;
+          old_abs_term=abs_term;
+        }
+      }
+      result_series = (lower_tail==positive_x) ? 1 - result_series : result_series;
+      error_series = ((betaB!=-1)?abs_term:fabs(term)) + abs_tail*Machine_eps;
+    }
+  } else if (alpha == 1) {
+    n_series = 0;
+    result_series = std::numeric_limits<myFloat>::quiet_NaN();
+    error_series = std::numeric_limits<myFloat>::max();
+    
+  } else {
+    // alpha > 1
+    // Zolotarev 2.4.6
+    
+    //    Formula 2.4.3 is a convergent series that works well for x <=1, but
+    //    but suffers from extreme rounding errors for larger x.
+    n_series = 0;
+    myFloat term{.5*(1+theta)};
+    myFloat abs_term{fabs(term)};
+    result_series = term;
+    error_series = 0;
+    if (verbose > 1)
+      cout << "n = " << n_series << ", term = " << fmt << term << endl;
+    myFloat abs_series = fabs(term);
+    for (int n=1; n<=max_n; ++n) {
+      abs_term = tgamma_ratio(n/alpha+1,myFloat(n+1))*pow(xB,n)/(n * pi);
+      term = abs_term * (1==n%2 ? -1 : 1) * sin(pi*n*rho);
+      myFloat error = fabs(term) * ((n/alpha+1)*digamma(n/alpha+1) + n)*Machine_eps;
+      if (verbose>1)
+        cout << "n = " << n << ", term = " << fmt << term << endl;
+      n_series = n;
+      result_series += term;
+      error_series += error;
+      abs_series += fabs(term);
+      if (!boost::math::isfinite(abs_term) || abs_term < 2*Machine_eps*fabs(result_series)) break;
+    }
+    result_series = (lower_tail==positive_x) ? 1-result_series : result_series;
+    error_series += abs_term;
+    
+  }  // alpha > 1
+  if (verbose > 0)
+    cout << "result_series = " << fmt << result_series
+    << ", error_series = " << fmt << error_series
+    << ", n_series = " << n_series << endl;
+  return result_series;
+} // series_small_x_cdf
+
 } //namespace stable_distribution
