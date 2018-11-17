@@ -29,6 +29,9 @@
 #include "adaptive_integration.h"
 #include "myFloat.h"
 #include <Eigen/Dense>
+#include <mutex>
+using std::mutex;
+using std::unique_lock;
 using Eigen::Array;
 using Eigen::Dynamic;
 
@@ -75,6 +78,7 @@ struct AlphaMinusOne {
 template<typename myFloat>
 class STABLE_EXP StandardStableDistribution {
 public:
+  static mutex stable_mutex;                ///< protect duing initialization of static variables
   static myFloat pi;                        ///< pi
   static myFloat pi2;                       ///< pi/2
   static myFloat eps;                       ///< machine epsilon

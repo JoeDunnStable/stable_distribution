@@ -43,6 +43,7 @@ using boost::math::tools::polynomial;
 template<typename myFloat>
 myFloat pdf_smallA(myFloat x, myFloat alpha, myFloat beta, bool log_flag=false);
 
+template<typename myFloat> mutex StandardStableDistribution<myFloat>::stable_mutex;
 template<typename myFloat> myFloat StandardStableDistribution<myFloat>::pi;
 template<typename myFloat> myFloat StandardStableDistribution<myFloat>::pi2;
 template<typename myFloat> myFloat StandardStableDistribution<myFloat>::eps;
@@ -59,18 +60,21 @@ template<typename myFloat> int StandardStableDistribution<myFloat>::max_n;
 
 template<typename myFloat>
 void StandardStableDistribution<myFloat>::initialize(){
-  pi = const_pi<myFloat>();
-  pi2 = pi/2;
-  eps = std::numeric_limits<myFloat>::epsilon();
-  xmin = std::numeric_limits<myFloat>::min();
-  large_exp_arg = log(std::numeric_limits<myFloat>::max());
-  PosInf = std::numeric_limits<myFloat>::infinity();
-  NegInf = -PosInf;
-  zeta_tol = 200*eps;
-  threshhold_1 = .5;
-  max_n = 50;
-  gamma_at_integers = gamma_derivative_at_integers<myFloat>(max_n);
-  initialized = true;
+  unique_lock<mutex> stable_lock(stable_mutex);
+  if (!initialized) {
+    pi = const_pi<myFloat>();
+    pi2 = pi/2;
+    eps = std::numeric_limits<myFloat>::epsilon();
+    xmin = std::numeric_limits<myFloat>::min();
+    large_exp_arg = log(std::numeric_limits<myFloat>::max());
+    PosInf = std::numeric_limits<myFloat>::infinity();
+    NegInf = -PosInf;
+    zeta_tol = 200*eps;
+    threshhold_1 = .5;
+    max_n = 50;
+    gamma_at_integers = gamma_derivative_at_integers<myFloat>(max_n);
+    initialized = true;
+  }
 }
 
 /// consturctor
@@ -217,8 +221,11 @@ void StandardStableDistribution<myFloat>::Q_initializer() {
       // the 2 * i moment of normal distriubtion is (i-1)!!
       tmp += double_factorial<myFloat>(i-1)*q_cdf_n.at(n)[i];
     Q_cdf.push_back(tmp);
-    Q_pdf.push_back((alpha_star/2)*(2*n+1)*Q_cdf.at(n-1)+Q_cdf.at(n));
-    Q_ddx_pdf.push_back(((alpha_star/2)*(2*n+1)-1)*Q_pdf.at(n-1) + Q_pdf.at(n));
+    Q_pdf.push_back((alpha_star/2)*(2*n-1)*Q_cdf.at(n-1)+Q_cdf.at(n));
+    Q_ddx_pdf.push_back(((alpha_star/2)*(2*n-1-2/alpha))*Q_pdf.at(n-1) + Q_pdf.at(n));
+/*
+    Q_ddx_pdf.push_back(((alpha_star/2)*(2*n-1)-1)*Q_pdf.at(n-1) + Q_pdf.at(n));
+*/
     if (verbose > 1)
       cout << setw(10) << n
       << fmt << Q_cdf.back()
@@ -240,17 +247,25 @@ myFloat StandardStableDistribution<myFloat>::g_l(myFloat th_l) const{
   else if ((alpha < 1 && th_l > th_span*(1-4*eps)) || (alpha >1 && th_l<4*xmin))
     return PosInf;
   else {
-    myFloat costh = max<myFloat>(static_cast<myFloat>(0),sin(th_l-add_l));
-    myFloat cos_costh = max<myFloat>(static_cast<myFloat>(0),-sin((alpha-1)*th_l+add_l))/costh;
-    myFloat att = alpha*th_l;
+    myFloat cos_sin_att;
+    myFloat cos_costh;
+    if (add_l != 0) {
+      myFloat costh = max<myFloat>(static_cast<myFloat>(0),sin(th_l-add_l));
+      cos_sin_att = costh/sin(alpha*th_l);
+      cos_costh = max<myFloat>(static_cast<myFloat>(0),-sin((alpha-1)*th_l+add_l))/costh;
+    } else {
+      myFloat sincth = sinc_pi(th_l);
+      cos_sin_att = sincth/(alpha*sinc_pi(alpha*th_l));
+      cos_costh = -(alpha-1)*sinc_pi((alpha-1)*th_l)/sincth;
+    }
     myFloat pow2;
     
     if (fabs(zeta) < 1 || fabs(x_m_zeta_input+zeta) > .1 * fabs(zeta)) {
-      myFloat x_cos_sin = x_m_zet*(costh/sin(att));
+      myFloat x_cos_sin = x_m_zet*(cos_sin_att);
       myFloat pow1 = pow(x_cos_sin,alpha);
       pow2 = pow(cat0*pow1,(1/(alpha-1)));
     } else {
-      myFloat ln_pow1 = alpha * (log(fabs(zeta))+log1p(-x_m_zeta_input/zeta-1)+log(costh/sin(att)));
+      myFloat ln_pow1 = alpha * (log(fabs(zeta))+log1p(-x_m_zeta_input/zeta-1)+log(cos_sin_att));
       myFloat ln_pow2 = (log(cat0) + ln_pow1)/(alpha-1);
       pow2 = exp(ln_pow2);
     }
@@ -277,15 +292,23 @@ myFloat StandardStableDistribution<myFloat>::g_r(myFloat th_r) const{
     // rounding errors cause problems when th_r is near th_span.  th_l works better.
     if (th_l< min(256*eps, th_span/2))
       return g_l(th_l);
-    myFloat att = alpha*th_r+add_r;
-    myFloat costh = max<myFloat>(0,sin(th_r));
-    myFloat cos_costh = max(static_cast<myFloat>(0.),static_cast<myFloat>(sin((alpha-1)*th_r+add_r)))/costh;
+    myFloat cos_sin_att;
+    myFloat cos_costh;
+    if (add_r != 0) {
+      myFloat costh = max<myFloat>(0,sin(th_r));
+      cos_sin_att = costh/sin(alpha*th_r+add_r);
+      cos_costh = max(static_cast<myFloat>(0.),static_cast<myFloat>(sin((alpha-1)*th_r+add_r)))/costh;
+    } else {
+      myFloat sincth = sinc_pi(th_r);
+      cos_sin_att = sincth/(alpha*sinc_pi(alpha*th_r));
+      cos_costh = (alpha-1)*sinc_pi((alpha-1)*th_r)/sincth;
+    }
     myFloat pow2;
     if (x_m_zet < 1e100) {
-      myFloat pow1 = pow(x_m_zet*(costh/sin(att)),alpha);
+      myFloat pow1 = pow(x_m_zet*(cos_sin_att),alpha);
       pow2 = pow(cat0 * pow1,1/(alpha-1));
     } else {
-      myFloat ln_pow1 = alpha*(log(x_m_zet) + log(costh/sin(att)));
+      myFloat ln_pow1 = alpha*(log(x_m_zet) + log(cos_sin_att));
       pow2 = exp((log(cat0) + ln_pow1)/(alpha - 1));
     }
     myFloat ret = pow2*cos_costh;
@@ -724,10 +747,23 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
         beta = -beta_input;
       }
     }  //alpha == 1
-    avoid_series_small_x = xB!=0 && ((alpha == 1) || (alpha <= .1) || (alpha<1 && beta == 1));
-    use_series_small_x = !avoid_series_small_x && xB < .001;
-    avoid_series_large_x = (alpha > 1) && (beta == -1);
-    use_series_large_x = (!avoid_series_large_x) && pow(xB,-alpha) < .001;
+    myFloat eps_term_avoid = .01;
+    myFloat eps_term_use = pow(eps,.2);
+    if ((alpha<1 && beta == 1) || (alpha>=1 && beta == -1)) {
+      myFloat xbound_avoid = alpha==1 ? -log(eps_term_avoid)+1
+                           : alpha*pow(1/(eps_term_avoid*alpha*fabs(1-alpha)),1-1/alpha);
+      avoid_series_small_x = (xB!=0 && ((alpha == 1) || (alpha <= .1))) || ((alpha<1 && xB > xbound_avoid)  || (alpha>1 && xB > eps_term_avoid));
+      avoid_series_large_x = ((alpha>=1 && xB < xbound_avoid) || (alpha<1 && pow(xB,-alpha) > eps_term_avoid));
+      myFloat xbound_use = alpha==1 ? -log(eps_term_use)+1
+                        : alpha*pow(1/(eps_term_use*alpha*fabs(1-alpha)),1-1/alpha);
+      use_series_small_x = (!avoid_series_small_x) && ((alpha<1 && xB < xbound_use) || (alpha>1 && xB < eps_term_use)) ;
+      use_series_large_x = (!avoid_series_large_x) && ((alpha>=1 && xB > xbound_use) || (alpha<1 && pow(xB,-alpha) < eps_term_use));
+    } else {
+      avoid_series_small_x = (xB!=0 && ((alpha == 1) || (alpha <= .1))) || (xB > eps_term_avoid);
+      avoid_series_large_x = pow(xB,-alpha) > eps_term_avoid;
+      use_series_small_x = (!avoid_series_small_x) && xB < eps_term_use;
+      use_series_large_x = (!avoid_series_large_x) && pow(xB,-alpha) < eps_term_use;
+    }
 
     if (use_series_small_x || use_series_large_x) return; 
     
@@ -757,7 +793,7 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
         add_l = theta0-(pi2);
         add_r = max<myFloat>(static_cast<myFloat>(0),pi-alpha*(th_span));
       } else {
-	myFloat zeta_adj = (x_m_zeta_in>=0) ? zeta : -zeta;     
+        myFloat zeta_adj = (x_m_zeta_in>=0) ? zeta : -zeta;
         th_span = (zeta_adj<0)
                     ? pi-(pi2*alpha_minus_one+atan(1/abs(zeta_adj)))/alpha
                     : (pi2*alpha_minus_one+atan(1/abs(zeta_adj)))/alpha;

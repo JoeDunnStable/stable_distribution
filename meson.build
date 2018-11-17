@@ -1,5 +1,5 @@
 project('Stable Distribution', 'cpp', default_options : ['cpp_std=c++11'],
-         version : '1.1.0')
+         version : '1.2.0')
 
 compiler=meson.get_compiler('cpp').get_id()
 
@@ -64,7 +64,7 @@ incdir=include_directories(['.',
                             'Zolotarev'])
 
 add_test_setup('gcc', env: 'DYLD_LIBRARY_PATH='+join_paths(meson.build_root(),'stable_distribution'))
-
+add_test_setup('boost_1_68_0', env: 'DYLD_LIBRARY_PATH=/Users/jdunn/Documents/XCode/boost_1_68_0/stage/lib')
 subdir('doc')
 subdir('stable_distribution')
 subdir('basic_test')
@@ -79,3 +79,4 @@ subdir('trace_zolotarev')
 subdir('xcheck_series_to_file')
 subdir('random_test')
 subdir('duality_check')
+subdir('xcheck_two_files')

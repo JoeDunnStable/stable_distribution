@@ -102,13 +102,17 @@ myFloat StandardStableDistribution<myFloat>::ddx_pdf(myFloat x, Parameterization
         cout << "  General Case"<< endl;
       if (use_series_small_x) {
         ret = series_small_x_ddx_pdf(x, pm);
-	abserr = fabs(error_series);
-	return ret;
+        abserr = fabs(error_series);
+        if (verbose)
+          cout << "  x is very small.  Using series = " << fmt << ret << endl;
+        return ret;
       } 
       if (use_series_large_x) {
         ret = series_large_x_ddx_pdf(x, pm);
-	abserr = fabs(error_series);
-	return ret;
+        abserr = fabs(error_series);
+        if (verbose)
+          cout << "  x is very large.  Using series = " << fmt << ret << endl;
+        return ret;
       }
 /*      
       if (alpha != 1) { // 0 < alpha < 2	&  |beta| <= 1 from above
@@ -136,27 +140,30 @@ myFloat StandardStableDistribution<myFloat>::ddx_pdf(myFloat x, Parameterization
         ret = integrate_ddx_pdf();
         if (verbose) cout << "pdf:" << endl;
         myFloat error = max(c_g_theta2_error, abserr);
-        if (avoid_series || error < controllers.controller.epsrel * ret) {
+        if (avoid_series) {
           if (verbose)
-            cout << "  Integration error is below threshhold or series is unreliable. Using integral = " << ret << endl;
+            cout << "  Series is unreliable. Using integral = " << ret << endl;
+        } else if (error < controllers.controller.epsrel * fabs(ret)) {
+          if (verbose)
+            cout << "  Integration error is below threshhold. Using integral = " << ret << endl;
         } else {
-	  myFloat result_series = (small_x_m_zet) ? series_small_x_ddx_pdf(x, pm) : series_large_x_ddx_pdf(x, pm);
-	  if (fabs(error_series) > abserr || (xB!=0 && ((alpha > 1 && beta == -1 ) || (alpha<1 && beta == 1)))) {
+          myFloat result_series = (small_x_m_zet) ? series_small_x_ddx_pdf(x, pm) : series_large_x_ddx_pdf(x, pm);
+          if (fabs(error_series) > abserr ) {
             if (verbose)
-              cout << "  Integration ierror is above threshhold but better than series. Using integral = " << fmt << ret << endl;
+              cout << "  Integration error is above threshhold but better than series. Using integral = " << fmt << ret << endl;
           } else {
             ret = result_series;
-	    abserr = fabs(error_series);
+            abserr = fabs(error_series);
             if (verbose)
                cout << "  Integration error is above threshhold and worse than series.  Using series = " << fmt << ret << endl;
-	  }
+          }
         }
       } else { // bad theta2 and not avoid series
         abserr = NAN;
         termination_code = IntegrationController<myFloat>::bad_integrand;
         last = 0;
-	ret = (small_x_m_zet) ? series_small_x_ddx_pdf(x, pm) : series_large_x_ddx_pdf(x, pm);
-	abserr = fabs(error_series);
+        ret = (small_x_m_zet) ? series_small_x_ddx_pdf(x, pm) : series_large_x_ddx_pdf(x, pm);
+        abserr = fabs(error_series);
         if (verbose)
           cout << "  Bad theta2.  Using series = " << fmt << ret << endl;
       } // bad theta2
@@ -219,16 +226,16 @@ myFloat StandardStableDistribution<myFloat>::series_large_x_ddx_pdf(myFloat x0, 
       n_series = 0;
     } else if (betaB == -1) {
       // Derivative of Zolotarev formula 2.5.17 which is asymptotic for x large
-      myFloat psi = exp(xB-1);
-      if (exp(-psi) == 0) {
+      myFloat xi = exp(xB-1);
+      if (exp(-xi) == 0) {
         result_series = 0;
         n_series = 0;
         error_series = 0;
       } else {
         myFloat nu = 1;
-        myFloat fac = -nu*nu*pow(psi,(4-alpha)/(2*alpha))*exp(-psi)/sqrt(2*pi*alpha)/(gammaB*gammaB);
+        myFloat fac = -nu*nu*pow(xi,(4-alpha)/(2*alpha))*exp(-xi)/sqrt(2*pi*alpha)/(gammaB*gammaB);
         if (verbose > 1)
-          cout << "psi = " << fmt << psi << endl
+          cout << "xi = " << fmt << xi << endl
           << "nu  = " << fmt << nu << endl
           << "fac = " << fmt << fac << endl;
         myFloat term = fac;
@@ -237,19 +244,22 @@ myFloat StandardStableDistribution<myFloat>::series_large_x_ddx_pdf(myFloat x0, 
           cout << "n = " << 0 << ", term = " << fmt << term << endl;
         result_series = term;
         myFloat alpha_star = 1/alpha;
-        myFloat alpha_psi_n = 1;
+        myFloat alpha_xi_n = 1;
         for (int n = 1; n<Q_ddx_pdf.size(); ++n) {
-          alpha_psi_n /= (alpha_star*psi);
-          term = fac * Q_ddx_pdf.at(n) * alpha_psi_n;
+          alpha_xi_n /= (alpha_star*xi);
+          term = fac * Q_ddx_pdf.at(n) * alpha_xi_n;
           if (fabs(term) > fabs(old_term)) break;
           if (verbose > 1)
             cout << "n = " << n << ", term = " << fmt << term << endl;
           n_series = n;
           result_series += term;
           old_term = term;
+          if (fabs(term) <= eps*fabs(result_series) && fabs(alpha_xi_n) <= eps) break;
         }
         result_series *= (positive_xB)? 1 : -1;
-        error_series = fabs(term)+fabs(result_series)*exp(-psi-pow(psi,.25));
+        error_series = fabs(term)
+/*        +fabs(result_series)*exp(-xi-pow(xi,.25)) */
+        ;
       }
     } else {
       // Zolotarev 2.5.23 is the series series for large x
@@ -321,17 +331,17 @@ myFloat StandardStableDistribution<myFloat>::series_large_x_ddx_pdf(myFloat x0, 
     
     if (beta == -1) {
       // Proof of Zolotarev Theorem 2.5.2 asymptotic for x -> infinity
-      myFloat psi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
-      if (psi < 1) {
+      myFloat xi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
+      if (xi < 1) {
         result_series = std::numeric_limits<myFloat>::quiet_NaN();
         error_series = std::numeric_limits<myFloat>::max();
         n_series = 0;
       } else {
         myFloat nu = pow(abs(1-alpha),-1/alpha);
-        myFloat exp_m_psi = exp(-psi);
-        myFloat fac = (exp_m_psi!=0) ? -nu*nu*pow(psi,(4-alpha)/(2*alpha))*exp_m_psi/sqrt(2*pi*alpha)/(gammaB*gammaB) : 0;
+        myFloat exp_m_xi = exp(-xi);
+        myFloat fac = (exp_m_xi!=0) ? -nu*nu*pow(xi,(4-alpha)/(2*alpha))*exp_m_xi/sqrt(2*pi*alpha)/(gammaB*gammaB) : 0;
         if (verbose > 1)
-          cout << "psi = " << fmt << psi << endl
+          cout << "xi = " << fmt << xi << endl
           << "nu  = " << fmt << nu << endl
           << "fac = " << fmt << fac << endl;
         myFloat term = fac;
@@ -340,19 +350,22 @@ myFloat StandardStableDistribution<myFloat>::series_large_x_ddx_pdf(myFloat x0, 
           cout << "n = " << 0 << ", term = " << fmt << term << endl;
         result_series = term;
         myFloat alpha_star = 1/alpha;
-        myFloat alpha_psi_n = 1;
+        myFloat alpha_xi_n = 1;
         for (int n = 1; n<Q_ddx_pdf.size(); ++n) {
-          alpha_psi_n /= (alpha_star*psi);
-          term = fac * Q_ddx_pdf.at(n) * alpha_psi_n;
+          alpha_xi_n /= (alpha_star*xi);
+          term = fac * Q_ddx_pdf.at(n) * alpha_xi_n;
           if (fabs(term) > fabs(old_term)) break;
           if (verbose > 1)
             cout << "n = " << n << ", term = " << fmt << term << endl;
           n_series = n;
           result_series += term;
           old_term = term;
+          if (fabs(term) <= eps*fabs(result_series) && fabs(alpha_xi_n) <= eps) break;
         }
         result_series = (positive_x) ? result_series : -result_series;
-        error_series = fabs(term)+fabs(result_series)*exp(-pow(psi,.25));
+        error_series = fabs(term)
+        /*        +fabs(result_series)*exp(-pow(xi,.25)) */
+        ;
       }
     } else if ( xB == 0) {
       result_series = std::numeric_limits<myFloat>::quiet_NaN();
@@ -412,17 +425,17 @@ myFloat StandardStableDistribution<myFloat>::series_small_x_ddx_pdf(myFloat x0, 
   if (alpha < 1) {
     if (beta==1) {
       // Modification of the proof of Theorem 2.5.2, asymptotic for small x
-      myFloat psi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
-      if (psi < 1) {
+      myFloat xi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
+      if (xi < 1) {
         result_series = std::numeric_limits<myFloat>::quiet_NaN();
         error_series = std::numeric_limits<myFloat>::max();
         n_series = 0;
       } else {
         myFloat nu = pow(abs(1-alpha),-1/alpha);
-        myFloat exp_m_psi = exp(-psi);
-        myFloat fac = (exp_m_psi != 0) ? nu*nu*pow(psi,(4-alpha)/(2*alpha))*exp_m_psi/sqrt(2*pi*alpha)/(gammaB*gammaB) : 0;
+        myFloat exp_m_xi = exp(-xi);
+        myFloat fac = (exp_m_xi != 0) ? nu*nu*pow(xi,(4-alpha)/(2*alpha))*exp_m_xi/sqrt(2*pi*alpha)/(gammaB*gammaB) : 0;
         if (verbose > 1)
-          cout << "psi = " << fmt << psi << endl
+          cout << "xi = " << fmt << xi << endl
           << "nu  = " << fmt << nu << endl
           << "fac = " << fmt << fac << endl;
         myFloat term = fac;
@@ -431,19 +444,22 @@ myFloat StandardStableDistribution<myFloat>::series_small_x_ddx_pdf(myFloat x0, 
         myFloat old_term = term;
         result_series = term;
         myFloat alpha_star = alpha;
-        myFloat alpha_psi_n = 1;
+        myFloat alpha_xi_n = 1;
         for (int n = 1; n<Q_ddx_pdf.size(); ++n) {
-          alpha_psi_n /= (alpha_star*psi);
-          term = fac * Q_ddx_pdf.at(n) * alpha_psi_n;
+          alpha_xi_n /= (alpha_star*xi);
+          term = fac * Q_ddx_pdf.at(n) * alpha_xi_n;
           if (fabs(term) > fabs(old_term)) break;
           if (verbose > 1)
             cout << "n = " << n << ", term = " << fmt << term << endl;
           n_series = n;
           result_series += term;
           old_term = term;
+          if (fabs(term) <= eps*fabs(result_series) && fabs(alpha_xi_n) <= eps) break;
         }
         result_series *= (positive_x) ? 1 : -1;
-        error_series = fabs(term)+fabs(result_series)*exp(-pow(psi,.25));
+        error_series = fabs(term)
+/*        +fabs(result_series)*exp(-pow(xi,.25)) */
+        ;
       }
     } else if (beta == 1 && xB >=10) {
       result_series=std::numeric_limits<myFloat>::quiet_NaN();

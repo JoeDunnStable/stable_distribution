@@ -14,6 +14,9 @@ using std::endl;
 #include <string>
 #include <algorithm>
 #include <chrono>
+using std::chrono::high_resolution_clock;
+using std::chrono::duration;
+
 #include <mpreal.h>
 using mpfr::mpreal;
 #include "stable_config.h"
@@ -24,6 +27,8 @@ using Vec = Eigen::Matrix<double, Eigen::Dynamic, 1>;
 #include <boost/math/tools/toms748_solve.hpp>
 
 #include <boost/filesystem.hpp>
+#include <boost/timer/timer.hpp>
+using boost::timer::auto_cpu_timer;
 
 using std::setw;
 using std::right;
@@ -35,22 +40,6 @@ using std::string;
 using std::stringstream;
 using std::sort;
 using boost::math::tools::toms748_solve;
-using std::chrono::high_resolution_clock;
-using std::chrono::duration;
-
-struct auto_timer {
-  high_resolution_clock::time_point start;
-  std::ostream& os;
-  auto_timer(std::ostream& os) : start(high_resolution_clock::now()),
-  os(os){}
-  auto_timer() : start(high_resolution_clock::now()),
-  os(std::cout) {}
-  ~auto_timer() {
-    duration<double> elapsed = high_resolution_clock::now() - start;
-    os << "Elapsed time = " << setprecision(3) << fixed << elapsed.count() << " seconds" << endl;
-  }
-};
-
 using namespace stable_distribution;
 
 static void show_usage (string name){
@@ -96,7 +85,7 @@ int main(int argc, char *argv[]) {
   string out_file = out_dir + "/quick_test.out";
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
-  auto_timer timer(out);
+  auto_cpu_timer timer(out);
   
   Vec alphas(6);    alphas << .1, .5, 1, 1.5, 1.99, 2;
   Vec betas(5);     betas << -1., -.5, 0, .5, 1;

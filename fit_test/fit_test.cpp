@@ -24,23 +24,8 @@ using std::string;
 using std::mt19937;
 using std::uniform_real_distribution;
 
-#include <chrono>
-using std::chrono::high_resolution_clock;
-using std::chrono::duration;
-
-struct auto_timer {
-  high_resolution_clock::time_point start;
-  std::ostream& os;
-  auto_timer(std::ostream& os) : start(high_resolution_clock::now()),
-  os(os){}
-  auto_timer() : start(high_resolution_clock::now()),
-  os(std::cout) {}
-  ~auto_timer() {
-    duration<double> elapsed = high_resolution_clock::now() - start;
-    os << "Elapsed time = " << std::setprecision(3) << std::fixed << elapsed.count() << " seconds" << endl;
-  }
-};
-
+#include <boost/timer/timer.hpp>
+using boost::timer::auto_cpu_timer;
 
 #include <boost/filesystem.hpp>
 
@@ -87,7 +72,7 @@ int main(int argc, char *argv[]) {
   string out_file = out_dir + "/test_stable_fit.out";
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
-  auto_timer timer(out);
+  auto_cpu_timer timer(out);
 
   NullBuffer null_buffer;
   ostream null_stream(&null_buffer);

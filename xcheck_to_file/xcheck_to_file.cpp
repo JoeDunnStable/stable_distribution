@@ -19,22 +19,8 @@ using std::stringstream;
 #include <limits>
 #include <fstream>
 #include <boost/filesystem.hpp>
-#include <chrono>
-using std::chrono::high_resolution_clock;
-using std::chrono::duration;
-
-struct auto_timer {
-  high_resolution_clock::time_point start;
-  std::ostream& os;
-  auto_timer(std::ostream& os) : start(high_resolution_clock::now()),
-  os(os){}
-  auto_timer() : start(high_resolution_clock::now()),
-  os(std::cout) {}
-  ~auto_timer() {
-    duration<double> elapsed = high_resolution_clock::now() - start;
-    os << "Elapsed time = " << std::setprecision(3) << std::fixed << elapsed.count() << " seconds" << endl;
-  }
-};
+#include <boost/timer/timer.hpp>
+using boost::timer::auto_cpu_timer;
 
 #define LIBRARY
 #include "zolotarev.h"
@@ -234,7 +220,7 @@ public:
   friend ostream& operator<<(ostream& os, results r);
 };
 
-vector<mpreal> results::probs = {.01, .05, .25, .5, .75, .95, .99};
+vector<mpreal> results::probs = {.01, .05, .25, .5, .75, .95, .99, .999, .9999, 1};
 
 ostream& operator<<(ostream& os, results r) {
   vector<mpreal> qs = r.quantile();
@@ -382,7 +368,7 @@ int main(int argc, char *argv[]) {
   string out_file = out_dir + "/xcheck_double_to_" + float_type_str + ".out";
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
-  auto_timer timer(out);
+  auto_cpu_timer timer(out);
   
   string tail_out_file = out_dir + "/tail_comp_" + float_type_str +".out";
   cout << "Writing tail output to " + tail_out_file << endl;
@@ -440,7 +426,8 @@ int main(int argc, char *argv[]) {
       ss >> x;
     }
     if (alpha != alpha_old || beta != beta_old) {
-      cout << "alpha = " << alpha << ", beta = " << beta << endl;
+      cout << "alpha = " << fixed << setprecision(4) << alpha
+           << ", beta = " << fixed << setprecision(4) << beta << endl;
       if (a_cdf.ec.size()>0)
         tail_out << a_cdf << a_pdf << a_ddx_pdf;
       a_cdf.reset(alpha, beta);

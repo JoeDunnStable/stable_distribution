@@ -52,9 +52,11 @@ using mpfr::const_euler;
 #include <boost/math/special_functions/factorials.hpp>
 #include <boost/math/special_functions/zeta.hpp>
 #include <boost/math/special_functions/erf.hpp>
+#include <boost/math/special_functions/sinc.hpp>
 //using fmax = boost::multiprecision::max;
 //using fmin = boost::multiprecision::min;
 
+/*
 using boost::math::isfinite;
 using boost::math::isnan;
 using boost::math::isinf;
@@ -64,11 +66,13 @@ using boost::math::erf;
 using boost::math::erfc;
 using boost::math::tgamma;
 using boost::math::lgamma;
+*/
 using boost::math::digamma;
 using boost::math::tgamma_ratio;
 using boost::math::binomial_coefficient;
 using boost::math::factorial;
 using boost::math::zeta;
+using boost::math::sinc_pi;
 
 template<typename myFloat>
 inline myFloat erf_inv(myFloat p) {
@@ -80,26 +84,67 @@ inline myFloat erfc_inv(myFloat p) {
   return boost::math::erfc_inv(p);
 }
 
+template<typename myFloat>
+inline myFloat my_erfc(myFloat x) {
+  return erfc(x);
+}
+
+#ifdef CPP_BIN_FLOAT
+
+#include <boost/math/constants/constants.hpp>
+
+template<> CppBinFloat my_erfc<CppBinFloat>(CppBinFloat x) {
+  // https://dlmf.nist.gov/7.12.E1
+  using namespace boost::math::constants;
+  if (x<=100) return erfc(x);
+  CppBinFloat x_sq{x*x};
+  CppBinFloat fac = exp(-x_sq)/(x*root_pi<CppBinFloat>());
+  CppBinFloat sum = 0;
+  CppBinFloat term = 1;
+  int n = 0;
+  for (n=0; n<10; n++) {
+    sum += term;
+    term *= (-1)*(static_cast<CppBinFloat>(.5)+n)/x_sq;
+    if (fabs(term) < std::numeric_limits<CppBinFloat>::epsilon()) break;
+  }
+  return fac * sum;
+}
+
+#endif
+
 #ifdef MPREAL
 #include <boost/multiprecision/mpfr.hpp>
 using boost::multiprecision::mpfr_float_50;
 
-// the boost version of tgamma_ratio, erf_inv, erfc_inv is broken for variable precision mpreal
+// the boost version of sinc_pi, tgamma_ratio, erf_inv, erfc_inv is broken
+// for variable precision mpreal
+
+mpreal sinc_pi(mpreal x) {
+  mpfr_float_50 x_mpfr{x.mpfr_ptr()};
+  mpreal ret = static_cast<mpreal>(boost::math::sinc_pi(x_mpfr).backend().data());
+  ret.set_prec(mpreal::get_default_prec());
+  return ret;
+}
 
 mpreal tgamma_ratio(mpreal num, mpreal denom) {
-  // Unfortunatly tgamma_ratio doen't work with mpfr_float
   mpfr_float_50 num_mpfr{num.mpfr_ptr()}, denom_mpfr{denom.mpfr_ptr()};
-  return static_cast<mpreal>(tgamma_ratio(num_mpfr, denom_mpfr).backend().data());
+  mpreal ret = static_cast<mpreal>(tgamma_ratio(num_mpfr, denom_mpfr).backend().data());
+  ret.set_prec(mpreal::get_default_prec());
+  return ret;
 }
 
 mpreal erf_inv(mpreal x) {
   mpfr_float_50 x_mpfr{x.mpfr_ptr()};
-  return static_cast<mpreal>(boost::math::erf_inv(x_mpfr).backend().data());
+  mpreal ret = static_cast<mpreal>(boost::math::erf_inv(x_mpfr).backend().data());
+  ret.set_prec(mpreal::get_default_prec());
+  return ret;
 }
 
 mpreal erfc_inv(mpreal x) {
   mpfr_float_50 x_mpfr{x.mpfr_ptr()};
-  return static_cast<mpreal>(boost::math::erfc_inv(x_mpfr).backend().data());
+  mpreal ret = static_cast<mpreal>(boost::math::erfc_inv(x_mpfr).backend().data());
+  ret.set_prec(mpreal::get_default_prec());
+  return ret;
 }
 
 namespace mpfr {
@@ -200,6 +245,66 @@ public:
     return os;
   }
 };
+
+template<typename myFloat>
+myFloat exp_m_xi(myFloat alpha, myFloat xB) {
+  myFloat xi = (alpha==1)
+                ? exp(xB-1)
+                : fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
+  return exp(-xi);
+}
+
+#include <boost/multiprecision/cpp_bin_float.hpp>
+template<>
+double exp_m_xi<double> (double alpha, double xB) {
+  using namespace boost::multiprecision;
+  using BigFloat = number<backends::cpp_bin_float<20>, et_off>;
+  BigFloat a = alpha;
+  BigFloat x = xB;
+  BigFloat xi = (a==1)
+                 ? exp(x-1)
+                 : fabs(1-a) * pow(x/a, a/(a-1));
+  return static_cast<double>(exp(-xi));
+}
+
+#ifdef MPREAL
+template<>
+mpreal exp_m_xi<mpreal> (mpreal alpha, mpreal xB) {
+  mpreal a = alpha; a.set_prec(128);
+  mpreal x = xB; x.set_prec(128);
+  mpreal xi = (a==1)
+               ? exp(x-1)
+               : fabs(1-a) * pow(x/a, a/(a-1));
+  mpreal ret = exp(-xi); ret.set_prec(mpreal::get_default_prec());
+  return ret;
+}
+#endif
+
+#ifdef MPFR_FLOAT
+template<>
+MpfrFloat exp_m_xi<MpfrFloat> (MpfrFloat alpha, MpfrFloat xB) {
+  BigMpfrFloat a = alpha;
+  BigMpfrFloat x = xB;
+  BigMpfrFloat xi = (a==1)
+                 ? exp(x-1)
+                 : fabs(1-a) * pow(x/a, a/(a-1));
+  return static_cast<MpfrFloat>(exp(-xi));
+}
+#endif
+
+#ifdef CPP_BIN_FLOAT
+
+
+template<>
+CppBinFloat exp_m_xi<CppBinFloat> (CppBinFloat alpha, CppBinFloat xB) {
+  BigCppBinFloat a = alpha;
+  BigCppBinFloat x = xB;
+  BigCppBinFloat xi = (a==1)
+  ? exp(x-1)
+  : fabs(1-a) * pow(x/a, a/(a-1));
+  return static_cast<CppBinFloat>(exp(-xi));
+}
+#endif
 
 #include <string>
 using std::string;

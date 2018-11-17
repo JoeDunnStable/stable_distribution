@@ -58,10 +58,10 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
     
     if (beta == 1) {
       // Zolotarev Theorem 2.5.3, asymptotic for small x
-      myFloat psi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
-      myFloat fac = exp(-psi)/sqrt(2*pi*alpha*psi);
+      myFloat xi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
+      myFloat fac = exp(-xi)/sqrt(2*pi*alpha*xi);
       if (verbose > 1)
-        cout << "psi = " << psi << endl
+        cout << "xi = " << xi << endl
         << "fac = " << fac << endl;
       myFloat term = fac;
       if (verbose > 1)
@@ -69,10 +69,10 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
       myFloat old_term = term;
       result_asymptotic = term;
       myFloat alpha_star = alpha;
-      myFloat alpha_psi_n = 1;
+      myFloat alpha_xi_n = 1;
       for (int n = 1; n<Q_cdf.size(); ++n) {
-        alpha_psi_n /= (alpha_star*psi);
-        term = fac * Q_cdf.at(n) * alpha_psi_n;
+        alpha_xi_n /= (alpha_star*xi);
+        term = fac * Q_cdf.at(n) * alpha_xi_n;
         if (fabs(term) > fabs(old_term)) break;
         if (verbose > 1)
           cout << "n = " << n << ", term = " << setprecision(digits10) << scientific<< term << endl;
@@ -80,7 +80,7 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
         result_asymptotic += term;
         old_term = term;
       }
-      error_asymptotic = fabs(term) + fabs(result_asymptotic-fac)*exp(-pow(psi,.25));
+      error_asymptotic = fabs(term) + fabs(result_asymptotic-fac)*exp(-pow(xi,.25));
       result_asymptotic = (lower_tail == positive_x) ? result_asymptotic : 1 - result_asymptotic;
 
     } else { // beta != 1
@@ -150,21 +150,21 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
       n_asymptotic = 0;
     } else if (betaB == -1) {
       // Zolotarev formula 2.5.20
-      myFloat psi = exp(xB-1);
-      myFloat fac = exp(-psi)/sqrt(2*pi*psi);
+      myFloat xi = exp(xB-1);
+      myFloat fac = exp(-xi)/sqrt(2*pi*xi);
       if (verbose > 1)
-        cout << "psi = " << setprecision(digits10) << scientific<< psi << endl
+        cout << "xi = " << setprecision(digits10) << scientific<< xi << endl
         << "fac = " << setprecision(digits10) << scientific<< fac << endl;
       myFloat term = fac;
       if (verbose > 1)
         cout << "n = " << 0 << ", term = " << setprecision(digits10) << scientific << term << endl;
       result_asymptotic = term;
       myFloat old_term=term;
-      myFloat psi_n = 1;
+      myFloat xi_n = 1;
       n_asymptotic = 0;
       for (n=1; n<Q_cdf.size(); ++n) {
-        psi_n /= psi;
-        term = fac * Q_cdf.at(n) * psi_n;
+        xi_n /= xi;
+        term = fac * Q_cdf.at(n) * xi_n;
         if (fabs(term) > fabs(old_term)) {
           break;
         }
@@ -173,7 +173,9 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
        n_asymptotic = n;
         result_asymptotic += term;
       }
-      error_asymptotic = fabs(term) + fabs(result_asymptotic-fac)*exp(-pow(psi,.25));
+      error_asymptotic = fabs(term)
+/*      + fabs(result_asymptotic-fac)*exp(-pow(xi,.25)) */
+      ;
       result_asymptotic = (lower_tail == positive_xB) ? 1-result_asymptotic : result_asymptotic;
     } else { // xB > 0 & betaB_ != -1
       myFloat log_x=log(xB);
@@ -289,10 +291,10 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
       error_asymptotic = std::numeric_limits<myFloat>::max();
       n_asymptotic = 0;
     } else if (beta == -1) {
-      myFloat psi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
-      myFloat fac = exp(-psi)/sqrt(2*pi*alpha*psi);
+      myFloat xi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
+      myFloat fac = exp(-xi)/sqrt(2*pi*alpha*xi);
       if (verbose > 1)
-        cout << "psi = " << setprecision(digits10) << scientific << psi << endl
+        cout << "xi = " << setprecision(digits10) << scientific << xi << endl
         << "fac = " << setprecision(digits10) << scientific << fac << endl;
       myFloat term = fac;
       myFloat old_term = term;
@@ -300,10 +302,10 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
         cout << "n = " << 0 << ", term = " << term << endl;
       result_asymptotic = term;
       myFloat alpha_star = 1/alpha;
-      myFloat alpha_psi_n = 1;
+      myFloat alpha_xi_n = 1;
       for (int n = 1; n<Q_cdf.size(); ++n) {
-        alpha_psi_n /= (alpha_star*psi);
-        term = fac * Q_cdf.at(n) * alpha_psi_n;
+        alpha_xi_n /= (alpha_star*xi);
+        term = fac * Q_cdf.at(n) * alpha_xi_n;
         if (fabs(term) > fabs(old_term)) break;
         if (verbose > 1)
           cout << "n = " << n
@@ -312,10 +314,10 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
         result_asymptotic += term;
         old_term = term;
       }
-      error_asymptotic = fabs(term)+fabs(result_asymptotic-fac)*exp(-pow(psi,.25));
+      error_asymptotic = fabs(term)+fabs(result_asymptotic-fac)*exp(-pow(xi,.25));
       result_asymptotic = (lower_tail==positive_x) ? 1 - result_asymptotic : result_asymptotic;
     } else {
-      abs_term =(1/(pi))*tgamma(alpha)/tgamma<myFloat>(2)*pow(xB,-alpha);
+      abs_term =(1/(pi))*tgamma(alpha)/tgamma(static_cast<myFloat>(2))*pow(xB,-alpha);
       term=abs_term*sin(pi/2*(2-alpha)*(1+betaB));
       result_asymptotic=term;
       myFloat old_abs_term=abs_term;

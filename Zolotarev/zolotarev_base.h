@@ -138,8 +138,8 @@ Zolotarev<myFloat>::Zolotarev(myFloat alpha, myFloat beta_input,
         // the 2 * i moment of normal distriubtion is (i-1)!!
         tmp += double_factorial<myFloat>(i-1)*q_cdf_n.at(n)[i];
       Q_cdf.push_back(tmp);
-      Q_pdf.push_back((alpha_star/2)*(2*n+1)*Q_cdf.at(n-1)+Q_cdf.at(n));
-      Q_ddx_pdf.push_back(((alpha_star/2)*(2*n+1)-1)*Q_pdf.at(n-1) + Q_pdf.at(n));
+      Q_pdf.push_back((alpha_star/2)*(2*n-1)*Q_cdf.at(n-1)+Q_cdf.at(n));
+      Q_ddx_pdf.push_back(((alpha_star/2)*(2*n-1-2/alpha))*Q_pdf.at(n-1) + Q_pdf.at(n));
       if (verbose > 1)
         cout << setw(10) << n
              << setw(25) << setprecision(15) << scientific << Q_cdf.back()

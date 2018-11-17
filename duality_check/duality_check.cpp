@@ -55,22 +55,8 @@ using std::unique_lock;
 #include <condition_variable>
 using std::condition_variable;
 
-#include <chrono>
-using std::chrono::high_resolution_clock;
-using std::chrono::duration;
-
-struct auto_timer {
-  high_resolution_clock::time_point start;
-  std::ostream& os;
-  auto_timer(std::ostream& os) : start(high_resolution_clock::now()),
-  os(os){}
-  auto_timer() : start(high_resolution_clock::now()),
-  os(std::cout) {}
-  ~auto_timer() {
-    duration<double> elapsed = high_resolution_clock::now() - start;
-    os << "Elapsed time = " << setprecision(3) << fixed << elapsed.count() << " seconds" << endl;
-  }
-};
+#include <boost/timer/timer.hpp>
+using boost::timer::auto_cpu_timer;
 
 #include <algorithm>
 using std::sort;
@@ -211,7 +197,7 @@ public:
 };
 
 template<typename myFloat>
-vector<double> Results<myFloat>::probs = {.01, .05, .25, .5, .75, .95, .99};
+vector<double> Results<myFloat>::probs = {.01, .05, .25, .5, .75, .95, .99, .999, .9999, 1};
 
 template<typename myFloat>
 ostream& operator<<(ostream& os, Results<myFloat>& r) {
@@ -554,7 +540,7 @@ int main(int argc, char *argv[]) {
   cout << "Writing to file " << out_file_name << endl << endl;
 
   ofstream os{out_file_name};
-  auto_timer timer(os);
+  auto_cpu_timer timer(os);
 
 #ifdef MPREAL
   // First create some high precision coeficients for

@@ -61,21 +61,23 @@ using std::chrono::duration;
 
 #include <boost/filesystem.hpp>
 
+#define N_XS 407
+
 template<typename myFloat>
 class result {
 public:
   bool finished;
   myFloat alpha;
   myFloat beta;
-  array<double, 407> xs;
-  array<myFloat, 407> cdf;
-  array<myFloat, 407> pdf;
-  array<myFloat, 407> ddx_pdf;
-  array<myFloat, 407> cdf_abserr;
-  array<myFloat, 407> pdf_abserr;
-  array<myFloat, 407> ddx_pdf_abserr;
-  array<bool, 407> good_theta2;
-  array<myFloat, 407> g_dd_theta2;
+  array<double, N_XS> xs;
+  array<myFloat, N_XS> cdf;
+  array<myFloat, N_XS> pdf;
+  array<myFloat, N_XS> ddx_pdf;
+  array<myFloat, N_XS> cdf_abserr;
+  array<myFloat, N_XS> pdf_abserr;
+  array<myFloat, N_XS> ddx_pdf_abserr;
+  array<bool, N_XS> good_theta2;
+  array<myFloat, N_XS> g_dd_theta2;
   result() : finished(false), alpha(std::numeric_limits<myFloat>::quiet_NaN()),
              beta(std::numeric_limits<myFloat>::quiet_NaN()) {
     xs.fill(std::numeric_limits<double>::quiet_NaN());
@@ -88,7 +90,7 @@ public:
     good_theta2.fill(false);
     g_dd_theta2.fill(std::numeric_limits<myFloat>::quiet_NaN());
   }
-  result(array<double, 407>& xs) : finished(false), alpha(std::numeric_limits<myFloat>::quiet_NaN()),
+  result(array<double, N_XS>& xs) : finished(false), alpha(std::numeric_limits<myFloat>::quiet_NaN()),
                                    beta(std::numeric_limits<myFloat>::quiet_NaN()), xs(xs){
     cdf.fill(std::numeric_limits<myFloat>::quiet_NaN());
     pdf.fill(std::numeric_limits<myFloat>::quiet_NaN());
@@ -124,7 +126,7 @@ class result_buffer {
 public:
   array<result<myFloat>, NBUFFERS> results;
   
-  void initialize(array<double, 407>& xs) {
+  void initialize(array<double, N_XS>& xs) {
     front = 0;
     back = 0;
     number_in_use = 0;
@@ -292,7 +294,6 @@ int dump(string float_type_str, const Kronrod<BigFloat>& g_k_big, int digits,
   int verbose = 0;
   
   // Set up iteration ranges for alpha, beta and x
-  
   array<double, 24> alphas {{.01, .1, .2, .3, .4, .5, .6, .7, .8, .9, .99, 1.,
     1.01, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 1.99, 2.0}};
   
@@ -326,7 +327,7 @@ int dump(string float_type_str, const Kronrod<BigFloat>& g_k_big, int digits,
   }
   int number_of_jobs = static_cast<int>(jobs.abs.size());
     
-  array<double, 407> xs;
+  array<double, N_XS> xs;
   xs.at(0) = -std::numeric_limits<double>::infinity();
   xs.at(1) = -pow(10.,300);
   xs.at(2) = -pow(10.,200);

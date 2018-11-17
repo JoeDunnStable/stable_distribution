@@ -154,7 +154,7 @@ int main(int argc, const char * argv[]) {
         double q_tol = 64 * std::numeric_limits<double>::epsilon();
         result = dist.quantile(x, lower_tail, log_p, q_tol, pm);
       }
-      cout << setw(15) << "Result = " << result << endl;
+      cout << setw(15) << "Result = " << Fmt<double>() << result << endl;
     }
 #ifdef MPREAL
     else if (test_name == "cdf_mpreal" || test_name == "quantile_mpreal"){
@@ -167,7 +167,7 @@ int main(int argc, const char * argv[]) {
         mpreal q_tol = 64 * std::numeric_limits<mpreal>::epsilon();
         result = dist.quantile(x, lower_tail, log_p, q_tol, pm);
       }
-      cout << setw(15) << "Result = " << result << endl;
+      cout << setw(15) << "Result = " << Fmt<mpreal>() << result << endl;
     }
 #endif //MPREAL
 #ifdef CPP_BIN_FLOAT
@@ -181,7 +181,7 @@ int main(int argc, const char * argv[]) {
         CppBinFloat q_tol = 64 * std::numeric_limits<CppBinFloat>::epsilon();
         result = dist.quantile(x, lower_tail, log_p, q_tol, pm);
       }
-      cout << setw(15) << "Result = " << result << endl;
+      cout << setw(15) << "Result = " << Fmt<CppBinFloat>() << result << endl;
     }
 #endif //CPP_BIN_FLOAT
 #ifdef MPFR_FLOAT
@@ -195,7 +195,7 @@ int main(int argc, const char * argv[]) {
         MpfrFloat q_tol = 64 * std::numeric_limits<MpfrFloat>::epsilon();
         result = dist.quantile(x, lower_tail, log_p, q_tol, pm);
       }
-      cout << setw(15) << "Result = " << result << endl;
+      cout << setw(15) << "Result = " << Fmt<MpfrFloat>() << result << endl;
     }
 #endif //MPFR_FLOAT
   } else if (test_name.substr(0,3) == "pdf" || test_name.substr(0,7) == "ddx_pdf") {
@@ -205,6 +205,7 @@ int main(int argc, const char * argv[]) {
     double x; ss4 >> x;
 	if (len >= 6 && test_name.substr(len-6,6)=="double")
       cout << ", x = " << x;
+/*
 #ifdef MPREAL
 	istringstream ss4_mpreal((string(argv[4])));
 	mpreal x_mpreal; ss4_mpreal >> x_mpreal;
@@ -223,6 +224,7 @@ int main(int argc, const char * argv[]) {
 	if (len >= 13 && test_name.substr(len - 13, 13) == "cpp_bin_float")
 		cout << ", x_cpp_bin_float = " << x_cpp_bin_float;
 #endif
+*/
 	Parameterization pm = S0;
     if (argc > 5) {
       istringstream ss5((string(argv[5])));
@@ -245,7 +247,7 @@ int main(int argc, const char * argv[]) {
       } else {
         result = dist.ddx_pdf(x, pm);
       }
-      cout << setw(15) << "Result = " << result << endl;
+      cout << setw(15) << "Result = " << Fmt<double>() << result << endl;
     }
 #ifdef MPREAL
     else if( test_name == "pdf_mpreal" || test_name == "ddx_pdf_mpreal") {
@@ -253,11 +255,11 @@ int main(int argc, const char * argv[]) {
       mpreal result;
       cout.precision(bits2digits(mpfr::mpreal::get_default_prec()));
       if (test_name == "pdf_mpreal") {
-        result = dist.pdf(x_mpreal, log_p, pm);
+        result = dist.pdf(x, log_p, pm);
       } else {
-        result = dist.ddx_pdf(x_mpreal, pm);
+        result = dist.ddx_pdf(x, pm);
       }
-      cout << setw(15) << "Result = " << result << endl;
+      cout << setw(15) << "Result = " << Fmt<mpreal>() << result << endl;
     }
 #endif // MPREAL
 #ifdef CPP_BIN_FLOAT
@@ -266,11 +268,11 @@ int main(int argc, const char * argv[]) {
       CppBinFloat result;
       cout.precision(std::numeric_limits<CppBinFloat>::digits10);
       if (test_name == "pdf_cpp_bin_float") {
-        result = dist.pdf(x_cpp_bin_float, log_p, pm);
+        result = dist.pdf(x, log_p, pm);
       } else {
-        result = dist.ddx_pdf(x_cpp_bin_float, pm);
+        result = dist.ddx_pdf(x, pm);
       }
-      cout << setw(15) << "Result = " << result << endl;
+      cout << setw(15) << "Result = " << Fmt<CppBinFloat>() << result << endl;
     }
 #endif // CPP_BIN_FLOAT
 #ifdef MPFR_FLOAT
@@ -279,11 +281,11 @@ int main(int argc, const char * argv[]) {
       MpfrFloat result;
       cout.precision(std::numeric_limits<MpfrFloat>::digits10);
       if (test_name == "pdf_mpfr_float") {
-        result = dist.pdf(x_mpfr_float, log_p, pm);
+        result = dist.pdf(x, log_p, pm);
       } else {
-        result = dist.ddx_pdf(x_mpfr_float, pm);
+        result = dist.ddx_pdf(x, pm);
       }
-      cout << setw(15) << "Result = " << result << endl;
+      cout << setw(15) << "Result = " << Fmt<MpfrFloat>() << result << endl;
     }
 #endif // MPFRFLOAT
     else {
@@ -316,8 +318,8 @@ int main(int argc, const char * argv[]) {
       cout.precision(std::numeric_limits<double>::digits10);
       double mode_tol = 64*std::numeric_limits<double>::epsilon();
       result = dist.mode(mode_tol, verbose_mode, pm);
-      cout << setw(15) << "Result = (" << result.first << ", " << result.second << ")"<< endl;
-      cout << setw(15) << "ddx at result = " << dist.ddx_pdf(result.first, pm) << endl;
+      cout << setw(15) << "Result = (" << Fmt<double>() << result.first << ", " << result.second << ")"<< endl;
+      cout << setw(15) << "ddx at result = " << Fmt<double>() << dist.ddx_pdf(result.first, pm) << endl;
     }
 #ifdef MPREAL
     else if (test_name == "mode_mpreal") {
@@ -326,8 +328,8 @@ int main(int argc, const char * argv[]) {
       cout.precision(bits2digits(mpfr::mpreal::get_default_prec()));
       mpreal mode_tol = 64 * std::numeric_limits<mpreal>::epsilon();
       result = dist.mode(mode_tol, verbose_mode, pm);
-      cout << setw(15) << "Result = (" << result.first << ", " << result.second << ")"<< endl;
-      cout << setw(15) << "ddx at result = " << dist.ddx_pdf(result.first, pm) << endl;
+      cout << setw(15) << "Result = (" << Fmt<mpreal>() << result.first << ", " << result.second << ")"<< endl;
+      cout << setw(15) << "ddx at result = " << Fmt<mpreal>() << dist.ddx_pdf(result.first, pm) << endl;
     }
 #endif // MPREAL
 #ifdef CPP_BIN_FLOAT
@@ -337,8 +339,8 @@ int main(int argc, const char * argv[]) {
       cout.precision(std::numeric_limits<CppBinFloat>::digits10);
       CppBinFloat mode_tol = 64 * std::numeric_limits<CppBinFloat>::epsilon();
       result = dist.mode(mode_tol, verbose_mode, pm);
-      cout << setw(15) << "Result = (" << result.first << ", " << result.second << ")"<< endl;
-      cout << setw(15) << "ddx at result = " << dist.ddx_pdf(result.first, pm) << endl;
+      cout << setw(15) << "Result = (" << Fmt<CppBinFloat>() << result.first << ", " << result.second << ")"<< endl;
+      cout << setw(15) << "ddx at result = " << Fmt<CppBinFloat>() << dist.ddx_pdf(result.first, pm) << endl;
     }
 #endif // CPP_BIN_FLOAT
 #ifdef MPFR_FLOAT
@@ -348,8 +350,8 @@ int main(int argc, const char * argv[]) {
       cout.precision(std::numeric_limits<MpfrFloat>::digits10);
       MpfrFloat mode_tol = 64 * std::numeric_limits<MpfrFloat>::epsilon();
       result = dist.mode(mode_tol, verbose_mode, pm);
-      cout << setw(15) << "Result = (" << result.first << ", " << result.second << ")"<< endl;
-      cout << setw(15) << "ddx at result = " << dist.ddx_pdf(result.first, pm) << endl;
+      cout << setw(15) << "Result = (" << Fmt<MpfrFloat>() << result.first << ", " << result.second << ")"<< endl;
+      cout << setw(15) << "ddx at result = " << Fmt<MpfrFloat>() << dist.ddx_pdf(result.first, pm) << endl;
     }
 #endif // MPFR_FLOAT
     else {

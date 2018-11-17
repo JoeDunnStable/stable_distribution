@@ -177,7 +177,7 @@ public:
 };
 
 template<typename myFloat>
-vector<myFloat> Results<myFloat>::probs = {.01, .05, .25, .5, .75, .95, .99};
+vector<myFloat> Results<myFloat>::probs = {.01, .05, .25, .5, .75, .95, .99, .999, .9999, 1};
 
 template<typename myFloat>
 void Results<myFloat>::print(ostream& os){

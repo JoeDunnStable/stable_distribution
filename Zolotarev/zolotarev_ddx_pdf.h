@@ -66,17 +66,17 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
     
     if (beta==1) {
       // Modification of the proof of Theorem 2.5.2, asymptotic for small x
-      myFloat psi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
-      if (psi < 1) {
+      myFloat xi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
+      if (xi < 1) {
         result_asymptotic = std::numeric_limits<myFloat>::quiet_NaN();
         error_asymptotic = std::numeric_limits<myFloat>::max();
         n_asymptotic = 0;
       } else {
         myFloat nu = pow(abs(1-alpha),-1/alpha);
-        myFloat exp_m_psi = exp(-psi);
-        myFloat fac = (exp_m_psi != 0) ? nu*nu*pow(psi,(4-alpha)/(2*alpha))*exp_m_psi/sqrt(2*pi*alpha)/(gammaB*gammaB) : 0;
+        myFloat exp_m_xi = exp(-xi);
+        myFloat fac = (exp_m_xi != 0) ? nu*nu*pow(xi,(4-alpha)/(2*alpha))*exp_m_xi/sqrt(2*pi*alpha)/(gammaB*gammaB) : 0;
         if (verbose > 1)
-          cout << "psi = " << psi << endl
+          cout << "xi = " << xi << endl
           << "nu  = " << nu << endl
           << "fac = " << fac << endl;
         myFloat term = fac;
@@ -85,10 +85,10 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
         myFloat old_term = term;
         result_asymptotic = term;
         myFloat alpha_star = alpha;
-        myFloat alpha_psi_n = 1;
+        myFloat alpha_xi_n = 1;
         for (int n = 1; n<Q_ddx_pdf.size(); ++n) {
-          alpha_psi_n /= (alpha_star*psi);
-          term = fac * Q_ddx_pdf.at(n) * alpha_psi_n;
+          alpha_xi_n /= (alpha_star*xi);
+          term = fac * Q_ddx_pdf.at(n) * alpha_xi_n;
           if (fabs(term) > fabs(old_term)) break;
           if (verbose > 1)
             cout << "n = " << n << ", term = " << term << endl;
@@ -97,7 +97,7 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
           old_term = term;
         }
         result_asymptotic *= (positive_x) ? 1 : -1;
-        error_asymptotic = fabs(term)+fabs(result_asymptotic)*exp(-pow(psi,.25));
+        error_asymptotic = fabs(term)+fabs(result_asymptotic)*exp(-pow(xi,.25));
       }
     } else if (beta == 1 && xB >=10) {
       result_asymptotic=std::numeric_limits<myFloat>::quiet_NaN();
@@ -168,16 +168,16 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
       n_asymptotic = 0;
     } else if (betaB == -1) {
       // Derivative of Zolotarev formula 2.5.17 which is asymptotic for x large
-      myFloat psi = exp(xB-1);
-      if (exp(-psi) == 0) {
+      myFloat xi = exp(xB-1);
+      if (exp(-xi) == 0) {
         result_asymptotic = 0;
         n_asymptotic = 0;
         error_asymptotic = 0;
       } else {
         myFloat nu = 1;
-        myFloat fac = -nu*nu*pow(psi,(4-alpha)/(2*alpha))*exp(-psi)/sqrt(2*pi*alpha)/(gammaB*gammaB);
+        myFloat fac = -nu*nu*pow(xi,(4-alpha)/(2*alpha))*exp(-xi)/sqrt(2*pi*alpha)/(gammaB*gammaB);
         if (verbose > 1)
-          cout << "psi = " << psi << endl
+          cout << "xi = " << xi << endl
           << "nu  = " << nu << endl
           << "fac = " << fac << endl;
         myFloat term = fac;
@@ -186,10 +186,10 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
           cout << "n = " << 0 << ", term = " << term << endl;
        result_asymptotic = term;
         myFloat alpha_star = 1/alpha;
-        myFloat alpha_psi_n = 1;
+        myFloat alpha_xi_n = 1;
         for (int n = 1; n<Q_ddx_pdf.size(); ++n) {
-          alpha_psi_n /= (alpha_star*psi);
-          term = fac * Q_ddx_pdf.at(n) * alpha_psi_n;
+          alpha_xi_n /= (alpha_star*xi);
+          term = fac * Q_ddx_pdf.at(n) * alpha_xi_n;
           if (fabs(term) > fabs(old_term)) break;
           if (verbose > 1)
             cout << "n = " << n << ", term = " << term << endl;
@@ -198,7 +198,9 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
           old_term = term;
         }
         result_asymptotic *= (positive_xB)? 1 : -1;
-        error_asymptotic = fabs(term)+fabs(result_asymptotic)*exp(-psi-pow(psi,.25));
+        error_asymptotic = fabs(term)
+/*        +fabs(result_asymptotic)*exp(-xi-pow(xi,.25)) */
+        ;
       }
     } else {
       // Zolotarev 2.5.23 is the asymptotic series for large x
@@ -314,17 +316,17 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
     
     if (beta == -1) {
       // Proof of Zolotarev Theorem 2.5.2 asymptotic for x -> infinity
-      myFloat psi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
-      if (psi < 1) {
+      myFloat xi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
+      if (xi < 1) {
         result_asymptotic = std::numeric_limits<myFloat>::quiet_NaN();
         error_asymptotic = std::numeric_limits<myFloat>::max();
         n_asymptotic = 0;
       } else {
         myFloat nu = pow(abs(1-alpha),-1/alpha);
-        myFloat exp_m_psi = exp(-psi);
-        myFloat fac = (exp_m_psi!=0) ? -nu*nu*pow(psi,(4-alpha)/(2*alpha))*exp_m_psi/sqrt(2*pi*alpha)/(gammaB*gammaB) : 0;
+        myFloat exp_m_xi = exp(-xi);
+        myFloat fac = (exp_m_xi!=0) ? -nu*nu*pow(xi,(4-alpha)/(2*alpha))*exp_m_xi/sqrt(2*pi*alpha)/(gammaB*gammaB) : 0;
         if (verbose > 1)
-          cout << "psi = " << psi << endl
+          cout << "xi = " << xi << endl
           << "nu  = " << nu << endl
           << "fac = " << fac << endl;
         myFloat term = fac;
@@ -333,10 +335,10 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
           cout << "n = " << 0 << ", term = " << term << endl;
         result_asymptotic = term;
         myFloat alpha_star = 1/alpha;
-        myFloat alpha_psi_n = 1;
+        myFloat alpha_xi_n = 1;
         for (int n = 1; n<Q_ddx_pdf.size(); ++n) {
-          alpha_psi_n /= (alpha_star*psi);
-          term = fac * Q_ddx_pdf.at(n) * alpha_psi_n;
+          alpha_xi_n /= (alpha_star*xi);
+          term = fac * Q_ddx_pdf.at(n) * alpha_xi_n;
           if (fabs(term) > fabs(old_term)) break;
           if (verbose > 1)
             cout << "n = " << n << ", term = " << term << endl;
@@ -345,7 +347,7 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
           old_term = term;
         }
         result_asymptotic = (positive_x) ? result_asymptotic : -result_asymptotic;
-        error_asymptotic = fabs(term)+fabs(result_asymptotic)*exp(-pow(psi,.25));
+        error_asymptotic = fabs(term)+fabs(result_asymptotic)*exp(-pow(xi,.25));
       }
     } else if ( xB == 0) {
       result_asymptotic = std::numeric_limits<myFloat>::quiet_NaN();

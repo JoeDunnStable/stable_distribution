@@ -14,7 +14,7 @@ test('quantile_double', basic_test, args: 'quantile_double', timeout: double_tim
 test('mode_double', basic_test, args: 'mode_double', timeout: double_timeout)
 test('random_double', basic_test, args: 'random_double', timeout: double_timeout)
 
-mpreal_timeout = 5000
+mpreal_timeout = 7000
 
 test('cdf_mpreal', basic_test, args: 'cdf_mpreal', timeout: mpreal_timeout)
 test('pdf_mpreal', basic_test, args: 'pdf_mpreal', timeout: mpreal_timeout)
