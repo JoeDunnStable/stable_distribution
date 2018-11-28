@@ -1,7 +1,7 @@
-/// \file parallel_duality_check.cpp
+/// \file duality_check.cpp
 /// Checks that Zolotarev duality theorem is satisfied
 /// \author Joseph Dunn
-/// \copyright 2017 Joseph Dunn
+/// \copyright 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <iostream>
@@ -212,7 +212,7 @@ ostream& operator<<(ostream& os, Results<myFloat>& r) {
   << setw(10) << fmt_eps(r.eps_sum/r.count) << endl << endl;
   os << setw(140) << "Quantile" << endl << endl;
   for (int i =0; i<Results<myFloat>::probs.size(); ++i)
-    os << setw(139) << fixed << setprecision(0) << Results<myFloat>::probs.at(i)*100 << "%"
+    os << setw(139) << fixed << setprecision(2) << Results<myFloat>::probs.at(i)*100 << "%"
        << setw(10) << fmt_eps(qs.at(i)) << endl;
   os << endl << (r.pass()?"Test Passed":"Test Failed") << endl;
 
@@ -384,11 +384,14 @@ void calculate_job_outputs(int thread_id, int noext, Kronrod<BigFloat> g_k_big,
   reset_prec<myFloat>(digits);
   
   unique_lock<mutex> cout_lock(cout_mutex);
+  double epsrel_dbl = max(64 * std::numeric_limits<double>::epsilon(),
+                          static_cast<double>(epsrel));
   IntegrationController<myFloat> cntl(noext, g_k_big, epsabs, epsrel, subdivisions, verbose);
   IntegrationController<double> cntl_double(noext, g_k_big, static_cast<double>(epsabs),
-                                            static_cast<double>(epsrel), subdivisions, verbose);
+                                            epsrel_dbl, subdivisions, verbose);
   Controllers<myFloat> ctls(cntl, cntl_double);
   
+  cout << endl;
   cout << "Starting thread " << thread_id << " with IntegraationController at " << &cntl << endl;
   cout << "Machine epsilon used: " << std::numeric_limits<myFloat>::epsilon() << endl;
   /*
@@ -430,7 +433,7 @@ int create_jobs(Kronrod<BigFloat> g_k_big, ostream& os) {
   
   cout << "std::numeric_limits<myFloat>::epsilon() = " << std::numeric_limits<myFloat>::epsilon() << endl;
   StandardStableDistribution<myFloat>::initialize();
-  int digits = static_cast<int>(-log(std::numeric_limits<myFloat>::epsilon())/log(2.));
+  int digits = 1+static_cast<int>(-log(std::numeric_limits<myFloat>::epsilon())/log(2.));
   int digits10 = static_cast<int>(-log(std::numeric_limits<myFloat>::epsilon())/log(10.));
   os.precision(digits10);
   
@@ -541,6 +544,7 @@ int main(int argc, char *argv[]) {
 
   ofstream os{out_file_name};
   auto_cpu_timer timer(os);
+  os << stable_config << endl;
 
 #ifdef MPREAL
   // First create some high precision coeficients for
@@ -562,14 +566,14 @@ int main(int argc, char *argv[]) {
   if (test_name == "double") {
     os << title
        << ".  Machine epsilon = " << std::numeric_limits<double>::epsilon() << endl << endl;
-    create_jobs<double, BIGFLOAT>(k_big, os);
+    return create_jobs<double, BIGFLOAT>(k_big, os);
   }
   
 #ifdef MPREAL
   else if(test_name == "mpreal") {
     os << title
     << ".  Machine epsilon = " << std::numeric_limits<mpreal>::epsilon() << endl << endl;
-    create_jobs<mpreal, mpreal>(k_big, os);
+    return create_jobs<mpreal, mpreal>(k_big, os);
   }
 #endif
   
@@ -578,7 +582,7 @@ int main(int argc, char *argv[]) {
     Kronrod<BigCppBinFloat> k_big_cpp_bin_float(10);
     os << title
     << ".  Machine epsilon = " << std::numeric_limits<CppBinFloat>::epsilon() << endl << endl;
-    create_jobs<CppBinFloat, BigCppBinFloat>(k_big_cpp_bin_float, os);
+    return create_jobs<CppBinFloat, BigCppBinFloat>(k_big_cpp_bin_float, os);
   }
 #endif
   
@@ -587,7 +591,7 @@ int main(int argc, char *argv[]) {
     Kronrod<BigMpfrFloat> k_big_mpfr_float(10);
     os << title
     << ".  Machine epsilon = " << std::numeric_limits<MpfrFloat>::epsilon() << endl << endl;
-    create_jobs<MpfrFloat, BigMpfrFloat>(k_big_mpfr_float, os);
+    return create_jobs<MpfrFloat, BigMpfrFloat>(k_big_mpfr_float, os);
   }
 #endif
   else {

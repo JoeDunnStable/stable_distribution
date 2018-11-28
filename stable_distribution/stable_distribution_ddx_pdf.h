@@ -2,7 +2,7 @@
 /// Implementation of derivative of pdf of standard stable distribution.
 /// Included in stable_distribution.h when LIBRARY is defined
 /// \author Joseph Dunn
-/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright 2016, 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <limits>
@@ -469,7 +469,7 @@ myFloat StandardStableDistribution<myFloat>::series_small_x_ddx_pdf(myFloat x0, 
       // beta != 1
       myFloat abs_tail;
       if (xB == 0) {
-        result_series = (betaB!=0 ? tgamma(2/alpha)/tgamma(myFloat(2))/(pi*alpha*gammaB*gammaB) * sin(pi * (1-betaB)) : 0);
+        result_series = (betaB!=0 ? tgamma(2/alpha)/tgamma(myFloat(2))/(pi*alpha*gammaB*gammaB) * sin(pi * one_m_betaB) : 0);
         abs_tail = min(std::numeric_limits<myFloat>::max(),fabs(result_series));
         n_series = 0;
       } else {
@@ -486,7 +486,7 @@ myFloat StandardStableDistribution<myFloat>::series_small_x_ddx_pdf(myFloat x0, 
           cout << "n = " << n_series << ", term = " << fmt << term << endl;
         for (int k=1; k<=max_n; ++k) {
           abs_term = tgamma_ratio((k+1)/alpha,myFloat(k+1))*pow(xB,k-1)*k/(pi * alpha * gammaB*gammaB);
-          term = abs_term * sin(pi/2 * (k+1) * (1-betaB));
+          term = abs_term * sin(pi/2 * (k+1) * one_m_betaB);
           if (k > 1 && abs_term > k*old_abs_term) break;
           if (verbose>0)
             cout << "n = " << k << ", term = " << fmt << term << endl;

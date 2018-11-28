@@ -1,7 +1,7 @@
 /// \file xcheck_to_Zolotarev.cpp
 /// Unit tests for routines in zolotarev.h
 /// \author Joseph Dunn
-/// \copyright 2017 Joseph Dunn
+/// \copyright 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <iostream>
@@ -217,7 +217,7 @@ void Results<myFloat>::print(ostream& os){
   << setw(15) << setprecision(5) << rel_diff_sum/count << endl << endl;
   os << setw(99) << "Quantile" << endl << endl;
   for (int i =0; i<Results<myFloat>::probs.size(); ++i)
-    os << setw(98) << fixed << setprecision(0) << Results<myFloat>::probs.at(i)*100 << "%"
+    os << setw(98) << fixed << setprecision(2) << Results<myFloat>::probs.at(i)*100 << "%"
     << setw(15) << " " << setw(15) << setprecision(5) << scientific<< qs.at(i) << endl;
   
   os << "Table of worst " << abs_data.size() << " out of " << count << " absolute differences for " << type << endl << endl;
@@ -255,7 +255,7 @@ void Results<myFloat>::print(ostream& os){
   << setw(15) << setprecision(5) << rel_diff_sum/count << endl << endl;
   os << setw(99) << "Quantile" << endl << endl;
     for (int i =0; i<Results<myFloat>::probs.size(); ++i)
-    os << setw(98) << fixed << setprecision(0) << Results<myFloat>::probs.at(i)*100 << "%"
+    os << setw(98) << fixed << setprecision(2) << Results<myFloat>::probs.at(i)*100 << "%"
     << setw(15) << " " << setw(15) << setprecision(5) << scientific<< qs.at(i) << endl;
   
   os << "Table of worst " << rel_data.size() << " out of " << count << " relative differences for " << type << endl << endl;
@@ -293,7 +293,7 @@ void Results<myFloat>::print(ostream& os){
   << setw(15) << setprecision(5) << rel_diff_sum/count << endl << endl;
   os << setw(99) << "Quantile" << endl << endl;
   for (int i =0; i<Results<myFloat>::probs.size(); ++i)
-    os << setw(98) << fixed << setprecision(0) << Results<myFloat>::probs.at(i)*100 << "%"
+    os << setw(98) << fixed << setprecision(2) << Results<myFloat>::probs.at(i)*100 << "%"
     << setw(15) << " " << setw(15) << setprecision(5) << scientific << qs.at(i) << endl;
   
 }

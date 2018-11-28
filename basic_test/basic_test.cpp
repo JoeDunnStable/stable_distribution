@@ -1,7 +1,7 @@
 ///  \file basic_test.cpp
 ///  Basic unit tests for the standard stable distribution
 /// \author Joseph Dunn
-/// \copyright 2017 Joseph Dunn
+/// \copyright 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <iostream>
@@ -37,9 +37,6 @@ using boost::timer::auto_cpu_timer;
 #define MPFR_FLOAT
 #include "stable_distribution.h"
 #include "kolmogorov.h"
-#define LIBRARY
-#include "zolotarev.h"
-#undef LIBRARY
 #include "bracket_and_solve.h"
 
 using namespace stable_distribution;
@@ -122,7 +119,6 @@ int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
   out << "Comparison of cdf to Levy formula for alpha = .5, beta = 1, digits10 = "
   << fmt.digits10 << endl << endl;
   StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
-  Zolotarev<myFloat> zol(alpha, beta, &ctls.controller, verbose);
   out << setw(8) << right << "alpha"
   << setw(8) << right << "beta"
   << setw(13) << right << "x"
@@ -133,9 +129,6 @@ int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
   << setw(15) << right << "abserr"
   << setw(4) << right << "tc"
   << setw(7) << right << "neval"
-  << setw(fmt.width) << right << "log(zol_cdf)"
-  << setw(10) << right << "epsdiff"
-  << setw(2) << right << "T"
   << endl << endl;
   bool pass = true;
   for (auto x : xs) {
@@ -147,8 +140,6 @@ int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
     }
     myFloat r = std_stable_dist.cdf(x, lower_tail, log_p, S1);
     myFloat eps = epsdiff(r, r_Levy);
-    myFloat r_zol = log(zol.cdf(x, lower_tail, S1));
-    myFloat eps_zol = epsdiff(r_zol, r_Levy);
     bool pass1 = !boost::math::isnan(eps) && boost::math::isfinite(eps)
                  && eps < 100;
 
@@ -162,9 +153,6 @@ int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
     << setw(15) << setprecision(5) << scientific << std_stable_dist.abserr
     << setw(4) << std_stable_dist.termination_code
     << setw(7) << std_stable_dist.neval
-    << fmt << r_zol
-    << setw(10) << fmt_eps(eps_zol)
-    << setw(2) << (zol.result_type==asymptotic ? "A" : "C")
     << (pass1 ? "" : " FAIL") << endl;
     pass = pass && pass1;
   }
@@ -316,7 +304,6 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
   out << "Comparison of pdf to Levy formula for alpha = .5, beta = 1, digits10 = "
   << fmt.digits10 << endl << endl;
   StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
-  Zolotarev<myFloat> zol(alpha, beta, &ctls.controller, verbose);
   int log_flag=1;
   out << setw(13) << right << "alpha"
   << setw(13) << right << "beta"
@@ -327,17 +314,12 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
   << setw(15) << right << "abserr"
   << setw(4) << right << "TC"
   << setw(7) << right << "neval"
-  << setw(fmt.width) << right << "log(zol_pdf)"
-  << setw(10) << right << "epsdiff"
-  << setw(2) << right << "T"
   << endl << endl;
   bool pass = true;
   for (auto x : xs) {
     myFloat r_Levy = stable_levy_pdf<myFloat>(x, log_flag);
     myFloat r = std_stable_dist.pdf(x, log_flag, S1);
     myFloat eps = epsdiff(r, r_Levy);
-    myFloat r_zol = log(zol.pdf(x, S1));
-    myFloat eps_zol = epsdiff(r_zol, r_Levy);
     bool pass1 = !boost::math::isnan(eps) && boost::math::isfinite(eps)
     && eps < 100;
 
@@ -350,9 +332,6 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
     << setw(15) << setprecision(5) << scientific << std_stable_dist.abserr
     << setw(4) << std_stable_dist.termination_code
     << setw(7) << std_stable_dist.neval
-    << fmt << r_zol
-    << setw(10) << fmt_eps(eps_zol)
-    << setw(2) << (zol.result_type==asymptotic ? "A" : "C")
     << (pass1 ? "" : " FAIL") << endl;
     pass = pass && pass1;
 
@@ -362,7 +341,6 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
   << fmt.digits10 << endl << endl;
   alpha = 1.5;
   StandardStableDistribution<myFloat> stable_1_pt_5(alpha, beta, ctls, verbose);
-  Zolotarev<myFloat> zol_1_pt_5(alpha, beta, &ctls.controller, verbose);
   out << setw(13) << right << "alpha"
   << setw(13) << right << "beta"
   << setw(13) << right << "x"
@@ -372,9 +350,6 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
   << setw(15) << right << "abserr"
   << setw(4) << right << "TC"
   << setw(7) << right << "neval"
-  << setw(fmt.width) << right << "log(zol_pdf)"
-  << setw(10) << right << "epsdiff"
-  << setw(2) << right << "T"
   << endl << endl;
   vector<myFloat> xs2;
   for (auto x : xs) {
@@ -389,8 +364,6 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
     myFloat r_taleb = stable_taleb_pdf<myFloat>(x, log_flag);
     myFloat r = stable_1_pt_5.pdf(x, log_flag, S1);
     myFloat eps = epsdiff(r, r_taleb);
-    myFloat r_zol = log(zol_1_pt_5.pdf(x, S1));
-    myFloat eps_zol = epsdiff(r_zol, r_taleb);
     bool pass1 = !boost::math::isnan(eps) && boost::math::isfinite(eps)
     && eps < 300;
     
@@ -403,9 +376,6 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
     << setw(15) << setprecision(5) << scientific << stable_1_pt_5.abserr
     << setw(4) << stable_1_pt_5.termination_code
     << setw(7) << stable_1_pt_5.neval
-    << fmt << r_zol
-    << setw(10) << fmt_eps(eps_zol)
-    << setw(2) << (zol_1_pt_5.result_type==asymptotic ? "A" : "C")
     << (pass1 ? "" : " FAIL") << endl;
     pass = pass && pass1;
     
@@ -455,7 +425,6 @@ int test_stable_ddx_pdf(ostream& out, Controllers<myFloat> ctls) {
   out << "Comparison of ddx_pdf to Levy formula for alpha = .5, beta = 1, digits10 = "
   << fmt.digits10 << endl << endl;
   StandardStableDistribution<myFloat> std_stable_dist(alpha, beta, ctls, verbose);
-  Zolotarev<myFloat> zol(alpha, beta, &ctls.controller, verbose);
   out << setw(13) << right << "alpha"
   << setw(13) << right << "beta"
   << setw(13) << right << "x"
@@ -465,17 +434,12 @@ int test_stable_ddx_pdf(ostream& out, Controllers<myFloat> ctls) {
   << setw(15) << right << "abserr"
   << setw(4) << right << "termination_code"
   << setw(7) << right << "neval"
-  << setw(fmt.width) << right << "zol_ddx_pdf)"
-  << setw(10) << right << "epsdiff"
-  << setw(2) << right << "T"
   << endl << endl;
   bool pass = true;
   for (auto x : xs) {
     myFloat r_Levy = stable_levy_ddx_pdf<myFloat>(x);
     myFloat r = std_stable_dist.ddx_pdf(x, S1);
     myFloat eps = epsdiff(log(fabs(r)), log(fabs(r_Levy)));
-    myFloat r_zol = zol.ddx_pdf(x,S1);
-    myFloat eps_zol = epsdiff(log(fabs(r_zol)), log(fabs(r_Levy)));
     bool pass1 = !boost::math::isnan(eps) && boost::math::isfinite(eps)
     && eps < 100;
 
@@ -488,9 +452,6 @@ int test_stable_ddx_pdf(ostream& out, Controllers<myFloat> ctls) {
     << setw(15) << setprecision(5) << scientific << std_stable_dist.abserr
     << setw(4) << std_stable_dist.termination_code
     << setw(7) << std_stable_dist.neval
-    << fmt << r_zol
-    << setw(10) << fmt_eps(eps_zol)
-    << setw(2) << (zol.result_type==asymptotic ? "A" : "C")
     << (pass1 ? "" : " FAIL") << endl;
     pass = pass && pass1;
   }
@@ -833,138 +794,71 @@ int main(int argc, const char * argv[]) {
   if (!boost::filesystem::is_directory(out_dir))
     boost::filesystem::create_directory(out_dir);
   bool fail = false;
+  string outfile = out_dir + "/test_stable_" + test_name + ".out";
+  cout << "Writing output to " << outfile << endl;
+  ofstream out(outfile);
+  out << stable_config << endl;
+  
   if (test_name == "cdf_double") {
-    string outfile = out_dir + "/test_stable_cdf_double.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream cdf_double(outfile);
-    fail = test_stable_cdf<double>(cdf_double, ctls_double);
+    fail = test_stable_cdf<double>(out, ctls_double);
   } else if (test_name == "pdf_double") {
-    string outfile = out_dir + "/test_stable_pdf_double.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream pdf_double(outfile);
-    fail = test_stable_pdf<double>(pdf_double, ctls_double);
+    fail = test_stable_pdf<double>(out, ctls_double);
   } else if (test_name == "ddx_pdf_double") {
-    string outfile = out_dir + "/test_stable_ddx_pdf_double.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream ddx_pdf_double(outfile);
-    fail = test_stable_ddx_pdf<double>(ddx_pdf_double, ctls_double);
+    fail = test_stable_ddx_pdf<double>(out, ctls_double);
   } else if (test_name == "quantile_double") {
-    string outfile = out_dir + "/test_stable_quantile_double.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream quantile_double(outfile);
-    fail = test_stable_quantile<double>(quantile_double, ctls_double);
+    fail = test_stable_quantile<double>(out, ctls_double);
   } else if (test_name == "mode_double") {
-    string outfile = out_dir + "/test_stable_mode_double.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream mode_double(outfile);
-    fail = test_stable_mode<double>(mode_double, ctls_double);
+    fail = test_stable_mode<double>(out, ctls_double);
   } else if (test_name == "random_double") {
-    string outfile = out_dir + "/test_stable_random_double.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream random_double(outfile);
-    fail = test_stable_random<double>(random_double, 10000, .5, .5, ctls_double);
-    fail = test_stable_random<double>(random_double, 10000, 1.-1./128., .5, ctls_double) || fail;
-    fail = test_stable_random<double>(random_double, 10000, 1, .5, ctls_double) || fail;
-    fail = test_stable_random<double>(random_double, 10000, 1.+1./128., .5, ctls_double) || fail;
-    fail = test_stable_random<double>(random_double, 10000, 1.5, .5, ctls_double) || fail;
+    fail = test_stable_random<double>(out, 10000, .5, .5, ctls_double);
+    fail = test_stable_random<double>(out, 10000, 1.-1./128., .5, ctls_double) || fail;
+    fail = test_stable_random<double>(out, 10000, 1, .5, ctls_double) || fail;
+    fail = test_stable_random<double>(out, 10000, 1.+1./128., .5, ctls_double) || fail;
+    fail = test_stable_random<double>(out, 10000, 1.5, .5, ctls_double) || fail;
   }
 #ifdef MPREAL
   else if (test_name == "cdf_mpreal") {
-    string outfile = out_dir + "/test_stable_cdf_mpreal.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream cdf_mpreal(outfile);
-    fail = test_stable_cdf<mpreal>(cdf_mpreal,  ctls_mpreal);
+    fail = test_stable_cdf<mpreal>(out,  ctls_mpreal);
   } else if (test_name == "pdf_mpreal") {
-    string outfile = out_dir + "/test_stable_pdf_mpreal.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream pdf_mpreal(outfile);
-    fail = test_stable_pdf<mpreal>(pdf_mpreal,  ctls_mpreal);
+    fail = test_stable_pdf<mpreal>(out,  ctls_mpreal);
   } else if (test_name == "ddx_pdf_mpreal") {
-    string outfile = out_dir + "/test_stable_ddx_pdf_mpreal.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream ddx_pdf_mpreal(outfile);
-    fail = test_stable_ddx_pdf<mpreal>(ddx_pdf_mpreal,  ctls_mpreal);
+    fail = test_stable_ddx_pdf<mpreal>(out,  ctls_mpreal);
   } else if (test_name == "quantile_mpreal") {
-    string outfile = out_dir + "/test_stable_quantile_mpreal.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream quantile_mpreal(outfile);
-    fail = test_stable_quantile<mpreal>(quantile_mpreal, ctls_mpreal);
+    fail = test_stable_quantile<mpreal>(out, ctls_mpreal);
   } else if (test_name == "mode_mpreal") {
-    string outfile = out_dir + "/test_stable_mode_mpreal.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream mode_mpreal(outfile);
-    fail = test_stable_mode<mpreal>(mode_mpreal,  ctls_mpreal);
+    fail = test_stable_mode<mpreal>(out,  ctls_mpreal);
   } else if (test_name == "random_mpreal") {
-    string outfile = out_dir + "/test_stable_random_mpreal.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream random_mpreal(outfile);
-    fail = test_stable_random<mpreal>(random_mpreal, 10000, 1.5, .5,  ctls_mpreal);
+    fail = test_stable_random<mpreal>(out, 10000, 1.5, .5,  ctls_mpreal);
   }
 #endif //MPREAL
 #ifdef CPP_BIN_FLOAT
   else if (test_name == "cdf_cpp_bin_float") {
-    string outfile = out_dir + "/test_stable_cdf_cpp_bin_float.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream cdf_cpp_bin_float(outfile);
-    fail = test_stable_cdf<CppBinFloat>(cdf_cpp_bin_float,  ctls_cpp_bin_float);
+    fail = test_stable_cdf<CppBinFloat>(out,  ctls_cpp_bin_float);
   } else if (test_name == "pdf_cpp_bin_float") {
-    string outfile = out_dir + "/test_stable_pdf_cpp_bin_float.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream pdf_cpp_bin_float(outfile);
-    fail = test_stable_pdf<CppBinFloat>(pdf_cpp_bin_float,  ctls_cpp_bin_float);
+    fail = test_stable_pdf<CppBinFloat>(out,  ctls_cpp_bin_float);
   } else if (test_name == "ddx_pdf_cpp_bin_float") {
-    string outfile = out_dir + "/test_stable_ddx_pdf_cpp_bin_float.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream ddx_pdf_cpp_bin_float(outfile);
-    fail = test_stable_ddx_pdf<CppBinFloat>(ddx_pdf_cpp_bin_float,  ctls_cpp_bin_float);
+    fail = test_stable_ddx_pdf<CppBinFloat>(out,  ctls_cpp_bin_float);
   } else if (test_name == "quantile_cpp_bin_float") {
-    string outfile = out_dir + "/test_stable_quantile_cpp_bin_float.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream quantile_cpp_bin_float(outfile);
-    fail = test_stable_quantile<CppBinFloat>(quantile_cpp_bin_float, ctls_cpp_bin_float);
+    fail = test_stable_quantile<CppBinFloat>(out, ctls_cpp_bin_float);
   } else if (test_name == "mode_cpp_bin_float") {
-    string outfile = out_dir + "/test_stable_mode_cpp_bin_float.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream mode_cpp_bin_float(outfile);
-    fail = test_stable_mode<CppBinFloat>(mode_cpp_bin_float,  ctls_cpp_bin_float);
+    fail = test_stable_mode<CppBinFloat>(out,  ctls_cpp_bin_float);
   } else if (test_name == "random_cpp_bin_float") {
-    string outfile = out_dir + "/test_stable_random_cpp_bin_float.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream random_cpp_bin_float(outfile);
-    fail = test_stable_random<CppBinFloat>(random_cpp_bin_float, 10000, 1.5, .5,  ctls_cpp_bin_float);
+    fail = test_stable_random<CppBinFloat>(out, 10000, 1.5, .5,  ctls_cpp_bin_float);
   }
 #endif //CPP_BIN_FLOAT
 #ifdef MPFR_FLOAT
   else if (test_name == "cdf_mpfr_float") {
-    string outfile = out_dir + "/test_stable_cdf_mpfr_float.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream cdf_mpfr_float(outfile);
-    fail = test_stable_cdf<MpfrFloat>(cdf_mpfr_float,  ctls_mpfr_float);
+    fail = test_stable_cdf<MpfrFloat>(out,  ctls_mpfr_float);
   } else if (test_name == "pdf_mpfr_float") {
-    string outfile = out_dir + "/test_stable_pdf_mpfr_float.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream pdf_mpfr_float(outfile);
-    fail = test_stable_pdf<MpfrFloat>(pdf_mpfr_float,  ctls_mpfr_float);
+    fail = test_stable_pdf<MpfrFloat>(out,  ctls_mpfr_float);
   } else if (test_name == "ddx_pdf_mpfr_float") {
-    string outfile = out_dir + "/test_stable_ddx_pdf_mpfr_float.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream ddx_pdf_mpfr_float(outfile);
-    fail = test_stable_ddx_pdf<MpfrFloat>(ddx_pdf_mpfr_float,  ctls_mpfr_float);
+    fail = test_stable_ddx_pdf<MpfrFloat>(out,  ctls_mpfr_float);
   } else if (test_name == "quantile_mpfr_float") {
-    string outfile = out_dir + "/test_stable_quantile_mpfr_float.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream quantile_mpfr_float(outfile);
-    fail = test_stable_quantile<MpfrFloat>(quantile_mpfr_float, ctls_mpfr_float);
+    fail = test_stable_quantile<MpfrFloat>(out, ctls_mpfr_float);
   } else if (test_name == "mode_mpfr_float") {
-    string outfile = out_dir + "/test_stable_mode_mpfr_float.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream mode_mpfr_float(outfile);
-    fail = test_stable_mode<MpfrFloat>(mode_mpfr_float,  ctls_mpfr_float);
+    fail = test_stable_mode<MpfrFloat>(out,  ctls_mpfr_float);
   } else if (test_name == "random_mpfr_float") {
-    string outfile = out_dir + "/test_stable_random_mpfr_float.out"; 
-    cout << "Writing output to " << outfile << endl;
-    ofstream random_mpfr_float(outfile);
-    fail = test_stable_random<MpfrFloat>(random_mpfr_float, 10000, 1.5, .5,  ctls_mpfr_float);
+    fail = test_stable_random<MpfrFloat>(out, 10000, 1.5, .5,  ctls_mpfr_float);
   }
 #endif //MPFR_FLOAT
   else {

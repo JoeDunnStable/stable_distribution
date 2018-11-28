@@ -1,7 +1,7 @@
 /// \file quick_test.cpp
 /// Unit test of the quick verison of the pdf of standard stable distribution
 /// \author Joseph Dunn
-/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright 2016, 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <iostream>
@@ -86,6 +86,7 @@ int main(int argc, char *argv[]) {
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
   auto_cpu_timer timer(out);
+  out << stable_config << endl;
   
   Vec alphas(6);    alphas << .1, .5, 1, 1.5, 1.99, 2;
   Vec betas(5);     betas << -1., -.5, 0, .5, 1;

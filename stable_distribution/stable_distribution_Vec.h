@@ -3,7 +3,7 @@
 /// Declaration of routines calculating 4 parameter stable distributions
 /// x, gamma and delta can be vectors
 /// \author Joseph Dunn
-/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright 2016, 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #ifndef stable_distribution_Vec_h

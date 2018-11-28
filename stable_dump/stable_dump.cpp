@@ -1,7 +1,7 @@
 /// \file dump_mpreal.cpp
 /// Dumps high precision cdf, pdf, & ddx_pdf of standard stable distribution
 /// \author Joseph Dunn
-/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright 2016, 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <iostream>
@@ -211,17 +211,22 @@ void calculate_results(int thread_id, int noext, const Kronrod<BigFloat>& g_k_bi
                        Jobs* jobs, result_buffer<myFloat>* res_buf, int digits) {
   reset_prec<myFloat>(digits);
   
+  double eps_dbl = std::numeric_limits<double>::epsilon();
+  double epsrel_dbl = max(64*eps_dbl, static_cast<double>(epsrel));
+  
   IntegrationController<myFloat> cntl(noext, g_k_big, epsabs, epsrel, subdivisions, verbose);
   IntegrationController<double> cntl_double(noext, g_k_big, static_cast<double>(epsabs),
-                                            static_cast<double>(epsrel), subdivisions, verbose);
+                                            epsrel_dbl, subdivisions, verbose);
   Controllers<myFloat> ctls(cntl, cntl_double);
   {
     unique_lock<mutex> lock(cout_mutex);
+    cout << endl;
     cout << "Starting thread " << thread_id << " with IntegraationController at " << &cntl << endl;
-    cout << "Machine epsilon used: " << std::numeric_limits<myFloat>::epsilon() << endl;
+    cout << "Machine epsilon used: " << Fmt<myFloat>() << std::numeric_limits<myFloat>::epsilon() << endl;
+    /*
+
     cout << "Digits10: " << int(digits * log(2)/log(10)) << endl;
     cout << "Input epsabs: " << epsabs << ", epsrel: " << epsrel << endl;
-/*
     cout << cntl << endl;
  */
   }
@@ -283,7 +288,6 @@ int dump(string float_type_str, const Kronrod<BigFloat>& g_k_big, int digits,
   StandardStableDistribution<myFloat>::initialize();
   int digits10 = digits * log(2)/log(10);
   cout.precision(digits10);
-  cout << "zeta_tol:" << StandardStableDistribution<myFloat>::zeta_tol << endl;
   
   // Parameters for the integration controllers
   

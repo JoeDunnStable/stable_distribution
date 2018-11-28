@@ -2,7 +2,7 @@
 /// \file  adaptive_integration.h
 /// Routines for adapative integration ala QUADPACK
 /// \author Joseph Dunn
-/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright 2016, 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #ifndef adaptive_integration_h

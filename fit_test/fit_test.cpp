@@ -1,7 +1,7 @@
 /// \file fit_test.cpp
 /// Unit test of the routine in stable_distribution_fit.h
 /// \author Joseph Dunn
-/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright 2016, 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <iostream>
@@ -73,6 +73,7 @@ int main(int argc, char *argv[]) {
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
   auto_cpu_timer timer(out);
+  out << stable_config << endl;
 
   NullBuffer null_buffer;
   ostream null_stream(&null_buffer);

@@ -1,7 +1,7 @@
 /// \file cubicspline.h
 /// General purpose cubic splines
 /// \author Joseph Dunn
-/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright 2016, 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #ifndef CUBICSPLINE_H

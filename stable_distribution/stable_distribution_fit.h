@@ -2,7 +2,7 @@
 /// \file stable_distribution_fit.h
 /// Maximum likelihood estimates of stable distrubtion parameters
 /// \author Joseph Dunn
-/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright 2016, 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #ifndef stable_distribution_fit_h

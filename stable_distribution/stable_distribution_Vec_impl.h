@@ -2,7 +2,7 @@
 /// \file stable_distribution_Vec.cpp
 /// Routines implementing general 4 parameter stable distributions
 /// \author Joseph Dunn
-/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright 2016, 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include "parameter_check.h"

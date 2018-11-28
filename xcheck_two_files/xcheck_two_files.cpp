@@ -321,6 +321,7 @@ int main(int argc, char *argv[]) {
   string out_file = out_dir + "/xcheck_" + out_label + ".out";
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
+  out << stable_config << endl;
   out << "Opening " << path_file1 << " as file1" << endl;
   out << "Opening " << path_file2 << " as file2" << endl << endl;
   auto_cpu_timer timer(out);

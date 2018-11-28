@@ -2,7 +2,7 @@
 /// Implementation of common routines for standard stable distribution
 /// Included in stable_distribution.h when LIBRARY is defined
 /// \author Joseph Dunn
-/// \copyright 2017 Joseph Dunn
+/// \copyright 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <limits>
@@ -51,7 +51,6 @@ template<typename myFloat> myFloat StandardStableDistribution<myFloat>::xmin;
 template<typename myFloat> myFloat StandardStableDistribution<myFloat>::large_exp_arg;
 template<typename myFloat> myFloat StandardStableDistribution<myFloat>::PosInf;
 template<typename myFloat> myFloat StandardStableDistribution<myFloat>::NegInf;
-template<typename myFloat> myFloat StandardStableDistribution<myFloat>::zeta_tol;
 template<typename myFloat> double StandardStableDistribution<myFloat>::threshhold_1;
 template<typename myFloat> bool StandardStableDistribution<myFloat>::initialized = false;
 template<typename myFloat>
@@ -69,7 +68,6 @@ void StandardStableDistribution<myFloat>::initialize(){
     large_exp_arg = log(std::numeric_limits<myFloat>::max());
     PosInf = std::numeric_limits<myFloat>::infinity();
     NegInf = -PosInf;
-    zeta_tol = 200*eps;
     threshhold_1 = .5;
     max_n = 50;
     gamma_at_integers = gamma_derivative_at_integers<myFloat>(max_n);
@@ -546,6 +544,7 @@ const int w = 21;
      << setw(w) << " rho = " << dist.fmt << dist.rho << endl
      << setw(w) << " betaB = " << dist.fmt << dist.betaB << endl
      << setw(w) << " betaB_p_1 = " << dist.fmt << dist.betaB_p_1 << endl
+     << setw(w) << " one_m_betaB = " << dist.fmt << dist.one_m_betaB << endl
      << setw(w) << " gammaB = " << dist.fmt << dist.gammaB << endl
      << setw(w) << " xB = " << dist.fmt << dist.xB << endl
      << setw(w) << " beta = " << dist.fmt << dist.beta << endl;
@@ -727,6 +726,11 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
       else
         betaB_p_1 = atan((1+beta)*tan(alpha*pi/2)/(1-beta*pow(tan(alpha*pi/2),2)))
                     /(k_alpha*pi/2);
+      if (fabs(1-betaB) > .1)
+        one_m_betaB = 1-betaB;
+      else
+        one_m_betaB = atan((1-beta)*tan(alpha*pi/2)/(1+beta*pow(tan(alpha*pi/2),2)))
+                      /(k_alpha*pi/2);
       gammaB = pow(cat0,-1/alpha); // = Zolotarev lambda^(1/alpha)
       xB = x_m_zet/gammaB;
     } else {
@@ -769,24 +773,6 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
     
     // Set up the items needed for the integration
     if (alpha !=1) {
-/*
-      myFloat x_m_zet_tol = 0;
-      switch (pm) {
-        case S0:
-          x_m_zet_tol = zeta_tol * (zeta_tol + std::max(fabs(x), fabs(zeta)));
-          break;
-        case S1:
-          x_m_zet_tol = std::numeric_limits<myFloat>::min();
-          break;
-      }
-      if (fabs(x_m_zet) <= x_m_zet_tol) {
-        small_x_m_zet = true;
-        use_f_zeta = true;
-        return;
-      } else {
-        use_f_zeta = false;
-      }
-*/
       th_min=0;
       if (fabs(alpha_minus_one)> threshhold_1 * fabs(beta)) {
         th_span=(pi2)+theta0;

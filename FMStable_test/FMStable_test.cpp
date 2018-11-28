@@ -1,7 +1,7 @@
 /// \file FMStable_test.cpp
 /// Unit test for standard stable distribution compare to FMStable
 /// \author Joseph Dunn
-/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright 2016, 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <mpreal.h>
@@ -190,7 +190,7 @@ ostream& operator<<(ostream& os, results r) {
   << setw(15) << setprecision(5) << r.rel_diff_sum/r.count << endl << endl;
   os << setw(99) << "Quantile" << endl << endl;
   for (int i =0; i<results::probs.size(); ++i)
-    os << setw(98) << fixed << setprecision(0) << results::probs.at(i)*100 << "%"
+    os << setw(98) << fixed << setprecision(2) << results::probs.at(i)*100 << "%"
     << setw(15) << " " << setw(15) << setprecision(5) << scientific<< qs.at(i) << endl;
   
   os << "Table of worst " << r.rel_data.size() << " out of " << r.count << " relative differences for " << r.type << endl << endl;
@@ -224,7 +224,7 @@ ostream& operator<<(ostream& os, results r) {
   << setw(15) << setprecision(5) << r.rel_diff_sum/r.count << endl << endl;
   os << setw(99) << "Quantile" << endl << endl;
   for (int i =0; i<results::probs.size(); ++i)
-    os << setw(98) << fixed << setprecision(0) << results::probs.at(i)*100 << "%"
+    os << setw(98) << fixed << setprecision(2) << results::probs.at(i)*100 << "%"
     << setw(15) << " " << setw(15) << setprecision(5) << scientific<< qs.at(i) << endl;
   
   
@@ -252,6 +252,7 @@ int main(int argc, char *argv[]) {
   cout << "Writing output to " + out_file << endl;
   ofstream out(out_file);
   auto_cpu_timer timer(out);
+  out << stable_config << endl;
   
   StandardStableDistribution<double>::initialize();
   

@@ -2,7 +2,7 @@
 /// Implemenation of convergent integral used for alpha = 1 & small x
 /// Included in zolotarev.h when LIBRARY is defined
 /// \author Joseph Dunn
-/// \copyright 2017 Joseph Dunn
+/// \copyright 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 // Allows the calculation of pdf and cdf for alpha = 1 via integrals

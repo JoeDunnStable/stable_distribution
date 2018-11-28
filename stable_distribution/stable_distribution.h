@@ -1,7 +1,7 @@
 /// \file stable_distribution.h
 /// Class for standard stable distriubution
 /// \author Joseph Dunn
-/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright 2016, 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #ifndef stable_distribution_H
@@ -86,7 +86,6 @@ public:
   static myFloat large_exp_arg;             ///< the largest argument for exp()
   static myFloat PosInf;                    ///< positive inifinity 
   static myFloat NegInf;                    ///< negative inifinity
-  static myFloat zeta_tol;                  ///< tolerance for the use of f_zeta
   static double threshhold_1;               ///< used to define near=abs(alpha-1) < threshhold_1 * abs(beta)
   static Array<myFloat, Dynamic, Dynamic> gamma_at_integers;  ///<gamma function and derivatives at integers
   static int max_n;     ///< the maximum number of terms for series expansions
@@ -115,6 +114,7 @@ private:
   myFloat beta;                             ///< the skewness parameter actually used in computation 
   myFloat betaB;                            ///< for alpha==1, beta for Zolotarev's B representation
   myFloat betaB_p_1;                        ///< betaB + 1 via numerically stable method
+  myFloat one_m_betaB;                      ///< 1 - betaB vis numerically stable method
   myFloat theta0;                           ///< the lower limit of integration used
   bool positive_x;                          ///< Indicator the sign x has been flipped
   bool positive_xB;                         ///< Indicator the sign of xB has been flipped

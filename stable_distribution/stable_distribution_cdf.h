@@ -2,7 +2,7 @@
 /// Implementation of cdf for standard stable distribution
 /// Included in stable_distribution.h when LIBRARY is defined
 /// \author Joseph Dunn
-/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright 2016, 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <iostream>
@@ -501,7 +501,7 @@ myFloat StandardStableDistribution<myFloat>::series_small_x_cdf(myFloat x0, int 
       if (xB != 0 && beta != -1) {
         for (int k=1; k<=max_n; ++k) {
           abs_term = tgamma_ratio(k/alpha,myFloat(k+1))* pow(xB,k)/(pi * alpha);
-          term = -abs_term * sin(pi/2 * k * (1-betaB));
+          term = -abs_term * sin(pi/2 * k * one_m_betaB);
           if (k > 1 && abs_term > old_abs_term) break;
           if (verbose>1)
             cout << "n = " << k << ", term = " << fmt << term << endl;

@@ -2,10 +2,43 @@
 #ifndef STABLE_CONFIG_H
 #define STABLE_CONFIG_H
 
-#define PACKAGE_NAME "@PACKAGE_NAME@"
-#define PACKAGE_VERSION "@PACKAGE_VERSION@"
-#define PACKAGE_COMPILER "@PACKAGE_COMPILER@"
-#define PACKAGE_OS "@PACKAGE_OS@"
+#include <string>
+using std::string;
+#include <iostream>
+using std::endl;
+using std::ostream;
+#include <iomanip>
+using std::left;
+using std::setw;
+
+
+struct StableConfig {
+const string name  {"@PACKAGE_NAME@"};
+const string version {"@PACKAGE_VERSION@"};
+const string compiler {"@PACKAGE_COMPILER@"};
+const string compiler_version {"@PACKAGE_COMPILER_VERSION@"};
+const string os {"@PACKAGE_OS@"};
+const string boost_version { "@BOOST_VERSION@"};
+const string mpfr_ver {"@MPFR_VERSION@"};
+const string eigen_version {"@EIGEN_VERSION@"};
+
+friend ostream& operator<< (ostream& ostr, StableConfig sc) {
+  ostr << setw(20) << left << "Package Name:" << sc.name << endl
+	     << setw(20) << left << "Package Version:" << sc.version << endl
+       << setw(20) << left << "Compiler:" << sc.compiler << endl
+	     << setw(20) << left << "Compiler Version:" << sc.compiler_version << endl
+       << setw(20) << left << "Operating System:" << sc.os << endl
+	     << setw(20) << left << "Boost Version:" << sc.boost_version << endl
+	     << setw(20) << left << "Mpfr Version:" << sc.mpfr_ver << endl
+	     << setw(20) << left << "Eigen Version:" << sc.eigen_version << endl;
+  return ostr;
+    
+}
+
+};
+
+static const StableConfig stable_config;
+
 #define OUT_DIR "../output-@PACKAGE_OS@-@PACKAGE_COMPILER@-@PACKAGE_VERSION@"
 
 #endif // STABLE_CONFIG_H

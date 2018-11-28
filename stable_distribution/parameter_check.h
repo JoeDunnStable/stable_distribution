@@ -2,7 +2,7 @@
 ///  \file parameter_check.h
 ///  Checking and translating the 4 parameters of stable distributions
 ///  \author Joseph Dunn on 7/27/16.
-///  \copyright 2016, 2017 Joseph Dunn.
+///  \copyright 2016, 2017, 2018 Joseph Dunn.
 //
 
 #ifndef parameter_check_h

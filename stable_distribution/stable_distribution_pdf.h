@@ -2,7 +2,7 @@
 /// Implementation of pdf of standard stable distribution
 /// Included in stable_distribution.h when LIBRARY is defined
 /// \author Joseph Dunn
-/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright 2016, 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <limits>
@@ -471,7 +471,7 @@ myFloat StandardStableDistribution<myFloat>::series_small_x_pdf(myFloat x0, Para
       // Zolotarev formula 2.5.1, which is asmyptotic as x->0
       // for betaB != 1
       myFloat abs_term = tgamma(1/alpha)/(pi * alpha * gammaB);
-      myFloat term = abs_term * ((beta!=-1)?sin(pi/2*(1-betaB)):0);
+      myFloat term = abs_term * ((beta!=-1)?sin(pi/2*one_m_betaB):0);
       myFloat abs_tail{fabs(term)};
       if (xB == 0 || beta== -1) {
         result_series = term;
@@ -488,7 +488,7 @@ myFloat StandardStableDistribution<myFloat>::series_small_x_pdf(myFloat x0, Para
         for (int k=1; k<=max_n; ++k) {
           // calculate the next term which is used to estimate the error
           abs_term = tgamma_ratio((k+1)/alpha,myFloat(k+1))*pow(xB,k)/(pi * alpha * gammaB);
-          myFloat new_term = abs_term * sin(pi/2 * (k+1) * (1-betaB));
+          myFloat new_term = abs_term * sin(pi/2 * (k+1) * one_m_betaB);
           cos_ab_m_k /= cos_ab;
           myFloat new_error = abs_term * cos_ab_m_k;
           if (k>1 && (!boost::math::isfinite(new_error) || new_error > error_series)) break;

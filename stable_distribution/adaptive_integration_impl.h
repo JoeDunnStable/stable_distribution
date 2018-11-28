@@ -2,7 +2,7 @@
 /// Implementation of the classes declared in adaptive_integration.h
 /// Included in adaptive_integration.h when LIBRARY is defined.
 /// \author Joseph Dunn
-/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright 2016, 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #include <limits>

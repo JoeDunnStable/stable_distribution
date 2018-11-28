@@ -7,7 +7,7 @@
 /// 4. cpp_bin_float, the boost multiprecion cpp_bin_float when CPP_BIN_FLOAT is defined
 ///
 /// \author Joseph Dunn
-/// \copyright 2016, 2017 Joseph Dunn
+/// \copyright 2016, 2017, 2018 Joseph Dunn
 /// \copyright Distributed under the terms of the GNU General Public License version 3
 
 #ifndef myFloat_h
@@ -24,7 +24,7 @@ using CppBinFloat = boost::multiprecision::number<boost::multiprecision::backend
 using BigCppBinFloat = boost::multiprecision::number<boost::multiprecision::backends::cpp_bin_float<38>, boost::multiprecision::et_off>;
 #endif
 
-#ifdef MPFR_FLOAT
+#if defined(MPFR_FLOAT)
 #include <boost/multiprecision/mpfr.hpp>
 
 using MpfrFloat = boost::multiprecision::number<boost::multiprecision::mpfr_float_backend<28>, boost::multiprecision::et_off>;
@@ -113,35 +113,37 @@ template<> CppBinFloat my_erfc<CppBinFloat>(CppBinFloat x) {
 #endif
 
 #ifdef MPREAL
+
 #include <boost/multiprecision/mpfr.hpp>
-using boost::multiprecision::mpfr_float_50;
+using MpfrProxy = boost::multiprecision::number<boost::multiprecision::mpfr_float_backend<29>, boost::multiprecision::et_off>;
+
 
 // the boost version of sinc_pi, tgamma_ratio, erf_inv, erfc_inv is broken
 // for variable precision mpreal
 
 mpreal sinc_pi(mpreal x) {
-  mpfr_float_50 x_mpfr{x.mpfr_ptr()};
+  MpfrProxy x_mpfr{x.mpfr_ptr()};
   mpreal ret = static_cast<mpreal>(boost::math::sinc_pi(x_mpfr).backend().data());
   ret.set_prec(mpreal::get_default_prec());
   return ret;
 }
 
 mpreal tgamma_ratio(mpreal num, mpreal denom) {
-  mpfr_float_50 num_mpfr{num.mpfr_ptr()}, denom_mpfr{denom.mpfr_ptr()};
+  MpfrProxy num_mpfr{num.mpfr_ptr()}, denom_mpfr{denom.mpfr_ptr()};
   mpreal ret = static_cast<mpreal>(tgamma_ratio(num_mpfr, denom_mpfr).backend().data());
   ret.set_prec(mpreal::get_default_prec());
   return ret;
 }
 
 mpreal erf_inv(mpreal x) {
-  mpfr_float_50 x_mpfr{x.mpfr_ptr()};
+  MpfrProxy x_mpfr{x.mpfr_ptr()};
   mpreal ret = static_cast<mpreal>(boost::math::erf_inv(x_mpfr).backend().data());
   ret.set_prec(mpreal::get_default_prec());
   return ret;
 }
 
 mpreal erfc_inv(mpreal x) {
-  mpfr_float_50 x_mpfr{x.mpfr_ptr()};
+  MpfrProxy x_mpfr{x.mpfr_ptr()};
   mpreal ret = static_cast<mpreal>(boost::math::erfc_inv(x_mpfr).backend().data());
   ret.set_prec(mpreal::get_default_prec());
   return ret;
@@ -150,7 +152,7 @@ mpreal erfc_inv(mpreal x) {
 namespace mpfr {
 inline long long lltrunc(mpfr::mpreal const& x)
 {
-  mpfr_float_50 x_mpfr{x.mpfr_ptr()};
+  MpfrProxy x_mpfr{x.mpfr_ptr()};
   return boost::math::lltrunc(x_mpfr);
 }
 }
