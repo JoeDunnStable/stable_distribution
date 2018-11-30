@@ -1,5 +1,5 @@
 project('Stable Distribution', 'cpp', default_options : ['cpp_std=c++11'],
-         version : '1.2.1')
+         version : '1.2.2')
 
 compiler=meson.get_compiler('cpp').get_id()
 

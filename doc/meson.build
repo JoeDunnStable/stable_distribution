@@ -1,7 +1,7 @@
 doxygen = find_program('doxygen')
 
 if(doxygen.found())
-  src_doxygen = [meson.source_root()+'/README.md', \
+  src_doxygen = [meson.source_root()+'/doc/README.md', \
                  meson.source_root()+'/stable_distribution/adaptive_integration.h', \
                  meson.source_root()+'/stable_distribution/cubicspline.h', \
                  meson.source_root()+'/stable_distribution/gauss_kronrod.h', \

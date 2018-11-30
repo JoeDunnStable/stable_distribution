@@ -26,16 +26,16 @@ following to install the package.
 
 1. The meson build system available at http://mesonbuild.com/Getting-meson.html
 2. While the meson system has support for several backends, the ninja one 
-   works best.  It's available at https://github.com/ninja-build/ninja/releases
+works best.  It's available at https://github.com/ninja-build/ninja/releases
 3. The Boost headers and libraries available at http://www.boost.org
 4. The Eigen 3 headers available at http://eigen.tuxfamily.org
 5. For multiprecision support, which is used in some of the test programs, 
-   you'll need the GNU mpfr library available at http://www.mpfr.org and
-   the GNU gmp library available at https://gmplib.org.
+you'll need the GNU mpfr library available at http://www.mpfr.org and
+the GNU gmp library available at https://gmplib.org.
 6. The Pavel Holoborodko's Mpfr C++ header is used to wrap the GNU mpfr library. 
-   The header needs to be modified to allow it to work with Boost by commenting out the 
-   line #define MPREAL_HAVE_DYNAMIC_STD_NUMERIC_LIMITS. 
-   The original is available at http://www.holoborodko.com/pavel/mpfr/..
+The header needs to be modified to allow it to work with Boost by commenting out the 
+line #define MPREAL_HAVE_DYNAMIC_STD_NUMERIC_LIMITS. 
+The original is available at http://www.holoborodko.com/pavel/mpfr/..
 
 Most of these prerequisites can be downloaded using a package management system.
 I used MacPorts to get them on my Mac.
@@ -48,11 +48,11 @@ such files, but it's relatively easy to add appropriate entries.  Once that's
 done Meson should do the rest.  I wanted to use the clang++ compiler so
 I used the following commands from the root directory:
 
-    $ mkdir build
-    $ CXX=clang++ BOOST_ROOT=/opt/local meson build
-    $ cd build
-    $ ninja
-    $ ninja test
+$ mkdir build
+$ CXX=clang++ BOOST_ROOT=/opt/local meson build
+$ cd build
+$ ninja
+$ ninja test
 
 There are also three options available for adding a multiprecision support, 
 which are implemented by defining MPREAL, CPP_BIN_FLOAT, and/or MPFR_FLOAT. As 
@@ -64,15 +64,15 @@ output-$PACKAGE_OS-$PACKAGE_COMPILER-$PACKAGE_VERSION- directory of the parent d
 If you have a lot of time on your hands, you can run the following from the
 build directory:
 
-    $ ./stable_dump/stable_dump float_type
+$ ./stable_dump/stable_dump float_type
 
 Where float_type is mpreal, mpfr_float or cpp_bin_float.  
 This will create a 224,000 line file 'stable_float_type.out' in the output directory,
 which can be used to check the double precision calculations by issuing the 
 following command from the build directory:
 
-    $ ./xcheck_to_file/xcheck_to_file float_type.
-   
+$ ./xcheck_to_file/xcheck_to_file float_type.
+
 The src files beginning with the word "trace" can be used as examples of how to
 call the programs.
 
@@ -120,6 +120,95 @@ by the stable_fit routine and are included in the present package.  The original
 is available at https://github.com/PatWie/CppNumericalSolvers.
 10. The documentation is prepared using Doxygen, which is available at http://doxygen.org, and 
 mathjax
+
+Details
+-------
+The function uses the approach of J.P. Nolan for general stable
+distributions. Nolan (1997) derived expressions in form of integrals
+based on the characteristic function for standardized stable random
+variables. For `StandardStableDistribution::pdf` and
+`StandardStableDistribution::cdf`, these integrals
+are numerically evaluated.
+
+There are several different parameterizations in use for the stable
+distribution.  Nolan derived his integral representation using the parameterization
+he labeled "S0" "[pm=0], which is based on the (M) representation
+of Zolotarev.  Unlike the Zolotarev (M) parameterization, gamma and
+delta are straightforward scale and shift parameters. This
+representation is continuous in all 4 parameters.
+
+### Definition
+
+The random variable \f$ Y \f$ is said to be distriubuted according to the
+\f$ S(\alpha, \beta, \gamma, \delta, 0) \f$ if its characteristic function is
+given by the following:
+\f{equation}{
+{E \exp(itY)} =
+\begin{cases}
+\exp \{ -\gamma^\alpha |t|^\alpha \left [1+i\beta(\tan{\frac{\pi \alpha}{2}})(\text{sign } t)(|\gamma t|^{1-\alpha}-1) \right ]+i \delta t \} &\alpha \ne 1 \\
+\exp \{-\gamma |t| \left[ 1+i \beta \frac {2}{\pi}(\text{sign }t)\log{(\gamma |t|)} \right ]+i \delta t \} & \alpha=1.
+\end{cases}
+\f}
+where
+\par
+\f$ \alpha \f$, the shape parameter, satisfies \f$ 0 \lt \alpha \le 2 \f$,
+\par
+\f$ \beta \f$, the skewness parameter, satisfies \f$ -1 \le \beta \le 1 \f$,
+\par
+\f$ \gamma \f$, the scale parameter, satisfies \f$ 0 \lt \gamma \f$, and
+\par
+\f$ \delta \f$, the location parameter, is unconstrained.
+
+Setting \f$\gamma = 1\f$ and \f$\delta =0\f$ gives the standard skew stable distribution, \f$ S_0 \f$, whose characteristic function is therefore:
+\f{equation}{
+{E \exp(itY)} =
+\begin{cases}
+\exp \{ -|t|^\alpha \left [1+i\beta(\tan{\frac{\pi \alpha}{2}})(\text{sign } t)(|t|^{1-\alpha}-1) \right ] \} &\alpha \ne 1 \\
+\exp \{-|t| \left[ 1+i \beta \frac {2}{\pi}(\text{sign }t)\log{(|t|)} \right ]\} & \alpha=1.
+\end{cases}
+\f}
+
+Traditionally, the parameters in the stable distribution are defined somewhat differently.
+The random variable \f$ Y \f$ is said to be distriubuted according to the
+\f$ S(\alpha, \beta, \gamma, \delta, 1) \f$ if its characteristic function is
+given by the following:
+\f{equation}{
+{E \exp(itY)} =
+\begin{cases}
+\exp \{ -\gamma^\alpha |t|^\alpha \left [1-i\beta(\tan{\frac{\pi \alpha}{2}})(\text{sign } t) \right ]+i \delta t \} &\alpha \ne 1 \\
+\exp \{-\gamma |t| \left[ 1+i \beta \frac {2}{\pi}(\text{sign }t)\log{ |t|} \right ]+i \delta t \} & \alpha=1.
+\end{cases}
+\f}
+where \f$ \alpha \f$, \f$ \beta \f$, \f$ \gamma \f$, \f$ \delta \f$ are in the same ranges as for \f$ S_0 \f$, but with 
+different interpretations for \f$ \gamma \f$ and \f$ \delta \f$.
+
+Setting \f$\gamma = 1\f$ and \f$\delta =0\f$ gives the standard skew stable distribution, \f$ S_1 \f$, whose characteristic function is therefore:
+\f{equation}{
+{E \exp(itY)} =
+\begin{cases}
+\exp \{ -|t|^\alpha \left [1-i\beta(\tan{\frac{\pi \alpha}{2}})(\text{sign } t) \right ] \} &\alpha \ne 1 \\
+\exp \{-|t| \left[ 1+i \beta \frac {2}{\pi}(\text{sign }t)\log{(|t|)} \right ]\} & \alpha=1.
+\end{cases}
+\f}
+
+This package supports either parameterization through the pm parameter.  Generally the \f$ S_1 \f$ works best for small
+\f$ \alpha \f$, otherwise the \f$ S_0 \f$ is to be preferred.
+
+Note that when \f$ \alpha = 1 \f$ and \f$ \beta = 0 \f$ the standard stable distribution is simply the Cauchy distribution,
+and when \f$ \alpha = 2 \f$ the standard stable distribution is a normal distribution with standard deviation of
+\f$ \sqrt{2} \f$.
+
+The package supports a third parameterization, \f$ S_2 \f$, which adjusts the scale parameter
+so that the \f$ \gamma = 1 \f$ corrresponds to the standard normal distribution when \f$ \alpha = 2 \f$ and Cauchy distributon 
+when \f$ \alpha = 1 \f$ and \f$ \beta = 0 \f$.  Specifically
+\f{equation}{
+\gamma_2 = \gamma_0 \alpha ^ {\frac{1}{\alpha}}
+\f}
+
+The parameter \f$ \delta_2 \f$ is determined so that the mode of the distribution is at \f$ \delta_2 \f$. Specifically
+\f{equation}{
+\delta_2 = \delta_0 + \gamma_0 * \text{mode}_0
+\f}
 
 
 
