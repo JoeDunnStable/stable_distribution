@@ -12,12 +12,20 @@ using std::endl;
 using std::setw;
 using std::setprecision;
 
+#ifdef RCPP_VERSION
+#include <boost/iostreams/stream.hpp>
+using boost::iostreams::stream;
+using boost::iostreams::null_sink;
+#else
 #include <fstream>
 using std::ofstream;
+#include <boost/filesystem.hpp>
+using boost::filesystem::is_directory;
+using boost::filesystem::create_directory;
+#endif
 
 #include <cmath>
 #include <Eigen/Dense>
-#include <boost/filesystem.hpp>
 #include "Problem.h"
 #include "stable_config.h"
 
@@ -75,12 +83,16 @@ public:
 
     const size_t DIM = x.rows();
       
+#ifdef RCPP_VERSION
+    stream< null_sink > trace( ( null_sink() ) );
+#else
     string out_dir = string(OUT_DIR);
-    if (!boost::filesystem::is_directory(out_dir))
-      boost::filesystem::create_directory(out_dir);
+    if (!is_directory(out_dir))
+      create_directory(out_dir);
 
     ofstream trace(out_dir + "/nm_trace.txt");
-
+#endif
+                  
     // create initial simplex
     Matrix<T> x0 = Matrix<T>::Zero(DIM, DIM + 1);
     for (int c = 0; c < DIM + 1; ++c) {

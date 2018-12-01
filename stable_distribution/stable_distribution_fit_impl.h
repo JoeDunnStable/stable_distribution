@@ -14,14 +14,23 @@
 #include <chrono>
 
 #include <iomanip>
-#include <fstream>
 #include <sstream>
 #include <algorithm>
 #include <string>
 
 //#define BOOST_MATH_INSTRUMENT
 #include <boost/math/tools/toms748_solve.hpp>
+#ifdef RCPP_VERSION
+#include <boost/iostreams/stream.hpp>
+using boost::iostreams::stream;
+using boost::iostreams::null_sink;
+#else
+#include <fstream>
+using std::ofstream;
 #include <boost/filesystem.hpp>
+using boost::filesystem::is_directory;
+using boost::filesystem::create_directory;
+#endif
 
 #include "neldermeadsolver.h"
 #include "stable_distribution.h"
@@ -701,12 +710,17 @@ template<typename myFloat>
 std::vector<FitResult<myFloat> > stable_fit(const Vec& yy, Controllers<myFloat> ctls, const myFloat dbltol,
                                   const string type,const bool quick, const int verbose) {
   int n=static_cast<int>(yy.size());
-  string out_dir = string(OUT_DIR);
-  if (!boost::filesystem::is_directory(out_dir))
-    boost::filesystem::create_directory(out_dir);
-
-  ofstream trace(out_dir + "/stable_fit_trace.txt");
   
+#ifdef RCPP_VERSION
+  stream< null_sink > trace( ( null_sink() ) );
+#else
+  string out_dir = string(OUT_DIR);
+  if (!is_directory(out_dir))
+    create_directory(out_dir);
+  
+  ofstream trace(out_dir + "/stable_fit_trace.txt");
+#endif
+
   // First McCulloch's method
   
   Vec probs(5); probs << .05, .25, .5, .75, .95;
