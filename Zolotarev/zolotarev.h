@@ -67,6 +67,7 @@ public:
   static vector<myFloat> points;     ///< the initial subdivision of [0, pi/2] for integration
   IntegrationController<myFloat>* cntl; ///< pointer to integration controller to use
   myFloat alpha;             ///< shape parameter for stable distribution
+  myFloat alpha_m_1;         ///< alpah - 1
   myFloat beta_input;        ///< beta, the skewness parameter as input
   myFloat beta;              ///< beta actually use.  +/- beta_input
   bool positive_x;           ///< indicates whether x_m_zet has been negated for calculation

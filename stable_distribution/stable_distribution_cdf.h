@@ -389,7 +389,7 @@ myFloat StandardStableDistribution<myFloat>::series_large_x_cdf(myFloat x0, int 
       error_series = std::numeric_limits<myFloat>::max();
       n_series = 0;
     } else if (beta == -1) {
-      myFloat xi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
+      myFloat xi = fabs(alpha_m_1) * pow(xB/alpha, alpha/(alpha_m_1));
       myFloat fac = exp(-xi)/sqrt(2*pi*alpha*xi);
       if (verbose > 1)
         cout << "xi = " << fmt << xi << endl
@@ -460,7 +460,7 @@ myFloat StandardStableDistribution<myFloat>::series_small_x_cdf(myFloat x0, int 
   if (alpha < 1) {
     if (beta == 1) {
       // Zolotarev Theorem 2.5.3, asymptotic for small x
-      myFloat xi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
+      myFloat xi = fabs(alpha_m_1) * pow(xB/alpha, alpha/(alpha_m_1));
       myFloat fac = exp(-xi)/sqrt(2*pi*alpha*xi);
       if (verbose > 1)
         cout << "xi = " << fmt << xi << endl

@@ -13,6 +13,7 @@ using std::endl;
 #include <fstream>
 #define MPREAL
 #include "stable_distribution.h"
+#include "stable_config.h"
 #include <boost/math/constants/info.hpp>
 #include <boost/filesystem.hpp>
 #include <vector>
@@ -306,9 +307,13 @@ static void show_usage (string name){
 template<typename myFloat>
 void zolotarev_comparison(string float_type, Controllers<myFloat> ctls, int verbose) {
   
-  string out_file = "../output/xcheck_to_Zolotarev_" + float_type + ".out";
-  cout << "Writing output to " + out_file << endl;
-  ofstream out(out_file);
+  string out_dir = string(OUT_DIR);
+  if (!boost::filesystem::is_directory(out_dir))
+    boost::filesystem::create_directory(out_dir);
+  string outfile = out_dir + "/xcheck_to_Zolotarev_" + float_type + ".out";
+  cout << "Writing output to " << outfile << endl;
+  ofstream out(outfile);
+  out << stable_config << endl;  
 
  vector<double> alphas {.01, .1, .5, .9, .99, 1,
     1.01, 1.1, 1.5, 1.9, 1.99};

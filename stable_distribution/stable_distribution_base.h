@@ -81,24 +81,24 @@ template<typename myFloat>StandardStableDistribution<myFloat>::StandardStableDis
                              myFloat beta,                       ///< [in] the skewness parameter of the distribution
                              Controllers<myFloat> ctls,        ///< [in] reference to integration controllers
                              int verbose                        ///< [in] indicator for verbose output
-  ) : alpha(alpha), alpha_minus_one(alpha-1), beta_input(beta), x_input(NAN),
+  ) : alpha(alpha), alpha_m_1(alpha-1), beta_input(beta), x_input(NAN),
   x_m_zeta_input(NAN), controllers(ctls), verbose(verbose) {
   if (!initialized) initialize();
-  if (fabs(alpha_minus_one)>64*std::numeric_limits<myFloat>::epsilon()){
-    if (fabs(alpha_minus_one) > threshhold_1 * fabs(beta)) {
+  if (fabs(alpha_m_1)>64*std::numeric_limits<myFloat>::epsilon()){
+    if (fabs(alpha_m_1) > threshhold_1 * fabs(beta)) {
       zeta = -beta_input*tan(alpha*pi2);
       theta0_x_gt_zeta = atan(beta_input*tan(alpha*pi2))/alpha;
     } else {
-      zeta = beta_input/tan(pi2*alpha_minus_one);
+      zeta = beta_input/tan(pi2*alpha_m_1);
       theta0_x_gt_zeta = ((zeta<0)? 1 : -1) *
-      (pi2 - (pi2*alpha_minus_one + atan(1/fabs(zeta)))/alpha);
+      (pi2 - (pi2*alpha_m_1 + atan(1/fabs(zeta)))/alpha);
     }
     theta0_x_gt_zeta = min(pi2,max<myFloat>(-pi2,theta0_x_gt_zeta));
     cat0=1/sqrt(1+zeta*zeta);
   } else {
     zeta=0;
     this->alpha=1;
-    this->alpha_minus_one=0;
+    this->alpha_m_1=0;
     c2=pi2*fabs(1/(2*beta_input));
     c_ddx=-c2*pi2/beta_input;
   }
@@ -112,24 +112,24 @@ StandardStableDistribution<myFloat>::StandardStableDistribution(
                              myFloat beta,                       ///< [in] the skewness parameter of the distribution
                              Controllers<myFloat> ctls,        ///< [in] reference to integration controller
                              int verbose                        ///< [in] indicator for verbose output
-  ) : alpha(a_m_1.alpha_minus_one + 1), alpha_minus_one(a_m_1.alpha_minus_one), beta_input(beta), x_input(NAN),
+  ) : alpha(a_m_1.alpha_m_1 + 1), alpha_m_1(a_m_1.alpha_m_1), beta_input(beta), x_input(NAN),
   x_m_zeta_input(NAN), controllers(ctls), verbose(verbose) {
   if (!initialized) initialize();
-  if (fabs(alpha_minus_one)> 64 * std::numeric_limits<myFloat>::min()){
-    if (fabs(alpha_minus_one) > threshhold_1 * fabs(beta)) {
+  if (fabs(alpha_m_1)> 64 * std::numeric_limits<myFloat>::min()){
+    if (fabs(alpha_m_1) > threshhold_1 * fabs(beta)) {
       zeta = -beta_input*tan(alpha*pi2);
       theta0_x_gt_zeta = atan(beta_input*tan(alpha*pi2))/alpha;
     } else {
-      zeta = beta_input/tan(pi2*alpha_minus_one);
+      zeta = beta_input/tan(pi2*alpha_m_1);
       theta0_x_gt_zeta = ((zeta<0)? 1 : -1) *
-      (pi2 - (pi2*alpha_minus_one + atan(1/fabs(zeta)))/alpha);
+      (pi2 - (pi2*alpha_m_1 + atan(1/fabs(zeta)))/alpha);
     }
     theta0_x_gt_zeta = min(pi2,max<myFloat>(-pi2,theta0_x_gt_zeta));
     cat0=1/sqrt(1+zeta*zeta);
   } else {
     zeta=0;
     this->alpha=1;
-    this->alpha_minus_one=0;
+    this->alpha_m_1=0;
     c2=pi2*fabs(1/(2*beta_input));
     c_ddx=-c2*pi2/beta_input;
   }
@@ -239,7 +239,7 @@ myFloat StandardStableDistribution<myFloat>::g_l(myFloat th_l) const{
   if ((alpha < 1 && th_l<4*xmin) || (alpha > 1 && th_l>th_span*(1-4*eps))) {
     myFloat g0 = 0;
     if ((alpha<1 && beta == 1) || (alpha > 1 && beta == -1))
-      g0 = pow(cat0*pow(x_m_zet/alpha,alpha),(1/(alpha-1)))*fabs(1-alpha);
+      g0 = pow(cat0*pow(x_m_zet/alpha,alpha),(1/(alpha_m_1)))*fabs(alpha_m_1);
     return g0;
   }
   else if ((alpha < 1 && th_l > th_span*(1-4*eps)) || (alpha >1 && th_l<4*xmin))
@@ -250,21 +250,21 @@ myFloat StandardStableDistribution<myFloat>::g_l(myFloat th_l) const{
     if (add_l != 0) {
       myFloat costh = max<myFloat>(static_cast<myFloat>(0),sin(th_l-add_l));
       cos_sin_att = costh/sin(alpha*th_l);
-      cos_costh = max<myFloat>(static_cast<myFloat>(0),-sin((alpha-1)*th_l+add_l))/costh;
+      cos_costh = max<myFloat>(static_cast<myFloat>(0),-sin((alpha_m_1)*th_l+add_l))/costh;
     } else {
       myFloat sincth = sinc_pi(th_l);
       cos_sin_att = sincth/(alpha*sinc_pi(alpha*th_l));
-      cos_costh = -(alpha-1)*sinc_pi((alpha-1)*th_l)/sincth;
+      cos_costh = -(alpha_m_1)*sinc_pi((alpha_m_1)*th_l)/sincth;
     }
     myFloat pow2;
     
     if (fabs(zeta) < 1 || fabs(x_m_zeta_input+zeta) > .1 * fabs(zeta)) {
       myFloat x_cos_sin = x_m_zet*(cos_sin_att);
       myFloat pow1 = pow(x_cos_sin,alpha);
-      pow2 = pow(cat0*pow1,(1/(alpha-1)));
+      pow2 = pow(cat0*pow1,(1/(alpha_m_1)));
     } else {
       myFloat ln_pow1 = alpha * (log(fabs(zeta))+log1p(-x_m_zeta_input/zeta-1)+log(cos_sin_att));
-      myFloat ln_pow2 = (log(cat0) + ln_pow1)/(alpha-1);
+      myFloat ln_pow2 = (log(cat0) + ln_pow1)/(alpha_m_1);
       pow2 = exp(ln_pow2);
     }
     
@@ -282,7 +282,7 @@ myFloat StandardStableDistribution<myFloat>::g_r(myFloat th_r) const{
   else if ((alpha>1 && th_r<4*xmin) || (alpha <1 && th_r > th_span*(1-4*eps))){
     myFloat g0 = 0;
     if ((alpha<1 && beta == 1) || (alpha > 1 && beta == -1))
-      g0=pow(cat0*pow(x_m_zet/alpha,alpha),(1/(alpha-1)))*fabs(1-alpha);
+      g0=pow(cat0*pow(x_m_zet/alpha,alpha),(1/(alpha_m_1)))*fabs(alpha_m_1);
     return g0;
   }
   else {
@@ -295,16 +295,16 @@ myFloat StandardStableDistribution<myFloat>::g_r(myFloat th_r) const{
     if (add_r != 0) {
       myFloat costh = max<myFloat>(0,sin(th_r));
       cos_sin_att = costh/sin(alpha*th_r+add_r);
-      cos_costh = max(static_cast<myFloat>(0.),static_cast<myFloat>(sin((alpha-1)*th_r+add_r)))/costh;
+      cos_costh = max(static_cast<myFloat>(0.),static_cast<myFloat>(sin((alpha_m_1)*th_r+add_r)))/costh;
     } else {
       myFloat sincth = sinc_pi(th_r);
       cos_sin_att = sincth/(alpha*sinc_pi(alpha*th_r));
-      cos_costh = (alpha-1)*sinc_pi((alpha-1)*th_r)/sincth;
+      cos_costh = (alpha_m_1)*sinc_pi((alpha_m_1)*th_r)/sincth;
     }
     myFloat pow2;
     if (x_m_zet < 1e100) {
       myFloat pow1 = pow(x_m_zet*(cos_sin_att),alpha);
-      pow2 = pow(cat0 * pow1,1/(alpha-1));
+      pow2 = pow(cat0 * pow1,1/(alpha_m_1));
     } else {
       myFloat ln_pow1 = alpha*(log(x_m_zet) + log(cos_sin_att));
       pow2 = exp((log(cat0) + ln_pow1)/(alpha - 1));
@@ -372,9 +372,9 @@ myFloat StandardStableDistribution<myFloat>::g_r_c(myFloat th_c) const{
     return g_r(th_c-th_min);
   }
   myFloat ln_g = ln_g_th2
-  +(1/alpha_minus_one)*log1p(-2*pow(sin(th_c/2),2)+sin(th_c)*cot_th2_1)
-  -(alpha/alpha_minus_one)*log1p(-2*pow(sin(alpha*th_c/2),2)+sin(alpha*th_c)*cot_th2_2)
-  +log1p(-2*pow(sin(alpha_minus_one*th_c/2),2)+sin(alpha_minus_one*th_c)*cot_th2_3);
+  +(1/alpha_m_1)*log1p(-2*pow(sin(th_c/2),2)+sin(th_c)*cot_th2_1)
+  -(alpha/alpha_m_1)*log1p(-2*pow(sin(alpha*th_c/2),2)+sin(alpha*th_c)*cot_th2_2)
+  +log1p(-2*pow(sin(alpha_m_1*th_c/2),2)+sin(alpha_m_1*th_c)*cot_th2_3);
   return exp(ln_g);
 }
 
@@ -386,9 +386,9 @@ myFloat StandardStableDistribution<myFloat>::g_l_c(myFloat th_c) const {
     return g_l(th_c-th_min);
   }
   myFloat ln_g = ln_g_th2
-  +(1/alpha_minus_one)*log1p(-2*pow(sin(th_c/2),2)+sin(th_c)*cot_th2_1)
-  -(alpha/alpha_minus_one)*log1p(-2*pow(sin(alpha*th_c/2),2)+sin(alpha*th_c)*cot_th2_2)
-  +log1p(-2*pow(sin(alpha_minus_one*th_c/2),2)+sin(alpha_minus_one*th_c)*cot_th2_3);
+  +(1/alpha_m_1)*log1p(-2*pow(sin(th_c/2),2)+sin(th_c)*cot_th2_1)
+  -(alpha/alpha_m_1)*log1p(-2*pow(sin(alpha*th_c/2),2)+sin(alpha*th_c)*cot_th2_2)
+  +log1p(-2*pow(sin(alpha_m_1*th_c/2),2)+sin(alpha_m_1*th_c)*cot_th2_3);
   return exp(ln_g);
 }
   
@@ -464,22 +464,22 @@ myFloat StandardStableDistribution<myFloat>::ga1_c(myFloat u_c) const{
 template<typename myFloat>
 myFloat StandardStableDistribution<myFloat>::g_a_near_1_r(myFloat th_r) const {
   myFloat tol = 4 * eps;
-  if ((alpha_minus_one < 0 && fabs(th_r - th_span) < tol)
-      ||(alpha_minus_one > 0 && th_r == 0)) {
+  if ((alpha_m_1 < 0 && fabs(th_r - th_span) < tol)
+      ||(alpha_m_1 > 0 && th_r == 0)) {
     myFloat g0 = 0;
-    if ((alpha_minus_one < 0  && beta == 1) || (alpha_minus_one >0 && beta == -1))
-      g0=pow(cat0*pow(x_m_zet/alpha,alpha),(1/(alpha_minus_one)))*fabs(alpha_minus_one);
+    if ((alpha_m_1 < 0  && beta == 1) || (alpha_m_1 >0 && beta == -1))
+      g0=pow(cat0*pow(x_m_zet/alpha,alpha),(1/(alpha_m_1)))*fabs(alpha_m_1);
     return g0;
-  } else if ((alpha_minus_one < 0 & th_r == 0)
-             || (alpha_minus_one > 0 & fabs(th_r - th_span) < tol)) {
+  } else if ((alpha_m_1 < 0 & th_r == 0)
+             || (alpha_m_1 > 0 & fabs(th_r - th_span) < tol)) {
     return PosInf;
   } else {
-    myFloat ea = (alpha/alpha_minus_one) * log1p(-x_input/zeta);
-    myFloat h_tanh = -(alpha/alpha_minus_one)*log1p(max<myFloat>(-1,-2 * pow(sin((alpha_minus_one*th_r+add_r)/2),2) +
-                                                            1/tan(th_r)*sin(alpha_minus_one*th_r + add_r)));
-    myFloat ln_h2b = log(abs(zeta)*sin(alpha_minus_one*th_r+add_r));
+    myFloat ea = (alpha/alpha_m_1) * log1p(-x_input/zeta);
+    myFloat h_tanh = -(alpha/alpha_m_1)*log1p(max<myFloat>(-1,-2 * pow(sin((alpha_m_1*th_r+add_r)/2),2) +
+                                                            1/tan(th_r)*sin(alpha_m_1*th_r + add_r)));
+    myFloat ln_h2b = log(abs(zeta)*sin(alpha_m_1*th_r+add_r));
     myFloat ln_costh = log(sin(th_r));
-    myFloat residual = -1/(2*alpha_minus_one)*log1p(pow(zeta,-2));
+    myFloat residual = -1/(2*alpha_m_1)*log1p(pow(zeta,-2));
     return exp(ea+h_tanh+ln_h2b-ln_costh+residual);
   }
 } // g_a_near_1_r
@@ -487,39 +487,39 @@ myFloat StandardStableDistribution<myFloat>::g_a_near_1_r(myFloat th_r) const {
 template<typename myFloat>
   myFloat StandardStableDistribution<myFloat>::g_a_near_1_l(myFloat th_l) const{
   myFloat tol = 4*eps;
-  if ((alpha_minus_one < 0 && th_l == 0)
-      ||(alpha_minus_one > 0 && fabs(th_l - th_span) < tol)) {
+  if ((alpha_m_1 < 0 && th_l == 0)
+      ||(alpha_m_1 > 0 && fabs(th_l - th_span) < tol)) {
     myFloat g0 = 0;
-    if ((alpha_minus_one < 0  && beta == 1) || (alpha_minus_one >0 && beta == -1))
-      g0=pow(cat0*pow(x_m_zet/alpha,alpha),(1/(alpha_minus_one)))*fabs(alpha_minus_one);
+    if ((alpha_m_1 < 0  && beta == 1) || (alpha_m_1 >0 && beta == -1))
+      g0=pow(cat0*pow(x_m_zet/alpha,alpha),(1/(alpha_m_1)))*fabs(alpha_m_1);
     return g0;
-  } else if ((alpha_minus_one < 0 && fabs(th_l - th_span) < tol)
-             ||(alpha_minus_one > 0 & th_l == 0)) {
+  } else if ((alpha_m_1 < 0 && fabs(th_l - th_span) < tol)
+             ||(alpha_m_1 > 0 & th_l == 0)) {
     return PosInf;
   } else {
-    myFloat ea = (alpha/alpha_minus_one) * log1p(-x_input/zeta);
-    myFloat h_tanh = -(alpha/alpha_minus_one)*log1p(max<myFloat>(-1,-2 * pow(sin((alpha_minus_one*th_l+add_l)/2),2) +
-                                                                1/tan(th_l-add_l)*sin(alpha_minus_one*th_l + add_l)));
-    myFloat ln_h2b = log(fabs(zeta)*-sin(alpha_minus_one*th_l+add_l));
+    myFloat ea = (alpha/alpha_m_1) * log1p(-x_input/zeta);
+    myFloat h_tanh = -(alpha/alpha_m_1)*log1p(max<myFloat>(-1,-2 * pow(sin((alpha_m_1*th_l+add_l)/2),2) +
+                                                                1/tan(th_l-add_l)*sin(alpha_m_1*th_l + add_l)));
+    myFloat ln_h2b = log(fabs(zeta)*-sin(alpha_m_1*th_l+add_l));
     myFloat ln_costh = log(sin(th_l-add_l));
-    myFloat residual = -1/(2*alpha_minus_one)*log1p(pow(zeta,-2));
+    myFloat residual = -1/(2*alpha_m_1)*log1p(pow(zeta,-2));
     return exp(ea+h_tanh+ln_h2b-ln_costh+residual);
   }
 } // g_a_near_1_l
 
 template<typename myFloat>
 myFloat StandardStableDistribution<myFloat>::dlng_dth_r(myFloat th_r){
-  myFloat t1 = + cos(th_r)/(sin(th_r)*(alpha-1));
-  myFloat t2 = - (alpha*alpha)/(alpha-1)*cos(alpha*th_r+add_r)/sin(alpha*th_r+add_r);
-  myFloat t3 = + (alpha-1) * cos((alpha-1)*th_r+add_r)/sin((alpha-1)*th_r+add_r);
+  myFloat t1 = + cos(th_r)/(sin(th_r)*(alpha_m_1));
+  myFloat t2 = - (alpha*alpha)/(alpha_m_1)*cos(alpha*th_r+add_r)/sin(alpha*th_r+add_r);
+  myFloat t3 = + (alpha_m_1) * cos((alpha_m_1)*th_r+add_r)/sin((alpha_m_1)*th_r+add_r);
   return t1+t2+t3;
 }
 
 template<typename myFloat>
 myFloat StandardStableDistribution<myFloat>::dlng_dth_l(myFloat th_l) {
   myFloat t1 = cos(th_l-add_l)/sin(th_l-add_l);
-  myFloat t2 = -(alpha*alpha)/(alpha-1)*cos(alpha*th_l)/sin(alpha*th_l);
-  myFloat t3 = (1-alpha) * cos((1-alpha)*th_l - add_l)/sin((1-alpha)*th_l - add_l);
+  myFloat t2 = -(alpha*alpha)/(alpha_m_1)*cos(alpha*th_l)/sin(alpha*th_l);
+  myFloat t3 = (-alpha_m_1) * cos((-alpha_m_1)*th_l - add_l)/sin((-alpha_m_1)*th_l - add_l);
   return t1+t2+t3;
 }
 
@@ -540,12 +540,14 @@ const int w = 21;
      << setw(w) << " x_input = " << dist.fmt << dist.x_input << endl
      << setw(w) << " x_m_zeta_input = " << dist.fmt << dist.x_m_zeta_input << endl;
   if (!boost::math::isfinite(dist.x_input)) return os;
-  os << setw(w) << " theta = " << dist.fmt << dist.theta << endl
-     << setw(w) << " rho = " << dist.fmt << dist.rho << endl
-     << setw(w) << " betaB = " << dist.fmt << dist.betaB << endl
-     << setw(w) << " betaB_p_1 = " << dist.fmt << dist.betaB_p_1 << endl
-     << setw(w) << " one_m_betaB = " << dist.fmt << dist.one_m_betaB << endl
-     << setw(w) << " gammaB = " << dist.fmt << dist.gammaB << endl
+  os << setw(w) << " betaB = " << dist.fmt << dist.betaB << endl
+     << setw(w) << " betaB_p_1 = " << dist.fmt << dist.betaB_p_1 << endl;
+  if (dist.alpha != 1) {
+    os << setw(w) << " theta = " << dist.fmt << dist.theta << endl
+       << setw(w) << " rho = " << dist.fmt << dist.rho << endl
+       << setw(w) << " one_m_betaB = " << dist.fmt << dist.one_m_betaB << endl;
+  }
+  os << setw(w) << " gammaB = " << dist.fmt << dist.gammaB << endl
      << setw(w) << " xB = " << dist.fmt << dist.xB << endl
      << setw(w) << " beta = " << dist.fmt << dist.beta << endl;
   switch (dist.dist_type) {
@@ -745,6 +747,7 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
         xB = -xB;
       }
       betaB_p_1=betaB+1;
+      one_m_betaB=1-betaB;  // Not used
       if (x_m_zeta_in >= 0) {
         beta = beta_input;
       } else {
@@ -755,11 +758,11 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
     myFloat eps_term_use = pow(eps,.2);
     if ((alpha<1 && beta == 1) || (alpha>=1 && beta == -1)) {
       myFloat xbound_avoid = alpha==1 ? -log(eps_term_avoid)+1
-                           : alpha*pow(1/(eps_term_avoid*alpha*fabs(1-alpha)),1-1/alpha);
+                           : alpha*pow(1/(eps_term_avoid*alpha*fabs(alpha_m_1)),1-1/alpha);
       avoid_series_small_x = (xB!=0 && ((alpha == 1) || (alpha <= .1))) || ((alpha<1 && xB > xbound_avoid)  || (alpha>1 && xB > eps_term_avoid));
       avoid_series_large_x = ((alpha>=1 && xB < xbound_avoid) || (alpha<1 && pow(xB,-alpha) > eps_term_avoid));
       myFloat xbound_use = alpha==1 ? -log(eps_term_use)+1
-                        : alpha*pow(1/(eps_term_use*alpha*fabs(1-alpha)),1-1/alpha);
+                        : alpha*pow(1/(eps_term_use*alpha*fabs(alpha_m_1)),1-1/alpha);
       use_series_small_x = (!avoid_series_small_x) && ((alpha<1 && xB < xbound_use) || (alpha>1 && xB < eps_term_use)) ;
       use_series_large_x = (!avoid_series_large_x) && ((alpha>=1 && xB > xbound_use) || (alpha<1 && pow(xB,-alpha) < eps_term_use));
     } else {
@@ -774,24 +777,24 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
     // Set up the items needed for the integration
     if (alpha !=1) {
       th_min=0;
-      if (fabs(alpha_minus_one)> threshhold_1 * fabs(beta)) {
+      if (fabs(alpha_m_1)> threshhold_1 * fabs(beta)) {
         th_span=(pi2)+theta0;
         add_l = theta0-(pi2);
         add_r = max<myFloat>(static_cast<myFloat>(0),pi-alpha*(th_span));
       } else {
         myFloat zeta_adj = (x_m_zeta_in>=0) ? zeta : -zeta;
         th_span = (zeta_adj<0)
-                    ? pi-(pi2*alpha_minus_one+atan(1/abs(zeta_adj)))/alpha
-                    : (pi2*alpha_minus_one+atan(1/abs(zeta_adj)))/alpha;
+                    ? pi-(pi2*alpha_m_1+atan(1/abs(zeta_adj)))/alpha
+                    : (pi2*alpha_m_1+atan(1/abs(zeta_adj)))/alpha;
         add_l = (zeta_adj<0)
-                    ? -(pi2*alpha_minus_one + atan(1/abs(zeta_adj)))/alpha
-                    : (pi2*alpha_minus_one + atan(1/abs(zeta_adj)))/alpha-pi;
+                    ? -(pi2*alpha_m_1 + atan(1/abs(zeta_adj)))/alpha
+                    : (pi2*alpha_m_1 + atan(1/abs(zeta_adj)))/alpha-pi;
         add_r = (zeta_adj<0)
-                    ? -alpha_minus_one*pi+(pi2*alpha_minus_one+atan(1/abs(zeta_adj)))
-                    : pi-(pi2*alpha_minus_one+atan(1/abs(zeta_adj)));
+                    ? -alpha_m_1*pi+(pi2*alpha_m_1+atan(1/abs(zeta_adj)))
+                    : pi-(pi2*alpha_m_1+atan(1/abs(zeta_adj)));
       }
       th_max=th_span;
-      if (fabs(alpha_minus_one)>= 0 || fabs(x_input)>.5*fabs(zeta)) {
+      if (fabs(alpha_m_1)>= 0 || fabs(x_input)>.5*fabs(zeta)) {
         small_x_m_zet = x_m_zet<max<myFloat>(static_cast<myFloat>(1),fabs(zeta));
         if (small_x_m_zet)
           fun_type=fun_g_l;
@@ -804,12 +807,12 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
         else
           fun_type=fun_g_a_near_1_r;
       }
-      if (alpha_minus_one < 0) {
+      if (alpha_m_1 < 0) {
         if (beta==1)
           add_l=0;
         else if (beta==-1)
           add_l=pi;
-      } else if (alpha_minus_one>0) {
+      } else if (alpha_m_1>0) {
         if (beta==-1)
           add_r=0;
       }
@@ -829,40 +832,52 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
           pair<myFloat,myFloat> th1_pair = toms748_solve(g_s, lower, upper, rel_tol, max_iter);
           myFloat ln_g_first=log(g(th1_pair.first));
           myFloat ln_g_second=log(g(th1_pair.second));
-          if (fabs(ln_g_first-ln_g_second)>controllers.controller.epsrel){
-            myFloat th2;
-            if (boost::math::isfinite(ln_g_first) && boost::math::isfinite(ln_g_second)) {
-              th2 = (th1_pair.first+th1_pair.second)/2;
-              ln_g_th2 = log(g(th2));
-            } else if (boost::math::isfinite(ln_g_first)) {
-              th2 = th1_pair.first;
-              ln_g_th2 = ln_g_first;
-            } else if (boost::math::isfinite(ln_g_second)){
-              th2 = th1_pair.second;
-              ln_g_th2 = ln_g_second;
-            } else {
-              th2 = (th1_pair.first+th1_pair.second)/2;
-              ln_g_th2 = 0;
-            }
+          if (verbose) {
+            cout << setw(15) << "th_first = " << fmt << th1_pair.first << endl
+                 << setw(15) << "ln_g_first = " << fmt << ln_g_first << endl
+                 << setw(15) << "th_second = " << fmt << th1_pair.second << endl
+                 << setw(15) << "ln_g_second = " << fmt << ln_g_second << endl;
+          }
+          myFloat th2;
+          bool center_on_th2;
+          if (boost::math::isfinite(ln_g_first) && boost::math::isfinite(ln_g_second)) {
+            th2 = (th1_pair.first+th1_pair.second)/2;
+            ln_g_th2 = log(g(th2));
+            myFloat d = dlng_dth(th2);
+            center_on_th2 = isnan(d) || !boost::math::isfinite(d) || fabs(th2*d) > controllers.controller.epsrel/8;
+          } else if (boost::math::isfinite(ln_g_first)) {
+            th2 = th1_pair.first;
+            ln_g_th2 = ln_g_first;
+            center_on_th2 = true;
+          } else if (boost::math::isfinite(ln_g_second)){
+            th2 = th1_pair.second;
+            ln_g_th2 = ln_g_second;
+            center_on_th2 = true;
+          } else {
+            th2 = (th1_pair.first+th1_pair.second)/2;
+            ln_g_th2 = 0;
+            center_on_th2 = true;
+          }
+          if (center_on_th2){
             th_min -= th2;
             th_max -= th2;
             if (fun_type==fun_g_l) {
               fun_type=fun_g_l_c;
               cot_th2_1 = 1/tan(th2-add_l);
               cot_th2_2 = 1/tan(alpha*th2);
-              cot_th2_3 = 1/tan(alpha_minus_one*th2+add_l);
+              cot_th2_3 = 1/tan(alpha_m_1*th2+add_l);
             } else {
               fun_type=fun_g_r_c;
               cot_th2_1 = 1/tan(th2);
               cot_th2_2 = 1/tan(alpha*th2+add_r);
-              cot_th2_3 = 1/tan(alpha_minus_one*th2 + add_r);
+              cot_th2_3 = 1/tan(alpha_m_1*th2 + add_r);
             }
           }
         }
       }
       
-      c2 = (alpha/(pi * fabs(alpha_minus_one) * x_m_zet));
-      c_ddx = c2/((alpha_minus_one)*(x_m_zeta_in));
+      c2 = (alpha/(pi * fabs(alpha_m_1) * x_m_zet));
+      c_ddx = c2/((alpha_m_1)*(x_m_zeta_in));
     } else { // alpha = 1
       abs_x=fabs(x_m_zeta_in);
       small_x_m_zet = abs_x < 10;
@@ -889,21 +904,27 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
           pair<myFloat,myFloat> ur1_pair = toms748_solve(g_s, lower, upper, rel_tol, max_iter);
           myFloat ln_g_first=log(g(ur1_pair.first));
           myFloat ln_g_second=log(g(ur1_pair.second));
-          if (fabs(ln_g_first-ln_g_second)>controllers.controller.epsrel){
-            myFloat u2;
-            if (boost::math::isfinite(ln_g_first) && boost::math::isfinite(ln_g_second)) {
-              u2 = (ur1_pair.first+ur1_pair.second)/2;
-              ln_g_u2 = log(g(u2));
-            } else if (boost::math::isfinite(ln_g_first)) {
-              u2 = ur1_pair.first;
-              ln_g_u2 = ln_g_first;
-            } else if (boost::math::isfinite(ln_g_second)){
-              u2 = ur1_pair.second;
-              ln_g_u2 = ln_g_second;
-            } else {
-              u2 = (ur1_pair.first+ur1_pair.second)/2;
-              ln_g_u2 = 0;
-            }
+          myFloat u2;
+          bool center_on_u2;
+          if (boost::math::isfinite(ln_g_first) && boost::math::isfinite(ln_g_second)) {
+            u2 = (ur1_pair.first+ur1_pair.second)/2;
+            ln_g_u2 = log(g(u2));
+            myFloat d = dlng_dth(u2);
+            center_on_u2 = isnan(d) || !boost::math::isfinite(d) || fabs(u2*d) > controllers.controller.epsrel/8;
+          } else if (boost::math::isfinite(ln_g_first)) {
+            u2 = ur1_pair.first;
+            ln_g_u2 = ln_g_first;
+            center_on_u2 = true;
+          } else if (boost::math::isfinite(ln_g_second)){
+            u2 = ur1_pair.second;
+            ln_g_u2 = ln_g_second;
+            center_on_u2 = true;
+          } else {
+            u2 = (ur1_pair.first+ur1_pair.second)/2;
+            ln_g_u2 = 0;
+            center_on_u2 = true;
+          }
+          if (center_on_u2){
             th_min -= u2;
             th_max -= u2;
             costh_u2 = sin(u2 * pi2);
@@ -1111,11 +1132,11 @@ void StandardStableDistribution<myFloat>::th_guess(const myFloat &value,
   switch(fun_type){
     case fun_g_l :
     case fun_g_a_near_1_l:
-      theta_guess= x_m_zet*pow(value,(1-alpha)/alpha)*pow(cat0,1/alpha)*sin(-add_l)/alpha;
+      theta_guess= x_m_zet*pow(value,(-alpha_m_1)/alpha)*pow(cat0,1/alpha)*sin(-add_l)/alpha;
       break;
     case fun_g_r :
     case fun_g_a_near_1_r:
-      theta_guess=sin(add_r)/cat0*pow(value,alpha-1)/pow(x_m_zet,alpha);
+      theta_guess=sin(add_r)/cat0*pow(value,alpha_m_1)/pow(x_m_zet,alpha);
       break;
     case fun_ga1_r:
       theta_guess = 2 * (1 + beta) / abs_x;

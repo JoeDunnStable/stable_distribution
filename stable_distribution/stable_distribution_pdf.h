@@ -349,8 +349,8 @@ myFloat StandardStableDistribution<myFloat>::series_large_x_pdf(myFloat x0, Para
       n_series = 0;
     } else if (beta == -1) {
       // Zolotarev Theorem 2.5.2 asymptotic for x -> infinity
-      myFloat xi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
-      myFloat nu = pow(abs(1-alpha),-1/alpha);
+      myFloat xi = fabs(alpha_m_1) * pow(xB/alpha, alpha/(alpha_m_1));
+      myFloat nu = pow(abs(alpha_m_1),-1/alpha);
       myFloat exp_m_xi = exp(-xi);
       myFloat fac = exp_m_xi !=0 ? nu*pow(xi,(2-alpha)/(2*alpha))*exp(-xi)/sqrt(2*pi*alpha)/gammaB
       :0;
@@ -436,8 +436,8 @@ myFloat StandardStableDistribution<myFloat>::series_small_x_pdf(myFloat x0, Para
     
     if (beta == 1) {
       // Zolotarev Theorem 2.5.2, asymptotic for small x
-      myFloat xi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
-      myFloat nu = pow(abs(1-alpha),-1/alpha);
+      myFloat xi = fabs(alpha_m_1) * pow(xB/alpha, alpha/(alpha_m_1));
+      myFloat nu = pow(abs(alpha_m_1),-1/alpha);
       myFloat exp_m_xi = exp(-xi);
       myFloat fac = exp_m_xi !=0 ?nu*pow(xi,(2-alpha)/(2*alpha))*exp_m_xi/sqrt(2*pi*alpha)/gammaB
       :0;

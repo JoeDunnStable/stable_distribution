@@ -58,7 +58,7 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
     
     if (beta == 1) {
       // Zolotarev Theorem 2.5.3, asymptotic for small x
-      myFloat xi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
+      myFloat xi = fabs(alpha_m_1) * pow(xB/alpha, alpha/(alpha-1));
       myFloat fac = exp(-xi)/sqrt(2*pi*alpha*xi);
       if (verbose > 1)
         cout << "xi = " << xi << endl
@@ -291,7 +291,7 @@ myFloat Zolotarev<myFloat>::cdf(myFloat x0, int lower_tail, Parameterization pm)
       error_asymptotic = std::numeric_limits<myFloat>::max();
       n_asymptotic = 0;
     } else if (beta == -1) {
-      myFloat xi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
+      myFloat xi = fabs(alpha_m_1) * pow(xB/alpha, alpha/(alpha-1));
       myFloat fac = exp(-xi)/sqrt(2*pi*alpha*xi);
       if (verbose > 1)
         cout << "xi = " << setprecision(digits10) << scientific << xi << endl

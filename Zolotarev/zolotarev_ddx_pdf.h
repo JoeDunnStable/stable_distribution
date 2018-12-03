@@ -66,13 +66,13 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
     
     if (beta==1) {
       // Modification of the proof of Theorem 2.5.2, asymptotic for small x
-      myFloat xi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
+      myFloat xi = fabs(alpha_m_1) * pow(xB/alpha, alpha/(alpha-1));
       if (xi < 1) {
         result_asymptotic = std::numeric_limits<myFloat>::quiet_NaN();
         error_asymptotic = std::numeric_limits<myFloat>::max();
         n_asymptotic = 0;
       } else {
-        myFloat nu = pow(abs(1-alpha),-1/alpha);
+        myFloat nu = pow(abs(alpha_m_1),-1/alpha);
         myFloat exp_m_xi = exp(-xi);
         myFloat fac = (exp_m_xi != 0) ? nu*nu*pow(xi,(4-alpha)/(2*alpha))*exp_m_xi/sqrt(2*pi*alpha)/(gammaB*gammaB) : 0;
         if (verbose > 1)
@@ -316,13 +316,13 @@ myFloat Zolotarev<myFloat>::ddx_pdf(myFloat x0, Parameterization pm) {
     
     if (beta == -1) {
       // Proof of Zolotarev Theorem 2.5.2 asymptotic for x -> infinity
-      myFloat xi = fabs(1-alpha) * pow(xB/alpha, alpha/(alpha-1));
+      myFloat xi = fabs(alpha_m_1) * pow(xB/alpha, alpha/(alpha-1));
       if (xi < 1) {
         result_asymptotic = std::numeric_limits<myFloat>::quiet_NaN();
         error_asymptotic = std::numeric_limits<myFloat>::max();
         n_asymptotic = 0;
       } else {
-        myFloat nu = pow(abs(1-alpha),-1/alpha);
+        myFloat nu = pow(abs(alpha_m_1),-1/alpha);
         myFloat exp_m_xi = exp(-xi);
         myFloat fac = (exp_m_xi!=0) ? -nu*nu*pow(xi,(4-alpha)/(2*alpha))*exp_m_xi/sqrt(2*pi*alpha)/(gammaB*gammaB) : 0;
         if (verbose > 1)

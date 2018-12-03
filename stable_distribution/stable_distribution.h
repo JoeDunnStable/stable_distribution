@@ -70,8 +70,8 @@ enum Parameterization {S0=0, S1=1};
 /// a class allowing the use of alpha-1 to initialize StandardStableDistribution
 template<typename myFloat>
 struct AlphaMinusOne {
-  myFloat alpha_minus_one;
-  AlphaMinusOne(myFloat alpha_minus_one) : alpha_minus_one(alpha_minus_one) {}
+  myFloat alpha_m_1;
+  AlphaMinusOne(myFloat alpha_m_1) : alpha_m_1(alpha_m_1) {}
 };
   
 /// the data and functions to calculate the standard stable distribution
@@ -91,7 +91,7 @@ public:
   static int max_n;     ///< the maximum number of terms for series expansions
   static bool initialized;                  ///< have the static member been initialized
   myFloat alpha;                            ///< the structural parameter to stable distribution
-  myFloat alpha_minus_one;                  ///< alpha minus one.  Used near 1
+  myFloat alpha_m_1;                        ///< alpha minus one.  Used near 1
   myFloat beta_input;                       ///< beta as input,  sign might be flipped in the computation 
 private:
   Fmt<myFloat> fmt;                         /// a manipulator to format myFloat to maximum precision
@@ -114,7 +114,7 @@ private:
   myFloat beta;                             ///< the skewness parameter actually used in computation 
   myFloat betaB;                            ///< for alpha==1, beta for Zolotarev's B representation
   myFloat betaB_p_1;                        ///< betaB + 1 via numerically stable method
-  myFloat one_m_betaB;                      ///< 1 - betaB vis numerically stable method
+  myFloat one_m_betaB;                      ///< if alpha !=1 1 - betaB vis numerically stable method
   myFloat theta0;                           ///< the lower limit of integration used
   bool positive_x;                          ///< Indicator the sign x has been flipped
   bool positive_xB;                         ///< Indicator the sign of xB has been flipped
@@ -448,11 +448,12 @@ public:
   /// return the difference between g(th) and the target value 
   myFloat operator()(const myFloat th ///< [in] the point at which to evaluate g
                     ) {
+    Fmt<myFloat> fmt;
     myFloat g_ = std_stable_dist->g(th);
     g_=max(g_min,min(g_,g_max));
     if (std_stable_dist->verbose >=3)
-      cout << "      theta = " << th
-      << ", " << (log_flag?"ln_":"") << "g(theta) = " << (log_flag?log(g_):g_) << endl;
+      cout << "      theta = " << fmt << th
+      << ", " << (log_flag?"ln_":"") << "g(theta) = " << fmt << (log_flag?log(g_):g_) << endl;
     if (log_flag)
       return log(g_)-value;
     else

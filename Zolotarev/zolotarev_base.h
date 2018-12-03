@@ -39,7 +39,7 @@ Zolotarev<myFloat>::Zolotarev(myFloat alpha, myFloat beta_input,
                     IntegrationController<myFloat>* cntl,
                      int verbose,
                      int verbose_integration) :
-  alpha(alpha), beta_input(beta_input), verbose(verbose),
+  alpha(alpha), alpha_m_1(alpha-1), beta_input(beta_input), verbose(verbose),
   cdf_alpha_1(Q_integrand<myFloat>(*this), points, *cntl, verbose_integration ),
   pdf_alpha_1(q_integrand<myFloat>(*this), points, *cntl, verbose_integration),
   ddx_pdf_alpha_1(ddx_q_integrand<myFloat>(*this), points, *cntl, verbose_integration){
