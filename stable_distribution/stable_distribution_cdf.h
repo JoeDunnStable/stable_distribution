@@ -45,6 +45,7 @@ myFloat StandardStableDistribution<myFloat>::integrate_cdf() {
 
   // When x_m_zeta is large use the version that gets small as abs(x) becomes large
   // When x_m_zeta is small use the version that gets small as x approaches zeta
+  // The result is F - F_zeta if small_x_m_zet and 1-F if !small_x_m_zet
   bool use_one_m_exp_m_x = ((alpha<1) && !small_x_m_zet)
                             || ((alpha>1) && small_x_m_zet)
                             || ((alpha==1) && (beta>0));
@@ -89,10 +90,11 @@ myFloat StandardStableDistribution<myFloat>::cdf(myFloat x, int lower_tail, int 
   neval = 0;
   myFloat ret;
   set_x_m_zeta(x, pm);
-  // default values which will be reset if the integrator is used
+  // default values which will be reset if the integrator or series is used
   abserr = 0;
   neval = 0;
   termination_code = IntegrationController<myFloat>::TerminationCode::normal;
+  n_series = 0;
   last = 0;
   if (verbose)
     cout << "cdf: lower_tail = " << lower_tail << ", log_p = " << log_p << endl << *this;

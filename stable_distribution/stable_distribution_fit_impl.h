@@ -411,7 +411,9 @@ public:
   }
   
   McCullochFit(const myFloat q_kurt, const myFloat q_skew, const myFloat alpha_min, const myFloat alpha_max, ostream *trace, const myFloat dbltol, Controllers<myFloat> ctls, const int verbose )
-  : q_kurt(q_kurt), q_skew(q_skew), alpha_min(alpha_min), alpha_max(alpha_max), trace(trace), dbltol(dbltol), ctls(ctls), verbose(verbose) {};
+  : q_kurt(q_kurt), q_skew(q_skew), alpha_min(alpha_min), alpha_max(alpha_max), trace(trace), dbltol(dbltol), ctls(ctls), verbose(verbose) {
+    StandardStableDistribution<myFloat>::initialize();
+  };
 };
 
 template<typename myFloat>
@@ -469,7 +471,9 @@ public:
   
   DunnFit(const myFloat q_kurt, const myFloat q_mode, const myFloat skew, const myFloat alpha_min, const myFloat alpha_max,
           ostream *trace, const myFloat dbltol, Controllers<myFloat> ctls, const int verbose )
-  : q_kurt(q_kurt), q_mode(q_mode), skew(skew), alpha_min(alpha_min), alpha_max(alpha_max), trace(trace), dbltol(dbltol), ctls(ctls), verbose(verbose) {};
+  : q_kurt(q_kurt), q_mode(q_mode), skew(skew), alpha_min(alpha_min), alpha_max(alpha_max), trace(trace), dbltol(dbltol), ctls(ctls), verbose(verbose) {
+    StandardStableDistribution<myFloat>::initialize();
+  };
 };
 
 template<typename myFloat>
@@ -546,7 +550,9 @@ public:
   
   MLEFit(const Vec &y, const myFloat alpha_min, const myFloat alpha_max, bool quick, ostream *trace,
          Controllers<myFloat> ctls, const int verbose )
-  : y(y), alpha_min(alpha_min), alpha_max(alpha_max), quick(quick), trace(trace), ctls(ctls), verbose(verbose) {};
+  : y(y), alpha_min(alpha_min), alpha_max(alpha_max), quick(quick), trace(trace), ctls(ctls), verbose(verbose) {
+    StandardStableDistribution<myFloat>::initialize();
+  };
 };
 
 

@@ -937,8 +937,8 @@ void StandardStableDistribution<myFloat>::set_x_m_zeta(myFloat x, Parameterizati
       }
     }
     map_g();
-  }
-}
+  } // x_m_zeta_in != x_m_zeta_input
+} //set_x_m_zeta
 
 template<typename myFloat>
 void StandardStableDistribution<myFloat>::map_g() {
@@ -1029,13 +1029,13 @@ void StandardStableDistribution<myFloat>::map_g() {
     cout << endl << "    theta2 = " << fmt << theta2
     << ", log(g(theta2)) = " << fmt << ln_g_theta2 << ", iterations = " << max_iter << endl
     << "    ddx_lng(theta2) = " << fmt << g_dd_theta2 <<endl;
-  vector<double> ln_g_lo={-.1,-.2,-.3,-.4,-.5,-.75,
+  vector<double> target_ln_g_small={-.1,-.2,-.3,-.4,-.5,-.75,
     -1,-2,-3,-4,-6,-8,-10,-12,-14,-16,
     -18,-20,-24,-28,-32,-36,-40,-50, -60,-70,-80, -100, -120, -140};
-  vector<double> ln_g_hi={.1, .5, 1, 2, 3, 4, 5, 6};
+  vector<double> target_ln_g_large={.1, .5, 1, 2, 3, 4, 5, 6};
   th=theta2;
   if (do_lo) {
-    vector<double> *ln_g = (boost::math::isfinite(g_lo)) ? &ln_g_lo : &ln_g_hi;
+    vector<double> *ln_g = (boost::math::isfinite(g_lo)) ? &target_ln_g_small : &target_ln_g_large;
     for (int j=0; j<(*ln_g).size() && (!boost::math::isfinite(g_lo) || (*ln_g)[j] > log_g_lo); j++) {
       myFloat target = ln_g_theta2+(*ln_g)[j];
       if (target >= log(g_s.g_max)) break;
@@ -1075,7 +1075,7 @@ void StandardStableDistribution<myFloat>::map_g() {
   long npts_low = points.size();
   th=theta2;
   if (do_hi){
-    vector<double> *ln_g = (boost::math::isfinite(g_hi)) ? &ln_g_lo : &ln_g_hi;
+    vector<double> *ln_g = (boost::math::isfinite(g_hi)) ? &target_ln_g_small : &target_ln_g_large;
     for (int j=0; j<(*ln_g).size() && (!boost::math::isfinite(g_hi) || g_hi == 0 || (*ln_g)[j] > log(g_hi)); j++) {
       myFloat target = ln_g_theta2+(*ln_g)[j];
       if (target >= log(g_s.g_max)) break;

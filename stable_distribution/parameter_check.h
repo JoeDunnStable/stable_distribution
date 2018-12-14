@@ -17,11 +17,12 @@ using Eigen::Matrix;
   using Eigen::Dynamic;
 #define Vec Matrix<myFloat, Dynamic, 1>
   
+/// Check that the parameters are okay.  Throw an exception if they're not
 template<typename myFloat>
 void inline parameter_check(const string fcn, const Vec& x, const myFloat alpha, const myFloat beta,
                             const Vec& gamma, const Vec& delta, const int pm) {
   if (alpha <= 0 || alpha > 2) {
-    throw std::out_of_range(fcn + ": alpha < 0 or alpha > 2");
+    throw std::out_of_range(fcn + ": alpha <= 0 or alpha > 2");
   }
   if (beta < -1 || beta > 1) {
     throw std::out_of_range(fcn + ": beta < -1 or beta > 1");
@@ -37,7 +38,9 @@ void inline parameter_check(const string fcn, const Vec& x, const myFloat alpha,
   }
 }
 
-// Switch to the location parameters for S1 distribution
+/// Switch to the location parameters for modified S1 distribution
+/// The output gamma and delta are adjusted so that (x-delta1)/gamma1
+/// has the standard stable distribution in pm=1
 template<typename myFloat>
 void inline switch_to_S1_location(const myFloat alpha, const myFloat beta,
                       const Vec& gamma, const Vec& delta, const int pm,
@@ -68,6 +71,7 @@ void inline switch_to_S1_location(const myFloat alpha, const myFloat beta,
   }
 }
 
+/// Switch the parameters to those for the S0 parameterization
 template<typename myFloat>
 void inline switch_to_S0(const myFloat alpha, const myFloat beta,
                          const Vec& gamma, const Vec& delta, const int pm,

@@ -129,6 +129,7 @@ int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
   << setw(15) << right << "abserr"
   << setw(4) << right << "tc"
   << setw(7) << right << "neval"
+  << setw(8) << right << "nseries"
   << endl << endl;
   bool pass = true;
   for (auto x : xs) {
@@ -151,8 +152,9 @@ int test_stable_cdf(ostream& out, Controllers<myFloat> ctls) {
     << fmt << r
     << setw(10) << setprecision(1) << fixed << eps
     << setw(15) << setprecision(5) << scientific << std_stable_dist.abserr
-    << setw(4) << std_stable_dist.termination_code
+    << setw(4) << 10*std_stable_dist.good_theta2+std_stable_dist.termination_code
     << setw(7) << std_stable_dist.neval
+    << setw(8) << std_stable_dist.n_series
     << (pass1 ? "" : " FAIL") << endl;
     pass = pass && pass1;
   }
@@ -314,6 +316,7 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
   << setw(15) << right << "abserr"
   << setw(4) << right << "TC"
   << setw(7) << right << "neval"
+  << setw(8) << right << "nseries"
   << endl << endl;
   bool pass = true;
   for (auto x : xs) {
@@ -330,8 +333,9 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
     << fmt << r
     << setw(10) << setprecision(1) << fixed << eps
     << setw(15) << setprecision(5) << scientific << std_stable_dist.abserr
-    << setw(4) << std_stable_dist.termination_code
+    << setw(4) << 10 * std_stable_dist.good_theta2+std_stable_dist.termination_code
     << setw(7) << std_stable_dist.neval
+    << setw(8) << std_stable_dist.n_series
     << (pass1 ? "" : " FAIL") << endl;
     pass = pass && pass1;
 
@@ -350,11 +354,12 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
   << setw(15) << right << "abserr"
   << setw(4) << right << "TC"
   << setw(7) << right << "neval"
+  << setw(8) << right << "nseries"
   << endl << endl;
   vector<myFloat> xs2;
   for (auto x : xs) {
     if (x <= 1e100) {
-      xs2.push_back(-x);
+      if (x!=0) xs2.push_back(-x);
       xs2.push_back(x);
     }
   }
@@ -374,8 +379,9 @@ int test_stable_pdf(ostream& out, Controllers<myFloat> ctls) {
     << fmt << r
     << setw(10) << setprecision(1) << fixed << eps
     << setw(15) << setprecision(5) << scientific << stable_1_pt_5.abserr
-    << setw(4) << stable_1_pt_5.termination_code
+    << setw(4) << 10*stable_1_pt_5.good_theta2+stable_1_pt_5.termination_code
     << setw(7) << stable_1_pt_5.neval
+    << setw(8) << stable_1_pt_5.n_series
     << (pass1 ? "" : " FAIL") << endl;
     pass = pass && pass1;
     
@@ -434,6 +440,7 @@ int test_stable_ddx_pdf(ostream& out, Controllers<myFloat> ctls) {
   << setw(15) << right << "abserr"
   << setw(4) << right << "termination_code"
   << setw(7) << right << "neval"
+  << setw(8) << right << "nseries"
   << endl << endl;
   bool pass = true;
   for (auto x : xs) {
@@ -450,8 +457,9 @@ int test_stable_ddx_pdf(ostream& out, Controllers<myFloat> ctls) {
     << fmt << r
     << setw(10) << setprecision(1) << fixed << eps
     << setw(15) << setprecision(5) << scientific << std_stable_dist.abserr
-    << setw(4) << std_stable_dist.termination_code
+    << setw(4) << 10*std_stable_dist.good_theta2+std_stable_dist.termination_code
     << setw(7) << std_stable_dist.neval
+    << setw(8) << std_stable_dist.n_series
     << (pass1 ? "" : " FAIL") << endl;
     pass = pass && pass1;
   }

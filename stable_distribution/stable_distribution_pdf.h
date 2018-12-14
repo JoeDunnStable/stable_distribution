@@ -82,11 +82,12 @@ cout << "  c2*sum(r)= " << fmt << c2 << " * " << fmt << r << " = " << fmt << c2*
 template<typename myFloat>
 myFloat StandardStableDistribution<myFloat>::pdf(myFloat x, int log_flag, Parameterization pm)
 {
-  //Default values which will be reset if the integrator is used
+  //Default values which will be reset if the integrator or series is used
   abserr = 0;
   neval = 0;
   termination_code = IntegrationController<myFloat>::TerminationCode::normal;
   last = 0;
+  n_series = 0;
   
   set_x_m_zeta(x, pm);
   myFloat ret;

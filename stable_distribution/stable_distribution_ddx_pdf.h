@@ -66,11 +66,12 @@ myFloat StandardStableDistribution<myFloat>::ddx_pdf(myFloat x, Parameterization
 {
   cout.precision(20);
   cout.setf(ios::scientific, ios::floatfield);
-  // Default values which will be reset in the integrator is used
+  // Default values which will be reset in the integrator or series is used
   abserr = 0;
   neval = 0;
   termination_code = IntegrationController<myFloat>::TerminationCode::normal;
   last = 0;
+  n_series = 0;
   
   myFloat ret;
   set_x_m_zeta(x, pm);
